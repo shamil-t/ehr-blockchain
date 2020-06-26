@@ -1,0 +1,37 @@
+{
+  "files": {
+    "main.css": "/ehr-blockchain/static/css/main.63b49ade.chunk.css",
+    "main.js": "/ehr-blockchain/static/js/main.5661642e.chunk.js",
+    "main.js.map": "/ehr-blockchain/static/js/main.5661642e.chunk.js.map",
+    "runtime-main.js": "/ehr-blockchain/static/js/runtime-main.f5fdd6b3.js",
+    "runtime-main.js.map": "/ehr-blockchain/static/js/runtime-main.f5fdd6b3.js.map",
+    "static/css/2.e6a150ea.chunk.css": "/ehr-blockchain/static/css/2.e6a150ea.chunk.css",
+    "static/js/2.35c81a6e.chunk.js": "/ehr-blockchain/static/js/2.35c81a6e.chunk.js",
+    "static/js/2.35c81a6e.chunk.js.map": "/ehr-blockchain/static/js/2.35c81a6e.chunk.js.map",
+    "index.html": "/ehr-blockchain/index.html",
+    "precache-manifest.ab7c46726054be1bd07e185c710f514d.js": "/ehr-blockchain/precache-manifest.ab7c46726054be1bd07e185c710f514d.js",
+    "service-worker.js": "/ehr-blockchain/service-worker.js",
+    "static/css/2.e6a150ea.chunk.css.map": "/ehr-blockchain/static/css/2.e6a150ea.chunk.css.map",
+    "static/css/main.63b49ade.chunk.css.map": "/ehr-blockchain/static/css/main.63b49ade.chunk.css.map",
+    "static/js/2.35c81a6e.chunk.js.LICENSE.txt": "/ehr-blockchain/static/js/2.35c81a6e.chunk.js.LICENSE.txt",
+    "static/media/Tabler.css": "/ehr-blockchain/static/media/zw.e223cee5.svg",
+    "static/media/Rx.png": "/ehr-blockchain/static/media/Rx.bba00c61.png",
+    "static/media/add_ico.png": "/ehr-blockchain/static/media/add_ico.00a7cdfc.png",
+    "static/media/assistant_ico.png": "/ehr-blockchain/static/media/assistant_ico.9fe703da.png",
+    "static/media/back.png": "/ehr-blockchain/static/media/back.5dae76dc.png",
+    "static/media/admin.css": "/ehr-blockchain/static/media/back1.1607a651.jpg",
+    "static/media/adddoc.css": "/ehr-blockchain/static/media/back4.ad9af828.jpg",
+    "static/media/Home.css": "/ehr-blockchain/static/media/bag01.1ee54593.jpg",
+    "static/media/chatbot.png": "/ehr-blockchain/static/media/chatbot.d61edb31.png",
+    "static/media/doc-2.jpg": "/ehr-blockchain/static/media/doc-2.6d8c7083.jpg",
+    "static/media/dr_icon.png": "/ehr-blockchain/static/media/dr_icon.48d160cb.png",
+    "static/media/pat_ico.png": "/ehr-blockchain/static/media/pat_ico.1b66c4f9.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f5fdd6b3.js",
+    "static/css/2.e6a150ea.chunk.css",
+    "static/js/2.35c81a6e.chunk.js",
+    "static/css/main.63b49ade.chunk.css",
+    "static/js/main.5661642e.chunk.js"
+  ]
+}
