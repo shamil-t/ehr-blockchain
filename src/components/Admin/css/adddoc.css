@@ -1,0 +1,53 @@
+#adddoc{
+    background-image: url('../img/back2.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+#appointment{
+    margin-top: 150px;
+}
+.appointment-wrap{
+    width: fit-content;
+    padding: 40px;
+}
+.forminput{
+border: 1px solid rgba(0, 0, 0, 0.1) !important;
+height: 48px !important;
+width: 250px;
+padding-left: 15px;
+padding-right: 15px;
+background: #fff !important;
+color: rgba(0, 0, 0, 0.5) !important;
+font-size: 16px;
+border-radius: 30px;
+box-shadow: none !important;
+}
+#go_back{
+    margin-top: 45px;
+    margin-left: 35px;
+    color:#241f23;
+    width: 35px;
+    font-size: 20px;
+}
+#go_back:hover{
+    color: darkgoldenrod;
+    overflow: hidden;
+}
+#lds{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+#addpatient{
+    background-image: url(../img/back3.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+#deleteuser{
+    background-image: url(../img/back4.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}

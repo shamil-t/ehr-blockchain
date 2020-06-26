@@ -1,0 +1,77 @@
+#pat_div{
+    margin-left: 53px;
+    width: 70%;
+    background-color: cadetblue;
+    border-radius: 12px;
+    
+}
+#pat_div button{
+    color: bisque;
+    font-weight: bold;
+    font-size: 20px;
+}
+#pat_pri_detail_view{
+    background-color: coral;
+    color: rgb(231, 224, 228);
+    margin-top: -5px;
+    margin-left: 50px;
+    font-size: 20px;
+    padding-top: 50px;
+    padding-left: 55px;
+    border-radius: 15px;
+    padding-bottom: 55px;
+    width: 70%;
+}
+#pat_pri_detail_view h1{
+    margin-top: -35px;
+    color: crimson;
+    font-size: 36px;
+    font-weight: bold;
+    text-align: center;
+}
+#pat_pri_detail_view td{
+    padding-top: 20px;
+    padding-left: 10px;
+}
+#input1{
+    width: 300px;
+    height: 40px;
+    border-radius: 18px;
+    font-size: medium;
+    font-weight: bold;
+    color: brown;
+    padding: 8px;
+}
+#pat_pri_detail_view textarea{
+    width: 300px;
+    border-radius: 15px;
+    color: firebrick;
+    font-size: 15px;
+    padding-left: 10px;
+    padding-top: 10px;
+    height: 80px;
+    font-weight: bold;
+}
+#pat_pri_detail_view select{
+    color:red;
+    font-size: 16px;
+    font-weight: bold;
+    width: 150px;
+    height: 35px;
+    border-radius: 12px;
+}
+#recs{
+    margin: auto;
+    padding-left: 55px;
+    padding-bottom: 50px;
+}
+#records{
+    width: 73%;
+    text-align: center;
+}
+#det{
+    text-align: initial;
+}
+#fulldetails{
+    visibility: hidden;
+}

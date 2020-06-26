@@ -1,0 +1,24 @@
+#viewInfo{
+    height: 100%;
+    margin-top: 0px;
+}
+#searchbar{
+    padding: 50px;
+    color: aliceblue;
+}
+#bar{
+
+    border: 0px;
+    background-color: transparent;
+    border-bottom: 1px solid #f48fb1;
+    box-shadow: 0 2px 0 0 #f48fb1;
+    color: rgb(218, 48, 5);
+    font-size: 15px;
+}
+#srch_btn{
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+}

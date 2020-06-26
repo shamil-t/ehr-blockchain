@@ -1,0 +1,116 @@
+.dropdown:hover>.dropdown-menu {
+    display: block;
+  }
+#refresh{
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    float: right;
+    margin-right: 5px;
+    margin-top: px;
+    color: aliceblue;
+}
+#nav{
+    top: 0;
+    overflow: visible;
+    position: fixed;
+    width: 100%;
+    z-index: 2;
+}
+section{
+    background-image: url(../images/bag01.jpg);
+    width: 100%;
+    height: 700px;
+    z-index: -10;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: inherit;
+}
+#chatBot{
+    position: absolute;
+    top: 130px;
+    bottom: 10px;
+    float: right;
+    right: 50px;
+    font-family: 'Courier New', Courier, monospace;
+}
+#chatbtn{
+    bottom: 5px;
+    right: 30px;
+    position: fixed;
+    /*background: transparent;*/
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    border-radius: 50px;
+    z-index: 3;
+    background-color:#2006D4;
+    font-weight: bolder;
+}
+#btn{
+    border-radius: 30px;
+}
+#chatbtn img{
+   width: auto;
+}
+#chatbtn span {
+    color: antiquewhite;
+    max-width: 0;
+    height: 100%;
+    -webkit-transition: max-width 1s;
+    transition: max-width 1s;
+    display: inline-block;
+    vertical-align: top;
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: center;
+    font-size: large;
+    margin-top: 10px;
+  }
+#chatbtn:hover span {
+    max-width: 7rem;
+}
+#chatbtn:focus{
+    outline: none;
+    border: none;
+}
+#chatbtn:active{
+    outline: none;
+    border: none;
+}
+#bot{
+    right: 100px;
+    position: fixed;
+    z-index: 2;
+    
+}
+.mb-4{
+    color: azure;
+}
+.subh{
+    margin-top: 150px;
+}
+#bot h2{
+    color: aliceblue;
+}
+
+input{
+    outline: none;
+    box-sizing: border-box;
+}
+
+.ftco-section{
+    width: 100%;
+    display: inline-block;
+}
+.appointment-form{
+    margin-top: -20px;
+}
+.col-md-5{
+    float: right;
+    width: 100%;
+}
+.row{display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;margin-right:-15px;margin-left:-15px}

@@ -1,0 +1,284 @@
+#g_back {
+    margin-left: 50px;
+    margin-top: 50px;
+}
+#g_back a{
+    color: maroon;
+}
+#g_back a:hover{
+    color: darkorange;
+    font-weight: bold;
+    font-size: large;
+}
+#pat_body{
+    top: 35px;
+
+    position: absolute;
+    margin: 0% 10%;
+}
+#pat_body a{
+    margin-top: -60px;
+    margin-left: -60px;
+}
+#usr_ico{
+    margin-top: 0px;
+    margin-left: 15px;
+}
+#pat_id_l{
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    color: indigo;
+}
+#pat_pri_detail{
+    background-color: coral;
+    color: rgb(231, 224, 228);
+    margin-top: -15px;
+    margin-left: 50px;
+    font-size: 20px;
+    padding-top: 50px;
+    padding-left: 55px;
+    border-radius: 15px;
+    padding-bottom: 55px;
+    width: 70%;
+}
+#pat_pri_detail h1{
+    margin-top: -35px;
+    color: crimson;
+    font-size: 36px;
+    font-weight: bold;
+    text-align: center;
+}
+#pat_pri_detail td{
+    padding-top: 20px;
+    padding-left: 10px;
+}
+#input1{
+    width: 300px;
+    height: 40px;
+    border-radius: 18px;
+    font-size: medium;
+    font-weight: bold;
+    color: brown;
+    padding: 8px;
+}
+#pat_pri_detail textarea{
+    width: 300px;
+    border-radius: 15px;
+    color: firebrick;
+    font-size: 15px;
+    padding-left: 10px;
+    padding-top: 10px;
+    height: 80px;
+    font-weight: bold;
+}
+#pat_pri_detail select{
+    color:red;
+    font-size: 16px;
+    font-weight: bold;
+    width: 150px;
+    height: 35px;
+    border-radius: 12px;
+}
+.htwt{
+    margin-top: 15px;
+    color: sienna;
+    margin-left: 10px;
+    border-radius: 18px;
+    padding: 8px;
+    font-weight: bold;
+    font-size: medium;
+    width: 150px;
+    height: 35px;
+}
+.age{
+    margin-top: 15px;
+    color: sienna;
+    margin-left: 10px;
+    border-radius: 12px;
+    padding: 8px;
+    font-weight: bold;
+    font-size: medium;
+    width: 150px;
+    height: 35px;
+}
+#phno{
+    color: orangered;
+    border-radius: 12px;
+    padding: 8px;
+    font-weight: bold;
+    font-size: medium;
+    width: 250px;
+    height: 35px;
+}
+#diagno {
+    background-color: rgb(185, 27, 27);
+    margin-top: 50px;
+    margin-left: 50px;
+    font-size: 18px;
+    width: 75%;
+    padding: 20px;
+    color: blanchedalmond;
+    border-radius: 18px;
+    margin-bottom: 150px;
+}
+#diagnosis textarea{
+    width: 900px;
+    height: 200px;
+    border-radius:15px ;
+    color: rgb(0, 4, 54);
+    font-size: 18px;
+    padding: 15px;
+    font-family: 'Courier New', Courier, monospace;
+}
+#medicines table{
+    width: 900px;
+}
+#medicines input{
+    height: 30px;
+    border-radius: 8px;
+    font-size: medium;
+    font-weight: normal;
+}
+#sl{
+    width: 30px;
+}
+#med1{
+    width: 170px;
+}
+#med2,#med3,#med4 {
+    width: 90px;
+    font-size: 14px;
+}
+#med3,#med2,#med4:focus{
+    outline: none;
+}
+#med3 option {
+    font-size: small;
+}
+#med3 option:focus {
+    outline: none;
+    box-sizing: unset;
+}
+#remark{
+    width: 140px;
+}
+#add{
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#diagno td{
+    padding: 2px;
+}
+#tr{
+    width: 950px;
+    margin-top: 65px;
+    border-radius: 10px;
+    height: 35px;
+    background-color: rgb(65, 28, 167);
+    color: bisque;
+    padding: 10px;
+}
+#tr p{
+    margin-top: 3px;
+    text-align: center;
+}
+#save{
+    float: right;
+    margin-right: 150px;
+    color: aliceblue;
+    background-color: rgb(56, 56, 240);
+    padding: 8px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 8px;
+}
+#rectest{
+    margin-top: 25px;
+    background-color: rgba(14, 50, 209, 0.63);
+    padding: 20px;
+    width: 50%;
+    border-radius: 15px;
+}
+
+
+#drinfo{
+    margin-top: 25px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+#clinicaltest {
+    border-radius: 10px;
+    width: 250px;
+    height: 35px;
+    font-size: 18px;
+    padding-left: 8px;
+}
+
+
+#followup{
+    border-radius: 15px;
+    width: 200px;
+    height: 35px;
+    font-size: 15px;
+    padding-left: 8px;
+}
+#followup option{
+    font-size: medium;
+}
+#drid{
+    margin-top: 20px;
+}
+#drinformation {
+    background-color: rgb(28, 87, 146);
+    padding: 15px;
+    border-radius: 18px;
+    font-weight: bold;
+    font-size: large;
+    color: aquamarine;
+    margin-bottom: 72px;
+    width: 80%;
+}
+#drinformation p{
+    font-weight: lighter;
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+}
+footer{
+    width: 100%;
+    background-color: rgb(221, 32, 15);
+    color: white;
+    position: fixed;
+    padding: 10px;
+    left: 0;
+    bottom: 0;
+    text-align: center;
+}
+.diagno {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 40, 100, 0.12);
+    border-radius: 3px;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.diagno:focus {
+    outline: none !important;
+
+    box-shadow: 0 0 10px #719ECE;
+}
+#clinicaltest,#med3,#followup:focus{
+    outline: none !important;
+
+    box-shadow: 0 0 10px #719ECE;
+}

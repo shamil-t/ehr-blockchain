@@ -1,0 +1,120 @@
+.nav{
+    float: right;
+    padding-top: 15px;
+    padding-right: 20px;
+    color: black;
+}
+.nav-item:hover>.dropdown-menu {
+    display: block;
+  }
+  .nav-item:hover > .dropdown-menu {
+    display: block;
+}
+.nav-item > .dropdown-toggle:active {
+    pointer-events: none;
+}
+#cards{
+    margin-top: 50px;
+   width: 100%;
+    
+}
+#card{
+    width: 95%;
+    display: block;
+    margin-left: 10px;
+}
+h5{
+    color: black;
+}
+#banner{
+    
+    width: 100%;
+    height: fit-content;
+    background-image: url(../img/back1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#h1top{
+    padding-top: 150px;
+}
+#header{
+    margin: auto;
+    width: 100%;
+    position: fixed;
+   z-index: 3;
+}
+.header{
+    position: absolute;
+    border-bottom: 0ch;
+    padding-bottom: 0px;
+    padding-top: 0px;
+    background-color: transparent;
+}
+#live{
+    font-size: 22px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding-bottom: 35px;
+}
+#rows{
+    padding: 30px;
+}
+.livenow {
+    width: 30px;
+    padding: 10px 40px 12px 40px;
+    margin: 0 auto;
+    display: inline-block;
+  }
+  
+  .livenow > div {
+    vertical-align: middle;
+    width: 22px;
+    height: 22px;
+    border-radius: 100%;
+    position: absolute;
+    margin: 0 auto;
+    border: 3px solid#6b6363;
+    -webkit-animation: live 1.4s infinite ease-in-out;
+    animation: live 1.4s infinite ease-in-out;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+  }
+  .livenow > div:nth-child(1) {
+    background-color: rgba(255, 255, 255, 0.3);
+    background-color: #6b6363;
+    -webkit-animation-delay: -0.1s;
+    animation-delay: -0.1s;
+  }
+  .livenow > div:nth-child(2) {
+    -webkit-animation-delay: 0.16s;
+    animation-delay: 0.16s;
+  }
+  .livenow > div:nth-child(3) {
+    -webkit-animation-delay: 0.42s;
+    animation-delay: 0.42s;
+    border: 3px solid rgba(255, 255, 255, 0.5);
+  }
+  .livenow > div:nth-child(4) {
+    border: 3px solid #6b6363;
+    -webkit-animation-delay: -0.42s;
+    animation-delay: -0.42s;
+  }
+  
+  @-webkit-keyframes live {
+    0%, 80%, 100% {
+      -webkit-transform: scale(0.6);
+    }
+    40% {
+      -webkit-transform: scale(1);
+    }
+  }
+  @keyframes live {
+    0%, 80%, 100% {
+      transform: scale(0.6);
+      -webkit-transform: scale(0.6);
+    }
+    40% {
+      transform: scale(1);
+      -webkit-transform: scale(1);
+    }
+  }
+  

@@ -1,0 +1,19 @@
+#drinfo{
+    margin: auto;
+    width: 50%;
+    border-radius: 18px;
+    padding: 10px;
+    background-color: rgb(35, 0, 100);
+    align-content: center;
+    font-style: normal;
+    color: antiquewhite;
+    font-size: 24px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.dinfo{
+    
+    font-weight: 0;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    padding-top: 20px;
+}

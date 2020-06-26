@@ -1,0 +1,135 @@
+#lds {
+    position: relative;
+    width: 100px;
+    height: 80px;
+    margin-top: 20px;
+    visibility: hidden;
+}
+#lds div {
+    position: absolute;
+    top: 33px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: rgb(23, 187, 59);
+    animation-timing-function: cubic-bezier(0, 1, 1, 0);
+  }
+  #lds div:nth-child(1) {
+    left: 10px;
+    animation: lds-ellipsis1 0.6s infinite;
+  }
+  #lds div:nth-child(2) {
+    left: 8px;
+    animation: lds-ellipsis2 0.6s infinite;
+  }
+  #lds div:nth-child(3) {
+    left: 32px;
+    animation: lds-ellipsis2 0.6s infinite;
+  }
+  #lds div:nth-child(4) {
+    left: 56px;
+    animation: lds-ellipsis3 0.6s infinite;
+  }
+  #lds div:nth-child(5) {
+    left: 66px;
+    animation: lds-ellipsis3 0.6s infinite;
+  }
+
+  @keyframes lds-ellipsis1 {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  @keyframes lds-ellipsis3 {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(0);
+    }
+  }
+  @keyframes lds-ellipsis2 {
+    0% {
+      transform: translate(0, 0);
+    }
+    100% {
+      transform: translate(24px, 0);
+    }
+  }
+
+#gback{
+margin-top:  10px;
+margin-left: 50px;
+}
+#gback a{
+    color: maroon;
+}
+#gback a:hover{
+    color: darkorange;
+    font-weight: bold;
+    font-size: large;
+}
+#h1{
+    margin-top: 0px;
+    padding-top: 5px;
+    font-size: 40px;
+    text-align: center;
+    color: crimson;
+    font-weight: bold;
+}
+#body h1:hover{
+    color: yellowgreen;
+}
+#form select,option{
+    color: gray;
+    text-align: center;
+    font-size: 15px;
+    border-radius: 18px;
+    padding-left: 10px;
+    width: 250px;
+    height: 40px;
+}
+#accId{
+    color: brown;
+    font-weight: bold;
+    font-size: 15px;
+    border-radius: 18px;
+    padding-left: 10px;
+    width: 500px;
+    height: 50px;
+}
+#form{
+    padding-top: 30px;
+    color: rgb(83, 0, 83);
+    font-size: 22px;
+    font-weight: bold;
+}
+#form td{
+  padding: 10px;
+}
+#submit{
+    font-size: 15px;
+    height: 50px;
+    width: fit-content;
+    padding: 10px;
+    border-radius: 18px;
+    background-color: rgb(57, 60, 240);
+    color: rgb(228, 194, 194);
+    font-weight: bold;
+}
+#submit:hover{
+    background-color: moccasin;
+    color: #786590;
+}
+#note1{
+    margin-top: -30px;
+    float: left;
+    display: block;
+    width: fit-content;
+    color: red;
+    font-weight: bold;
+    padding-left: 50px;
+}
