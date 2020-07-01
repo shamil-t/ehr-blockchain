@@ -1,12 +1,12 @@
 #lds {
-    position: relative;
+    position: fixed;
     width: 100px;
     height: 80px;
     margin-top: 20px;
     visibility: hidden;
 }
 #lds div {
-    position: absolute;
+    position: fixed;
     top: 33px;
     width: 13px;
     height: 13px;

@@ -81,8 +81,7 @@ class ViewPatientRec extends Component {
          // document.getElementById('pat_id').innerHTML = patId
       })
       await this.state.contract.methods.getPatInfo(this.state.account).call()
-      .then(rechash =>{
-  
+      .then(rechash =>{  
           console.log(rechash)
           ipfs.cat(rechash).then(data =>{
               const patinfo = JSON.parse(data)
