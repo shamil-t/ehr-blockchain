@@ -1,5 +1,5 @@
 {
-  "homepage": "http://shamil-t.github.io/ehr-blockchain",
+  "homepage": "http://localhost:3000/home",
   "name": "ehr-blockchain",
   "jest": {
     "testEnvironment": "node"
@@ -21,6 +21,7 @@
     "chai-as-promised": "7.1.1",
     "chai-bignumber": "3.0.0",
     "chart.js": "^2.9.3",
+    "eslint": "^7.28.0",
     "gh-pages": "^3.1.0",
     "infinite-react-carousel": "^1.2.11",
     "ipfs-http-client": "^42.0.0",
@@ -35,7 +36,7 @@
     "react-json-to-table": "^0.1.5",
     "react-native-elements": "^2.0.0",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "^3.4.0",
+    "react-scripts": "4.0.3",
     "react-simple-chatbot": "^0.6.1",
     "reactstrap": "^8.4.1",
     "styled-components": "^5.1.1",
