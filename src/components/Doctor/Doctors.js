@@ -66,6 +66,7 @@ class Doctors extends Component{
      async getDrInfo(){
        console.log(this.state.account)
         await this.state.contract.methods.getDrInfo().call().then(value =>{
+	   console.log(value)
           ipfs.cat(value).then(data =>{
             console.log(data)
             var val = JSON.parse(data)

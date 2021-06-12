@@ -87,7 +87,7 @@ contract Contract{
     }
     function getAllDrs() public view returns(address){
         uint i = 0;
-        for(i = 0;i<Dr_ids.length;i++)
+        for(i = 0;i<=Dr_ids.length;i++)
         {
             return(Dr_ids[i]);
         }

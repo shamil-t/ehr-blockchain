@@ -65,7 +65,7 @@ async loadWeb3() {
              const email = document.getElementById('email').value
              const dob = document.getElementById('dob').value
              const mobile = document.getElementById('mob').value
-             const accId = document.getElementById('accid').value
+             const accId = document.getElementById('accid').value.trim()
              const city = document.getElementById('city').value
              const state = document.getElementById('state').value
              const speciality = document.getElementById('spec').value
