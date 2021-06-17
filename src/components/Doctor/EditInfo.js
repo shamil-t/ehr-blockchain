@@ -76,8 +76,8 @@ class EditDrInfo extends Component{
         var Drinfo = JSON.stringify(DrInfos)
 
         await ipfs.add(Drinfo).then( Drhash =>{
-          console.log(Drhash)
-          this.state.contract.methods.addDrInfo(Drhash).send({from: this.state.account}).on("confirmation", 
+          console.log("Dr hash : ",Drhash)
+          this.state.contract.methods.updateInfo(this.state.account,Drhash).send({from: this.state.account}).on("confirmation", 
           (r) => {
             window.alert("Your Info Updated Successfully")
             document.getElementById('lds-ellipsis').style.visibility = "hidden"
@@ -95,9 +95,6 @@ class EditDrInfo extends Component{
 render(){
         return(
             <div id="editinfo">
-                <div id="g_back">          
-                    <Link  to="/"><img src={backico} width="40" height="30" alt="back"></img>Home</Link> 
-                </div>
                 <div id="Edit">
                     <center>   
                         <img id="dr_ico" src={dr_ico} alt={dr_ico} ></img>

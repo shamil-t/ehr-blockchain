@@ -60,7 +60,7 @@ class ViewInfo extends Component{
     searchInfo = async (event) =>{
         event.preventDefault()
         const search = document.getElementById('bar').value
-        console.log(search)
+        console.log("Searching..",search)
         document.getElementById('lds').style.visibility = "visible"
         await this.state.contract.methods.search(search).send({from : this.state.account})
         .on("confirmation" ,(e)=>{

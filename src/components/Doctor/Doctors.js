@@ -30,10 +30,6 @@ class Doctors extends Component{
         console.log(contract)
         const memeHash = await contract.methods.get().call()
         console.log("Value",memeHash)
-         
-
-         
-         
        }else{
          window.alert('Contarct not Deployed')
        }
@@ -66,13 +62,19 @@ class Doctors extends Component{
      async getDrInfo(){
        console.log(this.state.account)
         await this.state.contract.methods.getDrInfo().call().then(value =>{
-	   console.log(value)
+	        console.log("Doctor info hash : ",value)
           ipfs.cat(value).then(data =>{
             console.log(data)
             var val = JSON.parse(data)
-            document.getElementById('drname').innerHTML=val.Name
-            document.getElementById('drqual').innerHTML=val.Quali
-            document.getElementById('drspec').innerHTML = val.Spec
+            document.getElementById('drname').innerHTML= val.Fname
+            if(val.Quali != null){
+              document.getElementById('drqual').innerHTML= val.Quali
+            }
+            else{
+              document.getElementById('drqual').innerHTML= "Not given"
+            }
+            document.getElementById('drspec').innerHTML = val.Speciality
+            document.getElementById('drcity').innerHTML = val.City
           })
         })
      }
@@ -82,18 +84,21 @@ class Doctors extends Component{
 render(){
     return(
         <div id="Drsbody">
-          <div id="g_back">          
-                    <Link  to="/"><img src={backico} width="40" height="30" alt="back"></img>Home</Link> 
-                </div>
             <center>   
             <div id="drinfo">
                   <img id="dr_ico" src={dr_ico} alt={dr_ico} ></img>
-                  <table>
+                  <table className="t_items">
                       <tr>
                           <td>Full Name :-</td>
                           <td>
                             <p class="dinfo" id="drname"></p>
                           </td>
+                      </tr>
+                      <tr>
+                        <td>City :-</td>
+                        <td>
+                          <p class="dinfo" id="drcity"></p>
+                        </td>
                       </tr>
                       <tr>
                         <td>Specialization :-</td>

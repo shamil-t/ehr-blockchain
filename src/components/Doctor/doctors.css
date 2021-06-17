@@ -1,19 +1,28 @@
+#Drsbody{
+    margin-top: 70px;
+}
 #drinfo{
     margin: auto;
     width: 50%;
     border-radius: 18px;
     padding: 10px;
+    padding-bottom: 15px;
     background-color: rgb(35, 0, 100);
     align-content: center;
     font-style: normal;
     color: antiquewhite;
-    font-size: 24px;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 .dinfo{
-    
-    font-weight: 0;
     font-family: 'Courier New', Courier, monospace;
     font-size: 20px;
-    padding-top: 20px;
+    margin: auto 10px;
+}
+table{
+    width: fit-content;
+    margin-top: 25px;
+    padding-bottom: 15px;
+    align-items: center;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 22px;
 }
