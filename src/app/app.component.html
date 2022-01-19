@@ -1,10 +1,26 @@
-
 <div class="header">
   <div class="logo px-2">
     EHR 2.0
   </div>
   <div class="account px-2">
-   {{accounts[0]}}
+    {{accounts}}
+  </div>
+</div>
+
+<div class="pre-loader position-absolute" [hidden]="isConnected">
+  <div class="card">
+    <div class="spinner-border text-danger mb-3 mt-2" role="status" [hidden]="retry_visibility">
+    </div>
+    <i class="fas fa-exclamation-triangle fs-1 text-warning" [hidden]="!retry_visibility"></i>
+    <div class="load-text my-3 text-center">
+      {{load_text}}
+    </div>
+    <div class="retry" [hidden]="!retry_visibility">
+      <button class="btn btn-primary btn-sm" (click)="reload()">
+        <i class="fas fa-redo"></i>
+        &nbsp;Retry
+      </button>
+    </div>
   </div>
 </div>
 <router-outlet></router-outlet>

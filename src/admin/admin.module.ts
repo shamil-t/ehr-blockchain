@@ -6,6 +6,9 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { SidebarComponent } from './admin-dashboard/sidebar/sidebar.component';
 import { HeaderComponent } from './admin-dashboard/header/header.component';
 import { DoctorComponent } from './doctor/doctor.component';
+import { ViewComponent } from './doctor/view/view.component';
+import { AddComponent } from './doctor/add/add.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -13,11 +16,14 @@ import { DoctorComponent } from './doctor/doctor.component';
     AdminDashboardComponent,
     SidebarComponent,
     HeaderComponent,
-    DoctorComponent
+    DoctorComponent,
+    ViewComponent,
+    AddComponent
   ],
   imports: [
     CommonModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    FormsModule
   ]
 })
 export class AdminModule { }

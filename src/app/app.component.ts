@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BlockchainService } from 'services/blockchain.service';
+import { BlockchainService } from 'src/services/blockchain.service';
 import Web3 from 'web3';
 
 declare let window: any;
@@ -14,26 +14,45 @@ export class AppComponent implements OnInit {
 
   provider: any;
   web3js: any;
-  netId:any
-  accounts: any = [];
+  netId: any;
+  accounts: any;
 
-  constructor(private blockChainService: BlockchainService) {
-    
-  }
+  isConnected: boolean = false;
+
+  load_text: string = 'Connecting to BlockChain....';
+
+  retry_visibility: boolean = false;
+
+  constructor(private blockChainService: BlockchainService) {}
 
   ngOnInit(): void {
-    this.load()
-    
+    this.load();
   }
 
-  async load(){
-    await this.blockChainService.loadBlockChain().then(async () => {
-      await this.blockChainService.loadBlockChain();
-      this.netId = this.blockChainService.netId
-      this.accounts = this.blockChainService.accounts
+  reload() {
+    this.load();
+  }
+
+  load() {
+    console.log('loading....');
+    this.blockChainService.getWeb3Provider().then((result: Web3) => {
+      console.log(result);
+      this.accounts = result.eth.getAccounts((err, accs) => {
+        if(accs[0] != null){
+          this.accounts = accs[0]
+          this.isConnected = true;
+        }
+        else {
+          setTimeout(() => {
+            this.isConnected = false;
+            this.load_text =
+              'Unable to connect to BlockChain \n ' +
+              'Please Open Ganache and Connect to MetaMask';
+            this.retry_visibility = true;
+          }, 5000);
+        }
+        return accs;
+      });
     });
-    
   }
-
-
 }

@@ -99,12 +99,8 @@ contract Contract{
         return "1";
     }
     
-    function getAllDrs(uint i) public view returns(address){
-        // uint i = 0;
-        // for (i = 0; i <= Dr_ids.length; i++) {
-        //     return (Dr_ids[i]);
-        // }
-        return(Dr_ids[i]);
+    function getAllDrs() public view returns(address[] memory){
+        return(Dr_ids);
     }
 
     function getDoctorCount() public view returns(uint){

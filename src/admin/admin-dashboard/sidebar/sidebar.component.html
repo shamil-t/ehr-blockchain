@@ -12,17 +12,11 @@
         <button class="btn align-items-center rounded collapsed active"> <i class="fas fa-home"></i> Home</button>
       </li>
       <li class="list-main mb-1">
-        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
-          data-bs-target="#home-collapse" aria-expanded="false" >
-          Doctor
+        <button class="btn align-items-center rounded collapsed" data-bs-toggle="collapse"
+          data-bs-target="#home-collapse" aria-expanded="false" [routerLink]="'doctor'">
+          <i class="fas fa-user-md"></i> Doctor
         </button>
-        <div class="collapse" id="home-collapse">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#" class="link-dark rounded" [routerLink]="'doctor'"><i class="fas fa-user-plus"></i> &nbsp;Add Doctor</a></li>
-            <li><a href="#" class="link-dark rounded"><i class="fas fa-user-edit"></i> &nbsp;Edit Doctor</a></li>
-            <li><a href="#" class="link-dark rounded"><i class="fas fa-user-times"></i> &nbsp;Remove Doctor</a></li>
-          </ul>
-        </div>
+        
       </li>
       <li class="list-main mb-1">
         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"

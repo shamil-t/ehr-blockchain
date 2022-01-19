@@ -1,0 +1,16 @@
+<div class="container-fluid">
+  <div class="container">
+    <form #doctor="ngForm" (ngSubmit)="onAddDocSubmit()">
+      <div class="col-12">
+        <div class="form-group">
+          <label>Doctor Id</label>
+          <input [(ngModel)]="model.acID" name="acID" #acID type="text" class="form-control my-3"
+            placeholder="doctor account id" />
+        </div>
+      </div>
+      <button type="submit" id="btn" class="btn btn-primary my-3">
+        Add Doctor
+      </button>
+    </form>
+  </div>
+</div>
