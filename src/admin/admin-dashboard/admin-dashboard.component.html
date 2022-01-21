@@ -1,10 +1,10 @@
 <div class="dashboard"></div>
 <app-header (onCollapse)="isCollapse = !isCollapse"></app-header>
 
-<div class="container-fluid">
-  <div class="row">
+<div class="container-fluid m-0">
+  <div class="row m-0">
     <app-sidebar [isCollapsed]="isCollapse"></app-sidebar>
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <main class="col-md-10 ms-sm-auto col-lg-10 m-0">
       <router-outlet></router-outlet>
     </main>
   </div>

@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,IAAI,CAAC;EACH,OAAO,EAAE,IAAI;EACb,eAAe,EAAE,MAAM;EACvB,cAAc,EAAE,MAAM;EACtB,WAAW,EAAE,KAAK;CAAG",
+    "sources": [
+        "view.component.sass"
+    ],
+    "names": [],
+    "file": "view.component.css"
+}

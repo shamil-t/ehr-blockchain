@@ -1,6 +1,8 @@
 .navbar{
   background-color: rgb(48, 0, 179);
   color: aliceblue;
+  position: sticky;
+  top: 25px;
 }
 .navbar-brand {
   padding-top: 0.75rem;

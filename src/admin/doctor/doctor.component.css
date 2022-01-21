@@ -1,0 +1,16 @@
+.nav .nav-link {
+  margin-left: 3px;
+  border-bottom: 2px solid #ffffff;
+  border-radius: 10px 10px 0px 0px;
+}
+
+.nav .nav-link:hover {
+  border-bottom: 2px solid #0e6dfb;
+}
+
+.content .tab-content {
+  height: calc( 100vh - 150px);
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+/*# sourceMappingURL=doctor.component.css.map */

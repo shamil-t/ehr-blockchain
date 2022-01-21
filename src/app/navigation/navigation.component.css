@@ -1,0 +1,37 @@
+.navbar {
+  background-color: #ffffff;
+  -webkit-box-shadow: 2px 1px 2px 1px #c9c9c9;
+          box-shadow: 2px 1px 2px 1px #c9c9c9;
+  padding: 0px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 25px;
+}
+
+.navbar ul {
+  padding: 0px;
+  margin: 0px;
+  overflow: hidden;
+}
+
+.navbar ul li {
+  padding: 2px;
+  border-bottom: 2px solid #ffffff;
+}
+
+.navbar ul li:hover {
+  border-bottom: 2px solid #001d6d;
+}
+
+.navbar ul li:hover a {
+  color: #001f75;
+}
+
+.navbar ul li a {
+  color: #646464;
+}
+
+.navbar ul li a.active {
+  color: #000;
+}
+/*# sourceMappingURL=navigation.component.css.map */

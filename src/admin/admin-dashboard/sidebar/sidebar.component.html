@@ -1,4 +1,4 @@
-<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse" [attr.aria-expanded]="!isCollapsed"
+<nav id="sidebarMenu" class="col-md-2 col-lg-2 d-md-block bg-light sidebar collapse" [attr.aria-expanded]="!isCollapsed"
   [ngClass]="{collapse: isCollapsed}">
   <div class="position-sticky pt-3">
     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -9,28 +9,22 @@
     </h6>
     <ul class="list-unstyled ps-0 mx-3">
       <li class="list-main mb-1">
-        <button class="btn align-items-center rounded collapsed active"> <i class="fas fa-home"></i> Home</button>
+        <button class="btn btn-dash align-items-center rounded collapsed active"> 
+          <i class="fas fa-home"></i>&nbsp;&nbsp;Home</button>
       </li>
+
       <li class="list-main mb-1">
-        <button class="btn align-items-center rounded collapsed" data-bs-toggle="collapse"
-          data-bs-target="#home-collapse" aria-expanded="false" [routerLink]="'doctor'">
-          <i class="fas fa-user-md"></i> Doctor
+        <button class="btn btn-dash align-items-center rounded collapsed" [routerLink]="'doctor'">
+          <i class="fas fa-user-md"></i>&nbsp;&nbsp;Doctor
         </button>
-        
       </li>
+
       <li class="list-main mb-1">
-        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
-          data-bs-target="#dashboard-collapse" aria-expanded="false">
-          Patient
+        <button class="btn btn-dash align-items-center rounded collapsed">
+          <div class="fas fa-user-injured"></div>&nbsp;&nbsp;Patient
         </button>
-        <div class="collapse" id="dashboard-collapse">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#" class="link-dark rounded"><i class="fas fa-user-plus"></i> &nbsp;Add Patient</a></li>
-            <li><a href="#" class="link-dark rounded"><i class="fas fa-user-edit"></i> &nbsp;Edit Patient</a></li>
-            <li><a href="#" class="link-dark rounded"><i class="fas fa-user-times"></i> &nbsp;Remove Patient</a></li>
-          </ul>
-        </div>
       </li>
+
       <li class="list-main mb-1">
         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
           data-bs-target="#orders-collapse" aria-expanded="false">

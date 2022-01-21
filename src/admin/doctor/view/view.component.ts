@@ -17,10 +17,4 @@ export class ViewComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onAddDocSubmit(){
-    let _doctor = this.model.acID
-    console.log(_doctor);
-    this.doctorService.addDoctorRole(_doctor)
-  }
-
 }
