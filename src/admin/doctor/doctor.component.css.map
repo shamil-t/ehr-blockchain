@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AACE,IADE,CACF,SAAS,CAAC;EACR,WAAW,EAAE,GAAG;EAChB,aAAa,EAAE,iBAAiB;EAChC,aAAa,EAAE,iBAAiB;CAEO;;AAN3C,AAKI,IALA,CACF,SAAS,AAIN,MAAM,CAAC;EACN,aAAa,EAAE,iBAAiB;CAAG;;AAEzC,AACE,QADM,CACN,YAAY,CAAC;EACX,MAAM,EAAE,oBAAqB;EAC7B,UAAU,EAAE,MAAM;EAClB,eAAe,EAAE,MAAM;CAAG",
-    "sources": [
-        "doctor.component.sass"
-    ],
-    "names": [],
-    "file": "doctor.component.css"
-}
