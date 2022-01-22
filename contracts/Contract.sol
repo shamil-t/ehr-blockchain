@@ -106,6 +106,11 @@ contract Contract{
     function getDoctorCount() public view returns(uint){
         return(Dr_ids.length);
     }
+
+    // function getAllDrDetails() onlyAdmin() public view returns(string[] memory) {
+    //     drIds = 
+    //     return ['']
+    // }
     /*
             Patient
     

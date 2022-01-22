@@ -1,16 +1,57 @@
 <div class="container-fluid">
-  <div class="container">
-    <!-- <form #doctor="ngForm" (ngSubmit)="onAddDocSubmit()">
-      <div class="col-12">
-        <div class="form-group">
-          <label>Doctor Id</label>
-          <input [(ngModel)]="model.acID" name="acID" #acID type="text" class="form-control my-3"
-            placeholder="doctor account id" />
+  <div class="container w-100">
+    <div class="content" *ngIf="DoctorDetails.length >= 1">
+      <div class="card mt-2" *ngFor="let Docdetails of DoctorDetails ">
+        <div class="doctor w-100 p-2 d-flex flex-row align-items-center">
+          <div class="doc-image">
+            <img class="border border-1 border-secondary rounded-circle p-1"
+              [src]='Docdetails.imageHash || "../../../assets/images/doctor.png"' alt="Doctor Image" width="150px"
+              height="150px">
+          </div>
+          <div class="doc-info d-flex flex-column">
+            <div class="col">
+              <div class="row py-2">
+                <div class="col-md-12">
+                  <b>DocID: </b> <span class="docID">{{Docdetails.docID}}</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 d-flex flex-column">
+                  <div>
+                    <b>Full Name : </b> <span class="fName">{{Docdetails.fName}} {{Docdetails.lName}}</span></div>
+                  <div>
+                    <b>Date of Joining : </b> <span class="Doj">{{Docdetails.Doj}}</span>
+                  </div>
+                  <div>
+                    <b>Speciality: </b><span class="speciality">{{Docdetails.speciality}}</span>
+                  </div>
+
+                </div>
+                <div class="col-md-6 d-flex flex-column">
+                  <div>
+                    <b>Email : </b><span class="emailID">{{Docdetails.emailID}}</span></div>
+                  <div>
+                    <b>Phone: </b><span class="phone">{{Docdetails.phone}}</span>
+                  </div>
+                  <div>
+                    <b>City </b><span class="city">{{Docdetails.city}}</span>
+                  </div>
+                  <div>
+                    <b>State: </b><span class="state">{{Docdetails.state}}</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
         </div>
       </div>
-      <button type="submit" id="btn" class="btn btn-primary my-3">
-        Add Doctor
-      </button>
-    </form> -->
+    </div>
+    <div *ngIf="!loadComplete" class="mt-3 d-flex flex-column align-items-center">
+      <label for="progress">{{progressMsg}}</label>
+      <progress id="progress"></progress>
+    </div>
+
   </div>
+  <!-- <app-progress_card [show]="!loaded" [warn]="showProgressWarn" [msg_text]="progressMsg"></app-progress_card> -->
 </div>

@@ -1,3 +1,4 @@
+import { JsonPipe } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { exit } from 'process';
 import { from, Observable } from 'rxjs';
@@ -24,6 +25,10 @@ export class DoctorService {
 
   result: any;
 
+  Doctors: any;
+
+  DoctorDetails: string[] = [];
+
   constructor(private blockChainService: BlockchainService) {
     //GET BlockChain Service
     this.web3 = blockChainService.getWeb3();
@@ -44,7 +49,13 @@ export class DoctorService {
         this.contract = this.web3.eth.Contract(this.abi, this.address);
 
         console.log(this.contract.methods.getAdmin.call());
-        console.log(this.contract.methods.getAllDrs.call());
+        this.Doctors = this.contract.methods.getAllDrs
+          .call()
+          .then((docs: string[]) => {
+            this.Doctors = docs;
+            console.log(this.Doctors);
+          });
+        console.log('Doctors', this.Doctors);
       } else {
         console.log('Contract not Deployed');
       }
@@ -58,41 +69,18 @@ export class DoctorService {
     });
   }
 
-  async addDoctor(data: {}, docId: any): Promise<any> {
-    //Add Data to IPFS
-    return this.ipfs.addJSON(data).then(async (IPFShash: string) => {
-      console.log(IPFShash);
-      this.msg_text = 'Data added to IPFS...';
-      //add data to blockchain
-      return this.contract.methods
-        .addDrInfo(docId, IPFShash)
-        .send({ from: this.account })
-      
-      // console.log();
-      
-        
-      // console.log(' doc servc returning',this.result);
-      // return this.result;
-    });
+  getDoctorDetails(docID: any): Promise<any> {
+    console.log('DocID', docID);
+    return this.contract.methods
+      .getDr(docID)
+      .call()
+      .then((ipfsHash: string) => {
+        console.log(ipfsHash);
+        this.ipfs.cat(ipfsHash).then((data: any) => {
 
+          this.DoctorDetails.push(JSON.parse(data));
+          return data;
+        });
+      });
   }
-
 }
-
-// .on("confirmation",(result: any) => {
-        //   console.log(result);
-        //   this.msg_text += '<br>User Added to the Blockchain';
-        //   this.result = result
-        //   return result
-        // })
-        // // .then((result: any) => {
-        // //   console.log('User Added to Block', result);
-        // //   this.msg_text += '<br>User Added to the Blockchain';
-        // //   return result;
-        // // })
-        // .catch((err: any) => {
-        //   console.log(err);
-        //   this.msg_text =
-        //     '<br>Failed Adding to BlockChain <br>1. Invalid Doctor ID <br>2. Doctor Already exists';
-        //   return err;
-        // });
