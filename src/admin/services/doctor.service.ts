@@ -77,7 +77,8 @@ export class DoctorService {
       .then((ipfsHash: string) => {
         console.log(ipfsHash);
         this.ipfs.cat(ipfsHash).then((data: any) => {
-
+          console.log(data);
+          
           this.DoctorDetails.push(JSON.parse(data));
           return data;
         });

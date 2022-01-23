@@ -1,6 +1,9 @@
+<div class="overlay" [hidden]="isAdmin">
+</div>
+<app-progress_card [show]="!isAdmin" [msg_text]="progressMsg" [warn]="progressWarn" (retry)="onCheckAdmin()"></app-progress_card>
+
 <div class="dashboard"></div>
 <app-header (onCollapse)="isCollapse = !isCollapse"></app-header>
-
 <div class="container-fluid m-0">
   <div class="row m-0">
     <app-sidebar [isCollapsed]="isCollapse"></app-sidebar>

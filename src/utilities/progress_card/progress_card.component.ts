@@ -21,7 +21,7 @@ export class Progress_cardComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    this.msg_text = 'loading.....';
+    
     console.log(this.show, this.msg_text);
   }
 
