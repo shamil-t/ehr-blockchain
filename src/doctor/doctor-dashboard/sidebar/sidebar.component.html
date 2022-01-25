@@ -1,0 +1,54 @@
+<nav id="sidebarMenu" class="col-md-2 col-lg-2 d-md-block bg-light sidebar collapse" [attr.aria-expanded]="!isCollapsed"
+  [ngClass]="{collapse: isCollapsed}">
+  <div class="position-sticky pt-3">
+    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+      <span>Management</span>
+      <a class="link-secondary" href="#" aria-label="User Management">
+        <span data-feather="plus-circle"></span>
+      </a>
+    </h6>
+    <ul class="list-unstyled ps-0 mx-3">
+      <li class="list-main mb-1">
+        <button class="btn btn-dash align-items-center rounded collapsed active" [routerLink]="'admin-dashboard'">
+          <i class="fas fa-home"></i>&nbsp;&nbsp;Dashboard</button>
+      </li>
+
+      <li class="list-main mb-1">
+        <button class="btn btn-dash align-items-center rounded collapsed" [routerLink]="'doctor'">
+          <i class="fas fa-user-md"></i>&nbsp;&nbsp;Profile
+        </button>
+      </li>
+
+      <li class="list-main mb-1">
+        <button class="btn btn-dash align-items-center rounded collapsed" [routerLink]="'patient'">
+          <div class="fas fa-user-injured"></div>&nbsp;&nbsp;Consult
+        </button>
+      </li>
+
+      <li class="border-top my-3"></li>
+    </ul>
+
+    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+      <span>Reports</span>
+      <a class="link-secondary" href="#" aria-label="Add a new report">
+        <span data-feather="plus-circle"></span>
+      </a>
+    </h6>
+    <ul class="nav flex-column mb-2">
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="'reports'">
+          <span class="fas fa-random"></span>
+          Transactions
+        </a>
+      </li>
+    </ul>
+    <ul class="nav flex-column sign-out" [routerLink]="''">
+      <li>
+        <i class="fas fa-sign-out-alt"></i>
+        &nbsp;Sign Out
+      </li>
+    </ul>
+  </div>
+
+
+</nav>

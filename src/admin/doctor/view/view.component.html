@@ -47,14 +47,13 @@
         </div>
       </div>
     </div>
-    <div *ngIf="showProgressCard" class="mt-3 d-flex flex-column align-items-center">
+    <div *ngIf="showProgressCard" class="prgrs mt-3 d-flex flex-column align-items-center">
       <label for="progress">{{progressMsg}}</label>
       <progress id="progress"></progress>
     </div>
 
     <div class="nill d-flex flex-column justify-content-center align-items-center text-center" *ngIf="loadComplete && !loaded">
-      No Doctors In the Network <br>
-      Add Doctors using the <span class="text-promary fw-bold">Add Doctor</span> tab above
+      No Doctors In the Network Add Doctors using the above tab<span class="text-primary fw-bold">Add Doctor</span>
       <button class="btn btn-primary" (click)="GetDoctors()">Retry</button>
     </div>
 

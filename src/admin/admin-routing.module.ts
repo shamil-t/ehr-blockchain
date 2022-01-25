@@ -17,6 +17,9 @@ const routes: Routes = [
       { path: 'reports', component: ReportsComponent },
     ],
   },
+  {
+    path:'',redirectTo:'admin/admin-dashboard'
+  }
 ];
 
 @NgModule({

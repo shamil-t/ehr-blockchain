@@ -58,14 +58,15 @@ export class ViewComponent implements OnInit {
   }
 
   GetDoctors(): any{
-    if(this.DoctorDetails.length >= 1){
-      this.showProgressCard = false
-      return 0
-    }
     this.showProgressCard= true;
     this.showProgressWarn = false;
     this.progressMsg = ''
 
+    if(this.DoctorDetails.length >= 1){
+      this.showProgressCard = false
+      return 0
+    }
+    
     let docCall = setInterval(() => {
       console.log('interval');
 
@@ -76,8 +77,6 @@ export class ViewComponent implements OnInit {
         clearInterval(docCall);
       }
       else{
-        this.showProgressCard = true
-        this.showProgressWarn = true
         this.progressMsg = 'No Doctors in the Network....'
       }
     }, 1000);

@@ -98,6 +98,16 @@ contract Contract{
         require(doctor.has(id), "Only for Doctors");
         return "1";
     }
+
+    function isDoctor(address id) public view returns(int){
+        // require(doctor.has(msg.sender), "Only for Doctors");
+        for(uint i=0;i<=Dr_ids.length;i++){
+            if(Dr_ids[i] == id){
+                return 1;
+            }
+        }
+        return 0;
+    }
     
     function getAllDrs() public view returns(address[] memory){
         return(Dr_ids);

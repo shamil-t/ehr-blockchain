@@ -9,7 +9,12 @@ const routes: Routes = [
     loadChildren: () =>
       import('../admin/admin.module').then((m) => m.AdminModule),
   },
-  { path: '**', component: HomeComponent,redirectTo:'' },
+  {
+    path: 'doctor',
+    loadChildren: () =>
+      import('../doctor/doctor.module').then((m) => m.DoctorModule),
+  },
+  { path: '**', component: HomeComponent, redirectTo: '' },
 ];
 
 @NgModule({

@@ -9,7 +9,6 @@ declare let window: any;
   providedIn: 'root',
 })
 export class BlockchainService {
-
   account: any = [];
   netId: any;
   web3: any;
@@ -21,31 +20,30 @@ export class BlockchainService {
 
   admin: any;
 
-  balance:any
+  balance: any;
 
-  blockNumber:any;
+  blockNumber: any;
 
-  LOG:any
+  LOG: any;
 
-  Report:any = [];
+  Report: any = [];
 
   constructor() {
     this.getWeb3Provider().then(() => {
       this.web3.eth.getAccounts((err: any, accs: any) => {
         this.account = accs[0];
-        this.web3.eth.getBalance(this.account).then((r:any) => {
-          this.balance = r
+        this.web3.eth.getBalance(this.account).then((r: any) => {
+          this.balance = r;
         });
-        this.web3.eth.getBlockNumber().then((block:any)=>{
-          this.blockNumber = block
+        this.web3.eth.getBlockNumber().then((block: any) => {
+          this.blockNumber = block;
           console.log(this.blockNumber);
-          
-        })
+        });
       });
 
       this.web3.eth.net.getId().then((r: number) => {
         console.log(r);
-        
+
         this.netId = r;
         this.abi = Contract.abi;
         this.netWorkData = Contract.networks[this.netId];
@@ -63,15 +61,18 @@ export class BlockchainService {
           console.log(this.admin);
         }
       });
-      
-      
+      window.ethereum.on('accountsChanged', (acc:any) => {
+        console.log(acc);
+        window.location.reload();
+      });
     });
+
   }
 
-   //generate Report of Transactions
-   generateReport(block: number){
-    for(var i=1;i<=block;i++){
-      this.web3.eth.getBlock(i).then((Block:any) => {
+  //generate Report of Transactions
+  generateReport(block: number) {
+    for (var i = 1; i <= block; i++) {
+      this.web3.eth.getBlock(i).then((Block: any) => {
         this.Report.push(Block);
       });
     }
@@ -84,7 +85,7 @@ export class BlockchainService {
       window.web3 = new Web3(window.ethereum);
       window.ethereum.enable();
       console.log(window.web3);
-      
+
       this.web3 = window.web3;
       this.account = this.web3.eth.getAccounts()[0];
       return window.web3;
@@ -100,20 +101,19 @@ export class BlockchainService {
     return this.web3;
   }
 
-  getBalance():any{
-    return this.balance
+  getBalance(): any {
+    return this.balance;
   }
 
-  getTransactionBlockNumber(){
-    return this.blockNumber
+  getTransactionBlockNumber() {
+    return this.blockNumber;
   }
 
-  getAccount(){
-    return this.account
+  getAccount() {
+    return this.account;
   }
 
-  getContract(){
-    return this.contract
+  getContract() {
+    return this.contract;
   }
-
 }

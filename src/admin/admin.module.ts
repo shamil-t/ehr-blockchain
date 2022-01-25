@@ -10,12 +10,12 @@ import { ViewComponent } from './doctor/view/view.component';
 import { AddComponent } from './doctor/add/add.component';
 import { FormsModule } from '@angular/forms';
 import { NgxImageCompressService } from 'ngx-image-compress';
-import { Progress_cardComponent } from 'src/utilities/progress_card/progress_card.component';
 import { DoctorService } from './services/doctor.service';
 import { DashboardHomeComponent } from './dashboard-home/dashboard-home.component';
 import { CardComponent } from './dashboard-home/card/card.component';
 import { ReportsComponent } from './reports/reports.component';
 import { PatientComponent } from './patient/patient.component';
+import { UtilsModule } from 'src/utils/utils.module';
 
 @NgModule({
   declarations: [
@@ -25,13 +25,12 @@ import { PatientComponent } from './patient/patient.component';
     DoctorComponent,
     ViewComponent,
     AddComponent,
-    Progress_cardComponent,
     DashboardHomeComponent,
     CardComponent,
     ReportsComponent,
     PatientComponent
   ],
-  imports: [CommonModule, AdminRoutingModule, FormsModule],
+  imports: [CommonModule, AdminRoutingModule, FormsModule,UtilsModule],
   providers: [NgxImageCompressService,DoctorService],
 })
 export class AdminModule {}
