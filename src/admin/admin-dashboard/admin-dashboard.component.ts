@@ -25,6 +25,7 @@ export class AdminDashboardComponent implements OnInit {
   ngOnInit(): void {
     this.onCheckAdmin()
 
+    //TODO
     this.router.navigate(['admin/admin-dashboard']);
 
     

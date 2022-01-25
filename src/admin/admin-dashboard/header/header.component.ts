@@ -14,7 +14,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
         type="button"
         (click)="collapseSideNav()"
       >
-        <span class="fas fa-bars"></span>
+        <span [ngClass]="!collapse ? 'fas fa-bars' : 'fas fa-times'"></span>
       </button>
     </header>
   `,
@@ -25,9 +25,12 @@ export class HeaderComponent implements OnInit {
   onCollapse = new EventEmitter();
   constructor() {}
 
+  collapse:boolean = false;
+
   ngOnInit(): void {}
 
   collapseSideNav() {
+    this.collapse = ! this.collapse
     this.onCollapse.emit();
   }
 }

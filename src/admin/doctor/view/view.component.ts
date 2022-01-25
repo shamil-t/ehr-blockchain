@@ -46,6 +46,20 @@ export class ViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.GetDoctors()
+  }
+
+  loadDrDetails() {
+    for (var i = 0; i <= this.Doctors.length; i++) {
+      this.doctorService.getDoctorDetails(this.Doctors[i]);
+    }
+  }
+
+  GetDoctors(){
+    this.showProgressCard= true;
+    this.showProgressWarn = false;
+    this.progressMsg = ''
+
     let docCall = setInterval(() => {
       console.log('interval');
 
@@ -67,6 +81,10 @@ export class ViewComponent implements OnInit {
       console.log('Det len', this.doctorService.DoctorDetails.length);
       console.log('Doc len', this.Doctors.length);
 
+      if(this.Doctors.length <= 0){
+        clearInterval(DoctorDetailsCall)
+      }
+
       if(this.doctorService.DoctorDetails.length > 0){
         this.loaded = true
       }
@@ -82,11 +100,6 @@ export class ViewComponent implements OnInit {
         this.DoctorDetails = this.doctorService.DoctorDetails;
       }
     }, 5000);
-  }
-
-  loadDrDetails() {
-    for (var i = 0; i <= this.Doctors.length; i++) {
-      this.doctorService.getDoctorDetails(this.Doctors[i]);
-    }
+    
   }
 }

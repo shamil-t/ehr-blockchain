@@ -9,7 +9,7 @@
     </h6>
     <ul class="list-unstyled ps-0 mx-3">
       <li class="list-main mb-1">
-        <button class="btn btn-dash align-items-center rounded collapsed active" [routerLink]="'admin-dashboard'"> 
+        <button class="btn btn-dash align-items-center rounded collapsed active" [routerLink]="'admin-dashboard'">
           <i class="fas fa-home"></i>&nbsp;&nbsp;Dashboard</button>
       </li>
 
@@ -50,12 +50,19 @@
     </h6>
     <ul class="nav flex-column mb-2">
       <li class="nav-item">
-        <a class="nav-link" href="#">
-          <span data-feather="file-text"></span>
-          Current month
+        <a class="nav-link" [routerLink]="'reports'">
+          <span class="fas fa-random"></span>
+          Transactions
         </a>
       </li>
-
+    </ul>
+    <ul class="nav flex-column sign-out" [routerLink]="''">
+      <li>
+        <i class="fas fa-sign-out-alt"></i>
+        &nbsp;Sign Out
+      </li>
     </ul>
   </div>
+
+
 </nav>

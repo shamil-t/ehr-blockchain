@@ -13,6 +13,8 @@ import { NgxImageCompressService } from 'ngx-image-compress';
 import { Progress_cardComponent } from 'src/utilities/progress_card/progress_card.component';
 import { DoctorService } from './services/doctor.service';
 import { DashboardHomeComponent } from './dashboard-home/dashboard-home.component';
+import { CardComponent } from './dashboard-home/card/card.component';
+import { ReportsComponent } from './reports/reports.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { DashboardHomeComponent } from './dashboard-home/dashboard-home.componen
     ViewComponent,
     AddComponent,
     Progress_cardComponent,
-    DashboardHomeComponent
+    DashboardHomeComponent,
+    CardComponent,
+    ReportsComponent
   ],
   imports: [CommonModule, AdminRoutingModule, FormsModule],
   providers: [NgxImageCompressService,DoctorService],

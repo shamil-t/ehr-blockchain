@@ -55,7 +55,7 @@
     <div class="nill d-flex flex-column justify-content-center align-items-center text-center" *ngIf="loadComplete && !loaded">
       No Doctors In the Network <br>
       Add Doctors using the <span class="text-promary fw-bold">Add Doctor</span> tab above
-      <button class="btn btn-primary">Retry</button>
+      <button class="btn btn-primary" (click)="GetDoctors()">Retry</button>
     </div>
 
   </div>

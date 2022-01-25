@@ -1,0 +1,47 @@
+<div class="container-fluid">
+  <div class="container">
+    <div class="row mt-3 w-100">
+      <div class="col-md-12">
+        <div class="report card p-3">
+          <div class="h2">Transactions</div>
+          <hr>
+          <div class="h6">
+            Number of transactions : <span class="fs-6 fw-bold text-danger">{{Transactions}}</span>
+          </div>
+
+          <div class="generate">
+            Generate Report :-
+            <br>
+            <br>
+            <div class="d-flex flex-inline">
+              get latest &NonBreakingSpace;<input [(ngModel)]="noOfBlocks" name="blocks" class="form-control block"
+                type="number">&nbsp; &nbsp;blocks
+            </div>
+            <button class="btn btn-success" (click)="genrateReport()" [disabled]="reportProgress">Generate</button>
+          </div>
+
+          <div
+            [ngClass]="!reportProgress ? 'd-none progress-div mt-3 mb-3' : 'progress-div mt-3 mb-3 d-flex flex-column justify-content-center align-items-center'">
+            Generating Transaction Report.....
+            <div class="progress mt-2">
+              <progress></progress>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="report-toast" [hidden]="!reportToastShow">
+      <div class="card">
+        <div class="card-title w-100 d-flex flex-row justify-content-between">
+          <div class="px-2 py-2 fw-bold">Transaction Report</div>
+          <button class="btn px-1 py-1" (click)="reportToastShow = ! reportToastShow"> <i
+              class="fas fa-times-circle"></i> </button>
+        </div>
+        <div class="card-body px-2 py-1 m-0">
+          Transaction Report Generation Completed...
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

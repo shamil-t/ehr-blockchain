@@ -9,6 +9,7 @@ declare let window: any;
   providedIn: 'root',
 })
 export class BlockchainService {
+
   account: any = [];
   netId: any;
   web3: any;
@@ -20,17 +21,27 @@ export class BlockchainService {
 
   admin: any;
 
+  balance:any
+
+  blockNumber:any;
+
   LOG:any
+
+  Report:any = [];
 
   constructor() {
     this.getWeb3Provider().then(() => {
       this.web3.eth.getAccounts((err: any, accs: any) => {
         this.account = accs[0];
+        this.web3.eth.getBalance(this.account).then((r:any) => {
+          this.balance = r
+        });
+        this.web3.eth.getBlockNumber().then((block:any)=>{
+          this.blockNumber = block
+          console.log(this.blockNumber);
+          
+        })
       });
-
-      console.log(this.web3);
-      
-      // console.log(this.web3.eth.blockNumber);
 
       this.web3.eth.net.getId().then((r: number) => {
         console.log(r);
@@ -77,4 +88,22 @@ export class BlockchainService {
   getWeb3(): Web3 {
     return this.web3;
   }
+
+  getBalance():any{
+    return this.balance
+  }
+
+  getTransactionBlockNumber(){
+    return this.blockNumber
+  }
+
+  //generate Report of Transactions
+  generateReport(block: number){
+    for(var i=1;i<=block;i++){
+      this.web3.eth.getBlock(i).then((Block:any) => {
+        this.Report.push(Block);
+      });
+    }
+  }
+
 }
