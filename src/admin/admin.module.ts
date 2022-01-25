@@ -15,6 +15,7 @@ import { DoctorService } from './services/doctor.service';
 import { DashboardHomeComponent } from './dashboard-home/dashboard-home.component';
 import { CardComponent } from './dashboard-home/card/card.component';
 import { ReportsComponent } from './reports/reports.component';
+import { PatientComponent } from './patient/patient.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ReportsComponent } from './reports/reports.component';
     Progress_cardComponent,
     DashboardHomeComponent,
     CardComponent,
-    ReportsComponent
+    ReportsComponent,
+    PatientComponent
   ],
   imports: [CommonModule, AdminRoutingModule, FormsModule],
   providers: [NgxImageCompressService,DoctorService],

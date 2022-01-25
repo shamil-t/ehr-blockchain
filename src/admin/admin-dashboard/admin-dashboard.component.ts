@@ -26,7 +26,7 @@ export class AdminDashboardComponent implements OnInit {
     this.onCheckAdmin()
 
     //TODO
-    this.router.navigate(['admin/admin-dashboard']);
+    this.router.navigate(['admin/patient']);
 
     
     

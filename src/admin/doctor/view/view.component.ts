@@ -41,11 +41,13 @@ export class ViewComponent implements OnInit {
   progressMsg:string = ''
 
   constructor(private doctorService: DoctorService) {
-    this.DoctorDetails = doctorService.DoctorDetails
     this.progressMsg = 'Loading Doctor Accounts From Blockchain'
+
+    this.DoctorDetails = doctorService.DoctorDetails
   }
 
   ngOnInit(): void {
+
     this.GetDoctors()
   }
 
@@ -55,7 +57,11 @@ export class ViewComponent implements OnInit {
     }
   }
 
-  GetDoctors(){
+  GetDoctors(): any{
+    if(this.DoctorDetails.length >= 1){
+      this.showProgressCard = false
+      return 0
+    }
     this.showProgressCard= true;
     this.showProgressWarn = false;
     this.progressMsg = ''
@@ -91,6 +97,7 @@ export class ViewComponent implements OnInit {
 
       if (this.doctorService.DoctorDetails.length == this.Doctors.length) {
         console.log(this.doctorService.DoctorDetails);
+        this.showProgressCard = false
         this.loadComplete = true
         this.DoctorDetails = this.doctorService.DoctorDetails;
         clearInterval(DoctorDetailsCall);

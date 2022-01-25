@@ -3,10 +3,10 @@ import { Injectable } from '@angular/core';
 import { exit } from 'process';
 import { from, Observable } from 'rxjs';
 import { BlockchainService } from 'src/services/blockchain.service';
+import { IpfsService } from 'src/services/ipfs.service';
 import Web3 from 'web3';
 
 const Contract = require('../../../build/contracts/Contract.json');
-const IPFS = require('ipfs-mini');
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +19,7 @@ export class DoctorService {
   address: any;
   contract: any;
   account: any;
+
   ipfs: any;
 
   msg_text: string = '';
@@ -29,7 +30,12 @@ export class DoctorService {
 
   DoctorDetails: string[] = [];
 
-  constructor(private blockChainService: BlockchainService) {
+  drInfoload:boolean = false;
+
+  constructor(
+    private blockChainService: BlockchainService,
+    private ipfsService: IpfsService
+  ) {
     //GET BlockChain Service
     this.web3 = blockChainService.getWeb3();
 
@@ -62,11 +68,7 @@ export class DoctorService {
     });
 
     //IPFS
-    this.ipfs = new IPFS({
-      host: 'ipfs.infura.io',
-      port: 5001,
-      protocol: 'https',
-    });
+    this.ipfs = ipfsService.getIPFS();
   }
 
   getDoctorDetails(docID: any): Promise<any> {
@@ -78,8 +80,9 @@ export class DoctorService {
         console.log(ipfsHash);
         this.ipfs.cat(ipfsHash).then((data: any) => {
           console.log(data);
-          
+
           this.DoctorDetails.push(JSON.parse(data));
+          this.drInfoload = true
           return data;
         });
       });

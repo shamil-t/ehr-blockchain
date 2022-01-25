@@ -68,6 +68,17 @@ export class BlockchainService {
     });
   }
 
+   //generate Report of Transactions
+   generateReport(block: number){
+    for(var i=1;i<=block;i++){
+      this.web3.eth.getBlock(i).then((Block:any) => {
+        this.Report.push(Block);
+      });
+    }
+  }
+
+  //gets
+
   async getWeb3Provider() {
     if (window.ethereum) {
       window.web3 = new Web3(window.ethereum);
@@ -97,13 +108,12 @@ export class BlockchainService {
     return this.blockNumber
   }
 
-  //generate Report of Transactions
-  generateReport(block: number){
-    for(var i=1;i<=block;i++){
-      this.web3.eth.getBlock(i).then((Block:any) => {
-        this.Report.push(Block);
-      });
-    }
+  getAccount(){
+    return this.account
+  }
+
+  getContract(){
+    return this.contract
   }
 
 }
