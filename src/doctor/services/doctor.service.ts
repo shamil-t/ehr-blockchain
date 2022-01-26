@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
+import { resolve } from 'dns';
+import { Observable } from 'rxjs';
 import { BlockchainService } from 'src/services/blockchain.service';
+import { IpfsService } from 'src/services/ipfs.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,12 +14,21 @@ export class DoctorService {
 
   isDoctor: boolean = false;
   Doctors: any = [];
-  checkComplete:boolean = false
+  checkComplete: boolean = false;
 
-  constructor(private blockchainService: BlockchainService) {
+  DoctorDetails: any = {};
+
+  ipfs: any;
+
+  constructor(
+    private blockchainService: BlockchainService,
+    private ipfsService: IpfsService
+  ) {
     this.web3 = blockchainService.getWeb3();
     this.contract = blockchainService.getContract();
     this.account = blockchainService.getAccount();
+
+    this.ipfs = ipfsService.getIPFS();
   }
 
   checkisDr() {
@@ -39,10 +51,29 @@ export class DoctorService {
             }
           }
         }
-        this.checkComplete = true
+        this.checkComplete = true;
       })
       .catch((err: any) => {
         console.log(err);
       });
+  }
+
+  async getDoctor():Promise<any> {
+    this.contract = this.blockchainService.contract
+    return new Promise((resolve, reject) => {
+      this.contract.methods
+      .getDr(this.account)
+      .call()
+      .then(async (result: any) => {
+        console.log(result);
+        await this.ipfs.cat(result).then((data: any) => {
+          this.DoctorDetails = data;
+          resolve(this.DoctorDetails)
+          JSON.parse(this.DoctorDetails)
+          return this.DoctorDetails;
+        });
+      });
+      
+      }); 
   }
 }

@@ -7,6 +7,7 @@ import { SidebarComponent } from './doctor-dashboard/sidebar/sidebar.component';
 import { HeaderComponent } from './doctor-dashboard/header/header.component';
 import { DashboardHomeComponent } from './dashboard-home/dashboard-home.component';
 import { UtilsModule } from 'src/utils/utils.module';
+import { ConsultationComponent } from './consultation/consultation.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { UtilsModule } from 'src/utils/utils.module';
     SidebarComponent,
     HeaderComponent,
     
-    DashboardHomeComponent
+    DashboardHomeComponent,
+         ConsultationComponent
   ],
   imports: [
     CommonModule,
