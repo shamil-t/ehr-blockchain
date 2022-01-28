@@ -129,6 +129,15 @@ contract Contract{
         require(patient.has(id), "Only for Doctors");
         return "1";
     }
+    // Check is patient
+    function isPatient(address id) public view returns(int){
+        for(uint i = 0 ;i<=Patient_ids.length;i++){
+            if(id == Patient_ids[i]){return 1;}
+        }
+        return 0;
+    }
+
+
     function addPatient(address _newpatient) external onlyAdmin() {
         patient.add(_newpatient);
     }
@@ -155,7 +164,7 @@ contract Contract{
     }
     function addPatInfo(address pat_id, string memory _patInfoHash) public {
         require(admin.has(msg.sender) == true, 'Only you Can Add your info ');
-        Patient storage patInfo = Patients[msg.sender];
+        Patient storage patInfo = Patients[pat_id];
         patInfo.patHash = _patInfoHash;
         Patient_ids.push(msg.sender);
 

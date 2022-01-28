@@ -1,1 +1,19 @@
-<p>consultation works!</p>
+<div class="container-fluid">
+  <div class="container mt-3" [hidden]="isPatient">
+    <div class="h3">Patient Consultation</div>
+    <form class="patient__id" #patForm = "ngForm" (ngSubmit)="onPatIDSubmit()" >
+      <input [(ngModel)]="model.patID" name="patID" #patID type="text" class="form-control"
+        placeholder="Patient ID (0x00000000000000000000000000000000000000000)">
+      <button type="submit" class="btn btn-primary">Consult</button>
+    </form>
+  </div>
+  <!-- Record  -->
+  <div class="container" [hidden]="!isPatient">
+    <div class="h3">Patient Medical Record</div>
+    <app-patient-record [PatientDetails]="PatientDetails"></app-patient-record>
+  </div>
+  <!-- Record end -->
+  <!-- Progress -->
+  <app-progress_card></app-progress_card>
+  <!-- Progress End -->
+</div>

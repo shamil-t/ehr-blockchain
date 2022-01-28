@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { rejects } from 'assert';
 import { resolve } from 'dns';
 import { Observable } from 'rxjs';
 import { BlockchainService } from 'src/services/blockchain.service';
@@ -17,6 +18,8 @@ export class DoctorService {
   checkComplete: boolean = false;
 
   DoctorDetails: any = {};
+
+  PatientDetails: any = {};
 
   ipfs: any;
 
@@ -58,22 +61,56 @@ export class DoctorService {
       });
   }
 
-  async getDoctor():Promise<any> {
-    this.contract = this.blockchainService.contract
+  async getDoctor(): Promise<any> {
+    this.contract = this.blockchainService.contract;
     return new Promise((resolve, reject) => {
       this.contract.methods
-      .getDr(this.account)
-      .call()
-      .then(async (result: any) => {
-        console.log(result);
-        await this.ipfs.cat(result).then((data: any) => {
-          this.DoctorDetails = data;
-          resolve(this.DoctorDetails)
-          JSON.parse(this.DoctorDetails)
-          return this.DoctorDetails;
+        .getDr(this.account)
+        .call()
+        .then(async (result: any) => {
+          console.log(result);
+          await this.ipfs.cat(result).then((data: any) => {
+            this.DoctorDetails = data;
+            resolve(this.DoctorDetails);
+            JSON.parse(this.DoctorDetails);
+            return this.DoctorDetails;
+          });
         });
-      });
-      
-      }); 
+    });
+  }
+
+  async checkIsPatient(id: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.contract.methods
+        .isPat(id)
+        .call()
+        .then((result: any) => {
+          console.log(result);
+          resolve(result);
+        })
+        .catch((err: any) => {
+          console.log(err);
+          reject(err);
+        });
+    });
+  }
+
+  async getPatientDetails(id: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.contract.methods
+        .getPatInfo(id)
+        .call()
+        .then((result: any) => {
+          console.log(result);
+          this.ipfs.cat(result).then((data: any) => {
+            console.log(data);
+            resolve(data);
+          });
+        })
+        .catch((err: any) => {
+          console.log(err);
+          reject(err);
+        });
+    });
   }
 }

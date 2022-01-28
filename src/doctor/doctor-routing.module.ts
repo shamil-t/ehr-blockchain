@@ -16,7 +16,7 @@ const routes: Routes = [
   {
     path: '',
     component: DoctorDashboardComponent,
-    redirectTo: 'doctor/doctor-dashboard',
+    redirectTo: 'doctor/consult',
   },
 ];
 

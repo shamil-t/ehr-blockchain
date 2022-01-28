@@ -17,7 +17,7 @@ export class DoctorDashboardComponent implements OnInit {
   progressMsg: string = 'Checking Doctor....';
 
   constructor(private router: Router, private doctorService: DoctorService) {
-    router.navigate(['/doctor/doctor-dashboard']);
+    router.navigate(['/doctor/consult']);
   }
 
   ngOnInit(): void {
