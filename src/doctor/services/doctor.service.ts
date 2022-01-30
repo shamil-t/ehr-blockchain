@@ -20,6 +20,7 @@ export class DoctorService {
   DoctorDetails: any = {};
 
   PatientDetails: any = {};
+  patientId: string = '';
 
   ipfs: any;
 
@@ -80,6 +81,7 @@ export class DoctorService {
   }
 
   async checkIsPatient(id: string): Promise<any> {
+    this.patientId = id;
     return new Promise((resolve, reject) => {
       this.contract.methods
         .isPat(id)
@@ -110,6 +112,30 @@ export class DoctorService {
         .catch((err: any) => {
           console.log(err);
           reject(err);
+        });
+    });
+  }
+
+  async savePatientMedRecord(data: any): Promise<any> {
+    console.log(this.patientId, data);
+    return new Promise((resolve, reject) => {
+      this.ipfs
+        .addJSON(data)
+        .then((IPFSHash: any) => {
+          this.contract.methods
+            .addMedRecord(IPFSHash, this.patientId)
+            .send({ from: this.account })
+            .on('confirmation', (result: any) => {
+              console.log(result);
+              resolve(result);
+            })
+            .on('error', (err: any) => {
+              console.log(err);
+              reject(err);
+            });
+        })
+        .catch((err: any) => {
+          console.log(err);
         });
     });
   }

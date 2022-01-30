@@ -183,11 +183,16 @@
             </div>
             <!-- Follow up end -->
           </div>
-          <div class=" col-md-6 files my-3">
+          <div class=" col-md-8 files my-3">
             <div class="h4">Add Medical Files
               <hr>
             </div>
-            <input class="form-control my-3" type="file" multiple>
+            <div class="files-preview row">
+              <div class="preview m-1 col-md-3 col-sm-6" *ngFor="let file of LabFiles">
+                <img [src]="file" alt="">
+              </div>
+            </div>
+            <input class="form-control my-3" type="file" multiple #files (change)="onFileAdd($event)">
           </div>
         </div>
         <button type="submit" id="btn" class="btn btn-dark mt-3 mb-3"> <i class="fas fa-save"></i> save</button>

@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output,EventEmitter } from '@angular/core';
+
 
 type MedicationType = [
   {
@@ -23,6 +24,7 @@ type PatientMedicalrecordType = {
 })
 export class PatientRecordComponent implements OnInit {
   @Input() PatientDetails: any = {};
+  @Output() saveRecord = new EventEmitter<any>();
 
   model: any;
 
@@ -31,6 +33,8 @@ export class PatientRecordComponent implements OnInit {
 
   med: any = {};
   clinic: any = {};
+
+  LabFiles: any[] = []
 
   constructor() {
     this.model = {};
@@ -53,8 +57,21 @@ export class PatientRecordComponent implements OnInit {
   onPatientRecordSubmit() {
     this.model.medication = this.Medication;
     this.model.tests = this.ClinicalTest;
+    this.model.files = this.LabFiles
 
     console.log(this.model);
+
+    this.saveRecord.emit(this.model)
     
+  }
+
+  onFileAdd(files:any){
+    for (let i = 0; i< files.target.files.length; i++) {
+      var reader = new FileReader();
+      reader.onload = (event: any) => {
+        this.LabFiles[i]= event.target.result;
+      };
+      reader.readAsDataURL(files.target.files[i]);
+    }
   }
 }

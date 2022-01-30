@@ -10,7 +10,7 @@
   <!-- Record  -->
   <div class="container" [hidden]="!isPatient">
     <div class="h3">Patient Medical Record</div>
-    <app-patient-record [PatientDetails]="PatientDetails"></app-patient-record>
+    <app-patient-record [PatientDetails]="PatientDetails" (saveRecord)="onMedRecordSave($event)"></app-patient-record>
   </div>
   <!-- Record end -->
   <!-- Progress -->

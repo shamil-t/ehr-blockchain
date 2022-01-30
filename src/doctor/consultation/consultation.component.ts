@@ -12,7 +12,7 @@ export class ConsultationComponent implements OnInit {
   };
 
   //TODO
-  isPatient: boolean = true;
+  isPatient: boolean = false;
 
   PatientDetails: any = {};
 
@@ -42,4 +42,17 @@ export class ConsultationComponent implements OnInit {
         console.log(err);
       });
   }
+
+  onMedRecordSave(data:any){
+    this.doctorService.savePatientMedRecord(data).then((result:any)=>{
+      if(result){
+        console.log(result);
+        
+      }
+    }).catch((err:any)=>{
+      console.log(err);
+      
+    })
+  }
+
 }
