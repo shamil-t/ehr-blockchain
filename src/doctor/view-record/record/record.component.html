@@ -1,0 +1,81 @@
+<div class="container-fluid">
+  <div class="patient-record" >
+    <div class="record card">
+      <div class="row">
+        <div class="col-md-12 d-flex flex-row justify-content-between">
+          <h5 class="modal-title" id="exampleModalLabel">Patient Record</h5>
+          <button type="button" class="btn-close" (click)="onClose()"></button>
+        </div>
+        <hr>
+        <div class="col-md-12">
+          <div class="col-md-12 daignosis">
+            <div class="h6">Daignosis</div>
+            <hr>
+            <div class="col-md-10">
+              <div class="card p-2">
+                {{Medical.diagnosis}}
+              </div>
+            </div>
+            
+          </div>
+          <div class="medicines my-2">
+            <div class="h6">Medicines</div>
+            <hr>
+            <table class="table">
+              <thead>
+                <th>#</th>
+                <th>Name</th>
+                <th>Dose</th>
+                <th>Frequency</th>
+                <th>Remarks</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let med of Medical.medication ; let i = index">
+                  <td>{{i+1}}</td>
+                  <td>{{med.name}}</td>
+                  <td>{{med.dose}}</td>
+                  <td>{{med.frequency}}</td>
+                  <td>{{med.remarks}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-md-6 recomnded-tests my-2">
+            <div class="h6">Recomended Tests</div>
+            <hr>
+            <table class="table">
+              <thead>
+                <th>#</th>
+                <th>Test Name</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let test of Medical.tests ; let i = index">
+                  <td>{{i+1}}</td>
+                  <td>{{test.name}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-md-6 follow-up my-2">
+            <div class="h6">Follow up</div>
+            <hr>
+            {{Medical.followup}}
+          </div>
+          <div class="col-md-12 files">
+            <div class="h6 my-2">Lab Records</div>
+            <hr>
+            <div class="lab-files position-relative" *ngFor="let file of Medical.files;let i =index">
+              <img [src]="file" alt="" width="150px" height="150px">
+              <a download="labfile.jpg" [href]="file"><i class="fas fa-download"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="onClose()">Close</button>
+          <button type="button" class="btn btn-primary">Print</button>
+        </div>
+      </div>
+  </div>
+</div>
+
+</div>

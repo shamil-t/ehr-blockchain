@@ -75,7 +75,7 @@
                     <td>{{medication.frequency}}</td>
                     <td>{{medication.nofDays}}</td>
                     <td>{{medication.remarks}}</td>
-                    <td><button class="btn btn-danger px-2 py-1" (click)="Medication.pop()"><i class="fas fa-trash-alt"></i></button></td>
+                    <td><a class="btn btn-danger px-2 py-1" (click)="Medication.pop()"><i class="fas fa-trash-alt"></i></a></td>
 
                   </tr>
 
@@ -107,9 +107,9 @@
                         id="remark" type="text" placeholder="remarks">
                     </td>
                     <td>
-                      <button class="btn btn-dark px-2 py-1 fw-normal" type="submit" (click)="onMedicinesSave()">
+                      <a class="btn btn-dark px-2 py-1 fw-normal" (click)="onMedicinesSave()">
                         <i class="fa fa-capsules"></i>
-                      </button>
+                      </a>
                     </td>
                   </tr>
                 </tbody>
@@ -132,7 +132,7 @@
                   <tr *ngFor="let test of ClinicalTest;let i = index">
                     <td>{{i+1}}</td>
                     <td>{{test.name}}</td>
-                    <td><button class="btn btn-danger px-2 py-1" (click)="ClinicalTest.pop()"><i class="fas fa-trash-alt"></i></button></td>
+                    <td><a class="btn btn-danger px-2 py-1" (click)="ClinicalTest.pop()"><i class="fas fa-trash-alt"></i></a></td>
                   </tr>
                   <tr>
                     <td></td>
@@ -151,9 +151,9 @@
                       </select>
                     </td>
                     <td>
-                      <button class="btn btn-warning" (click)="onTestSave()">
+                      <a class="btn btn-warning" (click)="onTestSave()">
                         <i class="fas fa-vial"></i>
-                      </button>
+                      </a>
                     </td>
                   </tr>
                 </tbody>

@@ -3,8 +3,9 @@
     <div class="close w-100 d-flex flex-row justify-content-end align-items-end px-2 py-1">
       <button (click)="onClose()"><i class="fas fa-times text-end fs-4"></i></button>
     </div>
-    <div class="spinner-border text-danger mb-3 mt-2" role="status" [hidden]="warn">
+    <div class="spinner-border text-danger mb-3 mt-2" role="status" [hidden]="warn || success">
     </div>
+    <div class="fs-1 text-success" [hidden]="!success"><i class="fas fa-check-circle"></i></div>
     <i class="fas fa-exclamation-triangle fs-1 text-warning" [hidden]="!warn"></i>
     <div class="load-text my-3 mx-3 text-center fs-6 fw-normal" [innerHTML]="msg_text">
     </div>

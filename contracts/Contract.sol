@@ -186,8 +186,9 @@ contract Contract{
         RecordHashes.push(_recHash);
     }
 
-    function viewMedRec()public view returns(string memory){
-        return (Records[get_patient_id].RecordHash);
+    function viewMedRec(address id)public view returns(string memory){
+        // if(RecordHashes.has(Records[]) != )
+        return (Records[id].RecordHash);
     }
 
     /*

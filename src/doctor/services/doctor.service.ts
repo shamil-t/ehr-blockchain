@@ -118,24 +118,81 @@ export class DoctorService {
 
   async savePatientMedRecord(data: any): Promise<any> {
     console.log(this.patientId, data);
+    let PatientData = {
+      doctor: this.account,
+      data: data,
+      date: Date.now()
+    }
     return new Promise((resolve, reject) => {
-      this.ipfs
-        .addJSON(data)
-        .then((IPFSHash: any) => {
-          this.contract.methods
-            .addMedRecord(IPFSHash, this.patientId)
-            .send({ from: this.account })
-            .on('confirmation', (result: any) => {
-              console.log(result);
-              resolve(result);
+      this.getPatientRecords(this.patientId)
+        .then((record: any) => {
+          console.log(record);
+          
+          let PatientRecord;
+
+          if(record != null){
+            record['MedRecord'].push(PatientData)
+            PatientRecord = record
+          }
+          else{
+            PatientRecord = { "MedRecord":[PatientData] };
+          }
+
+          console.log(PatientRecord);
+          this.ipfs
+            .addJSON(PatientRecord)
+            .then((IPFSHash: any) => {
+              console.log(IPFSHash);
+              this.contract.methods
+                .addMedRecord(IPFSHash, this.patientId)
+                .send({ from: this.account })
+                .on('confirmation', (result: any) => {
+                  console.log(result);
+                  resolve(result);
+                })
+                .on('error', (err: any) => {
+                  console.log(err);
+                  reject(err);
+                });
             })
-            .on('error', (err: any) => {
+            .catch((err: any) => {
               console.log(err);
               reject(err);
             });
         })
         .catch((err: any) => {
           console.log(err);
+          reject(err);
+        });
+    });
+  }
+
+  async getPatientRecords(id: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.contract.methods
+        .viewMedRec(id)
+        .call()
+        .then((result: any) => {
+          console.log(result);
+          if (result.length >= 1) {
+            this.ipfs
+              .cat(result)
+              .then((record: any) => {
+                console.log(JSON.parse(record));
+                resolve(JSON.parse(record));
+              })
+              .catch((err: any) => {
+                console.log(err);
+                reject(err);
+              });
+          }
+          else{
+            resolve(null)
+          }
+        })
+        .catch((err: any) => {
+          console.log(err);
+          reject(err);
         });
     });
   }

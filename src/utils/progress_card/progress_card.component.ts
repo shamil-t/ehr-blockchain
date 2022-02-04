@@ -12,6 +12,8 @@ export class Progress_cardComponent implements OnInit {
   msg_text!: string;
   @Input()
   warn: boolean = false;
+  @Input()
+  success: boolean = false
 
   @Output()
   retry: EventEmitter<any> = new EventEmitter<any>();

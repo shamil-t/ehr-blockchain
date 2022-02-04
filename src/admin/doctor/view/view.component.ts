@@ -39,6 +39,7 @@ export class ViewComponent implements OnInit {
   showProgressCard: boolean = false;
   showProgressWarn:boolean = false;
   progressMsg:string = ''
+  
 
   constructor(private doctorService: DoctorService) {
     this.progressMsg = 'Loading Doctor Accounts From Blockchain'

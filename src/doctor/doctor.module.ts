@@ -10,6 +10,8 @@ import { UtilsModule } from 'src/utils/utils.module';
 import { ConsultationComponent } from './consultation/consultation.component';
 import { FormsModule } from '@angular/forms';
 import { PatientRecordComponent } from './consultation/patient-record/patient-record.component';
+import { ViewRecordComponent } from './view-record/view-record.component';
+import { RecordComponent } from './view-record/record/record.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,9 @@ import { PatientRecordComponent } from './consultation/patient-record/patient-re
     DashboardHomeComponent,
     ConsultationComponent,
     PatientRecordComponent,
+    ViewRecordComponent,
+    RecordComponent,
+    
   ],
   imports: [CommonModule,FormsModule, DoctorRoutingModule, UtilsModule],
 })

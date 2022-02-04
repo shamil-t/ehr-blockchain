@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { async } from '@angular/core/testing';
+
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { DoctorService } from 'src/admin/services/doctor.service';
 
@@ -31,6 +31,7 @@ export class AddComponent implements OnInit {
   show: boolean = false;
   msg_text: string = '';
   warn: boolean = false;
+  success: boolean = false
 
   ipfs: any;
 
@@ -68,6 +69,7 @@ export class AddComponent implements OnInit {
           if (result == 1) {
             this.msg_text += '<br>User Added to the Blockchain';
             console.log('User added Successfully');
+            this.success = true
             this.model = {};
             return result;
           } else {

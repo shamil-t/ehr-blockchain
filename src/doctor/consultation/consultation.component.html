@@ -14,6 +14,6 @@
   </div>
   <!-- Record end -->
   <!-- Progress -->
-  <app-progress_card></app-progress_card>
+  <app-progress_card [show]="showProggressCard" [warn]="showProgressWarning" [msg_text]="progressMsg"  (retry)="onRetry()"></app-progress_card>
   <!-- Progress End -->
 </div>

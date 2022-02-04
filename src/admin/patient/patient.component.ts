@@ -20,6 +20,7 @@ export class PatientComponent implements OnInit {
   show: boolean = false;
   msg_text: string = '';
   warn: boolean = false;
+  success:boolean = false
 
   ipfs: any;
 
@@ -41,6 +42,7 @@ export class PatientComponent implements OnInit {
     let checkProgress = setInterval(() => {
       if(this.patientService.added){
         this.msg_text = "Patient Added to the network"
+        this.success = true
         clearInterval(checkProgress)
       }
       if(this.patientService.failed){
