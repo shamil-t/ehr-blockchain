@@ -1,4 +1,4 @@
-# Ehr2.0
+# EHR 2.0
 
 🆁🅴🆀🆄🅸🆁🅴🅼🅴🅽🆃🆂
 
@@ -15,7 +15,7 @@ link :- https://www.trufflesuite.com/ganache
 link :- https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en-US
 
 
-4.open cmd as Administrator and type
+4.open cmd/terminal as Administrator and type
 
 	$npm install -g truffle
 	
@@ -30,5 +30,12 @@ link :- https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnk
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+## Live
+
+ `https://ehr-2-0.web.app/`
+
+
+
 
 
