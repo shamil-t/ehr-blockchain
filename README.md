@@ -32,8 +32,8 @@ link :- https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnk
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Live
-
- `https://ehr-2-0.web.app/`
+Live site hosted on firebase
+ [Click here](https://ehr-2-0.web.app/)
 
 
 
