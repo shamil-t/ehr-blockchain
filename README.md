@@ -2,6 +2,11 @@
 
 ## For Full working project 
 
+>>> Apponitments
+>>> Pdf upload
+>>> and much more.
+
+
 contact : 
 [Mail](mailto:tshamil90@gmail.com?Subject=ehr-blockchain&Body=Hi,)
 `tshamil90@gmail.com`
