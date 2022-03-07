@@ -2,9 +2,9 @@
 
 ## For Full working project 
 
->>> Apponitments
->>> Pdf upload
->>> and much more.
+-- Apponitments
+-- Pdf upload
+-- and much more.
 
 
 contact : 
