@@ -6,7 +6,7 @@
 -- Pdf upload
 -- and much more.
 
-Demo : [Youtube] (https://youtu.be/d_-pWoGgdVs)
+Demo : https://youtu.be/d_-pWoGgdVs
 
 contact : 
 [Mail](mailto:tshamil90@gmail.com?Subject=ehr-blockchain&Body=Hi,)
