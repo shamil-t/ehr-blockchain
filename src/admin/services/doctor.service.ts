@@ -1,5 +1,8 @@
 import { JsonPipe } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { rejects } from 'assert';
+import { resolve } from 'dns';
 import { exit } from 'process';
 import { from, Observable } from 'rxjs';
 import { BlockchainService } from 'src/services/blockchain.service';
@@ -30,11 +33,12 @@ export class DoctorService {
 
   DoctorDetails: string[] = [];
 
-  drInfoload:boolean = false;
+  drInfoload: boolean = false;
 
   constructor(
     private blockChainService: BlockchainService,
-    private ipfsService: IpfsService
+    private ipfsService: IpfsService,
+    private http: HttpClient
   ) {
     //GET BlockChain Service
     this.web3 = blockChainService.getWeb3();
@@ -71,20 +75,39 @@ export class DoctorService {
     this.ipfs = ipfsService.getIPFS();
   }
 
+  getDrs(): Promise<any> {
+    return new Promise((resolve, rejects) => {
+      this.blockChainService.getContract().then((contract: any) => {
+        this.Doctors = contract.methods.getAllDrs()
+          .call()
+          .then((docs: any) => {
+            this.Doctors = docs;
+            console.log(this.Doctors);
+            resolve(this.Doctors)
+          });
+      })
+
+    })
+  }
+
   getDoctorDetails(docID: any): Promise<any> {
     console.log('DocID', docID);
-    return this.contract.methods
-      .getDr(docID)
-      .call()
-      .then((ipfsHash: string) => {
-        console.log(ipfsHash);
-        this.ipfs.cat(ipfsHash).then((data: any) => {
-          console.log(data);
+    return new Promise((resolve, reject) => {
+      this.blockChainService.getContract().then((contract: any) => {
+        contract.methods
+          .getDr(docID)
+          .call()
+          .then((ipfsHash: string) => {
+            console.log(ipfsHash);
+            this.http.get('https://ipfs.infura.io/ipfs/' + ipfsHash)
+              .subscribe((data: any) => {
+                console.log(data);
+                resolve(data);
+              });
+          });
+      })
 
-          this.DoctorDetails.push(JSON.parse(data));
-          this.drInfoload = true
-          return data;
-        });
-      });
+    })
+
   }
 }

@@ -55,6 +55,24 @@ contract Contract{
         doctor.add(_newdr);
     }
 
+    function addDrInfo(address dr_id,string memory _drInfo_hash) public{
+        require(admin.has(msg.sender),'Only For Admin');
+
+        Doctor storage drInfo = Doctors[msg.sender];
+        drInfo.drHash = _drInfo_hash;
+        Dr_ids.push(msg.sender);
+
+        doctor.add(dr_id);
+    }
+
+    function getAllDrs() public view returns(address[] memory){
+        return Dr_ids;
+    }
+
+    function getDr(address _id) public view returns(string memory){
+        return (Doctors[_id].drHash);
+    }
+
    // check is Doctor
 
     function isDr(address id) public view returns(string memory){

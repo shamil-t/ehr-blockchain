@@ -16,6 +16,8 @@ import { CardComponent } from './dashboard-home/card/card.component';
 import { ReportsComponent } from './reports/reports.component';
 import { PatientComponent } from './patient/patient.component';
 import { UtilsModule } from 'src/utils/utils.module';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -30,7 +32,7 @@ import { UtilsModule } from 'src/utils/utils.module';
     ReportsComponent,
     PatientComponent
   ],
-  imports: [CommonModule, AdminRoutingModule, FormsModule,UtilsModule],
-  providers: [NgxImageCompressService,DoctorService],
+  imports: [CommonModule, AdminRoutingModule, FormsModule,UtilsModule,HttpClientModule],
+  providers: [NgxImageCompressService],
 })
 export class AdminModule {}

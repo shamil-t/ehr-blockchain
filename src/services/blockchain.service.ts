@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { rejects } from 'assert';
+import { resolve } from 'dns';
 import Web3 from 'web3';
 
 const Contract = require('../../build/contracts/Contract.json');
@@ -113,7 +115,10 @@ export class BlockchainService {
     return this.account;
   }
 
-  getContract() {
-    return this.contract;
+  getContract():Promise<any> {
+    return new Promise((resolve,rejects)=>{
+      if(this.contract != null)
+        resolve(this.contract)
+    })
   }
 }

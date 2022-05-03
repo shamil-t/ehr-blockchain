@@ -38,7 +38,8 @@ link :- https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnk
  * -->Select truffle-config.js in Project Directory
  * -->Save Workspace
 
-
+6.Compile and migrate Contracts
+	$truffle migrate
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
