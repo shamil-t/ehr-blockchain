@@ -16,6 +16,8 @@ package.lock.json
 # IDEs and editors
 .idea/
 .project
+.firebase
+.vscode
 .classpath
 .c9/
 *.launch
