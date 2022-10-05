@@ -4,7 +4,6 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { DashboardHomeComponent } from './dashboard-home/dashboard-home.component';
 import { DoctorComponent } from './doctor/doctor.component';
 import { PatientComponent } from './patient/patient.component';
-import { ReportsComponent } from './reports/reports.component';
 
 const routes: Routes = [
   {
@@ -14,7 +13,6 @@ const routes: Routes = [
       { path: 'admin-dashboard', component: DashboardHomeComponent },
       { path: 'doctor', component: DoctorComponent },
       { path: 'patient', component: PatientComponent },
-      { path: 'reports', component: ReportsComponent },
     ],
   },
   {

@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
-import { NgxImageCompressService } from 'ngx-image-compress';
+import { IPFSHTTPClient } from 'ipfs-http-client/dist/src/types';
 import { DoctorService } from 'src/admin/services/doctor.service';
 
-// declare let window: any;
-// const { ethereum } = window;
 
 @Component({
   selector: 'doctor-add',
@@ -33,17 +30,18 @@ export class AddComponent implements OnInit {
   warn: boolean = false;
   success: boolean = false
 
-  ipfs: any;
+  ipfs: IPFSHTTPClient;
+
+  IPFShash: string = ''
 
   constructor(
-    private imageCompress: NgxImageCompressService,
-    private doctorService: DoctorService
-  ) {}
+    private ds: DoctorService
+  ) {
+    this.ipfs = ds.ipfs
+  }
 
   ngOnInit(): void {
-    this.ipfs = this.doctorService.ipfs
-    // console.log(ethereum);
-    // ethereum.on('message', (message: string) => console.log(message));
+    this.ipfs = this.ds.ipfs
   }
 
   onAddDocSubmit() {
@@ -52,66 +50,39 @@ export class AddComponent implements OnInit {
     this.warn = false;
 
     this.model.imageHash = this.image_url;
-    // add doctor
-    // await this.doctorService.addDoctor(this.model, this.model.docID);
 
     let data = this.model;
 
-    this.ipfs.addJSON(data).then((IPFShash: string) => {
-      console.log(IPFShash);
+    this.ds.addDoctor(this.model.docID, data).then((r: any) => {
+      this.success = true
       this.msg_text = 'Data added to IPFS...';
-      //add data to blockchain
-      this.doctorService.contract.methods
-        .addDrInfo(this.model.docID, IPFShash)
-        .send({ from: this.doctorService.account })
-        .on("confirmation",(result: any) => {
-          console.log('result', result);
-          if (result == 1) {
-            this.msg_text += '<br>User Added to the Blockchain';
-            console.log('User added Successfully');
-            this.success = true
-            this.model = {};
-            return result;
-          } else {
-            this.warn = !this.warn;
-            this.msg_text = this.doctorService.msg_text;
-            console.log(result);
-            return result;
-          }
-        })
-        .catch((err: any) => {
-          this.warn = !this.warn;
-          this.msg_text =
-            'Adding Doctor Failed<br> <small class="fw-light text-danger"><b>"</b>' +
-            this.model.docID +
-            '<b>"</b></small><br>1.not a valid address or <br>2.Already have a role';
-          console.log(err);
-          return err;
-        });
-    });
+      this.msg_text += '<br>User Added to the Blockchain';
+      console.log('User added Successfully');
+
+      this.model = {}
+
+    }).catch((er: any) => {
+      this.warn = true
+      this.msg_text =
+        'Adding Doctor Failed<br> <small class="fw-light text-danger"><b>"</b>' +
+        this.model.docID +
+        '<b>"</b></small><br>1.not a valid address or <br>2.Already have a role';
+      console.log(er);
+    })
   }
+
 
   PreviewImage(event: any) {
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
       reader.onload = (event: any) => {
         this.image_url = event.target.result;
-        this.compressImage();
+        // this.compressImage();
+        console.log(this.image_url);
+
       };
       reader.readAsDataURL(event.target.files[0]);
     }
-  }
-
-  compressImage() {
-    this.imageCompress
-      .compressFile(this.image_url, 50, 50)
-      .then((compressedImage) => {
-        this.imageCompressedUrl = compressedImage;
-        this.image_url = this.imageCompressedUrl;
-      })
-      .catch((er) => {
-        console.log(er);
-      });
   }
 
   onClose() {

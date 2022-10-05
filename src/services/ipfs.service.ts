@@ -1,18 +1,16 @@
 import { Injectable } from '@angular/core';
+import { create, IPFSHTTPClient } from 'ipfs-http-client';
+import { IPFS } from 'src/environments/environment';
 
-const IPFS = require('ipfs-mini');
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class IpfsService {
-  ipfs: any;
+  ipfs!: IPFSHTTPClient;
   constructor() {
-    this.ipfs = new IPFS({
-      host: 'ipfs.infura.io',
-      port: 5001,
-      protocol: 'https',
-    });
+    this.ipfs = create({ url: IPFS.localIPFS });
   }
 
   getIPFS() {

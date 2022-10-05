@@ -1,8 +1,6 @@
 import {
-  AfterContentInit,
-  AfterViewInit,
   Component,
-  OnInit,
+  OnInit
 } from '@angular/core';
 import { DoctorService } from 'src/admin/services/doctor.service';
 
@@ -33,13 +31,13 @@ export class ViewComponent implements OnInit {
 
   DoctorDetails: any = [];
 
-  loaded : boolean = false;
+  loaded: boolean = false;
   loadComplete: boolean = false;
 
   showProgressCard: boolean = false;
-  showProgressWarn:boolean = false;
-  progressMsg:string = ''
-  
+  showProgressWarn: boolean = false;
+  progressMsg: string = ''
+
 
   constructor(private doctorService: DoctorService) {
     this.progressMsg = 'Loading Doctor Accounts From Blockchain'
@@ -55,70 +53,38 @@ export class ViewComponent implements OnInit {
     console.log(this.Doctors);
     this.DoctorDetails = []
     for (var i = 0; i <= this.Doctors.length; i++) {
-      this.doctorService.getDoctorDetails(this.Doctors[i]).then((data:any)=>{
-        this.DoctorDetails.push(data)
-      });
+      if (this.Doctors[i])
+        this.doctorService.getDoctorDetails(this.Doctors[i]).then((data: any) => {
+          this.DoctorDetails.push(data)
+        });
     }
     this.progressMsg = ''
     this.showProgressCard = false
   }
 
-  GetDoctors(): any{
-    this.showProgressCard= true;
+  GetDoctors(): any {
+    this.showProgressCard = true;
     this.showProgressWarn = false;
     this.progressMsg = ''
+    this.loadComplete = false
 
-    if(this.DoctorDetails.length >= 1){
+    if (this.DoctorDetails.length >= 1) {
       this.showProgressCard = false
       return 0
     }
 
-    this.doctorService.getDrs().then((docs:any)=>{
+    this.doctorService.getDrs().then((docs: any) => {
       this.Doctors = docs
       if (this.Doctors.length >= 1) {
         this.loadDrDetails();
-        this.progressMsg = "Found "+this.Doctors.length + " Accounts"
+        this.progressMsg = "Found " + this.Doctors.length + " Accounts"
       }
-      else{
+      else {
         this.progressMsg = 'No Doctors in the Network....'
+        this.loadComplete = true
+        this.showProgressCard = false
       }
     })
-    
-    // let docCall = setInterval(() => {
-    //   console.log('interval',this.doctorService.Doctors);
-    //   this.Doctors = this.doctorService.Doctors || [];
-    //   if (this.Doctors.length >= 1) {
-    //     this.loadDrDetails();
-    //     this.progressMsg = "Found "+this.Doctors.length + " Accounts"
-    //     clearInterval(docCall);
-    //   }
-    //   else{
-    //     this.progressMsg = 'No Doctors in the Network....'
-    //   }
-    // }, 1000);
 
-    // let DoctorDetailsCall = setInterval(() => {
-
-    //   if(this.Doctors.length <= 0){
-    //     clearInterval(DoctorDetailsCall)
-    //   }
-
-    //   if(this.doctorService.DoctorDetails.length > 0){
-    //     this.loaded = true
-    //   }
-
-    //   if (this.doctorService.DoctorDetails.length == this.Doctors.length) {
-    //     console.log(this.doctorService.DoctorDetails);
-    //     this.showProgressCard = false
-    //     this.loadComplete = true
-    //     this.DoctorDetails = this.doctorService.DoctorDetails;
-    //     clearInterval(DoctorDetailsCall);
-    //   } else {
-    //     this.progressMsg = "Loading Doctor Details From IPFS...."
-    //     console.log('Doctor Details... fff', this.doctorService.DoctorDetails);
-    //     this.DoctorDetails = this.doctorService.DoctorDetails;
-    //   }
-    // }, 5000);
-    
   }
 }

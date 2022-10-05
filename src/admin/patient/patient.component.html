@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <div class="container mb-4">
+  <!-- <div class="container mb-4">
     <form [noValidate]="false" #docForm="ngForm" (ngSubmit)="onSubmit()">
       <h3 class="h3 my-3">Add Patient to the Network</h3>
       <div class="row form-row">
@@ -55,7 +55,21 @@
         Add Patient
       </button>
     </form>
+  </div> -->
+  <div class="container">
+    NOT AVAILABLE
+    <br />
+    contact for full project:
+    <a href="mailto:tshamil90@gmail.com?subject=EHR 2.0">SHAMIL</a>
   </div>
-  <app-progress_card [success]="success" [show]="show" [msg_text]="msg_text" [warn]="warn" (retry)="onSubmit()" (close)="onClose()">
+
+  <app-progress_card
+    [success]="success"
+    [show]="show"
+    [msg_text]="msg_text"
+    [warn]="warn"
+    (retry)="onSubmit()"
+    (close)="onClose()"
+  >
   </app-progress_card>
 </div>

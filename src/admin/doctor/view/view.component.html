@@ -4,59 +4,83 @@
       <div class="card mt-2" *ngFor="let Docdetails of DoctorDetails">
         <div class="doctor w-100 p-2 d-flex flex-row align-items-center">
           <div class="doc-image">
-            <img class="border border-1 border-secondary rounded-circle p-1"
-              [src]='Docdetails.imageHash || "../../../assets/images/doctor.png"' alt="Doctor Image" width="150px"
-              height="150px">
+            <img
+              class="border border-1 border-secondary rounded-circle p-1"
+              [src]="
+                Docdetails.imageHash || '../../../assets/images/doctor.png'
+              "
+              alt="Doctor Image"
+              width="150px"
+              height="150px"
+            />
           </div>
           <div class="doc-info d-flex flex-column">
             <div class="col">
               <div class="row py-2">
                 <div class="col-md-12">
-                  <b>DocID: </b> <span class="docID"> <b>{{Docdetails.docID}}</b></span>
+                  <b>DocID: </b>
+                  <span class="docID">
+                    <b>{{ Docdetails.docID }}</b></span
+                  >
                 </div>
               </div>
               <div class="row-md-12 d-flex flex-row justify-content-between">
                 <div class="col-md-12 d-flex flex-column">
                   <div>
-                    <b>Full Name : </b> <span class="fName">{{Docdetails.fName}} {{Docdetails.lName}}</span></div>
-                  <div>
-                    <b>Date of Joining : </b> <span class="Doj">{{Docdetails.Doj}}</span>
+                    <b>Full Name : </b>
+                    <span class="fName"
+                      >{{ Docdetails.fName }} {{ Docdetails.lName }}</span
+                    >
                   </div>
                   <div>
-                    <b>Speciality: </b><span class="speciality">{{Docdetails.speciality}}</span>
+                    <b>Date of Joining : </b>
+                    <span class="Doj">{{ Docdetails.Doj }}</span>
                   </div>
-
+                  <div>
+                    <b>Speciality: </b
+                    ><span class="speciality">{{ Docdetails.speciality }}</span>
+                  </div>
                 </div>
                 <div class="col-md-12 d-flex flex-column">
                   <div>
-                    <b>Email : </b><span class="emailID">{{Docdetails.emailID}}</span></div>
-                  <div>
-                    <b>Phone: </b><span class="phone">{{Docdetails.phone}}</span>
+                    <b>Email : </b
+                    ><span class="emailID">{{ Docdetails.emailID }}</span>
                   </div>
                   <div>
-                    <b>City </b><span class="city">{{Docdetails.city}}</span>
+                    <b>Phone: </b
+                    ><span class="phone">{{ Docdetails.phone }}</span>
                   </div>
                   <div>
-                    <b>State: </b><span class="state">{{Docdetails.state}}</span>
+                    <b>City </b><span class="city">{{ Docdetails.city }}</span>
+                  </div>
+                  <div>
+                    <b>State: </b
+                    ><span class="state">{{ Docdetails.state }}</span>
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div *ngIf="showProgressCard" class="prgrs mt-3 d-flex flex-column align-items-center">
-      <label for="progress">{{progressMsg}}</label>
+    <div
+      *ngIf="showProgressCard"
+      class="prgrs mt-3 d-flex flex-column align-items-center"
+    >
+      <label for="progress">{{ progressMsg }}</label>
       <progress id="progress"></progress>
     </div>
 
-    <div class="nill d-flex flex-column justify-content-center align-items-center text-center" *ngIf="loadComplete && !loaded">
-      No Doctors In the Network Add Doctors using the above tab<span class="text-primary fw-bold">Add Doctor</span>
+    <div
+      class="nill d-flex flex-column justify-content-center align-items-center text-center"
+      *ngIf="loadComplete && !loaded"
+    >
+      No Doctors In the Network Add Doctors using the above tab<span
+        class="text-primary fw-bold"
+        >Add Doctor</span
+      >
       <button class="btn btn-primary" (click)="GetDoctors()">Retry</button>
     </div>
-
   </div>
-  <!-- <app-progress_card [show]="!loaded" [warn]="showProgressWarn" [msg_text]="progressMsg"></app-progress_card> -->
 </div>
