@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { rejects } from 'assert';
 import { resolve } from 'dns';
 import Web3 from 'web3';
 
@@ -37,33 +36,26 @@ export class BlockchainService {
         this.web3.eth.getBalance(this.account).then((r: any) => {
           this.balance = r;
         });
-        this.web3.eth.getBlockNumber().then((block: any) => {
-          this.blockNumber = block;
-          console.log(this.blockNumber);
-        });
       });
 
       this.web3.eth.net.getId().then((r: number) => {
-        console.log(r);
-
         this.netId = r;
         this.abi = Contract.abi;
         this.netWorkData = Contract.networks[this.netId];
-
         if (this.netWorkData) {
           this.address = this.netWorkData.address;
-          this.contract = this.web3.eth.Contract(this.abi, this.address);
+          this.contract = new this.web3.eth.Contract(this.abi, this.address);
+          // this.contract.methods
+          //   .getAdmin()
+          //   .call()
+          //   .then((r: any) => {
+          //     console.log(r);
 
-          this.contract.methods
-            .getAdmin()
-            .call()
-            .then((r: any) => {
-              this.admin = r;
-            });
-          console.log(this.admin);
+          //     this.admin = r;
+          //   });
         }
       });
-      window.ethereum.on('accountsChanged', (acc:any) => {
+      window.ethereum.on('accountsChanged', (acc: any) => {
         console.log(acc);
         window.location.reload();
       });
@@ -71,25 +63,41 @@ export class BlockchainService {
 
   }
 
-  //generate Report of Transactions
-  generateReport(block: number) {
-    for (var i = 1; i <= block; i++) {
-      this.web3.eth.getBlock(i).then((Block: any) => {
-        this.Report.push(Block);
-      });
-    }
+  checkIsAdmin(): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      this.getContract().then(c => {
+        console.log(c.methods.getAdmin().call());
+        this.getCurrentAcount().then(a => {
+          console.log(a);
+          c.methods.isAdmin().call({ from: a }).then((r: any) => {
+            console.log(r);
+
+            if (r) {
+              resolve(true)
+            }
+            reject(false)
+          })
+        }).catch((er: any) => {
+          console.log(er);
+
+        })
+      })
+    })
   }
 
   //gets
 
-  async getWeb3Provider() {
+  async getWeb3Provider(): Promise<Web3> {
     if (window.ethereum) {
       window.web3 = new Web3(window.ethereum);
       window.ethereum.enable();
-      console.log(window.web3);
+      // console.log(window.web3);
 
       this.web3 = window.web3;
-      this.account = this.web3.eth.getAccounts()[0];
+      this.account = await this.web3.eth.getAccounts().then((acc: string[]) => {
+        // console.log(acc);
+        return acc[0];
+      });
       return window.web3;
     } else if (window.web3) {
       window.web3 = new Web3(window.web3.currentProvider);
@@ -97,6 +105,19 @@ export class BlockchainService {
     } else {
       return window.web3;
     }
+  }
+
+  getCurrentAcount(): Promise<string> {
+    return new Promise((resolve, reject) => {
+      if (this.web3) {
+        this.web3.eth.getAccounts().then((acc: string[]) => {
+          // console.log(acc[0]);
+          resolve(acc[0]);
+        });
+      } else {
+        reject(null);
+      }
+    });
   }
 
   getWeb3(): Web3 {
@@ -107,18 +128,18 @@ export class BlockchainService {
     return this.balance;
   }
 
-  getTransactionBlockNumber() {
-    return this.blockNumber;
-  }
-
   getAccount() {
     return this.account;
   }
 
-  getContract():Promise<any> {
-    return new Promise((resolve,rejects)=>{
-      if(this.contract != null)
-        resolve(this.contract)
-    })
+  async getContract(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let check = setInterval(() => {
+        if (this.contract != null) {
+          resolve(this.contract);
+          clearInterval(check);
+        }
+      }, 1000);
+    });
   }
 }

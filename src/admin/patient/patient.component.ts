@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NgxImageCompressService } from 'ngx-image-compress';
 import { PatientService } from '../services/patient.service';
 
 @Component({
