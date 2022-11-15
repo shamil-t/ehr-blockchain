@@ -28,25 +28,29 @@ contact :
 
 * [Metamask Chrome](https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en-US)
 
+4. open cmd in project directory
 
-4.open cmd/terminal as Administrator and type
+  npm install --force
+
+
+5.open cmd/terminal as Administrator and type
 
 	npm install -g truffle
 	
-5.open Ganache
+6.open Ganache
  
  *  New Workspace
  *  AddProject
  *  Select truffle-config.js in Project Directory
  *  Save Workspace
 
-6.Compile and migrate Contracts
+7.Compile and migrate Contracts
    ```
    truffle migrate
    ```
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `ng serve -o` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Live
 Live site hosted on firebase
