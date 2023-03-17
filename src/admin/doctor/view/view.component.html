@@ -1,4 +1,9 @@
 <div class="container-fluid">
+  <div class="d-flex refresh-btn justify-content-end">
+    <button class="btn btn-sm btn-primary" (click)="GetDoctors()">
+      <i class="fa-solid fa-rotate-right"></i>&nbsp; Refresh
+    </button>
+  </div>
   <div class="container w-100">
     <div class="content" *ngIf="DoctorDetails.length >= 1">
       <div class="card mt-2" *ngFor="let Docdetails of DoctorDetails">
@@ -29,7 +34,7 @@
                   <div>
                     <b>Full Name : </b>
                     <span class="fName"
-                      >{{ Docdetails.fName }} {{ Docdetails.lName }}</span
+                    >{{ Docdetails.fName }} {{ Docdetails.lName }}</span
                     >
                   </div>
                   <div>
@@ -77,9 +82,9 @@
       *ngIf="loadComplete && !loaded"
     >
       No Doctors In the Network Add Doctors using the above tab<span
-        class="text-primary fw-bold"
-        >Add Doctor</span
-      >
+      class="text-primary fw-bold"
+    >Add Doctor</span
+    >
       <button class="btn btn-primary" (click)="GetDoctors()">Retry</button>
     </div>
   </div>

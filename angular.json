@@ -6,7 +6,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ehr-2.0": {
+    "ehr2.0": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -23,15 +23,29 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ehr-2.0",
+            "outputPath": "dist/ehr2.0",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "sass",
-            "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.sass"],
-            "scripts": []
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.sass"
+            ],
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "src/services/blockchain.service",
+              "ipfs-utils/src/env.js",
+              "any-signal",
+              "ipfs-utils/src/files/url-source.js",
+              "ipfs-utils/src/http.js",
+              "stream-to-it/source.js",
+              "debug"
+            ]
           },
           "configurations": {
             "production": {
@@ -61,19 +75,25 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "aot": false
             }
           },
           "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ehr2.0:build",
+            "watch": true,
+            "hmr": true
+          },
           "configurations": {
             "production": {
-              "browserTarget": "ehr-2.0:build:production"
+              "browserTarget": "ehr2.0:build:production"
             },
             "development": {
-              "browserTarget": "ehr-2.0:build:development"
+              "browserTarget": "ehr2.0:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -81,7 +101,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ehr-2.0:build"
+            "browserTarget": "ehr2.0:build"
           }
         },
         "test": {
@@ -92,13 +112,18 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "inlineStyleLanguage": "sass",
-            "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.sass"],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.sass"
+            ],
             "scripts": []
           }
         }
       }
     }
   },
-  "defaultProject": "ehr-2.0"
+  "defaultProject": "ehr2.0"
 }
