@@ -23,11 +23,6 @@ export class BlockchainService {
 
   balance: any;
 
-  blockNumber: any;
-
-  LOG: any;
-
-  Report: any = [];
 
   constructor() {
     this.getWeb3Provider().then(() => {
@@ -45,14 +40,6 @@ export class BlockchainService {
         if (this.netWorkData) {
           this.address = this.netWorkData.address;
           this.contract = new this.web3.eth.Contract(this.abi, this.address);
-          // this.contract.methods
-          //   .getAdmin()
-          //   .call()
-          //   .then((r: any) => {
-          //     console.log(r);
-
-          //     this.admin = r;
-          //   });
         }
       });
       window.ethereum.on('accountsChanged', (acc: any) => {
@@ -66,12 +53,10 @@ export class BlockchainService {
   checkIsAdmin(): Promise<boolean> {
     return new Promise((resolve, reject) => {
       this.getContract().then(c => {
-        console.log(c.methods.getAdmin().call());
         this.getCurrentAcount().then(a => {
           console.log(a);
           c.methods.isAdmin().call({ from: a }).then((r: any) => {
             console.log(r);
-
             if (r) {
               resolve(true)
             }
