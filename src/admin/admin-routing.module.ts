@@ -15,9 +15,6 @@ const routes: Routes = [
       { path: 'patient', component: PatientComponent },
     ],
   },
-  {
-    path:'',redirectTo:'admin/admin-dashboard'
-  }
 ];
 
 @NgModule({
