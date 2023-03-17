@@ -2,7 +2,7 @@ import {
   Component,
   OnInit
 } from '@angular/core';
-import { DoctorService } from 'src/admin/services/doctor.service';
+import {DoctorService} from 'src/admin/services/doctor.service';
 
 @Component({
   selector: 'doctor-view',
@@ -68,6 +68,8 @@ export class ViewComponent implements OnInit {
     this.progressMsg = ''
     this.loadComplete = false
 
+    this.DoctorDetails = []
+
     if (this.DoctorDetails.length >= 1) {
       this.showProgressCard = false
       return 0
@@ -78,8 +80,7 @@ export class ViewComponent implements OnInit {
       if (this.Doctors.length >= 1) {
         this.loadDrDetails();
         this.progressMsg = "Found " + this.Doctors.length + " Accounts"
-      }
-      else {
+      } else {
         this.progressMsg = 'No Doctors in the Network....'
         this.loadComplete = true
         this.showProgressCard = false
