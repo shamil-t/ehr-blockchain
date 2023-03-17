@@ -48,6 +48,7 @@ export class AddComponent implements OnInit {
     this.show = true;
     this.msg_text = 'Adding Doctor to the Network....';
     this.warn = false;
+    this.success = false
 
     this.model.imageHash = this.image_url;
 
