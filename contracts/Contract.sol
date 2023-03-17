@@ -4,99 +4,55 @@ pragma solidity >=0.4.21;
 import "./Roles.sol";
 
 contract Contract {
-    using Roles for Roles.Role;
+  using Roles for Roles.Role;
 
-    Roles.Role private admin;
-    Roles.Role private doctor;
-    Roles.Role private patient;
+  Roles.Role private admin;
+  Roles.Role private doctor;
 
-    struct Doctor {
-        string drHash;
-    }
+  struct Doctor {
+    address id;
+    string drHash;
+  }
 
-    struct Patient {
-        string patHash;
-    }
+  mapping(address => Doctor) Doctors;
 
-    mapping(address => Doctor) Doctors;
-    mapping(address => Patient) Patients;
+  address[] public DrIDs;
 
-    address[] public Dr_ids;
-    address[] public Patient_ids;
+  constructor() {
+    admin.add(msg.sender);
+  }
 
-    address accountId;
-    address admin_id;
-    address get_patient_id;
-    address get_dr_id;
+  //get Admin
 
-    constructor() {
-        admin_id = msg.sender;
-        admin.add(admin_id);
-    }
+  function isAdmin() public view returns (bool) {
+    return admin.has(msg.sender);
+  }
 
-    //get Admin
+  //Add Doctor
 
-    function getAdmin() public view returns (address) {
-        return admin_id;
-    }
+  function addDrInfo(address dr_id, string memory _drInfo_hash) public {
+    require(admin.has(msg.sender), "Only For Admin");
 
-    function isAdmin() public view returns (bool) {
-        return admin.has(msg.sender);
-    }
+    Doctor storage drInfo = Doctors[dr_id];
+    drInfo.id = dr_id;
+    drInfo.drHash = _drInfo_hash;
+    DrIDs.push(dr_id);
 
-    //Add Doctor
+    doctor.add(dr_id);
+  }
 
-    function addDoctor(address _newdr) public {
-        require(admin.has(msg.sender), "Only For Admin");
-        doctor.add(_newdr);
-    }
+  function getAllDrs() public view returns (address[] memory) {
+    return DrIDs;
+  }
 
-    function addDrInfo(address dr_id, string memory _drInfo_hash) public {
-        require(admin.has(msg.sender), "Only For Admin");
+  function getDr(address _id) public view returns (string memory) {
+    return (Doctors[_id].drHash);
+  }
 
-        Doctor storage drInfo = Doctors[msg.sender];
-        drInfo.drHash = _drInfo_hash;
-        Dr_ids.push(msg.sender);
+  // check is Doctor
 
-        doctor.add(dr_id);
-    }
+  function isDr(address id) public view returns (bool) {
+    return doctor.has(id);
+  }
 
-    function getAllDrs() public view returns (address[] memory) {
-        return Dr_ids;
-    }
-
-    function getDr(address _id) public view returns (string memory) {
-        return (Doctors[_id].drHash);
-    }
-
-    // check is Doctor
-
-    function isDr(address id) public view returns (string memory) {
-        require(doctor.has(id), "Only for Doctors");
-        return "1";
-    }
-
-    // Check is Patient
-
-    function isPat(address id) public view returns (string memory) {
-        require(patient.has(id), "Only for Doctors");
-        return "1";
-    }
-
-    /*
-        Modifiers
-    */
-
-    modifier onlyAdmin() {
-        require(admin.has(msg.sender) == true, "Only Admin Can Do That");
-        _;
-    }
-    modifier onlyDoctor() {
-        require(doctor.has(msg.sender) == true, "Only Doctor Can Do That");
-        _;
-    }
-    modifier onlyPatient() {
-        require(patient.has(msg.sender) == true, "Only Admin Can Do That");
-        _;
-    }
 }
