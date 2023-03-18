@@ -1,5 +1,10 @@
 # EHR 2.0
 
+
+## Live
+Live site hosted in firebase
+ [Click here](https://ehr-2-0.web.app/)
+
 ## For Full working project 
 
 -- Apponitments <br>
@@ -24,11 +29,17 @@ contact :
 
 * [Ganache Truffle](https://www.trufflesuite.com/ganache)
 
-3.Add Metamask Extension in Browser
+3. Download IPFS (kubo)
+
+* [IPFS Kubo](https://dist.ipfs.tech/#go-ipfs)
+
+  - configure ipfs refer: https://github.com/shamil-t/ehr-blockchain/issues/15#issuecomment-1333342345
+
+4.Add Metamask Extension in Browser
 
 * [Metamask Chrome](https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en-US)
 
-4. open cmd in project directory
+5. open cmd in project directory
 
   npm install --force
 
@@ -48,15 +59,10 @@ contact :
    ```
    truffle migrate
    ```
-## Development server
+8. Run Server
 
-Run `ng serve -o` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Live
-Live site hosted on firebase
- [Click here](https://ehr-2-0.web.app/)
-
-
+```
+ npm start
 
 
 
