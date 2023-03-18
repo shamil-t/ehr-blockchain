@@ -41,13 +41,16 @@ contact :
 
 5. open cmd in project directory
 
-  npm install --force
-
+```
+npm install --force
+```
 
 5.open cmd/terminal as Administrator and type
 
-	npm install -g truffle
-	
+```
+npm install -g truffle
+```
+
 6.open Ganache
  
  *  New Workspace
@@ -56,13 +59,14 @@ contact :
  *  Save Workspace
 
 7.Compile and migrate Contracts
-   ```
-   truffle migrate
-   ```
+ ```
+ truffle migrate
+ ```
 8. Run Server
 
 ```
- npm start
+npm start
+```
 
 
 
