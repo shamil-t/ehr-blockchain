@@ -41,13 +41,16 @@ contact :
 
 5. open cmd in project directory
 
+```
   npm install --force
-
+```
 
 5.open cmd/terminal as Administrator and type
 
+```
 	npm install -g truffle
-	
+```
+
 6.open Ganache
  
  *  New Workspace
@@ -63,6 +66,7 @@ contact :
 
 ```
  npm start
+ ```
 
 
 
