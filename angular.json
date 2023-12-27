@@ -6,7 +6,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ehr2.0": {
+    "ehr": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -26,7 +26,9 @@
             "outputPath": "dist/ehr2.0",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": [
+              "zone.js"
+            ],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "sass",
             "assets": [
@@ -84,16 +86,16 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ehr2.0:build",
+            "browserTarget": "ehr:build",
             "watch": true,
             "hmr": true
           },
           "configurations": {
             "production": {
-              "browserTarget": "ehr2.0:build:production"
+              "browserTarget": "ehr:build:production"
             },
             "development": {
-              "browserTarget": "ehr2.0:build:development"
+              "browserTarget": "ehr:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -101,16 +103,19 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ehr2.0:build"
+            "browserTarget": "ehr:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
             "inlineStyleLanguage": "sass",
             "assets": [
               "src/favicon.ico",
@@ -124,6 +129,5 @@
         }
       }
     }
-  },
-  "defaultProject": "ehr2.0"
+  }
 }

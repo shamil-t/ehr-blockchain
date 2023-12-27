@@ -1,9 +1,9 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { IPFSHTTPClient } from 'ipfs-http-client/dist/src/types';
-import { IPFS } from 'src/environments/environment';
-import { BlockchainService } from 'src/services/blockchain.service';
-import { IpfsService } from 'src/services/ipfs.service';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {IPFSHTTPClient} from 'ipfs-http-client/dist/src/types';
+import {IPFS} from 'src/environments/environment';
+import {BlockchainService} from 'src/services/blockchain.service';
+import {IpfsService} from 'src/services/ipfs.service';
 
 
 @Injectable({
@@ -80,7 +80,7 @@ export class DoctorService {
   addDoctor(docId: string, data: any): Promise<any> {
     return new Promise((resolve, reject) => {
       this.bs.getContract().then(c => {
-        this.bs.getCurrentAcount().then(a => {
+        this.bs.getCurrentAccount().then(a => {
           this.addRecord(data).then(ipfsHash => {
             c.methods
               .addDrInfo(docId, ipfsHash)
