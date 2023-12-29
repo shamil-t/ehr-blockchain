@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, effect } from '@angular/core';
 import { Router } from '@angular/router';
 import { BlockchainService } from 'src/services/blockchain.service';
 
@@ -20,7 +20,12 @@ export class AdminDashboardComponent implements OnInit {
   constructor(
     private router: Router,
     private bs: BlockchainService
-  ) { }
+  ) {
+    effect(() => {
+      this.onCheckAdmin()
+
+    })
+  }
 
   ngOnInit(): void {
     this.onCheckAdmin()
@@ -41,7 +46,7 @@ export class AdminDashboardComponent implements OnInit {
       this.checkProgress = false
       this.progressWarn = true
       this.progressMsg = '<span class="text-danger">Only admin have Access to this Page.... </span><br> ' +
-        'Conncet Metamask to your Admin account'
+        'Connect Metamask to your Admin account'
     })
   }
 }

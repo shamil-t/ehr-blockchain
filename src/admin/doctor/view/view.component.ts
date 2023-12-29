@@ -2,7 +2,7 @@ import {
   Component,
   OnInit
 } from '@angular/core';
-import {DoctorService} from 'src/admin/services/doctor.service';
+import { DoctorService } from 'src/admin/services/doctor.service';
 
 @Component({
   selector: 'doctor-view',
@@ -25,7 +25,7 @@ export class ViewComponent implements OnInit {
     phone: '123456789',
     city: 'city',
     state: 'state',
-    speciality: 'speciality',
+    specialty: 'specialty',
     imageHash: '',
   };
 

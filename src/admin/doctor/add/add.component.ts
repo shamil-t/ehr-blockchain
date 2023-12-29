@@ -18,7 +18,7 @@ export class AddComponent implements OnInit {
     phone: '123456789',
     city: 'city',
     state: 'state',
-    speciality: 'speciality',
+    specialty: 'specialty',
     imageHash: '',
   };
 
@@ -79,7 +79,7 @@ export class AddComponent implements OnInit {
       reader.onload = (event: any) => {
         this.image_url = event.target.result;
         // this.compressImage();
-        console.log(this.image_url);
+        // console.log(this.image_url);
 
       };
       reader.readAsDataURL(event.target.files[0]);

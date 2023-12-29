@@ -1,10 +1,10 @@
-import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
-import {IPFSHTTPClient} from 'ipfs-http-client/dist/src/types';
-import {IPFS} from 'src/environments/environment';
-import {BlockchainService} from 'src/services/blockchain.service';
-import {IpfsService} from 'src/services/ipfs.service';
-
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { IPFSHTTPClient } from 'ipfs-http-client/dist/src/types';
+import { IPFS } from 'src/environments/environment';
+import { BlockchainService } from 'src/services/blockchain.service';
+import { IpfsService } from 'src/services/ipfs.service';
+import { Buffer } from "buffer";
 
 @Injectable({
   providedIn: 'root',
@@ -86,8 +86,7 @@ export class DoctorService {
               .addDrInfo(docId, ipfsHash)
               .send({ from: a })
               .on("confirmation", (result: any) => {
-                console.log('result', result);
-                if (result == 1) {
+                if (result) {
                   resolve(result);
                 }
                 reject(false)
@@ -101,7 +100,7 @@ export class DoctorService {
     })
   }
   async addRecord(data: any) {
-    let IPFShash = await (await (this.ipfs.add(Buffer.from(JSON.stringify(data))))).path
-    return IPFShash
+    let IPFSHash = await (await (this.ipfs.add(Buffer.from(JSON.stringify(data))))).path
+    return IPFSHash
   }
 }

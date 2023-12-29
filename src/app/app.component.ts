@@ -1,5 +1,5 @@
-import {Component, effect, OnInit} from '@angular/core';
-import {BlockchainService} from 'src/services/blockchain.service';
+import { Component, effect, OnInit } from '@angular/core';
+import { BlockchainService } from 'src/services/blockchain.service';
 
 
 @Component({
@@ -18,6 +18,8 @@ export class AppComponent implements OnInit {
 
   constructor(private blockChainService: BlockchainService) {
     effect(() => {
+      console.log(blockChainService.account());
+
       this.account = this.blockChainService.account()
     });
   }
