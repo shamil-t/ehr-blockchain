@@ -10,23 +10,23 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^20.3.20",
-    "@angular/common": "^20.3.20",
-    "@angular/compiler": "^20.3.20",
-    "@angular/core": "^20.3.20",
-    "@angular/forms": "^20.3.20",
-    "@angular/platform-browser": "^20.3.20",
-    "@angular/platform-browser-dynamic": "^20.3.20",
-    "@angular/router": "^20.3.20",
+    "@angular/animations": "^21.2.12",
+    "@angular/common": "^21.2.12",
+    "@angular/compiler": "^21.2.12",
+    "@angular/core": "^21.2.12",
+    "@angular/forms": "^21.2.12",
+    "@angular/platform-browser": "^21.2.12",
+    "@angular/platform-browser-dynamic": "^21.2.12",
+    "@angular/router": "^21.2.12",
     "ipfs-http-client": "^60.0.0",
     "tslib": "^2.5.0",
     "web3": "4.7.0",
     "zone.js": "^0.15.1"
   },
   "devDependencies": {
-    "@angular/build": "^20.3.25",
-    "@angular/cli": "^20.3.25",
-    "@angular/compiler-cli": "^20.3.20",
+    "@angular/build": "^21.2.10",
+    "@angular/cli": "^21.2.10",
+    "@angular/compiler-cli": "^21.2.12",
     "@nomicfoundation/hardhat-ignition-viem": "^3.1.5",
     "@types/jasmine": "^4.3.1",
     "@types/node": "^22.19.18",
@@ -37,7 +37,7 @@
     "karma-coverage": "^2.2.0",
     "karma-jasmine": "^5.1.0",
     "karma-jasmine-html-reporter": "^2.0.0",
-    "typescript": "~5.8.0"
+    "typescript": "~5.9.3"
   },
   "type": "module"
 }
