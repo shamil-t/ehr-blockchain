@@ -1,6 +1,0 @@
-{
-  "type": "module",
-  "types": "../../_types/webauthn/Types.d.ts",
-  "main": "../../_cjs/webauthn/Types.js",
-  "module": "../../_esm/webauthn/Types.js"
-}

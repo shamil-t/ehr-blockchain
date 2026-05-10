@@ -1,6 +1,0 @@
-{
-  "type": "module",
-  "types": "../../_types/webauthn/Authenticator.d.ts",
-  "main": "../../_cjs/webauthn/Authenticator.js",
-  "module": "../../_esm/webauthn/Authenticator.js"
-}

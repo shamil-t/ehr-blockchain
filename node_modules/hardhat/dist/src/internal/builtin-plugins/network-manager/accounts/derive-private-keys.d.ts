@@ -1,2 +1,0 @@
-export declare function derivePrivateKeys(mnemonic: string, hdpath: string, initialIndex: number, count: number, passphrase: string): Promise<string[]>;
-//# sourceMappingURL=derive-private-keys.d.ts.map

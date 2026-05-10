@@ -1,6 +1,0 @@
-{
-  "type": "module",
-  "types": "../_types/core/Base32.d.ts",
-  "main": "../_cjs/core/Base32.js",
-  "module": "../_esm/core/Base32.js"
-}

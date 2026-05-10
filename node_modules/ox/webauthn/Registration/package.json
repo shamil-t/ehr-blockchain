@@ -1,6 +1,0 @@
-{
-  "type": "module",
-  "types": "../../_types/webauthn/Registration.d.ts",
-  "main": "../../_cjs/webauthn/Registration.js",
-  "module": "../../_esm/webauthn/Registration.js"
-}

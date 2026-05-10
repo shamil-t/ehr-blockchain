@@ -1,1 +1,0 @@
-{"version":3,"file":"subprocess.d.ts","sourceRoot":"","sources":["../../../../../src/internal/cli/init/subprocess.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,aAAa,EAAE,MAAM,yBAAyB,CAAC;AAE7D,OAAO,EAAE,KAAK,IAAI,SAAS,EAAE,MAAM,oBAAoB,CAAC;AAExD,wBAAsB,KAAK,CACzB,OAAO,EAAE,MAAM,EACf,IAAI,EAAE,MAAM,EAAE,EACd,OAAO,EAAE,aAAa,CAAC,OAAO,SAAS,CAAC,GACvC,OAAO,CAAC,IAAI,CAAC,CAef"}

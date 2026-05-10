@@ -1,1 +1,0 @@
-{"version":3,"file":"task-action.d.ts","sourceRoot":"","sources":["../../../../../src/internal/builtin-plugins/clean/task-action.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,qBAAqB,EAAE,MAAM,yBAAyB,CAAC;AAKrE,UAAU,oBAAoB;IAC5B,MAAM,EAAE,OAAO,CAAC;CACjB;AAED,QAAA,MAAM,WAAW,EAAE,qBAAqB,CAAC,oBAAoB,CAa5D,CAAC;AAEF,eAAe,WAAW,CAAC"}

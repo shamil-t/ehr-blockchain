@@ -1,6 +1,0 @@
-{
-  "type": "module",
-  "types": "../_types/core/CompactSize.d.ts",
-  "main": "../_cjs/core/CompactSize.js",
-  "module": "../_esm/core/CompactSize.js"
-}

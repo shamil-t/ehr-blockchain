@@ -1,8 +1,0 @@
-{
-  "name": "cborg-bench",
-  "type": "module",
-  "dependencies": {
-    "borc": "^2.1.2",
-    "ipld-garbage": "^3.0.3"
-  }
-}
