@@ -21,11 +21,12 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/ehr2.0",
+            "outputPath": {
+              "base": "dist/ehr2.0"
+            },
             "index": "src/index.html",
-            "main": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
@@ -47,7 +48,8 @@
               "ipfs-utils/src/http.js",
               "stream-to-it/source.js",
               "debug"
-            ]
+            ],
+            "browser": "src/main.ts"
           },
           "configurations": {
             "production": {
@@ -72,9 +74,7 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true,
@@ -86,16 +86,16 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ehr:build",
             "watch": true,
-            "hmr": true
+            "hmr": true,
+            "buildTarget": "ehr:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ehr:build:production"
+              "buildTarget": "ehr:build:production"
             },
             "development": {
-              "browserTarget": "ehr:build:development"
+              "buildTarget": "ehr:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -103,7 +103,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ehr:build"
+            "buildTarget": "ehr:build"
           }
         },
         "test": {
