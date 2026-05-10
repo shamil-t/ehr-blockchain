@@ -1,9 +1,6 @@
-import { Injectable } from '@angular/core';
-import { rejects } from 'assert';
-import { resolve } from 'dns';
-import { Observable } from 'rxjs';
-import { BlockchainService } from 'src/services/blockchain.service';
-import { IpfsService } from 'src/services/ipfs.service';
+import {Injectable} from '@angular/core';
+import {BlockchainService} from 'src/services/blockchain.service';
+import {IpfsService} from 'src/services/ipfs.service';
 
 @Injectable({
   providedIn: 'root',
@@ -49,7 +46,7 @@ export class DoctorService {
         console.log(result);
         this.Doctors = result;
         if (this.Doctors.length >= 0) {
-          for (var i = 0; i <= this.Doctors.length; i++) {
+          for (let i = 0; i <= this.Doctors.length; i++) {
             if (this.Doctors[i] == this.account) {
               this.isDoctor = true;
             }
@@ -130,12 +127,11 @@ export class DoctorService {
 
           let PatientRecord;
 
-          if(record != null){
+          if (record != null) {
             record['MedRecord'].push(PatientData)
             PatientRecord = record
-          }
-          else{
-            PatientRecord = { "MedRecord":[PatientData] };
+          } else {
+            PatientRecord = {"MedRecord": [PatientData]};
           }
 
           console.log(PatientRecord);
@@ -145,7 +141,7 @@ export class DoctorService {
               console.log(IPFSHash);
               this.contract.methods
                 .addMedRecord(IPFSHash, this.patientId)
-                .send({ from: this.account })
+                .send({from: this.account})
                 .on('confirmation', (result: any) => {
                   console.log(result);
                   resolve(result);
@@ -185,8 +181,7 @@ export class DoctorService {
                 console.log(err);
                 reject(err);
               });
-          }
-          else{
+          } else {
             resolve(null)
           }
         })

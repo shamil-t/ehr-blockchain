@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { IPFSHTTPClient } from 'ipfs-http-client/dist/src/types';
-import { DoctorService } from 'src/admin/services/doctor.service';
+import {Component, OnInit} from '@angular/core';
+import {DoctorService} from 'src/admin/services/doctor.service';
+import {KuboRPCClient} from "kubo-rpc-client";
 
 
 @Component({
@@ -30,7 +30,7 @@ export class AddComponent implements OnInit {
   warn: boolean = false;
   success: boolean = false
 
-  ipfs: IPFSHTTPClient;
+  ipfs: KuboRPCClient;
 
   IPFShash: string = ''
 
