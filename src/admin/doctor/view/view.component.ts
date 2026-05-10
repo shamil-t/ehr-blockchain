@@ -1,8 +1,5 @@
-import {
-  Component,
-  OnInit
-} from '@angular/core';
-import { DoctorService } from 'src/admin/services/doctor.service';
+import {Component, OnInit, signal} from '@angular/core';
+import {DoctorService} from 'src/admin/services/doctor.service';
 
 @Component({
   selector: 'doctor-view',
@@ -31,16 +28,16 @@ export class ViewComponent implements OnInit {
 
   DoctorDetails: any = [];
 
-  loaded: boolean = false;
-  loadComplete: boolean = false;
+  loaded = signal(false);
+  loadComplete = signal(false);
 
-  showProgressCard: boolean = false;
-  showProgressWarn: boolean = false;
-  progressMsg: string = ''
+  showProgressCard = signal(false);
+  showProgressWarn = signal(false);
+  progressMsg = signal('')
 
 
   constructor(private doctorService: DoctorService) {
-    this.progressMsg = 'Loading Doctor Accounts From Blockchain'
+    this.progressMsg.set('Loading Doctor Accounts From Blockchain')
 
     this.DoctorDetails = doctorService.DoctorDetails
   }
@@ -52,26 +49,26 @@ export class ViewComponent implements OnInit {
   loadDrDetails() {
     console.log(this.Doctors);
     this.DoctorDetails = []
-    for (var i = 0; i <= this.Doctors.length; i++) {
+    for (let i = 0; i <= this.Doctors.length; i++) {
       if (this.Doctors[i])
         this.doctorService.getDoctorDetails(this.Doctors[i]).then((data: any) => {
           this.DoctorDetails.push(data)
         });
     }
-    this.progressMsg = ''
-    this.showProgressCard = false
+    this.progressMsg.set('')
+    this.showProgressCard.set(false)
   }
 
   GetDoctors(): any {
-    this.showProgressCard = true;
-    this.showProgressWarn = false;
-    this.progressMsg = ''
-    this.loadComplete = false
+    this.showProgressCard.set(true);
+    this.showProgressWarn.set(false);
+    this.progressMsg.set('')
+    this.loadComplete.set(false)
 
     this.DoctorDetails = []
 
     if (this.DoctorDetails.length >= 1) {
-      this.showProgressCard = false
+      this.showProgressCard.set(false)
       return 0
     }
 
@@ -79,11 +76,11 @@ export class ViewComponent implements OnInit {
       this.Doctors = docs
       if (this.Doctors.length >= 1) {
         this.loadDrDetails();
-        this.progressMsg = "Found " + this.Doctors.length + " Accounts"
+        this.progressMsg.set("Found " + this.Doctors.length + " Accounts")
       } else {
-        this.progressMsg = 'No Doctors in the Network....'
-        this.loadComplete = true
-        this.showProgressCard = false
+        this.progressMsg.set('No Doctors in the Network....')
+        this.loadComplete.set(true)
+        this.showProgressCard.set(false)
       }
     })
 

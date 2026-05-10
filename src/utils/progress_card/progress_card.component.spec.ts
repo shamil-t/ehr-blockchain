@@ -11,8 +11,8 @@ describe('Progress_cardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ Progress_cardComponent ]
-    })
+    imports: [Progress_cardComponent]
+})
     .compileComponents();
   }));
 

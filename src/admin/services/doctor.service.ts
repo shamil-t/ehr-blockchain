@@ -1,5 +1,5 @@
 import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {IPFS} from 'src/environments/environment';
 import {BlockchainService} from 'src/services/blockchain.service';
 import {IpfsService} from 'src/services/ipfs.service';
@@ -10,6 +10,10 @@ import {KuboRPCClient} from "kubo-rpc-client";
   providedIn: 'root',
 })
 export class DoctorService {
+  bs = inject(BlockchainService);
+  ipfsService = inject(IpfsService);
+  http = inject(HttpClient);
+
   address: any;
   contract: any;
   account: any;
@@ -20,31 +24,16 @@ export class DoctorService {
   Doctors: any;
   DoctorDetails: string[] = [];
 
-  constructor(
-    private bs: BlockchainService,
-    ipfsService: IpfsService,
-    private http: HttpClient
-  ) {
-
-    this.contract = bs.getContract().then((c: any) => {
-      return c
-    })
-    this.ipfs = ipfsService.getIPFS();
+  constructor() {
+    this.ipfs = this.ipfsService.getIPFS();
   }
 
-  getDrs(): Promise<any> {
-    return new Promise((resolve) => {
-      this.bs.getContract().then((contract: any) => {
-        this.Doctors = contract.methods.getAllDrs()
-          .call()
-          .then((docs: any) => {
-            this.Doctors = docs;
-            console.log(this.Doctors);
-            resolve(this.Doctors)
-          });
-      })
-
-    })
+  async getDrs(): Promise<any> {
+    if (!this.contract) {
+      this.contract = await this.bs.getContract();
+    }
+    let doctors = await this.contract["getAllDrs"]()
+    return [...doctors];
   }
 
   getDoctorDetails(docID: any): Promise<any> {
@@ -70,20 +59,16 @@ export class DoctorService {
   addDoctor(docId: string, data: any): Promise<any> {
     return new Promise((resolve, reject) => {
       this.bs.getContract().then(c => {
-        this.bs.getCurrentAccount().then(a => {
+        this.bs.getAccount().then(a => {
           this.addRecord(data).then(ipfsHash => {
-            c.methods
-              .addDrInfo(docId, ipfsHash)
-              .send({from: a})
-              .on("confirmation", (result: any) => {
-                if (result) {
-                  resolve(result);
-                }
-                reject(false)
-              })
-              .catch((err: any) => {
-                reject(false)
-              });
+            c["addDrInfo"](docId, ipfsHash).then((result: any) => {
+              if (result) {
+                resolve(result);
+              }
+              reject(false)
+            }).catch((err: any) => {
+              reject(false)
+            });
           })
         })
       })
@@ -91,7 +76,6 @@ export class DoctorService {
   }
 
   async addRecord(data: any) {
-    let IPFSHash = await (await (this.ipfs.add(Buffer.from(JSON.stringify(data))))).path
-    return IPFSHash
+    return (await (this.ipfs.add(Buffer.from(JSON.stringify(data))))).path;
   }
 }

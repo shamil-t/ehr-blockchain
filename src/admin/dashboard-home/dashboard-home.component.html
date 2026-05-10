@@ -9,10 +9,10 @@
     </div>
     <div class="row mt-3">
       <div class="col-md-6">
-        <app-card [title]="'Account Balance'" [count]="accountBalance | currency:'ETH '"  [image]="'wallet'"></app-card>
+        <app-card [title]="'Account Balance'" [count]="accountBalance() | currency:'ETH '"  [image]="'wallet'"></app-card>
       </div>
       <div class="col-md-6">
-        <app-card [title]="'Total Earnings'" [count]="'234.76 ETH'" [image]="'money-check-alt'" [background]="'black-white'"></app-card>
+        <app-card [title]="'Total Earnings'" [count]="'ETH 0.00'" [image]="'money-check-alt'" [background]="'black-white'"></app-card>
       </div>
     </div>
   </div>

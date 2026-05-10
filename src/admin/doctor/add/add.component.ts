@@ -1,12 +1,18 @@
 import {Component, OnInit} from '@angular/core';
 import {DoctorService} from 'src/admin/services/doctor.service';
 import {KuboRPCClient} from "kubo-rpc-client";
+import {FormsModule} from "@angular/forms";
+import {Progress_cardComponent} from "../../../utils/progress_card/progress_card.component";
 
 
 @Component({
   selector: 'doctor-add',
   templateUrl: './add.component.html',
   styleUrls: ['./add.component.sass'],
+  imports: [
+    FormsModule,
+    Progress_cardComponent
+  ]
 })
 export class AddComponent implements OnInit {
   model: any = {
@@ -23,7 +29,6 @@ export class AddComponent implements OnInit {
   };
 
   image_url: any;
-  imageCompressedUrl: string = '';
 
   show: boolean = false;
   msg_text: string = '';
@@ -31,8 +36,6 @@ export class AddComponent implements OnInit {
   success: boolean = false
 
   ipfs: KuboRPCClient;
-
-  IPFShash: string = ''
 
   constructor(
     private ds: DoctorService
@@ -75,12 +78,9 @@ export class AddComponent implements OnInit {
 
   PreviewImage(event: any) {
     if (event.target.files && event.target.files[0]) {
-      var reader = new FileReader();
+      const reader = new FileReader();
       reader.onload = (event: any) => {
         this.image_url = event.target.result;
-        // this.compressImage();
-        // console.log(this.image_url);
-
       };
       reader.readAsDataURL(event.target.files[0]);
     }

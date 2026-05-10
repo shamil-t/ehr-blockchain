@@ -8,8 +8,8 @@ describe('PatientComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PatientComponent ]
-    })
+    imports: [PatientComponent]
+})
     .compileComponents();
   });
 

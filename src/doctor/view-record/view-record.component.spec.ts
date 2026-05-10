@@ -8,8 +8,8 @@ describe('ViewRecordComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ViewRecordComponent ]
-    })
+    imports: [ViewRecordComponent]
+})
     .compileComponents();
   });
 

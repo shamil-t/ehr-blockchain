@@ -5,7 +5,7 @@ import { Component, Input, OnInit } from '@angular/core';
   template: `
     <div [class]="'card '+background">
       <div class="image">
-        <span [class]="'fas fa-' + image" alt="card-logo"></span>
+        <span [class]="'fas fa-' + image"></span>
       </div>
       <span class="title" [innerHTML]="title"></span>
       <span class="count" [innerHTML]="count"></span>
