@@ -44,3 +44,6 @@ backup.zip
 # System files
 .DS_Store
 Thumbs.db
+
+/cache
+ignition/deployments
