@@ -1,9 +1,6 @@
-import { Injectable } from '@angular/core';
-import { rejects } from 'assert';
-import { resolve } from 'dns';
-import { Observable } from 'rxjs';
-import { BlockchainService } from 'src/services/blockchain.service';
-import { IpfsService } from 'src/services/ipfs.service';
+import {Injectable} from '@angular/core';
+import {BlockchainService} from 'src/services/blockchain.service';
+import {IpfsService} from 'src/services/ipfs.service';
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +25,7 @@ export class DoctorService {
     private blockchainService: BlockchainService,
     private ipfsService: IpfsService
   ) {
-    this.web3 = blockchainService.getWeb3();
+    this.web3 = blockchainService.getWeb3Provider();
     this.contract = blockchainService.getContract();
     this.account = blockchainService.getAccount();
 
@@ -49,7 +46,7 @@ export class DoctorService {
         console.log(result);
         this.Doctors = result;
         if (this.Doctors.length >= 0) {
-          for (var i = 0; i <= this.Doctors.length; i++) {
+          for (let i = 0; i <= this.Doctors.length; i++) {
             if (this.Doctors[i] == this.account) {
               this.isDoctor = true;
             }
@@ -127,15 +124,14 @@ export class DoctorService {
       this.getPatientRecords(this.patientId)
         .then((record: any) => {
           console.log(record);
-          
+
           let PatientRecord;
 
-          if(record != null){
+          if (record != null) {
             record['MedRecord'].push(PatientData)
             PatientRecord = record
-          }
-          else{
-            PatientRecord = { "MedRecord":[PatientData] };
+          } else {
+            PatientRecord = {"MedRecord": [PatientData]};
           }
 
           console.log(PatientRecord);
@@ -145,7 +141,7 @@ export class DoctorService {
               console.log(IPFSHash);
               this.contract.methods
                 .addMedRecord(IPFSHash, this.patientId)
-                .send({ from: this.account })
+                .send({from: this.account})
                 .on('confirmation', (result: any) => {
                   console.log(result);
                   resolve(result);
@@ -185,8 +181,7 @@ export class DoctorService {
                 console.log(err);
                 reject(err);
               });
-          }
-          else{
+          } else {
             resolve(null)
           }
         })

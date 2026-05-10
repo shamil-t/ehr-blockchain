@@ -45,5 +45,7 @@ backup.zip
 .DS_Store
 Thumbs.db
 
+/cache/*
 /cache
-ignition/deployments
+/ignition/deployments
+/artifacts

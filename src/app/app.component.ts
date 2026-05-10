@@ -1,31 +1,33 @@
-import { Component, effect, OnInit } from '@angular/core';
-import { BlockchainService } from 'src/services/blockchain.service';
+import {Component, inject, OnInit, signal} from '@angular/core';
+import {BlockchainService} from 'src/services/blockchain.service';
+import {RouterOutlet} from "@angular/router";
 
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.sass'],
+  imports: [RouterOutlet]
 })
 export class AppComponent implements OnInit {
+  blockChainService = inject(BlockchainService);
   account: any;
+  isConnected = signal(false);
+  load_text = signal('Connecting to BlockChain....');
+  retry_visibility = signal(false);
 
-  isConnected: boolean = false;
+  constructor() {
 
-  load_text: string = 'Connecting to BlockChain....';
-
-  retry_visibility: boolean = false;
-
-  constructor(private blockChainService: BlockchainService) {
-    effect(() => {
-      console.log(blockChainService.account());
-
-      this.account = this.blockChainService.account()
-    });
   }
 
   ngOnInit(): void {
-    this.connectWithContract();
+    this.getConnectedAccount().then(_ => {
+      this.connectWithContract();
+    })
+  }
+
+  async getConnectedAccount() {
+    this.account = await this.blockChainService.getAccount();
   }
 
   reload() {
@@ -33,23 +35,16 @@ export class AppComponent implements OnInit {
   }
 
   connectWithContract() {
-    this.blockChainService.getContract().then(c => {
-      if (c) {
-        this.isConnected = true;
-      } else {
-        this.isConnected = false;
-        this.load_text =
-          'Unable to connect to BlockChain \n ' +
-          'Please Open Ganache and Connect to MetaMask';
-        this.retry_visibility = true;
-      }
+    this.blockChainService.getContract().then(_ => {
+      this.isConnected.set(true);
     }).catch(err => {
       console.log(err)
-      this.isConnected = false;
-      this.load_text =
+      this.isConnected.set(false);
+      this.load_text.set(
         'Unable to connect to BlockChain \n ' +
-        'Please Open Ganache and Connect to MetaMask';
-      this.retry_visibility = true;
+        err.toString()
+      )
+      this.retry_visibility.set(true);
     })
   }
 }

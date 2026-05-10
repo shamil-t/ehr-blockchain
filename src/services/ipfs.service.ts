@@ -1,16 +1,16 @@
-import { Injectable } from '@angular/core';
-import { create, IPFSHTTPClient } from 'ipfs-http-client';
-import { IPFS } from 'src/environments/environment';
-
+import {Injectable} from '@angular/core';
+import {create, KuboRPCClient} from 'kubo-rpc-client';
+import {IPFS} from 'src/environments/environment';
 
 
 @Injectable({
   providedIn: 'root',
 })
 export class IpfsService {
-  ipfs!: IPFSHTTPClient;
+  ipfs: KuboRPCClient;
+
   constructor() {
-    this.ipfs = create({ url: IPFS.localIPFS });
+    this.ipfs = create({url: IPFS.localIPFS});
   }
 
   getIPFS() {

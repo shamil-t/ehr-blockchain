@@ -20,10 +20,10 @@ export class PatientService {
     private blockchainService: BlockchainService,
     private ipfsService: IpfsService
   ) {
-    this.web3 = blockchainService.getWeb3();
+    this.web3 = blockchainService.getWeb3Provider();
 
     this.contract = blockchainService.getContract();
-    
+
     this.getAcccount();
 
     this.ipfs = ipfsService.getIPFS();
