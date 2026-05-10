@@ -1,0 +1,1 @@
+{"version":3,"file":"stackElement.d.ts","sourceRoot":"","sources":["../../../../src/utils/types/stackElement.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,OAAO,EAAE,UAAU,EAAE,MAAM,gBAAgB,CAAC;AAE1D,0BAAkB,eAAe;IAC/B,MAAM,IAAA;IACN,KAAK,IAAA;CACN;AAED,MAAM,WAAW,YAAY;IAC3B,GAAG,EAAE,OAAO,CAAC;IACb,KAAK,EAAE,UAAU,CAAC;IAClB,IAAI,CAAC,EAAE,eAAe,CAAC;IACvB,IAAI,EAAE,OAAO,CAAC;CACf"}

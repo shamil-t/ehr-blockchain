@@ -1,0 +1,171 @@
+{
+  "name": "ipfs-core-utils",
+  "version": "0.18.1",
+  "description": "Package to share code between ipfs and ipfs-http-client",
+  "author": "Alex Potsides <alex@achingbrain.net>",
+  "license": "Apache-2.0 OR MIT",
+  "homepage": "https://github.com/ipfs/js-ipfs/tree/master/packages/ipfs-core-utils#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ipfs/js-ipfs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ipfs/js-ipfs/issues"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=7.0.0"
+  },
+  "type": "module",
+  "types": "./dist/src/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "*",
+        "dist/*",
+        "dist/src/*",
+        "dist/src/*/index"
+      ],
+      "src/*": [
+        "*",
+        "dist/*",
+        "dist/src/*",
+        "dist/src/*/index"
+      ]
+    }
+  },
+  "files": [
+    "src",
+    "dist",
+    "!dist/test",
+    "!**/*.tsbuildinfo"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./src/index.js"
+    },
+    "./agent": {
+      "types": "./src/agent.d.ts",
+      "browser": "./src/agent.browser.js",
+      "import": "./src/agent.js"
+    },
+    "./errors": {
+      "types": "./src/errors.d.ts",
+      "import": "./src/errors.js"
+    },
+    "./files/format-mode": {
+      "types": "./src/files/format-mode.d.ts",
+      "import": "./src/files/format-mode.js"
+    },
+    "./files/format-mtime": {
+      "types": "./src/files/format-mtime.d.ts",
+      "import": "./src/files/format-mtime.js"
+    },
+    "./files/normalise-content": {
+      "types": "./src/files/normalise-content.d.ts",
+      "import": "./src/files/normalise-content.js"
+    },
+    "./files/normalise-content.browser": {
+      "types": "./src/files/normalise-content.browser.d.ts",
+      "import": "./src/files/normalise-content.browser.js"
+    },
+    "./files/normalise-input-multiple": {
+      "types": "./src/files/normalise-input-multiple.d.ts",
+      "import": "./src/files/normalise-input-multiple.js"
+    },
+    "./files/normalise-input-multiple.browser": {
+      "types": "./src/files/normalise-input-multiple.browser.d.ts",
+      "import": "./src/files/normalise-input-multiple.browser.js"
+    },
+    "./files/normalise-input-single": {
+      "types": "./src/files/normalise-input-single.d.ts",
+      "import": "./src/files/normalise-input-single.js"
+    },
+    "./files/normalise-input-single.browser": {
+      "types": "./src/files/normalise-input-single.browser.d.ts",
+      "import": "./src/files/normalise-input-single.browser.js"
+    },
+    "./multibases": {
+      "types": "./src/multibases.d.ts",
+      "import": "./src/multibases.js"
+    },
+    "./multicodecs": {
+      "types": "./src/multicodecs.d.ts",
+      "import": "./src/multicodecs.js"
+    },
+    "./multihashes": {
+      "types": "./src/multihashes.d.ts",
+      "import": "./src/multihashes.js"
+    },
+    "./multipart-request": {
+      "types": "./src/multipart-request.d.ts",
+      "browser": "./src/multipart-request.browser.js",
+      "import": "./src/multipart-request.js"
+    },
+    "./pins/normalise-input": {
+      "types": "./src/pins/normalise-input.d.ts",
+      "import": "./src/pins/normalise-input.js"
+    },
+    "./to-cid-and-path": {
+      "types": "./src/to-cid-and-path.d.ts",
+      "import": "./src/to-cid-and-path.js"
+    },
+    "./to-url-string": {
+      "types": "./src/to-url-string.d.ts",
+      "import": "./src/to-url-string.js"
+    },
+    "./with-timeout-option": {
+      "types": "./src/with-timeout-option.d.ts",
+      "import": "./src/with-timeout-option.js"
+    }
+  },
+  "eslintConfig": {
+    "extends": "ipfs",
+    "parserOptions": {
+      "sourceType": "module"
+    }
+  },
+  "scripts": {
+    "test": "aegir test",
+    "test:node": "aegir test -t node --cov",
+    "test:chrome": "aegir test -t browser --cov",
+    "test:chrome-webworker": "aegir test -t webworker",
+    "test:firefox": "aegir test -t browser -- --browser firefox",
+    "test:firefox-webworker": "aegir test -t webworker -- --browser firefox",
+    "test:electron-main": "aegir test -t electron-main",
+    "lint": "aegir lint",
+    "clean": "aegir clean",
+    "dep-check": "aegir dep-check -i ipfs-core-types",
+    "build": "aegir build"
+  },
+  "dependencies": {
+    "@libp2p/logger": "^2.0.5",
+    "@multiformats/multiaddr": "^11.1.5",
+    "@multiformats/multiaddr-to-uri": "^9.0.1",
+    "any-signal": "^3.0.0",
+    "blob-to-it": "^2.0.0",
+    "browser-readablestream-to-it": "^2.0.0",
+    "err-code": "^3.0.1",
+    "ipfs-core-types": "^0.14.1",
+    "ipfs-unixfs": "^9.0.0",
+    "ipfs-utils": "^9.0.13",
+    "it-all": "^2.0.0",
+    "it-map": "^2.0.0",
+    "it-peekable": "^2.0.0",
+    "it-to-stream": "^1.0.0",
+    "merge-options": "^3.0.4",
+    "multiformats": "^11.0.0",
+    "nanoid": "^4.0.0",
+    "parse-duration": "^1.0.0",
+    "timeout-abort-controller": "^3.0.0",
+    "uint8arrays": "^4.0.2"
+  },
+  "devDependencies": {
+    "@web-std/file": "^3.0.2",
+    "aegir": "^37.11.0"
+  },
+  "browser": {
+    "fs": false
+  }
+}

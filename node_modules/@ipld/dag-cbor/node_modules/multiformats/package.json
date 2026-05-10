@@ -1,0 +1,307 @@
+{
+  "name": "multiformats",
+  "version": "12.1.3",
+  "description": "Interface for multihash, multicodec, multibase and CID",
+  "author": "Mikeal Rogers <mikeal.rogers@gmail.com> (https://www.mikealrogers.com/)",
+  "license": "Apache-2.0 OR MIT",
+  "homepage": "https://github.com/multiformats/js-multiformats#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/multiformats/js-multiformats.git"
+  },
+  "bugs": {
+    "url": "https://github.com/multiformats/js-multiformats/issues"
+  },
+  "keywords": [
+    "ipfs",
+    "ipld",
+    "multiformats"
+  ],
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=7.0.0"
+  },
+  "type": "module",
+  "types": "./dist/types/src/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "*",
+        "dist/types/*",
+        "dist/types/src/*",
+        "dist/types/src/*/index"
+      ],
+      "src/*": [
+        "*",
+        "dist/types/*",
+        "dist/types/src/*",
+        "dist/types/src/*/index"
+      ]
+    }
+  },
+  "files": [
+    "CHANGELOG.md",
+    "examples",
+    "LICENSE*",
+    "src",
+    "test",
+    "tsconfig.json",
+    "dist",
+    "vendor",
+    "!**/*.tsbuildinfo",
+    "!test/ts-use/node_modules"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/types/src/index.d.ts",
+      "import": "./src/index.js"
+    },
+    "./bases/base10": {
+      "types": "./dist/types/src/bases/base10.d.ts",
+      "import": "./src/bases/base10.js"
+    },
+    "./bases/base16": {
+      "types": "./dist/types/src/bases/base16.d.ts",
+      "import": "./src/bases/base16.js"
+    },
+    "./bases/base2": {
+      "types": "./dist/types/src/bases/base2.d.ts",
+      "import": "./src/bases/base2.js"
+    },
+    "./bases/base256emoji": {
+      "types": "./dist/types/src/bases/base256emoji.d.ts",
+      "import": "./src/bases/base256emoji.js"
+    },
+    "./bases/base32": {
+      "types": "./dist/types/src/bases/base32.d.ts",
+      "import": "./src/bases/base32.js"
+    },
+    "./bases/base36": {
+      "types": "./dist/types/src/bases/base36.d.ts",
+      "import": "./src/bases/base36.js"
+    },
+    "./bases/base58": {
+      "types": "./dist/types/src/bases/base58.d.ts",
+      "import": "./src/bases/base58.js"
+    },
+    "./bases/base64": {
+      "types": "./dist/types/src/bases/base64.d.ts",
+      "import": "./src/bases/base64.js"
+    },
+    "./bases/base8": {
+      "types": "./dist/types/src/bases/base8.d.ts",
+      "import": "./src/bases/base8.js"
+    },
+    "./bases/identity": {
+      "types": "./dist/types/src/bases/identity.d.ts",
+      "import": "./src/bases/identity.js"
+    },
+    "./bases/interface": {
+      "types": "./dist/types/src/bases/interface.d.ts",
+      "import": "./src/bases/interface.js"
+    },
+    "./basics": {
+      "types": "./dist/types/src/basics.d.ts",
+      "import": "./src/basics.js"
+    },
+    "./block": {
+      "types": "./dist/types/src/block.d.ts",
+      "import": "./src/block.js"
+    },
+    "./block/interface": {
+      "types": "./dist/types/src/block/interface.d.ts",
+      "import": "./src/block/interface.js"
+    },
+    "./bytes": {
+      "types": "./dist/types/src/bytes.d.ts",
+      "import": "./src/bytes.js"
+    },
+    "./cid": {
+      "types": "./dist/types/src/cid.d.ts",
+      "import": "./src/cid.js"
+    },
+    "./codecs/interface": {
+      "types": "./dist/types/src/codecs/interface.d.ts",
+      "import": "./src/codecs/interface.js"
+    },
+    "./codecs/json": {
+      "types": "./dist/types/src/codecs/json.d.ts",
+      "import": "./src/codecs/json.js"
+    },
+    "./codecs/raw": {
+      "types": "./dist/types/src/codecs/raw.d.ts",
+      "import": "./src/codecs/raw.js"
+    },
+    "./hashes/digest": {
+      "types": "./dist/types/src/hashes/digest.d.ts",
+      "import": "./src/hashes/digest.js"
+    },
+    "./hashes/hasher": {
+      "types": "./dist/types/src/hashes/hasher.d.ts",
+      "import": "./src/hashes/hasher.js"
+    },
+    "./hashes/identity": {
+      "types": "./dist/types/src/hashes/identity.d.ts",
+      "import": "./src/hashes/identity.js"
+    },
+    "./hashes/interface": {
+      "types": "./dist/types/src/hashes/interface.d.ts",
+      "import": "./src/hashes/interface.js"
+    },
+    "./hashes/sha1": {
+      "types": "./dist/types/src/hashes/sha1.d.ts",
+      "browser": "./src/hashes/sha1-browser.js",
+      "import": "./src/hashes/sha1.js"
+    },
+    "./hashes/sha2": {
+      "types": "./dist/types/src/hashes/sha2.d.ts",
+      "browser": "./src/hashes/sha2-browser.js",
+      "import": "./src/hashes/sha2.js"
+    },
+    "./interface": {
+      "types": "./dist/types/src/interface.d.ts",
+      "import": "./src/interface.js"
+    },
+    "./link": {
+      "types": "./dist/types/src/link.d.ts",
+      "import": "./src/link.js"
+    },
+    "./link/interface": {
+      "types": "./dist/types/src/link/interface.d.ts",
+      "import": "./src/link/interface.js"
+    },
+    "./traversal": {
+      "types": "./dist/types/src/traversal.d.ts",
+      "import": "./src/traversal.js"
+    }
+  },
+  "browser": {
+    "./hashes/sha1": "./src/hashes/sha1-browser.js",
+    "./src/hashes/sha1.js": "./src/hashes/sha1-browser.js",
+    "./hashes/sha2": "./src/hashes/sha2-browser.js",
+    "./src/hashes/sha2.js": "./src/hashes/sha2-browser.js"
+  },
+  "eslintConfig": {
+    "extends": "ipfs",
+    "parserOptions": {
+      "sourceType": "module"
+    }
+  },
+  "release": {
+    "branches": [
+      "master"
+    ],
+    "plugins": [
+      [
+        "@semantic-release/commit-analyzer",
+        {
+          "preset": "conventionalcommits",
+          "releaseRules": [
+            {
+              "breaking": true,
+              "release": "major"
+            },
+            {
+              "revert": true,
+              "release": "patch"
+            },
+            {
+              "type": "feat",
+              "release": "minor"
+            },
+            {
+              "type": "fix",
+              "release": "patch"
+            },
+            {
+              "type": "docs",
+              "release": "patch"
+            },
+            {
+              "type": "test",
+              "release": "patch"
+            },
+            {
+              "type": "deps",
+              "release": "patch"
+            },
+            {
+              "scope": "no-release",
+              "release": false
+            }
+          ]
+        }
+      ],
+      [
+        "@semantic-release/release-notes-generator",
+        {
+          "preset": "conventionalcommits",
+          "presetConfig": {
+            "types": [
+              {
+                "type": "feat",
+                "section": "Features"
+              },
+              {
+                "type": "fix",
+                "section": "Bug Fixes"
+              },
+              {
+                "type": "chore",
+                "section": "Trivial Changes"
+              },
+              {
+                "type": "docs",
+                "section": "Documentation"
+              },
+              {
+                "type": "deps",
+                "section": "Dependencies"
+              },
+              {
+                "type": "test",
+                "section": "Tests"
+              }
+            ]
+          }
+        }
+      ],
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      "@semantic-release/github",
+      "@semantic-release/git"
+    ]
+  },
+  "scripts": {
+    "clean": "aegir clean",
+    "lint": "aegir lint",
+    "build": "aegir build",
+    "release": "aegir release",
+    "docs": "aegir docs",
+    "test": "npm run lint && npm run test:node && npm run test:chrome && npm run test:ts",
+    "test:ts": "npm run test --prefix test/ts-use",
+    "test:node": "aegir test -t node --cov",
+    "test:chrome": "aegir test -t browser --cov",
+    "test:chrome-webworker": "aegir test -t webworker",
+    "test:firefox": "aegir test -t browser -- --browser firefox",
+    "test:firefox-webworker": "aegir test -t webworker -- --browser firefox",
+    "test:electron-main": "aegir test -t electron-main"
+  },
+  "devDependencies": {
+    "@stablelib/sha256": "^1.0.1",
+    "@stablelib/sha512": "^1.0.1",
+    "@types/node": "^20.3.1",
+    "aegir": "^41.0.0",
+    "buffer": "^6.0.3",
+    "cids": "^1.1.9",
+    "crypto-hash": "^3.0.0"
+  },
+  "aegir": {
+    "test": {
+      "target": [
+        "node",
+        "browser"
+      ]
+    }
+  }
+}

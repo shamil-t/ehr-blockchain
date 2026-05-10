@@ -1,0 +1,1 @@
+{"version":3,"file":"wipe.d.ts","sourceRoot":"","sources":["../../../../src/internal/tasks/wipe.ts"],"names":[],"mappings":"AACA,OAAO,KAAK,EAAE,qBAAqB,EAAE,MAAM,qBAAqB,CAAC;AAQjE,UAAU,iBAAiB;IACzB,YAAY,EAAE,MAAM,CAAC;IACrB,QAAQ,EAAE,MAAM,CAAC;CAClB;AAED,QAAA,MAAM,QAAQ,EAAE,qBAAqB,CAAC,iBAAiB,CAiBtD,CAAC;AAEF,eAAe,QAAQ,CAAC"}

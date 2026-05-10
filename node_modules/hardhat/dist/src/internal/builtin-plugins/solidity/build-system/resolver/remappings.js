@@ -1,0 +1,72 @@
+/**
+ * Tries to parse a remapping string, returning undefined if it's invalid.
+ */
+export function parseRemappingString(remapping) {
+    let rest = remapping;
+    const colon = rest.indexOf(":");
+    let context;
+    if (colon !== -1) {
+        context = rest.substring(0, colon);
+        rest = rest.substring(colon + 1);
+    }
+    else {
+        context = "";
+    }
+    const equal = rest.indexOf("=");
+    if (equal === -1) {
+        return undefined;
+    }
+    const prefix = rest.substring(0, equal);
+    if (prefix === "") {
+        return undefined;
+    }
+    const target = rest.substring(equal + 1);
+    return { context, prefix, target };
+}
+/**
+ * Selects the best remapping for a direct import, if any.
+ *
+ * @param fromInputSourceName The input source name of the file with the import.
+ * @param directImport The import path, which must be a direct import.
+ * @param remappings The array of remappings to consider.
+ * @returns The best remappings index or undefined if none is found.
+ */
+export function selectBestRemapping(fromInputSourceName, directImport, remappings) {
+    let bestRemappingIndex;
+    let longestContext = 0;
+    let longestPrefix = 0;
+    for (let i = 0; i < remappings.length; i++) {
+        const remapping = remappings[i];
+        const contextLength = remapping.context.length;
+        if (contextLength < longestContext) {
+            continue;
+        }
+        if (!fromInputSourceName.startsWith(remapping.context)) {
+            continue;
+        }
+        if (remapping.prefix.length < longestPrefix &&
+            contextLength === longestContext) {
+            continue;
+        }
+        if (!directImport.startsWith(remapping.prefix)) {
+            continue;
+        }
+        longestContext = contextLength;
+        longestPrefix = remapping.prefix.length;
+        bestRemappingIndex = i;
+    }
+    return bestRemappingIndex;
+}
+/**
+ * Applies a remapping assuming that it's valid for this importPath.
+ */
+export function applyValidRemapping(importPath, remapping) {
+    return remapping.target + importPath.substring(remapping.prefix.length);
+}
+export function formatRemapping(remapping) {
+    if (remapping.context === "") {
+        return `${remapping.prefix}=${remapping.target}`;
+    }
+    return `${remapping.context}:${remapping.prefix}=${remapping.target}`;
+}
+//# sourceMappingURL=remappings.js.map

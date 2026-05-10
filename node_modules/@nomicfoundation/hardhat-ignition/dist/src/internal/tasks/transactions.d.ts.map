@@ -1,0 +1,1 @@
+{"version":3,"file":"transactions.d.ts","sourceRoot":"","sources":["../../../../src/internal/tasks/transactions.ts"],"names":[],"mappings":"AACA,OAAO,KAAK,EAAE,qBAAqB,EAAE,MAAM,qBAAqB,CAAC;AAUjE,UAAU,yBAAyB;IACjC,YAAY,EAAE,MAAM,CAAC;CACtB;AAED,QAAA,MAAM,gBAAgB,EAAE,qBAAqB,CAC3C,yBAAyB,CA2B1B,CAAC;AAEF,eAAe,gBAAgB,CAAC"}

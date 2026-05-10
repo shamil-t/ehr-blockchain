@@ -1,0 +1,33 @@
+"use strict";
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+const core_1 = require("@angular-devkit/core");
+const workspace_1 = require("../../utility/workspace");
+/** Migration to replace 'defaultCollection' option in angular.json. */
+function default_1() {
+    return (0, workspace_1.updateWorkspace)((workspace) => {
+        // workspace level
+        replaceDefaultCollection(workspace.extensions['cli']);
+        // Project level
+        for (const project of workspace.projects.values()) {
+            replaceDefaultCollection(project.extensions['cli']);
+        }
+    });
+}
+exports.default = default_1;
+function replaceDefaultCollection(cliExtension) {
+    if (cliExtension && (0, core_1.isJsonObject)(cliExtension) && cliExtension['defaultCollection']) {
+        // If `schematicsCollection` defined `defaultCollection` is ignored hence no need to warn.
+        if (!cliExtension['schematicCollections']) {
+            cliExtension['schematicCollections'] = [cliExtension['defaultCollection']];
+        }
+        delete cliExtension['defaultCollection'];
+    }
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVwbGFjZS1kZWZhdWx0LWNvbGxlY3Rpb24tb3B0aW9uLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vLi4vLi4vLi4vLi4vLi4vLi4vcGFja2FnZXMvc2NoZW1hdGljcy9hbmd1bGFyL21pZ3JhdGlvbnMvdXBkYXRlLTE2L3JlcGxhY2UtZGVmYXVsdC1jb2xsZWN0aW9uLW9wdGlvbi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUE7Ozs7OztHQU1HOztBQUVILCtDQUErRDtBQUUvRCx1REFBMEQ7QUFFMUQsdUVBQXVFO0FBQ3ZFO0lBQ0UsT0FBTyxJQUFBLDJCQUFlLEVBQUMsQ0FBQyxTQUFTLEVBQUUsRUFBRTtRQUNuQyxrQkFBa0I7UUFDbEIsd0JBQXdCLENBQUMsU0FBUyxDQUFDLFVBQVUsQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDO1FBRXRELGdCQUFnQjtRQUNoQixLQUFLLE1BQU0sT0FBTyxJQUFJLFNBQVMsQ0FBQyxRQUFRLENBQUMsTUFBTSxFQUFFLEVBQUU7WUFDakQsd0JBQXdCLENBQUMsT0FBTyxDQUFDLFVBQVUsQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDO1NBQ3JEO0lBQ0gsQ0FBQyxDQUFDLENBQUM7QUFDTCxDQUFDO0FBVkQsNEJBVUM7QUFFRCxTQUFTLHdCQUF3QixDQUFDLFlBQW1DO0lBQ25FLElBQUksWUFBWSxJQUFJLElBQUEsbUJBQVksRUFBQyxZQUFZLENBQUMsSUFBSSxZQUFZLENBQUMsbUJBQW1CLENBQUMsRUFBRTtRQUNuRiwwRkFBMEY7UUFDMUYsSUFBSSxDQUFDLFlBQVksQ0FBQyxzQkFBc0IsQ0FBQyxFQUFFO1lBQ3pDLFlBQVksQ0FBQyxzQkFBc0IsQ0FBQyxHQUFHLENBQUMsWUFBWSxDQUFDLG1CQUFtQixDQUFDLENBQUMsQ0FBQztTQUM1RTtRQUVELE9BQU8sWUFBWSxDQUFDLG1CQUFtQixDQUFDLENBQUM7S0FDMUM7QUFDSCxDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiLyoqXG4gKiBAbGljZW5zZVxuICogQ29weXJpZ2h0IEdvb2dsZSBMTEMgQWxsIFJpZ2h0cyBSZXNlcnZlZC5cbiAqXG4gKiBVc2Ugb2YgdGhpcyBzb3VyY2UgY29kZSBpcyBnb3Zlcm5lZCBieSBhbiBNSVQtc3R5bGUgbGljZW5zZSB0aGF0IGNhbiBiZVxuICogZm91bmQgaW4gdGhlIExJQ0VOU0UgZmlsZSBhdCBodHRwczovL2FuZ3VsYXIuaW8vbGljZW5zZVxuICovXG5cbmltcG9ydCB7IEpzb25WYWx1ZSwgaXNKc29uT2JqZWN0IH0gZnJvbSAnQGFuZ3VsYXItZGV2a2l0L2NvcmUnO1xuaW1wb3J0IHsgUnVsZSB9IGZyb20gJ0Bhbmd1bGFyLWRldmtpdC9zY2hlbWF0aWNzJztcbmltcG9ydCB7IHVwZGF0ZVdvcmtzcGFjZSB9IGZyb20gJy4uLy4uL3V0aWxpdHkvd29ya3NwYWNlJztcblxuLyoqIE1pZ3JhdGlvbiB0byByZXBsYWNlICdkZWZhdWx0Q29sbGVjdGlvbicgb3B0aW9uIGluIGFuZ3VsYXIuanNvbi4gKi9cbmV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uICgpOiBSdWxlIHtcbiAgcmV0dXJuIHVwZGF0ZVdvcmtzcGFjZSgod29ya3NwYWNlKSA9PiB7XG4gICAgLy8gd29ya3NwYWNlIGxldmVsXG4gICAgcmVwbGFjZURlZmF1bHRDb2xsZWN0aW9uKHdvcmtzcGFjZS5leHRlbnNpb25zWydjbGknXSk7XG5cbiAgICAvLyBQcm9qZWN0IGxldmVsXG4gICAgZm9yIChjb25zdCBwcm9qZWN0IG9mIHdvcmtzcGFjZS5wcm9qZWN0cy52YWx1ZXMoKSkge1xuICAgICAgcmVwbGFjZURlZmF1bHRDb2xsZWN0aW9uKHByb2plY3QuZXh0ZW5zaW9uc1snY2xpJ10pO1xuICAgIH1cbiAgfSk7XG59XG5cbmZ1bmN0aW9uIHJlcGxhY2VEZWZhdWx0Q29sbGVjdGlvbihjbGlFeHRlbnNpb246IEpzb25WYWx1ZSB8IHVuZGVmaW5lZCk6IHZvaWQge1xuICBpZiAoY2xpRXh0ZW5zaW9uICYmIGlzSnNvbk9iamVjdChjbGlFeHRlbnNpb24pICYmIGNsaUV4dGVuc2lvblsnZGVmYXVsdENvbGxlY3Rpb24nXSkge1xuICAgIC8vIElmIGBzY2hlbWF0aWNzQ29sbGVjdGlvbmAgZGVmaW5lZCBgZGVmYXVsdENvbGxlY3Rpb25gIGlzIGlnbm9yZWQgaGVuY2Ugbm8gbmVlZCB0byB3YXJuLlxuICAgIGlmICghY2xpRXh0ZW5zaW9uWydzY2hlbWF0aWNDb2xsZWN0aW9ucyddKSB7XG4gICAgICBjbGlFeHRlbnNpb25bJ3NjaGVtYXRpY0NvbGxlY3Rpb25zJ10gPSBbY2xpRXh0ZW5zaW9uWydkZWZhdWx0Q29sbGVjdGlvbiddXTtcbiAgICB9XG5cbiAgICBkZWxldGUgY2xpRXh0ZW5zaW9uWydkZWZhdWx0Q29sbGVjdGlvbiddO1xuICB9XG59XG4iXX0=

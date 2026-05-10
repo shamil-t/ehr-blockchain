@@ -1,0 +1,187 @@
+import { HardhatError, assertHardhatInvariant, } from "@nomicfoundation/hardhat-errors";
+import { TaskDefinitionType } from "../../../types/tasks.js";
+import { ResolvedTask } from "./resolved-task.js";
+import { formatTaskId, getActorFragment } from "./utils.js";
+import { validateAction, validateId, validateOption, validatePositionalArgument, } from "./validations.js";
+export class TaskManagerImplementation {
+    #hre;
+    #rootTasks = new Map();
+    constructor(hre, globalOptionDefinitions) {
+        this.#hre = hre;
+        // reduce plugin tasks
+        for (const plugin of this.#hre.config.plugins) {
+            if (plugin.tasks === undefined) {
+                continue;
+            }
+            for (const taskDefinition of plugin.tasks) {
+                this.#validateTaskDefinition(taskDefinition, true);
+                this.#reduceTaskDefinition(globalOptionDefinitions, taskDefinition, plugin.id);
+            }
+        }
+        // reduce global user defined tasks
+        for (const taskDefinition of this.#hre.config.tasks) {
+            this.#validateTaskDefinition(taskDefinition, false);
+            this.#reduceTaskDefinition(globalOptionDefinitions, taskDefinition);
+        }
+    }
+    get rootTasks() {
+        return this.#rootTasks;
+    }
+    getTask(taskId) {
+        taskId = Array.isArray(taskId) ? taskId : [taskId];
+        if (taskId.length === 0) {
+            throw new HardhatError(HardhatError.ERRORS.CORE.TASK_DEFINITIONS.TASK_NOT_FOUND, {
+                task: formatTaskId(taskId),
+            });
+        }
+        let tasks = this.#rootTasks;
+        let task;
+        for (let i = 0; i < taskId.length; i++) {
+            const idFragment = taskId[i];
+            const currentTask = tasks.get(idFragment);
+            if (currentTask === undefined) {
+                throw new HardhatError(HardhatError.ERRORS.CORE.TASK_DEFINITIONS.TASK_NOT_FOUND, {
+                    task: formatTaskId(taskId.slice(0, i + 1)),
+                });
+            }
+            task = currentTask;
+            tasks = task.subtasks;
+        }
+        assertHardhatInvariant(task !== undefined, "Task is undefined despite it being always set by a non-empty loop");
+        return task;
+    }
+    #insertTask(taskId, task, pluginId) {
+        if (taskId.length === 0) {
+            throw new HardhatError(HardhatError.ERRORS.CORE.TASK_DEFINITIONS.EMPTY_TASK_ID);
+        }
+        // Traverse all the parent tasks to check that they exist
+        let tasks = this.#rootTasks;
+        for (let i = 0; i < taskId.length - 1; i++) {
+            const idFragment = taskId[i];
+            const currentTask = tasks.get(idFragment);
+            if (currentTask === undefined) {
+                throw new HardhatError(HardhatError.ERRORS.CORE.TASK_DEFINITIONS.SUBTASK_WITHOUT_PARENT, {
+                    task: formatTaskId(taskId.slice(0, i + 1)),
+                    subtask: formatTaskId(taskId),
+                });
+            }
+            tasks = currentTask.subtasks;
+        }
+        // Check that the task doesn't already exist
+        const lastIdFragment = taskId[taskId.length - 1];
+        const existingTask = tasks.get(lastIdFragment);
+        if (existingTask !== undefined) {
+            const exPluginId = existingTask.pluginId;
+            throw new HardhatError(HardhatError.ERRORS.CORE.TASK_DEFINITIONS.TASK_ALREADY_DEFINED, {
+                actorFragment: getActorFragment(pluginId),
+                task: formatTaskId(taskId),
+                definedByFragment: exPluginId !== undefined ? ` by plugin ${exPluginId}` : "",
+            });
+        }
+        // Insert the task
+        tasks.set(lastIdFragment, task);
+    }
+    #reduceTaskDefinition(globalOptionDefinitions, taskDefinition, pluginId) {
+        switch (taskDefinition.type) {
+            case TaskDefinitionType.EMPTY_TASK: {
+                const task = ResolvedTask.createEmptyTask(this.#hre, taskDefinition.id, taskDefinition.description, pluginId);
+                this.#insertTask(taskDefinition.id, task, pluginId);
+                break;
+            }
+            case TaskDefinitionType.NEW_TASK: {
+                this.#validateClashesWithGlobalOptions(globalOptionDefinitions, taskDefinition, pluginId);
+                const task = ResolvedTask.createNewTask(this.#hre, taskDefinition.id, taskDefinition.description, taskDefinition.action !== undefined
+                    ? { action: taskDefinition.action }
+                    : { inlineAction: taskDefinition.inlineAction }, taskDefinition.options, taskDefinition.positionalArguments, pluginId);
+                this.#insertTask(taskDefinition.id, task, pluginId);
+                break;
+            }
+            case TaskDefinitionType.TASK_OVERRIDE: {
+                this.#validateClashesWithGlobalOptions(globalOptionDefinitions, taskDefinition, pluginId);
+                this.#processTaskOverride(taskDefinition, pluginId);
+                break;
+            }
+        }
+    }
+    #validateClashesWithGlobalOptions(globalOptionDefinitions, taskDefinition, pluginId) {
+        const optionNames = Object.keys(taskDefinition.options);
+        const positionalArgNames = "positionalArguments" in taskDefinition
+            ? taskDefinition.positionalArguments.map(({ name }) => name)
+            : [];
+        [...optionNames, ...positionalArgNames].forEach((argName) => {
+            const globalOptionEntry = globalOptionDefinitions.get(argName);
+            if (globalOptionEntry !== undefined) {
+                throw new HardhatError(HardhatError.ERRORS.CORE.TASK_DEFINITIONS.TASK_OPTION_ALREADY_DEFINED, {
+                    actorFragment: getActorFragment(pluginId),
+                    task: formatTaskId(taskDefinition.id),
+                    option: argName,
+                    globalOptionPluginId: globalOptionEntry.pluginId,
+                });
+            }
+        });
+        const globalOptionDefinitionsByShortName = new Map();
+        for (const globalOptionEntry of globalOptionDefinitions.values()) {
+            if (globalOptionEntry.option.shortName !== undefined) {
+                globalOptionDefinitionsByShortName.set(globalOptionEntry.option.shortName, globalOptionEntry);
+            }
+        }
+        const optionShortNames = Object.values(taskDefinition.options)
+            .map((option) => option.shortName)
+            .filter((shortName) => shortName !== undefined);
+        optionShortNames.forEach((argName) => {
+            const globalOptionEntry = globalOptionDefinitionsByShortName.get(argName);
+            if (globalOptionEntry !== undefined) {
+                throw new HardhatError(HardhatError.ERRORS.CORE.TASK_DEFINITIONS.TASK_OPTION_ALREADY_DEFINED, {
+                    actorFragment: getActorFragment(pluginId),
+                    task: formatTaskId(taskDefinition.id),
+                    option: argName,
+                    globalOptionPluginId: globalOptionEntry.pluginId,
+                });
+            }
+        });
+    }
+    #processTaskOverride(taskDefinition, pluginId) {
+        const task = this.getTask(taskDefinition.id);
+        for (const [optionName, optionValue] of Object.entries(taskDefinition.options)) {
+            const hasArgument = task.options.has(optionName) ||
+                task.positionalArguments.some((p) => p.name === optionName);
+            if (hasArgument) {
+                throw new HardhatError(HardhatError.ERRORS.CORE.TASK_DEFINITIONS.TASK_OVERRIDE_OPTION_ALREADY_DEFINED, {
+                    actorFragment: getActorFragment(pluginId),
+                    option: optionName,
+                    task: formatTaskId(taskDefinition.id),
+                });
+            }
+            task.options.set(optionName, optionValue);
+        }
+        if (taskDefinition.description !== undefined) {
+            task.description = taskDefinition.description;
+        }
+        task.actions.push({
+            pluginId,
+            ...(taskDefinition.action !== undefined
+                ? { action: taskDefinition.action }
+                : { inlineAction: taskDefinition.inlineAction }),
+        });
+    }
+    #validateTaskDefinition(taskDefinition, isPlugin) {
+        validateId(taskDefinition.id);
+        // Empty tasks don't have actions, options, or positional arguments
+        if (taskDefinition.type === TaskDefinitionType.EMPTY_TASK) {
+            return;
+        }
+        validateAction(taskDefinition.action, taskDefinition.inlineAction, taskDefinition.id, isPlugin);
+        const usedNames = new Set();
+        Object.values(taskDefinition.options).forEach((optionDefinition) => validateOption(optionDefinition, usedNames, taskDefinition.id));
+        // Override tasks don't have positional arguments
+        if (taskDefinition.type === TaskDefinitionType.TASK_OVERRIDE) {
+            return;
+        }
+        let lastArg;
+        taskDefinition.positionalArguments.forEach((posArgDefinition) => {
+            validatePositionalArgument(posArgDefinition, usedNames, taskDefinition.id, lastArg);
+            lastArg = posArgDefinition;
+        });
+    }
+}
+//# sourceMappingURL=task-manager.js.map

@@ -1,0 +1,10 @@
+import type { CallExecutionState, ContractAtExecutionState, DeploymentExecutionState, EncodeFunctionCallExecutionState, ReadEventArgumentExecutionState, SendDataExecutionState, StaticCallExecutionState } from "../../types/execution-state.js";
+import type { CallExecutionStateInitializeMessage, ContractAtExecutionStateInitializeMessage, DeploymentExecutionStateInitializeMessage, EncodeFunctionCallExecutionStateInitializeMessage, ReadEventArgExecutionStateInitializeMessage, SendDataExecutionStateInitializeMessage, StaticCallExecutionStateInitializeMessage } from "../../types/messages.js";
+export declare function initialiseDeploymentExecutionStateFrom(action: DeploymentExecutionStateInitializeMessage): DeploymentExecutionState;
+export declare function initialiseStaticCallExecutionStateFrom(action: StaticCallExecutionStateInitializeMessage): StaticCallExecutionState;
+export declare function initialiseSendDataExecutionStateFrom(action: SendDataExecutionStateInitializeMessage): SendDataExecutionState;
+export declare function initialiseReadEventArgumentExecutionStateFrom(action: ReadEventArgExecutionStateInitializeMessage): ReadEventArgumentExecutionState;
+export declare function initialiseContractAtExecutionStateFrom(action: ContractAtExecutionStateInitializeMessage): ContractAtExecutionState;
+export declare function initialiseEncodeFunctionCallExecutionStateFrom(action: EncodeFunctionCallExecutionStateInitializeMessage): EncodeFunctionCallExecutionState;
+export declare function initialiseCallExecutionStateFrom(action: CallExecutionStateInitializeMessage): CallExecutionState;
+//# sourceMappingURL=initializers.d.ts.map

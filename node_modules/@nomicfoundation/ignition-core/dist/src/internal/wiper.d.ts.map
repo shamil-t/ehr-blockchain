@@ -1,0 +1,1 @@
+{"version":3,"file":"wiper.d.ts","sourceRoot":"","sources":["../../../src/internal/wiper.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,gBAAgB,EAAE,MAAM,8BAA8B,CAAC;AACrE,OAAO,KAAK,EAAE,eAAe,EAAE,MAAM,uCAAuC,CAAC;AAW7E,qBAAa,KAAK;IACJ,OAAO,CAAC,QAAQ,CAAC,iBAAiB;gBAAjB,iBAAiB,EAAE,gBAAgB;IAEnD,IAAI,CAAC,QAAQ,EAAE,MAAM,GAAG,OAAO,CAAC,eAAe,CAAC;CA8C9D"}

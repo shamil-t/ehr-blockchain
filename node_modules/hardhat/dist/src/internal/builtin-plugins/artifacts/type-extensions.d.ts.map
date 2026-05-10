@@ -1,0 +1,1 @@
+{"version":3,"file":"type-extensions.d.ts","sourceRoot":"","sources":["../../../../../src/internal/builtin-plugins/artifacts/type-extensions.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,eAAe,EAAE,MAAM,6BAA6B,CAAC;AAEnE,OAAO,QAAQ,uBAAuB,CAAC;IACrC,UAAU,yBAAyB;QACjC,SAAS,EAAE,eAAe,CAAC;KAC5B;CACF"}

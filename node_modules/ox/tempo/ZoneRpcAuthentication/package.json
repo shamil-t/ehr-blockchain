@@ -1,0 +1,6 @@
+{
+  "type": "module",
+  "types": "../../_types/tempo/ZoneRpcAuthentication.d.ts",
+  "main": "../../_cjs/tempo/ZoneRpcAuthentication.js",
+  "module": "../../_esm/tempo/ZoneRpcAuthentication.js"
+}

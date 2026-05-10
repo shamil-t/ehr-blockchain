@@ -1,0 +1,36 @@
+import type { NewTaskActionFunction } from "../../../types/tasks.js";
+
+import { pathToFileURL } from "node:url";
+
+import { HardhatError } from "@nomicfoundation/hardhat-errors";
+import { exists } from "@nomicfoundation/hardhat-utils/fs";
+import { resolveFromRoot } from "@nomicfoundation/hardhat-utils/path";
+
+interface RunActionArguments {
+  script: string;
+  noCompile: boolean;
+}
+
+const runScriptWithHardhat: NewTaskActionFunction<RunActionArguments> = async (
+  { script, noCompile },
+  hre,
+) => {
+  const normalizedPath = resolveFromRoot(process.cwd(), script);
+
+  if (!(await exists(normalizedPath))) {
+    throw new HardhatError(
+      HardhatError.ERRORS.CORE.BUILTIN_TASKS.RUN_FILE_NOT_FOUND,
+      { script },
+    );
+  }
+
+  if (!noCompile) {
+    const noTests = hre.config.solidity.splitTestsCompilation;
+    await hre.tasks.getTask("build").run({ quiet: true, noTests });
+    console.log();
+  }
+
+  await import(pathToFileURL(normalizedPath).href);
+};
+
+export default runScriptWithHardhat;

@@ -1,0 +1,6 @@
+{
+  "type": "module",
+  "types": "../_types/core/Bech32m.d.ts",
+  "main": "../_cjs/core/Bech32m.js",
+  "module": "../_esm/core/Bech32m.js"
+}

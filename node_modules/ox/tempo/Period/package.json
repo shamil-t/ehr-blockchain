@@ -1,0 +1,6 @@
+{
+  "type": "module",
+  "types": "../../_types/tempo/Period.d.ts",
+  "main": "../../_cjs/tempo/Period.js",
+  "module": "../../_esm/tempo/Period.js"
+}

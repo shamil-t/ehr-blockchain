@@ -1,0 +1,29 @@
+"use strict";
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.validateClassName = exports.validateHtmlSelector = exports.htmlSelectorRe = void 0;
+const schematics_1 = require("@angular-devkit/schematics");
+// Must start with a letter, and must contain only alphanumeric characters or dashes.
+// When adding a dash the segment after the dash must also start with a letter.
+exports.htmlSelectorRe = /^[a-zA-Z][.0-9a-zA-Z]*((:?-[0-9]+)*|(:?-[a-zA-Z][.0-9a-zA-Z]*(:?-[0-9]+)*)*)$/;
+// See: https://github.com/tc39/proposal-regexp-unicode-property-escapes/blob/fe6d07fad74cd0192d154966baa1e95e7cda78a1/README.md#other-examples
+const ecmaIdentifierNameRegExp = /^(?:[$_\p{ID_Start}])(?:[$_\u200C\u200D\p{ID_Continue}])*$/u;
+function validateHtmlSelector(selector) {
+    if (selector && !exports.htmlSelectorRe.test(selector)) {
+        throw new schematics_1.SchematicsException(`Selector "${selector}" is invalid.`);
+    }
+}
+exports.validateHtmlSelector = validateHtmlSelector;
+function validateClassName(className) {
+    if (!ecmaIdentifierNameRegExp.test(className)) {
+        throw new schematics_1.SchematicsException(`Class name "${className}" is invalid.`);
+    }
+}
+exports.validateClassName = validateClassName;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidmFsaWRhdGlvbi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uLy4uL3BhY2thZ2VzL3NjaGVtYXRpY3MvYW5ndWxhci91dGlsaXR5L3ZhbGlkYXRpb24udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBOzs7Ozs7R0FNRzs7O0FBRUgsMkRBQWlFO0FBRWpFLHFGQUFxRjtBQUNyRiwrRUFBK0U7QUFDbEUsUUFBQSxjQUFjLEdBQ3pCLCtFQUErRSxDQUFDO0FBRWxGLCtJQUErSTtBQUMvSSxNQUFNLHdCQUF3QixHQUFHLDZEQUE2RCxDQUFDO0FBRS9GLFNBQWdCLG9CQUFvQixDQUFDLFFBQWdCO0lBQ25ELElBQUksUUFBUSxJQUFJLENBQUMsc0JBQWMsQ0FBQyxJQUFJLENBQUMsUUFBUSxDQUFDLEVBQUU7UUFDOUMsTUFBTSxJQUFJLGdDQUFtQixDQUFDLGFBQWEsUUFBUSxlQUFlLENBQUMsQ0FBQztLQUNyRTtBQUNILENBQUM7QUFKRCxvREFJQztBQUVELFNBQWdCLGlCQUFpQixDQUFDLFNBQWlCO0lBQ2pELElBQUksQ0FBQyx3QkFBd0IsQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLEVBQUU7UUFDN0MsTUFBTSxJQUFJLGdDQUFtQixDQUFDLGVBQWUsU0FBUyxlQUFlLENBQUMsQ0FBQztLQUN4RTtBQUNILENBQUM7QUFKRCw4Q0FJQyIsInNvdXJjZXNDb250ZW50IjpbIi8qKlxuICogQGxpY2Vuc2VcbiAqIENvcHlyaWdodCBHb29nbGUgTExDIEFsbCBSaWdodHMgUmVzZXJ2ZWQuXG4gKlxuICogVXNlIG9mIHRoaXMgc291cmNlIGNvZGUgaXMgZ292ZXJuZWQgYnkgYW4gTUlULXN0eWxlIGxpY2Vuc2UgdGhhdCBjYW4gYmVcbiAqIGZvdW5kIGluIHRoZSBMSUNFTlNFIGZpbGUgYXQgaHR0cHM6Ly9hbmd1bGFyLmlvL2xpY2Vuc2VcbiAqL1xuXG5pbXBvcnQgeyBTY2hlbWF0aWNzRXhjZXB0aW9uIH0gZnJvbSAnQGFuZ3VsYXItZGV2a2l0L3NjaGVtYXRpY3MnO1xuXG4vLyBNdXN0IHN0YXJ0IHdpdGggYSBsZXR0ZXIsIGFuZCBtdXN0IGNvbnRhaW4gb25seSBhbHBoYW51bWVyaWMgY2hhcmFjdGVycyBvciBkYXNoZXMuXG4vLyBXaGVuIGFkZGluZyBhIGRhc2ggdGhlIHNlZ21lbnQgYWZ0ZXIgdGhlIGRhc2ggbXVzdCBhbHNvIHN0YXJ0IHdpdGggYSBsZXR0ZXIuXG5leHBvcnQgY29uc3QgaHRtbFNlbGVjdG9yUmUgPVxuICAvXlthLXpBLVpdWy4wLTlhLXpBLVpdKigoOj8tWzAtOV0rKSp8KDo/LVthLXpBLVpdWy4wLTlhLXpBLVpdKig6Py1bMC05XSspKikqKSQvO1xuXG4vLyBTZWU6IGh0dHBzOi8vZ2l0aHViLmNvbS90YzM5L3Byb3Bvc2FsLXJlZ2V4cC11bmljb2RlLXByb3BlcnR5LWVzY2FwZXMvYmxvYi9mZTZkMDdmYWQ3NGNkMDE5MmQxNTQ5NjZiYWExZTk1ZTdjZGE3OGExL1JFQURNRS5tZCNvdGhlci1leGFtcGxlc1xuY29uc3QgZWNtYUlkZW50aWZpZXJOYW1lUmVnRXhwID0gL14oPzpbJF9cXHB7SURfU3RhcnR9XSkoPzpbJF9cXHUyMDBDXFx1MjAwRFxccHtJRF9Db250aW51ZX1dKSokL3U7XG5cbmV4cG9ydCBmdW5jdGlvbiB2YWxpZGF0ZUh0bWxTZWxlY3RvcihzZWxlY3Rvcjogc3RyaW5nKTogdm9pZCB7XG4gIGlmIChzZWxlY3RvciAmJiAhaHRtbFNlbGVjdG9yUmUudGVzdChzZWxlY3RvcikpIHtcbiAgICB0aHJvdyBuZXcgU2NoZW1hdGljc0V4Y2VwdGlvbihgU2VsZWN0b3IgXCIke3NlbGVjdG9yfVwiIGlzIGludmFsaWQuYCk7XG4gIH1cbn1cblxuZXhwb3J0IGZ1bmN0aW9uIHZhbGlkYXRlQ2xhc3NOYW1lKGNsYXNzTmFtZTogc3RyaW5nKTogdm9pZCB7XG4gIGlmICghZWNtYUlkZW50aWZpZXJOYW1lUmVnRXhwLnRlc3QoY2xhc3NOYW1lKSkge1xuICAgIHRocm93IG5ldyBTY2hlbWF0aWNzRXhjZXB0aW9uKGBDbGFzcyBuYW1lIFwiJHtjbGFzc05hbWV9XCIgaXMgaW52YWxpZC5gKTtcbiAgfVxufVxuIl19

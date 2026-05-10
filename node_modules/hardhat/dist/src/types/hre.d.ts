@@ -1,0 +1,18 @@
+import type { GlobalOptions } from "./global-options.js";
+import type { UserInterruptionManager } from "./user-interruptions.js";
+import type { HardhatConfig, HardhatUserConfig } from "../types/config.js";
+/**
+ * The Hardhat Runtime Environment (HRE) is an object that exposes
+ * all the functionality available through Hardhat.
+ */
+export interface HardhatRuntimeEnvironment {
+    readonly config: HardhatConfig;
+    readonly userConfig: HardhatUserConfig;
+    readonly globalOptions: GlobalOptions;
+    readonly interruptions: UserInterruptionManager;
+    readonly versions: {
+        readonly hardhat: string;
+        readonly edr: string;
+    };
+}
+//# sourceMappingURL=hre.d.ts.map

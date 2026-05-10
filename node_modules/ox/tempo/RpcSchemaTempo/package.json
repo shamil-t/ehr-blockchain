@@ -1,0 +1,6 @@
+{
+  "type": "module",
+  "types": "../../_types/tempo/RpcSchemaTempo.d.ts",
+  "main": "../../_cjs/tempo/RpcSchemaTempo.js",
+  "module": "../../_esm/tempo/RpcSchemaTempo.js"
+}

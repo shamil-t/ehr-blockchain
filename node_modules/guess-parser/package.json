@@ -1,0 +1,55 @@
+{
+  "name": "guess-parser",
+  "version": "0.4.22",
+  "description": "Finds the route declarations in your application.",
+  "main": "dist/guess-parser/index.js",
+  "types": "dist/guess-parser/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guess-js/guess"
+  },
+  "keywords": [
+    "bundling",
+    "webpack",
+    "ml",
+    "ai",
+    "analytics",
+    "recommendation"
+  ],
+  "author": "Minko Gechev <mgechev@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/guess-js/guess/issues"
+  },
+  "homepage": "https://github.com/guess-js/guess#readme",
+  "dependencies": {
+    "@wessberg/ts-evaluator": "0.0.27"
+  },
+  "devDependencies": {
+    "ts-loader": "7.0.0"
+  },
+  "peerDependencies": {
+    "typescript": ">=3.7.5"
+  },
+  "files": [
+    "dist"
+  ],
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  },
+  "scripts": {
+    "build": "webpack"
+  },
+  "gitHead": "7ef3b0f79c6035be8700ea845f3fde66db1eef61"
+}

@@ -1,0 +1,5 @@
+import type { ContractDeploymentFuture, ContractCallFuture, NamedArtifactContractDeploymentFuture, StaticCallFuture, EncodeFunctionCallFuture } from "../../../types/module.js";
+import type { CallExecutionState, DeploymentExecutionState, EncodeFunctionCallExecutionState, StaticCallExecutionState } from "../../execution/types/execution-state.js";
+import type { ReconciliationContext, ReconciliationFutureResultFailure } from "../types.js";
+export declare function reconcileArguments(future: NamedArtifactContractDeploymentFuture<string> | ContractDeploymentFuture | StaticCallFuture<string, string> | ContractCallFuture<string, string> | EncodeFunctionCallFuture<string, string>, exState: DeploymentExecutionState | CallExecutionState | StaticCallExecutionState | EncodeFunctionCallExecutionState, context: ReconciliationContext): ReconciliationFutureResultFailure | undefined;
+//# sourceMappingURL=reconcile-arguments.d.ts.map

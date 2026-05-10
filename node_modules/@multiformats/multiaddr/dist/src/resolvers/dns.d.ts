@@ -1,0 +1,3 @@
+import { Resolver } from 'dns/promises';
+export default Resolver;
+//# sourceMappingURL=dns.d.ts.map

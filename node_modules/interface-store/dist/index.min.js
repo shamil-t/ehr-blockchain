@@ -1,0 +1,3 @@
+(function (root, factory) {(typeof module === 'object' && module.exports) ? module.exports = factory() : root.InterfaceStore = factory()}(typeof self !== 'undefined' ? self : this, function () {
+"use strict";var InterfaceStore=(()=>{var i=Object.defineProperty;var a=Object.getOwnPropertyDescriptor;var p=Object.getOwnPropertyNames;var r=Object.prototype.hasOwnProperty;var y=(e,t,s,o)=>{if(t&&typeof t=="object"||typeof t=="function")for(let n of p(t))!r.call(e,n)&&n!==s&&i(e,n,{get:()=>t[n],enumerable:!(o=a(t,n))||o.enumerable});return e};var l=e=>y(i({},"__esModule",{value:!0}),e);var A={};return l(A);})();
+return InterfaceStore}));

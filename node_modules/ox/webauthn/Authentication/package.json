@@ -1,0 +1,6 @@
+{
+  "type": "module",
+  "types": "../../_types/webauthn/Authentication.d.ts",
+  "main": "../../_cjs/webauthn/Authentication.js",
+  "module": "../../_esm/webauthn/Authentication.js"
+}

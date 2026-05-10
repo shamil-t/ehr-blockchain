@@ -1,0 +1,59 @@
+/**
+ * @file This file contains utilities to work with the path of root files.
+ *
+ * The SolidityBuildSystem has a different way to referring to root files when
+ * they come from npm packages, which is the `npm:<package>/file` string. This
+ * file contains utilities to work with these paths.
+ *
+ * The main reason for this `npm:` prefix is to make the SolidityBuildSystem
+ * APIs ergonomic, instead of using a tagged union type everywhere, but it adds
+ * some complexity to the implementation.
+ */
+import { ResolvedFileType } from "../../../../types/solidity/resolved-file.js";
+/**
+ * Parses the path of a root file, as received by the SolidityBuildSystem APIs.
+ *
+ * @param rootPath The root path.
+ * @returns The parsed root path.
+ */
+export function parseRootPath(rootPath) {
+    if (isNpmRootPath(rootPath)) {
+        return { npmPath: rootPath.substring(4) };
+    }
+    return { fsPath: rootPath };
+}
+/**
+ * Returns true if the given root path is for a npm file.
+ */
+export function isNpmRootPath(rootPath) {
+    return rootPath.startsWith("npm:");
+}
+/**
+ * Returns an npm root path for the given module.
+ * @param mod A module name, i.e. `<package>/<file>`.
+ * @returns The npm root path.
+ */
+export function npmModuleToNpmRootPath(mod) {
+    return `npm:${mod}`;
+}
+/**
+ * Returns true if the given parsed root path is for a npm file.
+ */
+export function isNpmParsedRootPath(parsedRootPath) {
+    return "npmPath" in parsedRootPath;
+}
+/**
+ * Formats the path of a root file, making it compatible with the
+ * SolidityBuildSystem APIs, which expect an absolute path or an npm: root path.
+ *
+ * @param userSourceName The user source name of the root file.
+ * @param rootFile The root file.
+ * @returns The formatted path.
+ */
+export function formatRootPath(userSourceName, rootFile) {
+    if (rootFile.type !== ResolvedFileType.NPM_PACKAGE_FILE) {
+        return rootFile.fsPath;
+    }
+    return `npm:${userSourceName}`;
+}
+//# sourceMappingURL=root-paths-utils.js.map

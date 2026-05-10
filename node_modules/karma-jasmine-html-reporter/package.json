@@ -1,0 +1,25 @@
+{
+  "name": "karma-jasmine-html-reporter",
+  "version": "2.1.0",
+  "description": "A Karma plugin. Dynamically displays tests results at debug.html page",
+  "main": "./src/index.js",
+  "keywords": [
+    "karma-plugin",
+    "karma-reporter",
+    "html"
+  ],
+  "scripts": {
+    "test": "karma start test/karma.conf.js"
+  },
+  "repository": {
+    "url": "https://github.com/dfederm/karma-jasmine-html-reporter"
+  },
+  "author": "David Federman <david.federman@outlook.com> (https://github.com/dfederm)",
+  "peerDependencies": {
+    "jasmine-core": "^4.0.0 || ^5.0.0",
+    "karma": "^6.0.0",
+    "karma-jasmine": "^5.0.0"
+  },
+  "license": "MIT",
+  "readmeFilename": "README.md"
+}

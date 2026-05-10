@@ -1,0 +1,5 @@
+import type { ContractAtFuture, ContractDeploymentFuture, LibraryDeploymentFuture, NamedArtifactContractAtFuture, NamedArtifactContractDeploymentFuture, NamedArtifactLibraryDeploymentFuture } from "../../../types/module.js";
+import type { ContractAtExecutionState, DeploymentExecutionState } from "../../execution/types/execution-state.js";
+import type { ReconciliationContext, ReconciliationFutureResultFailure } from "../types.js";
+export declare function reconcileContractName(future: NamedArtifactContractDeploymentFuture<string> | ContractDeploymentFuture | NamedArtifactLibraryDeploymentFuture<string> | LibraryDeploymentFuture | NamedArtifactContractAtFuture<string> | ContractAtFuture, exState: DeploymentExecutionState | ContractAtExecutionState, _context: ReconciliationContext): ReconciliationFutureResultFailure | undefined;
+//# sourceMappingURL=reconcile-contract-name.d.ts.map

@@ -1,0 +1,17 @@
+"use strict";
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+const generate_from_files_1 = require("../utility/generate-from-files");
+function default_1(options) {
+    return options.functional
+        ? (0, generate_from_files_1.generateFromFiles)({ ...options, templateFilesDirectory: './functional-files' })
+        : (0, generate_from_files_1.generateFromFiles)({ ...options, templateFilesDirectory: './class-files' });
+}
+exports.default = default_1;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi8uLi8uLi8uLi8uLi9wYWNrYWdlcy9zY2hlbWF0aWNzL2FuZ3VsYXIvcmVzb2x2ZXIvaW5kZXgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBOzs7Ozs7R0FNRzs7QUFHSCx3RUFBbUU7QUFHbkUsbUJBQXlCLE9BQWU7SUFDdEMsT0FBTyxPQUFPLENBQUMsVUFBVTtRQUN2QixDQUFDLENBQUMsSUFBQSx1Q0FBaUIsRUFBQyxFQUFFLEdBQUcsT0FBTyxFQUFFLHNCQUFzQixFQUFFLG9CQUFvQixFQUFFLENBQUM7UUFDakYsQ0FBQyxDQUFDLElBQUEsdUNBQWlCLEVBQUMsRUFBRSxHQUFHLE9BQU8sRUFBRSxzQkFBc0IsRUFBRSxlQUFlLEVBQUUsQ0FBQyxDQUFDO0FBQ2pGLENBQUM7QUFKRCw0QkFJQyIsInNvdXJjZXNDb250ZW50IjpbIi8qKlxuICogQGxpY2Vuc2VcbiAqIENvcHlyaWdodCBHb29nbGUgTExDIEFsbCBSaWdodHMgUmVzZXJ2ZWQuXG4gKlxuICogVXNlIG9mIHRoaXMgc291cmNlIGNvZGUgaXMgZ292ZXJuZWQgYnkgYW4gTUlULXN0eWxlIGxpY2Vuc2UgdGhhdCBjYW4gYmVcbiAqIGZvdW5kIGluIHRoZSBMSUNFTlNFIGZpbGUgYXQgaHR0cHM6Ly9hbmd1bGFyLmlvL2xpY2Vuc2VcbiAqL1xuXG5pbXBvcnQgeyBSdWxlIH0gZnJvbSAnQGFuZ3VsYXItZGV2a2l0L3NjaGVtYXRpY3MnO1xuaW1wb3J0IHsgZ2VuZXJhdGVGcm9tRmlsZXMgfSBmcm9tICcuLi91dGlsaXR5L2dlbmVyYXRlLWZyb20tZmlsZXMnO1xuaW1wb3J0IHsgU2NoZW1hIH0gZnJvbSAnLi9zY2hlbWEnO1xuXG5leHBvcnQgZGVmYXVsdCBmdW5jdGlvbiAob3B0aW9uczogU2NoZW1hKTogUnVsZSB7XG4gIHJldHVybiBvcHRpb25zLmZ1bmN0aW9uYWxcbiAgICA/IGdlbmVyYXRlRnJvbUZpbGVzKHsgLi4ub3B0aW9ucywgdGVtcGxhdGVGaWxlc0RpcmVjdG9yeTogJy4vZnVuY3Rpb25hbC1maWxlcycgfSlcbiAgICA6IGdlbmVyYXRlRnJvbUZpbGVzKHsgLi4ub3B0aW9ucywgdGVtcGxhdGVGaWxlc0RpcmVjdG9yeTogJy4vY2xhc3MtZmlsZXMnIH0pO1xufVxuIl19

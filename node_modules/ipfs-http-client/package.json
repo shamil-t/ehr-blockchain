@@ -1,0 +1,107 @@
+{
+  "name": "ipfs-http-client",
+  "version": "60.0.1",
+  "description": "A client library for the IPFS HTTP API",
+  "license": "Apache-2.0 OR MIT",
+  "homepage": "https://github.com/ipfs/js-ipfs/tree/master/packages/ipfs-http-client#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ipfs/js-ipfs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ipfs/js-ipfs/issues"
+  },
+  "keywords": [
+    "ipfs"
+  ],
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=7.0.0"
+  },
+  "type": "module",
+  "types": "./dist/src/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "*",
+        "dist/*",
+        "dist/src/*",
+        "dist/src/*/index"
+      ],
+      "src/*": [
+        "*",
+        "dist/*",
+        "dist/src/*",
+        "dist/src/*/index"
+      ]
+    }
+  },
+  "files": [
+    "src",
+    "dist",
+    "!dist/test",
+    "!**/*.tsbuildinfo"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./src/index.js"
+    }
+  },
+  "eslintConfig": {
+    "extends": "ipfs",
+    "parserOptions": {
+      "sourceType": "module"
+    }
+  },
+  "scripts": {
+    "build": "aegir build",
+    "test": "aegir test",
+    "test:node": "aegir test -t node --cov",
+    "test:chrome": "aegir test -t browser --cov",
+    "test:chrome-webworker": "aegir test -t webworker",
+    "test:firefox": "aegir test -t browser -- --browser firefox",
+    "test:firefox-webworker": "aegir test -t webworker -- --browser firefox",
+    "lint": "aegir lint",
+    "clean": "aegir clean",
+    "dep-check": "aegir dep-check -i ipfs-core -i ipfs-core-types"
+  },
+  "dependencies": {
+    "@ipld/dag-cbor": "^9.0.0",
+    "@ipld/dag-json": "^10.0.0",
+    "@ipld/dag-pb": "^4.0.0",
+    "@libp2p/logger": "^2.0.5",
+    "@libp2p/peer-id": "^2.0.0",
+    "@multiformats/multiaddr": "^11.1.5",
+    "any-signal": "^3.0.0",
+    "dag-jose": "^4.0.0",
+    "err-code": "^3.0.1",
+    "ipfs-core-types": "^0.14.1",
+    "ipfs-core-utils": "^0.18.1",
+    "ipfs-utils": "^9.0.13",
+    "it-first": "^2.0.0",
+    "it-last": "^2.0.0",
+    "merge-options": "^3.0.4",
+    "multiformats": "^11.0.0",
+    "parse-duration": "^1.0.0",
+    "stream-to-it": "^0.2.2",
+    "uint8arrays": "^4.0.2"
+  },
+  "devDependencies": {
+    "aegir": "^37.11.0",
+    "delay": "^5.0.0",
+    "go-ipfs": "^0.12.0",
+    "ipfsd-ctl": "^13.0.0",
+    "it-all": "^2.0.0",
+    "it-first": "^2.0.0",
+    "nock": "^13.0.2",
+    "p-defer": "^4.0.0"
+  },
+  "browser": {
+    "ipfs-utils/src/files/glob-source": false,
+    "go-ipfs": false,
+    "ipfs-core-utils/src/files/normalise-input": "ipfs-core-utils/src/files/normalise-input/index.browser.js",
+    "http": false,
+    "https": false
+  }
+}

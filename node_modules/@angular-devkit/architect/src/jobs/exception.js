@@ -1,0 +1,24 @@
+"use strict";
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.JobDoesNotExistException = exports.JobNameAlreadyRegisteredException = void 0;
+const core_1 = require("@angular-devkit/core");
+class JobNameAlreadyRegisteredException extends core_1.BaseException {
+    constructor(name) {
+        super(`Job named ${JSON.stringify(name)} already exists.`);
+    }
+}
+exports.JobNameAlreadyRegisteredException = JobNameAlreadyRegisteredException;
+class JobDoesNotExistException extends core_1.BaseException {
+    constructor(name) {
+        super(`Job name ${JSON.stringify(name)} does not exist.`);
+    }
+}
+exports.JobDoesNotExistException = JobDoesNotExistException;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhjZXB0aW9uLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vLi4vLi4vLi4vLi4vLi4vLi4vcGFja2FnZXMvYW5ndWxhcl9kZXZraXQvYXJjaGl0ZWN0L3NyYy9qb2JzL2V4Y2VwdGlvbi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUE7Ozs7OztHQU1HOzs7QUFFSCwrQ0FBcUQ7QUFHckQsTUFBYSxpQ0FBa0MsU0FBUSxvQkFBYTtJQUNsRSxZQUFZLElBQWE7UUFDdkIsS0FBSyxDQUFDLGFBQWEsSUFBSSxDQUFDLFNBQVMsQ0FBQyxJQUFJLENBQUMsa0JBQWtCLENBQUMsQ0FBQztJQUM3RCxDQUFDO0NBQ0Y7QUFKRCw4RUFJQztBQUVELE1BQWEsd0JBQXlCLFNBQVEsb0JBQWE7SUFDekQsWUFBWSxJQUFhO1FBQ3ZCLEtBQUssQ0FBQyxZQUFZLElBQUksQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLGtCQUFrQixDQUFDLENBQUM7SUFDNUQsQ0FBQztDQUNGO0FBSkQsNERBSUMiLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIEBsaWNlbnNlXG4gKiBDb3B5cmlnaHQgR29vZ2xlIExMQyBBbGwgUmlnaHRzIFJlc2VydmVkLlxuICpcbiAqIFVzZSBvZiB0aGlzIHNvdXJjZSBjb2RlIGlzIGdvdmVybmVkIGJ5IGFuIE1JVC1zdHlsZSBsaWNlbnNlIHRoYXQgY2FuIGJlXG4gKiBmb3VuZCBpbiB0aGUgTElDRU5TRSBmaWxlIGF0IGh0dHBzOi8vYW5ndWxhci5pby9saWNlbnNlXG4gKi9cblxuaW1wb3J0IHsgQmFzZUV4Y2VwdGlvbiB9IGZyb20gJ0Bhbmd1bGFyLWRldmtpdC9jb3JlJztcbmltcG9ydCB7IEpvYk5hbWUgfSBmcm9tICcuL2FwaSc7XG5cbmV4cG9ydCBjbGFzcyBKb2JOYW1lQWxyZWFkeVJlZ2lzdGVyZWRFeGNlcHRpb24gZXh0ZW5kcyBCYXNlRXhjZXB0aW9uIHtcbiAgY29uc3RydWN0b3IobmFtZTogSm9iTmFtZSkge1xuICAgIHN1cGVyKGBKb2IgbmFtZWQgJHtKU09OLnN0cmluZ2lmeShuYW1lKX0gYWxyZWFkeSBleGlzdHMuYCk7XG4gIH1cbn1cblxuZXhwb3J0IGNsYXNzIEpvYkRvZXNOb3RFeGlzdEV4Y2VwdGlvbiBleHRlbmRzIEJhc2VFeGNlcHRpb24ge1xuICBjb25zdHJ1Y3RvcihuYW1lOiBKb2JOYW1lKSB7XG4gICAgc3VwZXIoYEpvYiBuYW1lICR7SlNPTi5zdHJpbmdpZnkobmFtZSl9IGRvZXMgbm90IGV4aXN0LmApO1xuICB9XG59XG4iXX0=

@@ -1,0 +1,16 @@
+"use strict";
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.targetBuildNotFoundError = void 0;
+const schematics_1 = require("@angular-devkit/schematics");
+function targetBuildNotFoundError() {
+    return new schematics_1.SchematicsException(`Project target "build" not found.`);
+}
+exports.targetBuildNotFoundError = targetBuildNotFoundError;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJvamVjdC10YXJnZXRzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vLi4vLi4vLi4vLi4vLi4vcGFja2FnZXMvc2NoZW1hdGljcy9hbmd1bGFyL3V0aWxpdHkvcHJvamVjdC10YXJnZXRzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQTs7Ozs7O0dBTUc7OztBQUVILDJEQUFpRTtBQUVqRSxTQUFnQix3QkFBd0I7SUFDdEMsT0FBTyxJQUFJLGdDQUFtQixDQUFDLG1DQUFtQyxDQUFDLENBQUM7QUFDdEUsQ0FBQztBQUZELDREQUVDIiwic291cmNlc0NvbnRlbnQiOlsiLyoqXG4gKiBAbGljZW5zZVxuICogQ29weXJpZ2h0IEdvb2dsZSBMTEMgQWxsIFJpZ2h0cyBSZXNlcnZlZC5cbiAqXG4gKiBVc2Ugb2YgdGhpcyBzb3VyY2UgY29kZSBpcyBnb3Zlcm5lZCBieSBhbiBNSVQtc3R5bGUgbGljZW5zZSB0aGF0IGNhbiBiZVxuICogZm91bmQgaW4gdGhlIExJQ0VOU0UgZmlsZSBhdCBodHRwczovL2FuZ3VsYXIuaW8vbGljZW5zZVxuICovXG5cbmltcG9ydCB7IFNjaGVtYXRpY3NFeGNlcHRpb24gfSBmcm9tICdAYW5ndWxhci1kZXZraXQvc2NoZW1hdGljcyc7XG5cbmV4cG9ydCBmdW5jdGlvbiB0YXJnZXRCdWlsZE5vdEZvdW5kRXJyb3IoKTogU2NoZW1hdGljc0V4Y2VwdGlvbiB7XG4gIHJldHVybiBuZXcgU2NoZW1hdGljc0V4Y2VwdGlvbihgUHJvamVjdCB0YXJnZXQgXCJidWlsZFwiIG5vdCBmb3VuZC5gKTtcbn1cbiJdfQ==

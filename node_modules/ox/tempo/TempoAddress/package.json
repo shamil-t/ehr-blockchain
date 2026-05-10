@@ -1,0 +1,6 @@
+{
+  "type": "module",
+  "types": "../../_types/tempo/TempoAddress.d.ts",
+  "main": "../../_cjs/tempo/TempoAddress.js",
+  "module": "../../_esm/tempo/TempoAddress.js"
+}

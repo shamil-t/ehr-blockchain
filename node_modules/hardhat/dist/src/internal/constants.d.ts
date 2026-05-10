@@ -1,0 +1,10 @@
+export declare const HARDHAT_PACKAGE_NAME = "hardhat";
+export declare const HARDHAT_NAME = "Hardhat";
+export declare const HARDHAT_WEBSITE_URL = "https://hardhat.org/";
+export declare const EDR_NETWORK_REVERT_SNAPSHOT_EVENT = "hardhatNetworkRevertSnapshot";
+export declare const GENERIC_CHAIN_TYPE = "generic";
+export declare const L1_CHAIN_TYPE = "l1";
+export declare const OPTIMISM_CHAIN_TYPE = "op";
+export declare const DEFAULT_NETWORK_NAME = "default";
+export declare const DEFAULT_VERBOSITY = 2;
+//# sourceMappingURL=constants.d.ts.map

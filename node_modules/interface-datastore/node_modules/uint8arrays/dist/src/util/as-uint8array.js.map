@@ -1,0 +1,1 @@
+{"version":3,"file":"as-uint8array.js","sourceRoot":"","sources":["../../../src/util/as-uint8array.ts"],"names":[],"mappings":"AAAA;;;GAGG;AACH,MAAM,UAAU,YAAY,CAAE,GAAe;IAC3C,IAAI,UAAU,CAAC,MAAM,IAAI,IAAI,EAAE,CAAC;QAC9B,OAAO,IAAI,UAAU,CAAC,GAAG,CAAC,MAAM,EAAE,GAAG,CAAC,UAAU,EAAE,GAAG,CAAC,UAAU,CAAC,CAAA;IACnE,CAAC;IAED,OAAO,GAAG,CAAA;AACZ,CAAC"}

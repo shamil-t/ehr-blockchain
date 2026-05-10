@@ -1,0 +1,59 @@
+"use strict";
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.UnimplementedException = exports.UnsuccessfulWorkflowExecution = exports.MergeConflictException = exports.InvalidUpdateRecordException = exports.ContentHasMutatedException = exports.FileAlreadyExistException = exports.FileDoesNotExistException = exports.SchematicsException = void 0;
+const core_1 = require("@angular-devkit/core");
+// Used by schematics to throw exceptions.
+class SchematicsException extends core_1.BaseException {
+}
+exports.SchematicsException = SchematicsException;
+// Exceptions
+class FileDoesNotExistException extends core_1.BaseException {
+    constructor(path) {
+        super(`Path "${path}" does not exist.`);
+    }
+}
+exports.FileDoesNotExistException = FileDoesNotExistException;
+class FileAlreadyExistException extends core_1.BaseException {
+    constructor(path) {
+        super(`Path "${path}" already exist.`);
+    }
+}
+exports.FileAlreadyExistException = FileAlreadyExistException;
+class ContentHasMutatedException extends core_1.BaseException {
+    constructor(path) {
+        super(`Content at path "${path}" has changed between the start and the end of an update.`);
+    }
+}
+exports.ContentHasMutatedException = ContentHasMutatedException;
+class InvalidUpdateRecordException extends core_1.BaseException {
+    constructor() {
+        super(`Invalid record instance.`);
+    }
+}
+exports.InvalidUpdateRecordException = InvalidUpdateRecordException;
+class MergeConflictException extends core_1.BaseException {
+    constructor(path) {
+        super(`A merge conflicted on path "${path}".`);
+    }
+}
+exports.MergeConflictException = MergeConflictException;
+class UnsuccessfulWorkflowExecution extends core_1.BaseException {
+    constructor() {
+        super('Workflow did not execute successfully.');
+    }
+}
+exports.UnsuccessfulWorkflowExecution = UnsuccessfulWorkflowExecution;
+class UnimplementedException extends core_1.BaseException {
+    constructor() {
+        super('This function is unimplemented.');
+    }
+}
+exports.UnimplementedException = UnimplementedException;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhjZXB0aW9uLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vLi4vLi4vLi4vLi4vLi4vLi4vcGFja2FnZXMvYW5ndWxhcl9kZXZraXQvc2NoZW1hdGljcy9zcmMvZXhjZXB0aW9uL2V4Y2VwdGlvbi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUE7Ozs7OztHQU1HOzs7QUFFSCwrQ0FBcUQ7QUFFckQsMENBQTBDO0FBQzFDLE1BQWEsbUJBQW9CLFNBQVEsb0JBQWE7Q0FBRztBQUF6RCxrREFBeUQ7QUFFekQsYUFBYTtBQUNiLE1BQWEseUJBQTBCLFNBQVEsb0JBQWE7SUFDMUQsWUFBWSxJQUFZO1FBQ3RCLEtBQUssQ0FBQyxTQUFTLElBQUksbUJBQW1CLENBQUMsQ0FBQztJQUMxQyxDQUFDO0NBQ0Y7QUFKRCw4REFJQztBQUNELE1BQWEseUJBQTBCLFNBQVEsb0JBQWE7SUFDMUQsWUFBWSxJQUFZO1FBQ3RCLEtBQUssQ0FBQyxTQUFTLElBQUksa0JBQWtCLENBQUMsQ0FBQztJQUN6QyxDQUFDO0NBQ0Y7QUFKRCw4REFJQztBQUNELE1BQWEsMEJBQTJCLFNBQVEsb0JBQWE7SUFDM0QsWUFBWSxJQUFZO1FBQ3RCLEtBQUssQ0FBQyxvQkFBb0IsSUFBSSwyREFBMkQsQ0FBQyxDQUFDO0lBQzdGLENBQUM7Q0FDRjtBQUpELGdFQUlDO0FBQ0QsTUFBYSw0QkFBNkIsU0FBUSxvQkFBYTtJQUM3RDtRQUNFLEtBQUssQ0FBQywwQkFBMEIsQ0FBQyxDQUFDO0lBQ3BDLENBQUM7Q0FDRjtBQUpELG9FQUlDO0FBQ0QsTUFBYSxzQkFBdUIsU0FBUSxvQkFBYTtJQUN2RCxZQUFZLElBQVk7UUFDdEIsS0FBSyxDQUFDLCtCQUErQixJQUFJLElBQUksQ0FBQyxDQUFDO0lBQ2pELENBQUM7Q0FDRjtBQUpELHdEQUlDO0FBRUQsTUFBYSw2QkFBOEIsU0FBUSxvQkFBYTtJQUM5RDtRQUNFLEtBQUssQ0FBQyx3Q0FBd0MsQ0FBQyxDQUFDO0lBQ2xELENBQUM7Q0FDRjtBQUpELHNFQUlDO0FBRUQsTUFBYSxzQkFBdUIsU0FBUSxvQkFBYTtJQUN2RDtRQUNFLEtBQUssQ0FBQyxpQ0FBaUMsQ0FBQyxDQUFDO0lBQzNDLENBQUM7Q0FDRjtBQUpELHdEQUlDIiwic291cmNlc0NvbnRlbnQiOlsiLyoqXG4gKiBAbGljZW5zZVxuICogQ29weXJpZ2h0IEdvb2dsZSBMTEMgQWxsIFJpZ2h0cyBSZXNlcnZlZC5cbiAqXG4gKiBVc2Ugb2YgdGhpcyBzb3VyY2UgY29kZSBpcyBnb3Zlcm5lZCBieSBhbiBNSVQtc3R5bGUgbGljZW5zZSB0aGF0IGNhbiBiZVxuICogZm91bmQgaW4gdGhlIExJQ0VOU0UgZmlsZSBhdCBodHRwczovL2FuZ3VsYXIuaW8vbGljZW5zZVxuICovXG5cbmltcG9ydCB7IEJhc2VFeGNlcHRpb24gfSBmcm9tICdAYW5ndWxhci1kZXZraXQvY29yZSc7XG5cbi8vIFVzZWQgYnkgc2NoZW1hdGljcyB0byB0aHJvdyBleGNlcHRpb25zLlxuZXhwb3J0IGNsYXNzIFNjaGVtYXRpY3NFeGNlcHRpb24gZXh0ZW5kcyBCYXNlRXhjZXB0aW9uIHt9XG5cbi8vIEV4Y2VwdGlvbnNcbmV4cG9ydCBjbGFzcyBGaWxlRG9lc05vdEV4aXN0RXhjZXB0aW9uIGV4dGVuZHMgQmFzZUV4Y2VwdGlvbiB7XG4gIGNvbnN0cnVjdG9yKHBhdGg6IHN0cmluZykge1xuICAgIHN1cGVyKGBQYXRoIFwiJHtwYXRofVwiIGRvZXMgbm90IGV4aXN0LmApO1xuICB9XG59XG5leHBvcnQgY2xhc3MgRmlsZUFscmVhZHlFeGlzdEV4Y2VwdGlvbiBleHRlbmRzIEJhc2VFeGNlcHRpb24ge1xuICBjb25zdHJ1Y3RvcihwYXRoOiBzdHJpbmcpIHtcbiAgICBzdXBlcihgUGF0aCBcIiR7cGF0aH1cIiBhbHJlYWR5IGV4aXN0LmApO1xuICB9XG59XG5leHBvcnQgY2xhc3MgQ29udGVudEhhc011dGF0ZWRFeGNlcHRpb24gZXh0ZW5kcyBCYXNlRXhjZXB0aW9uIHtcbiAgY29uc3RydWN0b3IocGF0aDogc3RyaW5nKSB7XG4gICAgc3VwZXIoYENvbnRlbnQgYXQgcGF0aCBcIiR7cGF0aH1cIiBoYXMgY2hhbmdlZCBiZXR3ZWVuIHRoZSBzdGFydCBhbmQgdGhlIGVuZCBvZiBhbiB1cGRhdGUuYCk7XG4gIH1cbn1cbmV4cG9ydCBjbGFzcyBJbnZhbGlkVXBkYXRlUmVjb3JkRXhjZXB0aW9uIGV4dGVuZHMgQmFzZUV4Y2VwdGlvbiB7XG4gIGNvbnN0cnVjdG9yKCkge1xuICAgIHN1cGVyKGBJbnZhbGlkIHJlY29yZCBpbnN0YW5jZS5gKTtcbiAgfVxufVxuZXhwb3J0IGNsYXNzIE1lcmdlQ29uZmxpY3RFeGNlcHRpb24gZXh0ZW5kcyBCYXNlRXhjZXB0aW9uIHtcbiAgY29uc3RydWN0b3IocGF0aDogc3RyaW5nKSB7XG4gICAgc3VwZXIoYEEgbWVyZ2UgY29uZmxpY3RlZCBvbiBwYXRoIFwiJHtwYXRofVwiLmApO1xuICB9XG59XG5cbmV4cG9ydCBjbGFzcyBVbnN1Y2Nlc3NmdWxXb3JrZmxvd0V4ZWN1dGlvbiBleHRlbmRzIEJhc2VFeGNlcHRpb24ge1xuICBjb25zdHJ1Y3RvcigpIHtcbiAgICBzdXBlcignV29ya2Zsb3cgZGlkIG5vdCBleGVjdXRlIHN1Y2Nlc3NmdWxseS4nKTtcbiAgfVxufVxuXG5leHBvcnQgY2xhc3MgVW5pbXBsZW1lbnRlZEV4Y2VwdGlvbiBleHRlbmRzIEJhc2VFeGNlcHRpb24ge1xuICBjb25zdHJ1Y3RvcigpIHtcbiAgICBzdXBlcignVGhpcyBmdW5jdGlvbiBpcyB1bmltcGxlbWVudGVkLicpO1xuICB9XG59XG4iXX0=

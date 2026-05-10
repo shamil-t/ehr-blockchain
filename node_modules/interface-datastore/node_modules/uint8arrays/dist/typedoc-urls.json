@@ -1,0 +1,18 @@
+{
+  "alloc": "https://achingbrain.github.io/uint8arrays/functions/alloc.alloc.html",
+  "./alloc:alloc": "https://achingbrain.github.io/uint8arrays/functions/alloc.alloc.html",
+  "allocUnsafe": "https://achingbrain.github.io/uint8arrays/functions/alloc.allocUnsafe.html",
+  "./alloc:allocUnsafe": "https://achingbrain.github.io/uint8arrays/functions/alloc.allocUnsafe.html",
+  "compare": "https://achingbrain.github.io/uint8arrays/functions/compare.compare.html",
+  "./compare:compare": "https://achingbrain.github.io/uint8arrays/functions/compare.compare.html",
+  "concat": "https://achingbrain.github.io/uint8arrays/functions/concat.concat.html",
+  "./concat:concat": "https://achingbrain.github.io/uint8arrays/functions/concat.concat.html",
+  "equals": "https://achingbrain.github.io/uint8arrays/functions/equals.equals.html",
+  "./equals:equals": "https://achingbrain.github.io/uint8arrays/functions/equals.equals.html",
+  "fromString": "https://achingbrain.github.io/uint8arrays/functions/from_string.fromString.html",
+  "./from-string:fromString": "https://achingbrain.github.io/uint8arrays/functions/from_string.fromString.html",
+  "SupportedEncodings": "https://achingbrain.github.io/uint8arrays/types/index.SupportedEncodings.html",
+  "./to-string:toString": "https://achingbrain.github.io/uint8arrays/functions/to_string.toString.html",
+  "xor": "https://achingbrain.github.io/uint8arrays/functions/xor.xor.html",
+  "./xor:xor": "https://achingbrain.github.io/uint8arrays/functions/xor.xor.html"
+}
