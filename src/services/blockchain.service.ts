@@ -1,7 +1,8 @@
-import { Injectable, signal, WritableSignal } from '@angular/core';
-import Web3 from 'web3';
+import {Injectable, signal, WritableSignal} from '@angular/core';
 
-const Contract = require('../../build/contracts/Contract.json');
+import Contract from '.../../../ignition/deployments/chain-31337/artifacts/Contract#Contract.json';
+import DeployedAddress from 'ignition/deployments/chain-31337/deployed_addresses.json'
+import {BrowserProvider, ethers, formatUnits} from "ethers";
 
 declare let window: any;
 
@@ -19,24 +20,22 @@ export class BlockchainService {
   abi: any;
 
   admin: any;
+  web3Provider: BrowserProvider | null = null;
 
   balance: WritableSignal<number> = signal(0);
 
-
   constructor() {
-    this.getWeb3Provider().then((web3: Web3) => {
-      web3.eth.getAccounts().then((acts: any) => {
+    this.getWeb3Provider().then((provider) => {
+      this.web3Provider = provider;
+      provider.listAccounts().then((acts: any) => {
         this.account.set(acts[0])
         console.log(acts[0]);
-        web3.eth.getBalance(acts[0]).then((r: any) => {
-          this.balance.set(Math.floor(Number(web3.utils.fromWei(r, "ether")) * 1000) / 1000);
-        });
       }).catch(err => console.log(err))
 
       this.web3.eth.net.getId().then((r: any) => {
         this.netId = r;
         this.abi = Contract.abi;
-        this.netWorkData = Contract.networks[this.netId];
+        this.netWorkData = DeployedAddress["Contract#Contract"];
         if (this.netWorkData) {
           this.address = this.netWorkData.address;
           this.contract = new this.web3.eth.Contract(this.abi, this.address);
@@ -56,7 +55,7 @@ export class BlockchainService {
       this.getContract().then(c => {
         this.getCurrentAccount().then(a => {
           console.log(a);
-          c.methods.isAdmin().call({ from: a }).then((r: any) => {
+          c.methods.isAdmin().call({from: a}).then((r: any) => {
             console.log(r);
             if (r) {
               resolve(true)
@@ -65,29 +64,18 @@ export class BlockchainService {
           })
         }).catch((er: any) => {
           console.log(er);
-
         })
       })
     })
   }
 
   //gets
-
-  async getWeb3Provider(): Promise<Web3> {
+  async getWeb3Provider(): Promise<BrowserProvider> {
+    if (this.web3Provider) return this.web3Provider;
     if (window.ethereum) {
-      window.web3 = new Web3(window.ethereum);
-      window.ethereum.enable();
-
-      this.web3 = window.web3;
-      await this.web3.eth.getAccounts().then((acc: string[]) => {
-        this.account.set(acc[0])
-      });
-      return window.web3;
-    } else if (window.web3) {
-      window.web3 = new Web3(window.web3.currentProvider);
-      return window.web3;
+      return new BrowserProvider(window.ethereum);
     } else {
-      return window.web3;
+      throw new Error("No web3 provider: Install MetaMask");
     }
   }
 
@@ -103,16 +91,24 @@ export class BlockchainService {
     });
   }
 
-  getWeb3(): Web3 {
-    return this.web3;
-  }
-
-  getBalance(): any {
-    return this.balance;
-  }
-
   getAccount() {
     return this.account();
+  }
+
+  getBalanceByAccount(account?: string): Promise<string> {
+    if (!account) {
+      account = this.getAccount();
+    }
+    return new Promise((resolve, reject) => {
+      if (this.web3Provider) {
+        this.web3Provider.getBalance(account).then((balance) => {
+          resolve(formatUnits(balance, "ether"));
+        }).catch((er: any) => {
+          console.log(er);
+          reject(er)
+        })
+      }
+    })
   }
 
   async getContract(): Promise<any> {
