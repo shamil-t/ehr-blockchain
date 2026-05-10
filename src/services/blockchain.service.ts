@@ -1,8 +1,8 @@
 import {Injectable, signal, WritableSignal} from '@angular/core';
 
-import Contract from '.../../../ignition/deployments/chain-31337/artifacts/Contract#Contract.json';
+import Contract from '../assets/Contract#Contract.json'
 import DeployedAddress from 'ignition/deployments/chain-31337/deployed_addresses.json'
-import {BrowserProvider, ethers, formatUnits} from "ethers";
+import {BrowserProvider, formatUnits} from "ethers";
 
 declare let window: any;
 
@@ -47,7 +47,6 @@ export class BlockchainService {
         // window.location.reload();
       });
     });
-
   }
 
   checkIsAdmin(): Promise<boolean> {
