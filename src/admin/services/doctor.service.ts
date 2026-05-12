@@ -1,4 +1,3 @@
-import {HttpClient} from '@angular/common/http';
 import {inject, Injectable} from '@angular/core';
 import {BlockchainService} from 'src/services/blockchain.service';
 import {IpfsService} from 'src/services/ipfs.service';

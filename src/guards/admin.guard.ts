@@ -2,7 +2,7 @@ import {CanActivateChildFn, Router} from '@angular/router';
 import {inject} from "@angular/core";
 import {BlockchainService} from "../services/blockchain.service";
 
-export const adminGuard: CanActivateChildFn = async (route, state) => {
+export const adminGuard: CanActivateChildFn = async (_route, _state) => {
   const blockchainService = inject(BlockchainService);
   const router = inject(Router);
 

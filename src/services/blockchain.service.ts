@@ -31,7 +31,7 @@ export class BlockchainService {
 
       window.ethereum.on('accountsChanged', (acc: any) => {
         this.account.set(acc[0])
-        this.getContract().then(r => {
+        this.getContract().then(_r => {
           // console.log()
         })
         let currentUrl = (this.router.url.substring(0, this.router.url.lastIndexOf('/')));
