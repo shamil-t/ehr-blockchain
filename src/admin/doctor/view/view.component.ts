@@ -1,32 +1,19 @@
-import {Component, OnInit, signal} from '@angular/core';
+import {Component, OnInit, signal, WritableSignal} from '@angular/core';
 import {DoctorService} from 'src/admin/services/doctor.service';
+import {DoctorType} from "../../../types/doctor.type";
+import {NgOptimizedImage} from "@angular/common";
 
 @Component({
   selector: 'doctor-view',
   templateUrl: './view.component.html',
   styleUrls: ['./view.component.sass'],
+  imports: [
+    NgOptimizedImage
+  ]
 })
 export class ViewComponent implements OnInit {
-  model: any = {
-    acID: '',
-  };
-
   Doctors: string[] = [];
-
-  Doctor: any = {
-    docID: '',
-    fName: 'First Name',
-    lName: 'Last Name',
-    Doj: '',
-    emailID: 'test_name@mail.com',
-    phone: '123456789',
-    city: 'city',
-    state: 'state',
-    specialty: 'specialty',
-    imageHash: '',
-  };
-
-  DoctorDetails: any = [];
+  DoctorDetails: WritableSignal<DoctorType[]> = signal([]);
 
   loaded = signal(false);
   loadComplete = signal(false);
@@ -38,36 +25,37 @@ export class ViewComponent implements OnInit {
 
   constructor(private doctorService: DoctorService) {
     this.progressMsg.set('Loading Doctor Accounts From Blockchain')
-
-    this.DoctorDetails = doctorService.DoctorDetails
   }
 
   ngOnInit(): void {
-    this.GetDoctors()
+    this.loadAllDoctors()
   }
 
   loadDrDetails() {
-    console.log(this.Doctors);
-    this.DoctorDetails = []
-    for (let i = 0; i <= this.Doctors.length; i++) {
-      if (this.Doctors[i])
-        this.doctorService.getDoctorDetails(this.Doctors[i]).then((data: any) => {
-          this.DoctorDetails.push(data)
+    this.DoctorDetails.set([])
+    for (let i = 0; i < this.Doctors.length; i++) {
+      if (this.Doctors[i]) {
+        this.doctorService.getDoctorDetails(this.Doctors[i]).then((data) => {
+          data.subscribe((doctor: any) => {
+            this.DoctorDetails.set([...this.DoctorDetails(), doctor]);
+            // console.log(this.DoctorDetails())
+          })
         });
+      }
     }
     this.progressMsg.set('')
     this.showProgressCard.set(false)
   }
 
-  GetDoctors(): any {
+  loadAllDoctors(): any {
     this.showProgressCard.set(true);
     this.showProgressWarn.set(false);
     this.progressMsg.set('')
     this.loadComplete.set(false)
 
-    this.DoctorDetails = []
+    this.DoctorDetails.set([])
 
-    if (this.DoctorDetails.length >= 1) {
+    if (this.DoctorDetails().length >= 1) {
       this.showProgressCard.set(false)
       return 0
     }

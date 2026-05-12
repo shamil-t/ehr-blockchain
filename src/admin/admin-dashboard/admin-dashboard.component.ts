@@ -1,4 +1,4 @@
-import {Component, inject, OnInit, signal} from '@angular/core';
+import {Component, effect, inject, OnInit, signal} from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
 import {BlockchainService} from "../../services/blockchain.service";
 import {Progress_cardComponent} from "../../utils/progress_card/progress_card.component";
@@ -21,37 +21,45 @@ export class AdminDashboardComponent implements OnInit {
   bs = inject(BlockchainService)
   isCollapse: boolean = true;
 
+  account: string = '';
   isAdmin = signal(false);
 
-  checkProgress: boolean = true;
-  progressWarn: boolean = false
-  progressMsg: string = 'Checking Admin....';
+  checkProgress = signal(true);
+  progressWarn = signal(false);
+  progressMsg = signal('Checking Admin....');
 
   constructor() {
-
-  }
-
-  ngOnInit(): void {
-    this.onCheckAdmin()
-    this.router.navigate(['admin/dashboard']).then(_ => {
+    effect(() => {
+      if (this.account != this.bs.account()) {
+        this.account = this.bs.account();
+        this.onCheckAdmin()
+      }
     });
   }
 
-  onCheckAdmin() {
-    this.progressMsg = 'Checking Admin Access...'
-    this.progressWarn = false
-    // console.log("check admin");
+  ngOnInit(): void {
 
+  }
+
+  onCheckAdmin() {
+    this.progressMsg.set('Checking Admin Access...')
+    this.progressWarn.set(false)
     this.bs.checkIsAdmin().then(r => {
-      // console.log(r);
-      if (r) {
-        this.isAdmin.set(true)
+      this.isAdmin.set(r)
+      console.log(this.isAdmin())
+      if (!this.isAdmin()) {
+        this.showProgress()
+      } else {
+        this.router.navigate(['admin/dashboard']).then(_ => {
+        });
       }
-    }).catch((er: any) => {
-      this.checkProgress = false
-      this.progressWarn = true
-      this.progressMsg = '<span class="text-danger">Only admin have Access to this Page.... </span><br> ' +
-        'Connect MetaMask to your Admin account'
     })
+  }
+
+  showProgress() {
+    this.checkProgress.set(false)
+    this.progressWarn.set(true)
+    this.progressMsg.set('<span class="text-danger">Only admin have Access to this Page.... </span><br> ' +
+      'Connect MetaMask to your Admin account')
   }
 }

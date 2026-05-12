@@ -1,24 +1,23 @@
 <div class="container-fluid">
   <div class="d-flex refresh-btn justify-content-end">
-    <button class="btn btn-sm btn-primary" (click)="GetDoctors()">
+    <button class="btn btn-sm btn-primary" (click)="loadAllDoctors()">
       <i class="fa-solid fa-rotate-right"></i>&nbsp; Refresh
     </button>
   </div>
   <div class="container w-100">
-    @if (DoctorDetails.length >= 1) {
+    @if (DoctorDetails().length >= 1) {
       <div class="content">
-        @for (Docdetails of DoctorDetails; track Docdetails) {
+        @for (doc of DoctorDetails(); track doc) {
           <div class="card mt-2">
             <div class="doctor w-100 p-2 d-flex flex-row align-items-center">
               <div class="doc-image">
                 <img
                   class="border border-1 border-secondary rounded-circle p-1"
-                  [src]="
-                Docdetails.imageHash || '../../../assets/images/doctor.png'
-              "
+                  [ngSrc]="doc.imageHash || 'assets/images/doctor.png'"
                   alt="Doctor Image"
-                  width="150px"
-                  height="150px"
+                  width="150"
+                  height="150"
+                  priority
                 />
               </div>
               <div class="doc-info d-flex flex-column">
@@ -27,7 +26,7 @@
                     <div class="col-md-12">
                       <b>DocID: </b>
                       <span class="docID">
-                        <b>{{ Docdetails.docID }}</b></span
+                        <b>{{ doc.docId }}</b></span
                       >
                     </div>
                   </div>
@@ -36,33 +35,33 @@
                       <div>
                         <b>Full Name : </b>
                         <span class="fName"
-                        >{{ Docdetails.fName }} {{ Docdetails.lName }}</span
+                        >{{ doc.fName }} {{ doc.lName }}</span
                         >
                       </div>
                       <div>
                         <b>Date of Joining : </b>
-                        <span class="Doj">{{ Docdetails.Doj }}</span>
+                        <span class="Doj">{{ doc.doj }}</span>
                       </div>
                       <div>
                         <b>Speciality: </b
-                        ><span class="speciality">{{ Docdetails.speciality }}</span>
+                        ><span class="speciality">{{ doc.speciality }}</span>
                       </div>
                     </div>
                     <div class="col-md-12 d-flex flex-column">
                       <div>
                         <b>Email : </b
-                        ><span class="emailID">{{ Docdetails.emailID }}</span>
+                        ><span class="emailID">{{ doc.emailId }}</span>
                       </div>
                       <div>
                         <b>Phone: </b
-                        ><span class="phone">{{ Docdetails.phone }}</span>
+                        ><span class="phone">{{ doc.phone }}</span>
                       </div>
                       <div>
-                        <b>City </b><span class="city">{{ Docdetails.city }}</span>
+                        <b>City </b><span class="city">{{ doc.city }}</span>
                       </div>
                       <div>
                         <b>State: </b
-                        ><span class="state">{{ Docdetails.state }}</span>
+                        ><span class="state">{{ doc.state }}</span>
                       </div>
                     </div>
                   </div>
@@ -72,22 +71,24 @@
           </div>
         }
       </div>
-    }
-    @if (showProgressCard()) {
-      <div
-        class="prgrs mt-3 d-flex flex-column align-items-center"
-      >
-        <label for="progress">{{ progressMsg() }}</label>
-        <progress id="progress"></progress>
-      </div>
+    } @else {
+      @if (showProgressCard()) {
+        <div
+          class="prgrs mt-3 d-flex flex-column align-items-center"
+        >
+          <label for="progress">{{ progressMsg() }}</label>
+          <progress id="progress"></progress>
+        </div>
+      }
+
+      @if (loadComplete() && !loaded()) {
+        <div class="nill d-flex flex-column justify-content-center align-items-center text-center">
+          No Doctors In the Network Add Doctors using the above tab
+          <span class="text-primary">Add Doctor</span>
+          <button class="btn btn-primary" (click)="loadAllDoctors()">Retry</button>
+        </div>
+      }
     }
 
-    @if (loadComplete() && !loaded()) {
-      <div class="nill d-flex flex-column justify-content-center align-items-center text-center">
-        No Doctors In the Network Add Doctors using the above tab
-        <span class="text-primary">Add Doctor</span>
-        <button class="btn btn-primary" (click)="GetDoctors()">Retry</button>
-      </div>
-    }
   </div>
 </div>

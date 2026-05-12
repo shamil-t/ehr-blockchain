@@ -1,8 +1,9 @@
-import {Injectable, signal, WritableSignal} from '@angular/core';
+import {inject, Injectable, signal, WritableSignal} from '@angular/core';
 
-import Contract from '../assets/Contract.json'
+import EHR_Contract from '../assets/Contract.json'
 import DeployedAddress from 'ignition/deployments/chain-31337/deployed_addresses.json'
-import {BrowserProvider, ethers, formatUnits} from "ethers";
+import {BrowserProvider, Contract, formatUnits, JsonRpcSigner} from "ethers";
+import {Router} from "@angular/router";
 
 declare let window: any;
 
@@ -11,55 +12,51 @@ declare let window: any;
 })
 export class BlockchainService {
   account: WritableSignal<string> = signal('');
-  netId: any;
+  router = inject(Router)
 
-  address: any;
-  contract: ethers.Contract | null = null;
+  deployedAddress: any;
+  contract: Contract | null = null;
   abi: any;
 
-  admin: any;
   web3Provider: BrowserProvider | null = null;
 
   constructor() {
-    this.abi = Contract.abi;
+    this.abi = EHR_Contract.abi;
     if (DeployedAddress["Contract#Contract"]) {
-      this.address = DeployedAddress["Contract#Contract"];
+      this.deployedAddress = DeployedAddress["Contract#Contract"];
     }
 
     this.getWeb3Provider().then((provider) => {
       this.web3Provider = provider;
-      let _ = this.getAccount()
 
       window.ethereum.on('accountsChanged', (acc: any) => {
-        console.log(acc);
         this.account.set(acc[0])
+        this.getContract().then(r => {
+          // console.log()
+        })
+        let currentUrl = (this.router.url.substring(0, this.router.url.lastIndexOf('/')));
+        this.router.navigateByUrl(currentUrl, {skipLocationChange: false}).then(() => {
+          console.log(`Account changed successfully - reloading:${currentUrl}`);
+        });
       });
     });
   }
 
-  checkIsAdmin(): Promise<boolean> {
-    return new Promise((resolve, reject) => {
-      this.getContract().then(contract => {
-        // console.log(contract.target);
-        this.getCurrentAccount().then(async a => {
-          contract["isAdmin"].call({from: a}).then((r: any) => {
-            if (r) {
-              resolve(true)
-            }
-            reject(false)
-          })
-        }).catch((er: any) => {
-          console.log(er);
-        })
-      })
-    })
+  async checkIsAdmin(): Promise<boolean> {
+    if (!this.contract) {
+      this.contract = await this.getContract()
+    }
+    if (!this.account()) {
+      this.account.set(await this.getAccount())
+    }
+    return await this.contract["isAdmin"]();
   }
 
   //gets
   async getWeb3Provider(): Promise<BrowserProvider> {
     if (this.web3Provider) return this.web3Provider;
     if (window.ethereum) {
-      console.log("Connecting to MetaMask")
+      // console.log("Connecting to MetaMask")
       this.web3Provider = new BrowserProvider(window.ethereum);
       this.account.set((await this.web3Provider.getSigner()).address)
       return this.web3Provider;
@@ -90,18 +87,22 @@ export class BlockchainService {
     return Number(formatUnits(balance, "ether")).toFixed(4);
   }
 
-  async getContract(): Promise<ethers.Contract> {
+  async getContract(): Promise<Contract> {
+    if (this.contract) {
+      const signer = this.contract.runner
+      if (this.account() != (signer as JsonRpcSigner).address) this.contract = null
+    }
     if (!this.contract) {
       let counter = 0
-      while ((!this.address || !this.abi || !this.web3Provider) && counter < 10) {
+      while ((!this.deployedAddress || !this.abi || !this.web3Provider) && counter < 10) {
         counter++
         await new Promise(resolve => setTimeout(resolve, counter * 100));
       }
-      if (!this.address || !this.abi || !this.web3Provider) {
+      if (!this.deployedAddress || !this.abi || !this.web3Provider) {
         throw new Error("The contract address/provider doesn't exist");
       }
-      this.contract = new ethers.Contract(this.address, this.abi, this.web3Provider);
-
+      const signer = await this.web3Provider.getSigner();
+      this.contract = new Contract(this.deployedAddress, this.abi, signer);
       const code = await this.web3Provider?.getCode(this.contract.target);
       if (code == "0x") {
         throw new Error("Contract is empty / not found in the network");
@@ -110,12 +111,11 @@ export class BlockchainService {
     return this.contract;
   }
 
-  private getCurrentAccount(): Promise<string> {
-    return new Promise((resolve, reject) => {
-      this.getWeb3Provider().then(async (web3) => {
-        let accounts = await web3.listAccounts()
-        resolve(accounts[0].address)
-      })
-    });
+  private async getCurrentAccount(): Promise<string> {
+    if (!this.web3Provider) {
+      this.web3Provider = await this.getWeb3Provider();
+    }
+    let accounts = await this.web3Provider.listAccounts()
+    return accounts[0].address;
   }
 }

@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, inject, OnInit, signal} from '@angular/core';
 import {DoctorService} from 'src/admin/services/doctor.service';
 import {KuboRPCClient} from "kubo-rpc-client";
-import {FormsModule} from "@angular/forms";
+import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Progress_cardComponent} from "../../../utils/progress_card/progress_card.component";
+import {NgOptimizedImage} from "@angular/common";
 
 
 @Component({
@@ -11,29 +12,33 @@ import {Progress_cardComponent} from "../../../utils/progress_card/progress_card
   styleUrls: ['./add.component.sass'],
   imports: [
     FormsModule,
-    Progress_cardComponent
+    Progress_cardComponent,
+    NgOptimizedImage,
+    ReactiveFormsModule
   ]
 })
 export class AddComponent implements OnInit {
-  model: any = {
-    docID: '',
-    fName: 'test_name',
-    lName: 'test_name',
-    Doj: '',
-    emailID: 'test_name@mail.com',
-    phone: '123456789',
-    city: 'city',
-    state: 'state',
-    specialty: 'specialty',
-    imageHash: '',
-  };
 
-  image_url: any;
+  fb = inject(FormBuilder)
+  doctorForm = this.fb.group({
+    fName: ['test_name', Validators.required],
+    lName: ['test_name'],
+    doj: ['10/10/2010', Validators.required],
+    emailId: ['test_name@mail.com', [Validators.required, Validators.email]],
+    phone: ['1212121212', Validators.required],
+    docId: ['0x70997970c51812dc3a010c7d01b50e0d17dc79c8', Validators.required],
+    city: ['tests', Validators.required],
+    state: ['test'],
+    speciality: ['test', Validators.required],
+    image: ['']
+  });
 
-  show: boolean = false;
-  msg_text: string = '';
-  warn: boolean = false;
-  success: boolean = false
+  image_url = signal('')
+
+  show = signal(false);
+  msg_text = signal('');
+  warn = signal(false);
+  success = signal(false)
 
   ipfs: KuboRPCClient;
 
@@ -48,29 +53,22 @@ export class AddComponent implements OnInit {
   }
 
   onAddDocSubmit() {
-    this.show = true;
-    this.msg_text = 'Adding Doctor to the Network....';
-    this.warn = false;
-    this.success = false
+    this.show.set(true);
+    this.msg_text.set('Adding Doctor to the Network....');
+    this.warn.set(false);
+    this.success.set(false)
 
-    this.model.imageHash = this.image_url;
+    this.doctorForm.controls.image.setValue(this.image_url() ?? '')
 
-    let data = this.model;
-
-    this.ds.addDoctor(this.model.docID, data).then((r: any) => {
-      this.success = true
-      this.msg_text = 'Data added to IPFS...';
-      this.msg_text += '<br>User Added to the Blockchain';
+    this.ds.addDoctor(this.doctorForm.value).then((r: any) => {
+      this.success.set(true)
+      this.msg_text.set('Data added to IPFS...');
+      this.msg_text.set('<br>User Added to the Blockchain');
       console.log('User added Successfully');
-
-      this.model = {}
-
+      this.doctorForm.reset();
     }).catch((er: any) => {
-      this.warn = true
-      this.msg_text =
-        'Adding Doctor Failed<br> <small class="fw-light text-danger"><b>"</b>' +
-        this.model.docID +
-        '<b>"</b></small><br>1.not a valid address or <br>2.Already have a role';
+      this.warn.set(true)
+      this.msg_text.set('Adding Doctor Failed<br>1.not a valid address or <br>2.Already have a role');
       console.log(er);
     })
   }
@@ -80,14 +78,18 @@ export class AddComponent implements OnInit {
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
       reader.onload = (event: any) => {
-        this.image_url = event.target.result;
+        this.image_url.set(event.target.result);
       };
       reader.readAsDataURL(event.target.files[0]);
     }
   }
 
   onClose() {
-    this.show = false;
-    this.warn = false;
+    this.show.set(false);
+    this.warn.set(false);
+  }
+
+  protected validateDocId() {
+    return this.doctorForm.controls.docId.value?.length != 42;
   }
 }
