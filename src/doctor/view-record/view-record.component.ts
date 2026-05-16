@@ -1,10 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { DoctorService } from '../services/doctor.service';
+import {Component, OnInit} from '@angular/core';
+import {DoctorService} from '../services/doctor.service';
+import {FormsModule} from "@angular/forms";
+import {Progress_cardComponent} from "../../shared/progress_card/progress_card.component";
+import {RecordComponent} from "./record/record.component";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-view-record',
   templateUrl: './view-record.component.html',
   styleUrls: ['./view-record.component.sass'],
+  imports: [
+    FormsModule,
+    Progress_cardComponent,
+    RecordComponent,
+    DatePipe
+  ]
 })
 export class ViewRecordComponent implements OnInit {
   model: any = {};

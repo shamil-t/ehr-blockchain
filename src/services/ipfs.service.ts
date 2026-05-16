@@ -1,14 +1,12 @@
-import {inject, Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {create, KuboRPCClient} from 'kubo-rpc-client';
 import {IPFS} from 'src/environments/environment';
-import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root',
 })
 export class IpfsService {
-  http: HttpClient = inject(HttpClient);
-  ipfs: KuboRPCClient;
+  private readonly ipfs: KuboRPCClient;
 
   constructor() {
     this.ipfs = create({url: IPFS.localIPFS});
@@ -18,11 +16,35 @@ export class IpfsService {
     return this.ipfs;
   }
 
-  getIpfsData(ipfsHash: string) {
-    return this.http.get(IPFS.localIPFSGet + ipfsHash)
+  async getJsonData<T>(ipfsHash: string): Promise<T> {
+    return JSON.parse(await this.getIpfsData(ipfsHash)) as T;
+  }
+
+  getImageUrl(ipfsHash: string): string {
+    if (!ipfsHash) return '';
+    return IPFS.localIPFSGet + ipfsHash
+  }
+
+  async addFile(file: File) {
+    return this.ipfs.add(file);
   }
 
   async addRecord(data: any) {
-    return (await (this.ipfs.add(Buffer.from(JSON.stringify(data))))).path;
+    const jsonData = JSON.stringify(data);
+    const result = await this.ipfs.add(jsonData);
+    return result.path;
+    // return (await (this.ipfs.add(Buffer.from(JSON.stringify(data))))).path;
+  }
+
+  private async getIpfsData(ipfsHash: string): Promise<string> {
+    const decoder = new TextDecoder();
+    let result = '';
+
+    for await(const chunk of this.ipfs.cat(ipfsHash)) {
+      result += decoder.decode(chunk, {stream: true});
+    }
+
+    result += decoder.decode()
+    return result;
   }
 }

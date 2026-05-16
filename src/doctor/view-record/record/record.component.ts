@@ -1,9 +1,13 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {NgOptimizedImage} from "@angular/common";
 
 @Component({
   selector: 'app-record',
   templateUrl: './record.component.html',
   styleUrls: ['./record.component.sass'],
+  imports: [
+    NgOptimizedImage
+  ]
 })
 export class RecordComponent implements OnInit {
   @Input() PatientRecord: any;

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.4.21;
 
-import "./Roles.sol";
+import {Roles} from "./Roles.sol";
 
 contract Contract {
   using Roles for Roles.Role;
@@ -23,13 +23,11 @@ contract Contract {
   }
 
   //get Admin
-
   function isAdmin() public view returns (bool) {
     return admin.has(msg.sender);
   }
 
   //Add Doctor
-
   function addDrInfo(address dr_id, string memory _drInfo_hash) public {
     require(admin.has(msg.sender), "Only For Admin");
 
@@ -50,7 +48,6 @@ contract Contract {
   }
 
   // check is Doctor
-
   function isDr(address id) public view returns (bool) {
     return doctor.has(id);
   }

@@ -8,5 +8,5 @@ export type DoctorType = {
   city: string
   state: string
   speciality: string
-  imageHash: string
+  image: string
 }

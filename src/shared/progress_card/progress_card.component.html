@@ -10,9 +10,13 @@
     <div class="load-text my-3 mx-3 text-center fs-6 fw-normal" [innerHTML]="msg_text">
     </div>
     <div class="retry" [hidden]="!warn">
-      <button class="btn btn-primary btn-sm" (click)="onRetry()">
-        <i class="fas fa-redo"></i>
-        &nbsp;Retry
+      <button class="{{retry_text == 'Retry' ? 'btn btn-sm btn-primary' : 'btn btn-sm btn-danger'}}" (click)="onRetry()">
+        @if (retry_text == 'Retry') {
+          <i class="fas fa-redo"></i>
+        } @else {
+          <i class="fa-regular fa-circle-xmark"></i>
+        }
+        &nbsp;{{ retry_text }}
       </button>
     </div>
   </div>

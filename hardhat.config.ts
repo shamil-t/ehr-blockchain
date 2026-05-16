@@ -1,4 +1,4 @@
-import { defineConfig } from "hardhat/config";
+import {defineConfig} from "hardhat/config";
 import hardhatIgnitionViemPlugin from "@nomicfoundation/hardhat-ignition-viem";
 
 export default defineConfig({

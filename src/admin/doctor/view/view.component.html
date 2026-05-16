@@ -13,7 +13,7 @@
               <div class="doc-image">
                 <img
                   class="border border-1 border-secondary rounded-circle p-1"
-                  [ngSrc]="doc.imageHash || 'assets/images/doctor.png'"
+                  [ngSrc]="ipfs.getImageUrl(doc.image) || 'assets/images/doctor.png'"
                   alt="Doctor Image"
                   width="150"
                   height="150"

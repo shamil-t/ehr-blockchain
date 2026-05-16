@@ -1,11 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { DoctorService } from '../services/doctor.service';
+import {Component, OnInit} from '@angular/core';
+import {DoctorService} from '../services/doctor.service';
+import {FormsModule} from "@angular/forms";
+import {PatientRecordComponent} from "./patient-record/patient-record.component";
+import {Progress_cardComponent} from "../../shared/progress_card/progress_card.component";
 
 @Component({
   selector: 'app-consultation',
   templateUrl: './consultation.component.html',
   styleUrls: ['./consultation.component.sass'],
+  imports: [
+    FormsModule,
+    PatientRecordComponent,
+    Progress_cardComponent
+  ]
 })
 export class ConsultationComponent implements OnInit {
   model: any = {

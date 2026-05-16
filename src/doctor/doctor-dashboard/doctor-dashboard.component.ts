@@ -1,53 +1,71 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { DoctorService } from '../services/doctor.service';
+import {Component, effect, inject, OnInit, signal} from '@angular/core';
+import {Router, RouterOutlet} from '@angular/router';
+import {Progress_cardComponent} from "../../shared/progress_card/progress_card.component";
+import {HeaderComponent} from "./header/header.component";
+import {SidebarComponent} from "./sidebar/sidebar.component";
+import {WalletService} from "../../services/wallet.service";
+import {EhrContractService} from "../../services/ehr-contract.service";
 
 @Component({
   selector: 'app-doctor-dashboard',
   templateUrl: './doctor-dashboard.component.html',
   styleUrls: ['./doctor-dashboard.component.sass'],
+  imports: [
+    Progress_cardComponent,
+    HeaderComponent,
+    SidebarComponent,
+    RouterOutlet
+  ]
 })
 export class DoctorDashboardComponent implements OnInit {
-  isDoctor: boolean = false;
+  isDoctor = signal(false);
 
-  isCollapse: boolean = false;
+  isCollapse = signal(false);
 
-  checkProgress: boolean = true;
-  progressWarn: boolean = false;
-  progressMsg: string = 'Checking Doctor....';
+  checkProgress = signal(true);
+  progressWarn = signal(false);
+  progressMsg = signal('Checking Doctor....');
 
-  constructor(private router: Router, private doctorService: DoctorService) {
-    //TODO
-    router.navigate(['/doctor/view-record']);
+  walletService = inject(WalletService);
+  ehrContractService = inject(EhrContractService);
+  router: Router = inject(Router);
+  account = ''
+
+  constructor() {
+    effect(() => {
+      if (this.account != this.walletService.connectedAccount()) {
+        this.account = this.walletService.connectedAccount();
+        this.onCheckDoctor().then(_r => {
+        })
+      }
+    });
   }
 
   ngOnInit(): void {
-    this.onCheckDoctor();
+    this.onCheckDoctor().then(r => {
+    });
   }
 
-  onCheckDoctor() {
-    this.checkProgress = true;
-    this.progressWarn = false;
-    this.progressMsg = 'Checking Doctor....';
+  async onCheckDoctor() {
+    this.checkProgress.set(true);
+    this.progressWarn.set(false);
+    this.progressMsg.set('Checking Doctor....');
 
-    var count = 0;
+    this.isDoctor.set(await this.ehrContractService.isDoctor())
 
-    let checkDr = setInterval(() => {
-      this.doctorService.checkisDr();
-      if (this.doctorService.checkComplete) {
-        if (this.doctorService.isDoctor) {
-          this.isDoctor = true;
-        } else {
-          this.progressWarn = true;
-          this.progressMsg = 'Only Doctors have acess to this page...';
-        }
-        clearInterval(checkDr);
-      }
+    if (this.isDoctor()) {
+      this.router.navigate(['/doctor/dashboard']).then(r => {
+        console.log("Routing to Doctor Dashboard");
+      });
+    } else {
+      this.progressWarn.set(true);
+      this.progressMsg.set('<p class="small"><span class="text-danger">Only doctor have Access to this Page.... </span><br> ' +
+        'Connect MetaMask to your Doctor account</p>')
+    }
+  }
 
-      if (count >= 50) {
-        clearInterval(checkDr);
-      }
-      count++;
-    }, 1000);
+  protected exitProgress() {
+    this.router.navigate(['']).then(r => {
+    });
   }
 }

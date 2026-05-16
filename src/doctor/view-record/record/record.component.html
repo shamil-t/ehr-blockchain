@@ -9,7 +9,7 @@
         <hr>
           <div class="col-md-12">
             <div class="col-md-12 daignosis">
-              <div class="h6">Daignosis</div>
+              <div class="h6">Diagnosis</div>
               <hr>
                 <div class="col-md-10">
                   <div class="card p-2">
@@ -43,7 +43,7 @@
                   </table>
                 </div>
                 <div class="col-md-6 recomnded-tests my-2">
-                  <div class="h6">Recomended Tests</div>
+                  <div class="h6">Recommended Tests</div>
                   <hr>
                     <table class="table">
                       <thead>
@@ -70,7 +70,7 @@
                       <hr>
                         @for (file of Medical.files; track file; let i = $index) {
                           <div class="lab-files position-relative">
-                            <img [src]="file" alt="" width="150px" height="150px">
+                            <img [ngSrc]="file" alt="" width="150" height="150" priority>
                             <a download="labfile.jpg" [href]="file"><i class="fas fa-download"></i></a>
                           </div>
                         }

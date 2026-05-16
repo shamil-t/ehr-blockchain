@@ -2,7 +2,7 @@ import {Component, inject, OnInit, signal} from '@angular/core';
 import {DoctorService} from 'src/admin/services/doctor.service';
 import {KuboRPCClient} from "kubo-rpc-client";
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {Progress_cardComponent} from "../../../utils/progress_card/progress_card.component";
+import {Progress_cardComponent} from "../../../shared/progress_card/progress_card.component";
 import {NgOptimizedImage} from "@angular/common";
 
 
@@ -21,15 +21,15 @@ export class AddComponent implements OnInit {
 
   fb = inject(FormBuilder)
   doctorForm = this.fb.group({
-    fName: ['test_name', Validators.required],
-    lName: ['test_name'],
-    doj: ['10/10/2010', Validators.required],
-    emailId: ['test_name@mail.com', [Validators.required, Validators.email]],
-    phone: ['1212121212', Validators.required],
-    docId: ['0x70997970c51812dc3a010c7d01b50e0d17dc79c8', Validators.required],
-    city: ['tests', Validators.required],
-    state: ['test'],
-    speciality: ['test', Validators.required],
+    fName: ['', Validators.required],
+    lName: [''],
+    doj: ['', Validators.required],
+    emailId: ['', [Validators.required, Validators.email]],
+    phone: ['', Validators.required],
+    docId: ['', Validators.required],
+    city: ['', Validators.required],
+    state: [''],
+    speciality: ['', Validators.required],
     image: ['']
   });
 
@@ -42,6 +42,8 @@ export class AddComponent implements OnInit {
 
   ipfs: KuboRPCClient;
 
+  selectedDocImage: File | null = null;
+
   constructor(
     private ds: DoctorService
   ) {
@@ -52,13 +54,19 @@ export class AddComponent implements OnInit {
     this.ipfs = this.ds.ipfs
   }
 
-  onAddDocSubmit() {
+  async onAddDocSubmit() {
     this.show.set(true);
     this.msg_text.set('Adding Doctor to the Network....');
     this.warn.set(false);
     this.success.set(false)
 
-    this.doctorForm.controls.image.setValue(this.image_url() ?? '')
+    if (this.selectedDocImage) {
+      const imageHash = await this.ds.addDocImage(this.selectedDocImage);
+      this.doctorForm.controls.image.setValue(imageHash.path)
+    } else {
+      this.doctorForm.controls.image.setValue('')
+    }
+
 
     this.ds.addDoctor(this.doctorForm.value).then((_r: any) => {
       this.success.set(true)
@@ -74,14 +82,66 @@ export class AddComponent implements OnInit {
   }
 
 
-  PreviewImage(event: any) {
+  async PreviewImage(event: any) {
     if (event.target.files && event.target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = (event: any) => {
-        this.image_url.set(event.target.result);
-      };
-      reader.readAsDataURL(event.target.files[0]);
+      const resizedBlob = await this.resizeProfileImage(event.target.files[0]);
+      this.selectedDocImage = new File([resizedBlob], "DoctorProfileImage.png", {
+        type: resizedBlob.type,
+        lastModified: Date.now()
+      });
+      this.image_url.set(URL.createObjectURL(resizedBlob));
     }
+  }
+
+  async resizeProfileImage(file: File): Promise<Blob> {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+
+        if (!ctx) return
+
+        const TARGET_SIZE = 150;
+
+        canvas.width = TARGET_SIZE;
+        canvas.height = TARGET_SIZE;
+
+        // Maintain aspect ratio WITHOUT cropping
+        const scale = Math.max(
+          TARGET_SIZE / img.width,
+          TARGET_SIZE / img.height
+        );
+
+        const newWidth = img.width * scale;
+        const newHeight = img.height * scale;
+
+        const x = (TARGET_SIZE - newWidth) / 2;
+        const y = (TARGET_SIZE - newHeight) / 2;
+
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+
+        ctx.drawImage(img, x, y, newWidth, newHeight);
+
+        canvas.toBlob(
+          (blob) => {
+            if (!blob) {
+              reject('Failed to resize image');
+              return;
+            }
+
+            resolve(blob);
+          },
+          'image/jpeg',
+          0.95
+        );
+      };
+
+      img.onerror = reject;
+      img.src = URL.createObjectURL(file);
+    });
   }
 
   onClose() {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NavigationComponent} from "../navigation/navigation.component";
 
 @Component({

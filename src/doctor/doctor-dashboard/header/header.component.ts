@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {NgClass} from "@angular/common";
 
 @Component({
   selector: 'doctor-header',
@@ -7,7 +8,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
       <a
         class="navbar-brand col-md-2 col-lg-2 px-3 text-white fs-bold"
         href="/"
-        >EHR Hospital</a
+      >EHR Hospital</a
       >
       <button
         class="navbar-toggler d-md-none"
@@ -19,6 +20,9 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
     </header>
   `,
   styleUrls: ['./header.component.css'],
+  imports: [
+    NgClass
+  ]
 })
 export class HeaderComponent implements OnInit {
   @Output()
