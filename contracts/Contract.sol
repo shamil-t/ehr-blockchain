@@ -14,7 +14,7 @@ contract Contract {
     string drHash;
   }
 
-  mapping(address => Doctor) Doctors;
+  mapping(address => Doctor) private Doctors;
 
   address[] public DrIDs;
 
