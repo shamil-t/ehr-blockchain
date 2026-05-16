@@ -1,12 +1,14 @@
 import {Routes} from '@angular/router';
+import {doctorGuard} from "../guards/doctor.guard";
 
 export const DoctorRoutes: Routes = [
   {
     path: '',
+    canActivateChild: [doctorGuard],
     loadComponent: () => import('./doctor-dashboard/doctor-dashboard.component').then(m => m.DoctorDashboardComponent),
     children: [
       {
-        path: 'doctor-dashboard',
+        path: 'dashboard',
         loadComponent: () => import('./dashboard-home/dashboard-home.component').then(m => m.DashboardHomeComponent),
       },
       {

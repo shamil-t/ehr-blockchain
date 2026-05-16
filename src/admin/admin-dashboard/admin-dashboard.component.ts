@@ -1,9 +1,10 @@
 import {Component, effect, inject, OnInit, signal} from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
-import {BlockchainService} from "../../services/blockchain.service";
-import {Progress_cardComponent} from "../../utils/progress_card/progress_card.component";
+import {Progress_cardComponent} from "../../shared/progress_card/progress_card.component";
 import {HeaderComponent} from "./header/header.component";
 import {SidebarComponent} from "./sidebar/sidebar.component";
+import {EhrContractService} from "../../services/ehr-contract.service";
+import {WalletService} from "../../services/wallet.service";
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -18,7 +19,8 @@ import {SidebarComponent} from "./sidebar/sidebar.component";
 })
 export class AdminDashboardComponent implements OnInit {
   router = inject(Router);
-  bs = inject(BlockchainService)
+  walletService = inject(WalletService);
+  ehrService = inject(EhrContractService)
   isCollapse: boolean = true;
 
   account: string = '';
@@ -30,21 +32,19 @@ export class AdminDashboardComponent implements OnInit {
 
   constructor() {
     effect(() => {
-      if (this.account != this.bs.account()) {
-        this.account = this.bs.account();
-        this.onCheckAdmin()
-      }
+      this.walletService.connectedAccount()
+      this.checkIsConnectedAsAdminAccount()
     });
   }
 
   ngOnInit(): void {
-
+    this.checkIsConnectedAsAdminAccount()
   }
 
-  onCheckAdmin() {
+  checkIsConnectedAsAdminAccount() {
     this.progressMsg.set('Checking Admin Access...')
     this.progressWarn.set(false)
-    this.bs.checkIsAdmin().then(r => {
+    this.ehrService.isAdmin().then(r => {
       this.isAdmin.set(r)
       console.log(this.isAdmin())
       if (!this.isAdmin()) {
@@ -61,5 +61,10 @@ export class AdminDashboardComponent implements OnInit {
     this.progressWarn.set(true)
     this.progressMsg.set('<span class="text-danger">Only admin have Access to this Page.... </span><br> ' +
       'Connect MetaMask to your Admin account')
+  }
+
+  protected exitProgress() {
+    this.router.navigate(['']).then(r => {
+    })
   }
 }

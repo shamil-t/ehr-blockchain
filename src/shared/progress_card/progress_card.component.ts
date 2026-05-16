@@ -1,9 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-progress_card',
   templateUrl: './progress_card.component.html',
   styleUrls: ['./progress_card.component.sass'],
+  imports: []
 })
 export class Progress_cardComponent implements OnInit {
   @Input()
@@ -15,12 +16,16 @@ export class Progress_cardComponent implements OnInit {
   @Input()
   success: boolean = false
 
+  @Input()
+  retry_text: string = 'Retry';
+
   @Output()
   retry: EventEmitter<any> = new EventEmitter<any>();
   @Output()
   close: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor() {}
+  constructor() {
+  }
 
   ngOnInit() {
 

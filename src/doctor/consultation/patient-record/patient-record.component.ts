@@ -1,4 +1,6 @@
-import { Component, Input, OnInit, Output,EventEmitter } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FormsModule} from "@angular/forms";
+import {NgOptimizedImage} from "@angular/common";
 
 
 type MedicationType = [
@@ -21,6 +23,10 @@ type PatientMedicalrecordType = {
   selector: 'app-patient-record',
   templateUrl: './patient-record.component.html',
   styleUrls: ['./patient-record.component.sass'],
+  imports: [
+    FormsModule,
+    NgOptimizedImage
+  ]
 })
 export class PatientRecordComponent implements OnInit {
   @Input() PatientDetails: any = {};
@@ -62,7 +68,7 @@ export class PatientRecordComponent implements OnInit {
     console.log(this.model);
 
     this.saveRecord.emit(this.model)
-    
+
   }
 
   onFileAdd(files:any){

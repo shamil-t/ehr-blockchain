@@ -1,6 +1,7 @@
 import {Component, effect, inject, OnInit, signal} from '@angular/core';
-import {BlockchainService} from 'src/services/blockchain.service';
 import {RouterOutlet} from "@angular/router";
+import {EhrContractService} from "../services/ehr-contract.service";
+import {WalletService} from "../services/wallet.service";
 
 
 @Component({
@@ -10,20 +11,25 @@ import {RouterOutlet} from "@angular/router";
   imports: [RouterOutlet]
 })
 export class AppComponent implements OnInit {
-  blockChainService = inject(BlockchainService);
-  account= signal('')
+  walletService: WalletService = inject(WalletService);
+  ehrContractService = inject(EhrContractService);
+  account = signal('')
   isConnected = signal(false);
   load_text = signal('Connecting to BlockChain....');
   retry_visibility = signal(false);
 
   constructor() {
     effect(() => {
-      this.account = this.blockChainService.account
+      this.account = this.walletService.connectedAccount
+      if (this.account() == '') {
+        this.walletService.getConnectedAccount().then((_) => {
+        })
+      }
     });
   }
 
   ngOnInit(): void {
-      this.connectWithContract();
+    this.connectWithContract();
   }
 
   reload() {
@@ -31,8 +37,8 @@ export class AppComponent implements OnInit {
   }
 
   connectWithContract() {
-    this.blockChainService.getContract().then(_ => {
-      this.isConnected.set(true);
+    this.ehrContractService.validateContract().then(x => {
+      this.isConnected.set(x);
     }).catch(err => {
       console.log(err)
       this.isConnected.set(false);

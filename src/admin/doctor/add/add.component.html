@@ -4,11 +4,11 @@
       <div class="row g-3 pb-3">
         <!--        Doctor Image -->
         <div class="col-12">
-          <div class="usr-image d-flex justify-content-center flex-column align-items-center object-fit pt-3">
-            <img class="image rounded-circle" [ngSrc]=" image_url() || 'assets/images/doctor.png'" alt="user"
+          <div class="usr-image d-flex justify-content-center flex-column align-items-center pt-3">
+            <img class="rounded-circle object-fit-contain bg-white border" [ngSrc]=" image_url() || 'assets/images/doctor.png'" alt="user"
                  width="150" height="150" priority>
             <div class="img-c mb-3 mt-3 col-md-6 d-flex flex-column">
-              <label class="form-label text-center" for="formFile">Select Doctor image</label>
+              <label class="form-label text-center fs-8 text-secondary-emphasis" for="formFile">Select Doctor image</label>
               <input class="img-chooser form-control" type="file" id="formFile" (change)="PreviewImage($event)">
             </div>
           </div>
@@ -39,13 +39,25 @@
         </div>
 
         <!--        Date of joining -->
-        <div class="col-12">
+        <div class="col-12 col-sm-6">
           <div class="form-floating">
             <input formControlName="doj" id="dob" type="date" class="form-control" placeholder="date of Joining"
                    required/>
             <label for="dob">Date of Joining<sup class="fas fa-asterisk fs-8 text-danger"></sup></label>
             @if (doctorForm.controls.doj.touched && doctorForm.controls.doj.invalid) {
               <div class="text-danger small pt-1">Date of joining is required</div>
+            }
+          </div>
+        </div>
+
+        <!--        Speciality -->
+        <div class="col-12 col-sm-6">
+          <div class="form-floating">
+            <input formControlName="speciality" id="spec" type="text" class="form-control"
+                   placeholder="specialties" required/>
+            <label for="spec">Speciality<sup class="fas fa-asterisk fs-8 text-danger"></sup></label>
+            @if (doctorForm.controls.speciality.touched && doctorForm.controls.speciality.invalid) {
+              <span class="text-danger small">Speciality should not be empty</span>
             }
           </div>
         </div>
@@ -107,25 +119,14 @@
           </div>
         </div>
 
-        <!--        Speciality -->
-        <div class="col-12 col-sm-6">
-          <div class="form-floating">
-            <input formControlName="speciality" id="spec" type="text" class="form-control"
-                   placeholder="specialties" required/>
-            <label for="spec">Speciality<sup class="fas fa-asterisk fs-8 text-danger"></sup></label>
-            @if (doctorForm.controls.speciality.touched && doctorForm.controls.speciality.invalid) {
-              <span class="text-danger">Speciality should not be empty</span>
-            }
-          </div>
-        </div>
-
       </div>
       <button type="submit" id="btn" class="btn btn-primary" [disabled]="doctorForm.invalid">
         Add Doctor
       </button>
     </form>
   </div>
-  <app-progress_card [success]="success()" [show]="show()" [msg_text]="msg_text()" [warn]="warn()" (retry)="onAddDocSubmit()"
+  <app-progress_card [success]="success()" [show]="show()" [msg_text]="msg_text()" [warn]="warn()"
+                     (retry)="onAddDocSubmit()"
                      (close)="onClose()">
   </app-progress_card>
 </div>

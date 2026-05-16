@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {NgClass} from "@angular/common";
 import {RouterLink} from "@angular/router";
 

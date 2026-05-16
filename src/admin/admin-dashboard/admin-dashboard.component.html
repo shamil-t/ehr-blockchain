@@ -16,4 +16,5 @@
 
 <app-progress_card [success]="isAdmin() && checkProgress()" [show]="!isAdmin()" [msg_text]="progressMsg()"
                    [warn]="progressWarn()"
-                   (retry)="onCheckAdmin()"></app-progress_card>
+                   retry_text="Exit"
+                   (retry)="exitProgress()"></app-progress_card>

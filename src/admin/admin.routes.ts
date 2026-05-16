@@ -14,11 +14,12 @@ export const AdminRoutes: Routes = [
       {
         path: 'doctor',
         loadComponent: () => import('./doctor/doctor.component').then(m => m.DoctorComponent)
-      },
-      {
-        path: 'patient',
-        loadComponent: () => import('./patient/patient.component').then(m => m.PatientComponent)
-      },
+      }
     ],
   },
+  {
+    path: '**',
+    redirectTo: 'admin/dashboard',
+    pathMatch: 'full',
+  }
 ];

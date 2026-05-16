@@ -1,7 +1,8 @@
-import {Component, OnInit, signal, WritableSignal} from '@angular/core';
+import {Component, inject, OnInit, signal, WritableSignal} from '@angular/core';
 import {DoctorService} from 'src/admin/services/doctor.service';
 import {DoctorType} from "../../../types/doctor.type";
 import {NgOptimizedImage} from "@angular/common";
+import {IpfsService} from "../../../services/ipfs.service";
 
 @Component({
   selector: 'doctor-view',
@@ -12,6 +13,7 @@ import {NgOptimizedImage} from "@angular/common";
   ]
 })
 export class ViewComponent implements OnInit {
+  ipfs = inject(IpfsService)
   Doctors: string[] = [];
   DoctorDetails: WritableSignal<DoctorType[]> = signal([]);
 
@@ -31,16 +33,13 @@ export class ViewComponent implements OnInit {
     this.loadAllDoctors()
   }
 
-  loadDrDetails() {
+  async loadDrDetails() {
     this.DoctorDetails.set([])
     for (let i = 0; i < this.Doctors.length; i++) {
       if (this.Doctors[i]) {
-        this.doctorService.getDoctorDetails(this.Doctors[i]).then((data) => {
-          data.subscribe((doctor: any) => {
-            this.DoctorDetails.set([...this.DoctorDetails(), doctor]);
-            // console.log(this.DoctorDetails())
-          })
-        });
+        const doctor = await this.doctorService.getDoctorDetails(this.Doctors[i])
+        console.log(doctor)
+        this.DoctorDetails.set([...this.DoctorDetails(), doctor]);
       }
     }
     this.progressMsg.set('')

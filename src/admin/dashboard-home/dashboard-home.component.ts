@@ -1,7 +1,7 @@
 import {Component, inject, OnInit, signal} from '@angular/core';
-import {BlockchainService} from 'src/services/blockchain.service';
 import {CardComponent} from "./card/card.component";
 import {CurrencyPipe} from "@angular/common";
+import {WalletService} from "../../services/wallet.service";
 
 
 @Component({
@@ -14,7 +14,6 @@ import {CurrencyPipe} from "@angular/common";
   styleUrls: ['./dashboard-home.component.sass']
 })
 export class DashboardHomeComponent implements OnInit {
-  bs = inject(BlockchainService);
 
   Titles: any = ['Total Patients', 'In Patients', 'Active Doctors', 'Active Nurses']
   Images: any = ['user-injured', 'procedures', 'user-md', 'user-nurse']
@@ -23,12 +22,14 @@ export class DashboardHomeComponent implements OnInit {
 
   accountBalance = signal('0.00');
 
+  walletService = inject(WalletService);
+
   constructor() {
 
   }
 
   ngOnInit(): void {
-    this.bs.getBalanceByAccount().then(balance => {
+    this.walletService.getAccountBalance().then(balance => {
       this.accountBalance.set(balance);
     })
   }

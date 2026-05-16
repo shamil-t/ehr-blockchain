@@ -1,42 +1,31 @@
-import { Component, OnInit } from '@angular/core';
-import { DoctorService } from '../services/doctor.service';
+import {Component, inject, OnInit, signal, WritableSignal} from '@angular/core';
+import {DoctorService} from '../services/doctor.service';
+import {NgOptimizedImage} from "@angular/common";
+import {DoctorType} from "../../types/doctor.type";
+import {IpfsService} from "../../services/ipfs.service";
 
 @Component({
   selector: 'app-dashboard-home',
   templateUrl: './dashboard-home.component.html',
   styleUrls: ['./dashboard-home.component.sass'],
+  imports: [
+    NgOptimizedImage
+  ]
 })
 export class DashboardHomeComponent implements OnInit {
-  DoctorDetails: any = {
-    docID: '',
-    fName: 'First Name',
-    lName: 'Last Name',
-    Doj: '',
-    emailID: 'test_name@mail.com',
-    phone: '123456789',
-    city: 'city',
-    state: 'state',
-    speciality: 'speciality',
-    imageHash: null,
-  };
+  DoctorDetails: WritableSignal<DoctorType | null> = signal(null)
+  ipfs = inject(IpfsService)
 
   constructor(private doctorService: DoctorService) {
-    this.DoctorDetails = [];
+
   }
 
   ngOnInit(): void {
-    // this.check();
-    setTimeout(()=>{
-      this.getDoctorDetails()
-    },3000)
-    
+    this.getDoctorDetails()
   }
 
-  async getDoctorDetails(){
-    this.doctorService.getDoctor().then((data:any) =>{
-      
-      this.DoctorDetails = JSON.parse(data)
-    })
+  async getDoctorDetails() {
+    this.DoctorDetails.set(await this.doctorService.getDoctor())
   }
 
 }

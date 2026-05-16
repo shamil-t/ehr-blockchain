@@ -1,18 +1,15 @@
 import {inject, Injectable} from '@angular/core';
-import {BlockchainService} from 'src/services/blockchain.service';
 import {IpfsService} from 'src/services/ipfs.service';
 import {KuboRPCClient} from "kubo-rpc-client";
-import {ethers} from "ethers";
+import {DoctorType} from "../../types/doctor.type";
+import {EhrContractService} from "../../services/ehr-contract.service";
 
 @Injectable({
   providedIn: 'root',
 })
 export class DoctorService {
-  bs = inject(BlockchainService);
+  ehrContractService = inject(EhrContractService);
   ipfsService = inject(IpfsService);
-
-  contract: ethers.Contract | null = null;
-  account: string = '';
 
   ipfs: KuboRPCClient;
 
@@ -21,35 +18,21 @@ export class DoctorService {
   }
 
   async getDrs(): Promise<any> {
-    if (!this.contract) {
-      this.contract = await this.bs.getContract();
-    }
-    let doctors = await this.contract["getAllDrs"]()
-    return [...doctors];
+    return await this.ehrContractService.getAllDoctorsIds()
   }
 
   async getDoctorDetails(docID: any) {
-    if (!this.contract) {
-      this.contract = await this.bs.getContract();
-    }
-    if (!this.account) {
-      this.account = await this.bs.getAccount();
-    }
-    let docIpfsHash = await this.contract["getDr"](docID)
-    return this.ipfsService.getIpfsData(docIpfsHash);
+    let docIpfsHash = await this.ehrContractService.getDoctorDetailsHash(docID)
+    return this.ipfsService.getJsonData<DoctorType>(docIpfsHash);
   }
 
   async addDoctor(data: any): Promise<any> {
     const docId = data.docId;
-    if (!this.contract) {
-      this.contract = await this.bs.getContract();
-    }
-    if (!this.account) {
-      this.account = await this.bs.getAccount();
-    }
     const ipfsHash = await this.ipfsService.addRecord(data)
-    return await this.contract["addDrInfo"](docId, ipfsHash)
+    return await this.ehrContractService.addDoctor(docId, ipfsHash)
   }
 
-
+  addDocImage(selectedDocImage: File) {
+    return this.ipfsService.addFile(selectedDocImage);
+  }
 }
