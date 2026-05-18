@@ -52,3 +52,5 @@ Thumbs.db
 ignition/deployments/*
 .accounts
 .idea
+state.json
+src/assets/contract

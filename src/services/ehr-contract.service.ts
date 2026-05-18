@@ -3,8 +3,8 @@ import EHR_Contract from '../assets/contract/EHR.json'
 import DeployedAddress from '../assets/contract/deployed_addresses.json'
 import {Contract} from "ethers";
 import {WalletService} from "./wallet.service";
-import {User} from "../shared/enums/user.enum";
-import {UserType} from "../shared/types/user.type";
+import {User} from "../enums/user.enum";
+import {UserType} from "../types/user.type";
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +23,6 @@ export class EhrContractService {
       this.ehrContract = null
     });
   }
-
 
   async isAdmin(): Promise<boolean> {
     return (await this.isUser()) == User.ADMIN;

@@ -1,7 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {IpfsService} from 'src/services/ipfs.service';
 import {KuboRPCClient} from "kubo-rpc-client";
-import {DoctorType} from "../../shared/types/doctor.type";
+import {DoctorType} from "../../types/doctor.type";
 import {EhrContractService} from "../../services/ehr-contract.service";
 
 @Injectable({
