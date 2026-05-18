@@ -1,7 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {IpfsService} from 'src/services/ipfs.service';
 import {KuboRPCClient} from "kubo-rpc-client";
-import {DoctorType} from "../../types/doctor.type";
+import {DoctorType} from "../../shared/types/doctor.type";
 import {EhrContractService} from "../../services/ehr-contract.service";
 
 @Injectable({
@@ -17,13 +17,13 @@ export class DoctorService {
     this.ipfs = this.ipfsService.getIPFS();
   }
 
-  async getDrs(): Promise<any> {
-    return await this.ehrContractService.getAllDoctorsIds()
-  }
-
-  async getDoctorDetails(docID: any) {
-    let docIpfsHash = await this.ehrContractService.getDoctorDetailsHash(docID)
-    return this.ipfsService.getJsonData<DoctorType>(docIpfsHash);
+  async getAllDoctors(): Promise<DoctorType[]> {
+    let doctors = await this.ehrContractService.getAllDoctors();
+    let data: DoctorType[] = []
+    for (let doctor of doctors) {
+      data.push(await this.getDoctorDetails(doctor.profileCID));
+    }
+    return data
   }
 
   async addDoctor(data: any): Promise<any> {
@@ -34,5 +34,9 @@ export class DoctorService {
 
   addDocImage(selectedDocImage: File) {
     return this.ipfsService.addFile(selectedDocImage);
+  }
+
+  private async getDoctorDetails(doctorCID: any) {
+    return this.ipfsService.getJsonData<DoctorType>(doctorCID);
   }
 }

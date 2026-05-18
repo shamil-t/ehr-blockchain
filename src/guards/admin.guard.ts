@@ -7,7 +7,7 @@ export const adminGuard: CanActivateChildFn = async (_route, _state) => {
   const router = inject(Router);
 
   const isAdmin = await ehrContractService.isAdmin();
-  console.log("Admin guard", isAdmin);
+  // console.log("Admin guard", isAdmin);
   if (!isAdmin) {
     await router.navigateByUrl('/')
   }

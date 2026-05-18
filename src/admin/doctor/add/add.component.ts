@@ -67,7 +67,6 @@ export class AddComponent implements OnInit {
       this.doctorForm.controls.image.setValue('')
     }
 
-
     this.ds.addDoctor(this.doctorForm.value).then((_r: any) => {
       this.success.set(true)
       this.msg_text.set('Data added to IPFS...');

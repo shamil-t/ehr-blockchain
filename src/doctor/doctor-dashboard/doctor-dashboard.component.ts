@@ -42,8 +42,7 @@ export class DoctorDashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.onCheckDoctor().then(r => {
-    });
+    this.onCheckDoctor().then(_ =>{});
   }
 
   async onCheckDoctor() {
@@ -54,8 +53,8 @@ export class DoctorDashboardComponent implements OnInit {
     this.isDoctor.set(await this.ehrContractService.isDoctor())
 
     if (this.isDoctor()) {
-      this.router.navigate(['/doctor/dashboard']).then(r => {
-        console.log("Routing to Doctor Dashboard");
+      this.router.navigate(['/doctor/dashboard']).then(_r => {
+        // console.log("Routing to Doctor Dashboard");
       });
     } else {
       this.progressWarn.set(true);
@@ -65,7 +64,7 @@ export class DoctorDashboardComponent implements OnInit {
   }
 
   protected exitProgress() {
-    this.router.navigate(['']).then(r => {
+    this.router.navigate(['']).then(_r => {
     });
   }
 }

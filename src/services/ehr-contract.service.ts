@@ -1,60 +1,58 @@
 import {effect, inject, Injectable} from '@angular/core';
-import EHR_Contract from '../assets/contract/Contract.json'
+import EHR_Contract from '../assets/contract/EHR.json'
 import DeployedAddress from '../assets/contract/deployed_addresses.json'
 import {Contract} from "ethers";
 import {WalletService} from "./wallet.service";
+import {User} from "../shared/enums/user.enum";
+import {UserType} from "../shared/types/user.type";
 
 @Injectable({
   providedIn: 'root',
 })
 export class EhrContractService {
+  account = ''
   private walletService = inject(WalletService)
-  private readonly CONTRACT_ADDRESS = DeployedAddress["Contract#Contract"]
+  private readonly CONTRACT_ADDRESS = DeployedAddress["EHR#EHR"]
   private readonly ABI = EHR_Contract.abi
   private ehrContract: Contract | null = null
   private signerAddress: string = ''
 
   constructor() {
     effect(() => {
-      let _ = this.walletService.connectedAccount()
+      this.account = this.walletService.connectedAccount()
       this.ehrContract = null
     });
   }
 
+
   async isAdmin(): Promise<boolean> {
-    if (!this.ehrContract) {
-      this.ehrContract = await this.getContract()
-    }
-    return await this.ehrContract["isAdmin"]();
+    return (await this.isUser()) == User.ADMIN;
   }
 
   async isDoctor(): Promise<boolean> {
-    if (!this.ehrContract) {
-      this.ehrContract = await this.getContract()
-    }
-    return await this.ehrContract["isDr"](await this.walletService.getConnectedAccount());
+    return (await this.isUser()) == User.DOCTOR;
+  }
+
+  async isPatient(): Promise<boolean> {
+    return (await this.isUser()) == User.PATIENT;
   }
 
   async addDoctor(drId: string, ipfsHash: string): Promise<void> {
-    if (!this.ehrContract) {
-      this.ehrContract = await this.getContract()
-    }
-    return await this.ehrContract["addDrInfo"](drId, ipfsHash)
+    return await this.addUser(drId, ipfsHash, User.DOCTOR)
   }
 
-  async getAllDoctorsIds(): Promise<string[]> {
+  async getAllDoctors(): Promise<UserType[]> {
     if (!this.ehrContract) {
       this.ehrContract = await this.getContract()
     }
-    return await this.ehrContract["getAllDrs"]()
+    return await this.ehrContract["getAllDoctors"]()
   }
 
-  async getDoctorDetailsHash(drId: string): Promise<string> {
+  async getDoctorDetailsHash(): Promise<string> {
     if (!this.ehrContract) {
       this.ehrContract = await this.getContract()
     }
-    if (!drId) drId = this.signerAddress
-    return await this.ehrContract["getDr"](drId)
+    return await this.ehrContract["getDoctorProfile"]()
   }
 
   async validateContract() {
@@ -66,6 +64,25 @@ export class EhrContractService {
       throw new Error(`Contract is not deployed or not present in the connected network`)
     }
     return true
+  }
+
+  /**
+   *
+   * Private contract functions
+   * */
+
+  private async isUser(): Promise<number> {
+    if (!this.ehrContract) {
+      this.ehrContract = await this.getContract()
+    }
+    return Number(await this.ehrContract["isUser"](this.account))
+  }
+
+  private async addUser(id: string, ipfsHash: string, user: User): Promise<void> {
+    if (!this.ehrContract) {
+      this.ehrContract = await this.getContract()
+    }
+    return await this.ehrContract["addUser"](id, ipfsHash, user)
   }
 
   private async getContract() {

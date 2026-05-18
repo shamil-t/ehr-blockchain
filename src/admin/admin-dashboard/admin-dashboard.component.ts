@@ -46,7 +46,7 @@ export class AdminDashboardComponent implements OnInit {
     this.progressWarn.set(false)
     this.ehrService.isAdmin().then(r => {
       this.isAdmin.set(r)
-      console.log(this.isAdmin())
+      // console.log(this.isAdmin())
       if (!this.isAdmin()) {
         this.showProgress()
       } else {

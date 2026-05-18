@@ -1,7 +1,7 @@
-// const EHR_Contract = require('./src/assets/contract/Contract.json')
+// const EHR_Contract = require('./src/assets/contract/EHR.sol.json')
 // const DeployedAddress = require('./src/assets/contract/deployed_addresses.json')
 
-import EHR_Contract from './src/assets/contract/Contract.json' with {type: 'json'}
+import EHR_Contract from './src/assets/contract/EHR.json' with {type: 'json'}
 import DeployedAddress from './src/assets/contract/deployed_addresses.json' with {type: 'json'}
 
 import {create} from "kubo-rpc-client";
@@ -13,7 +13,7 @@ const IPFS = {
 }
 
 const ABI = EHR_Contract.abi
-const contractAddress = DeployedAddress["Contract#Contract"]
+const contractAddress = DeployedAddress["EHR#EHR"]
 
 class IpfsService {
   ipfs;
@@ -62,7 +62,9 @@ async function main() {
   console.log("Adding test doctor...")
 
   const ipfsHash = await ipfs.addRecord(doctor)
-  contract["addDrInfo"](doctor.docId, ipfsHash).then(result => {
+
+  // addUser(address id, string  memory dataHash, UserType userType)
+  contract["addUser"](doctor.docId, ipfsHash, 2).then(result => {
     console.log("Successfully added doctor...")
   })
 }
