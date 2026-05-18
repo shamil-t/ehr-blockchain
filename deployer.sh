@@ -12,11 +12,11 @@ npx hardhat compile
 
 echo "Deploying smart contract..."
 
-npx hardhat ignition deploy ignition/modules/Contract.ts --network localhost
+npx hardhat ignition deploy ignition/modules/EHR.ts --network localhost
 
 echo "Smart contract deployment completed"
 
-SOURCE_PATH="./artifacts/contracts/Contract.sol/Contract.json"
+SOURCE_PATH="./artifacts/contracts/EHR.sol/EHR.json"
 
 SOURCE_PATH_ADDR=$(find ignition/deployments -name deployed_addresses.json | head -n 1)
 

@@ -4,13 +4,13 @@
       <i class="fa-solid fa-rotate-right"></i>&nbsp; Refresh
     </button>
   </div>
-  <div class="container w-100">
+  <div class="container w-100 p-3">
     @if (DoctorDetails().length >= 1) {
-      <div class="content">
+      <div class="content py-3">
         @for (doc of DoctorDetails(); track doc) {
-          <div class="card mt-2">
+          <div class="card mb-1 shadow small border">
             <div class="doctor w-100 p-2 d-flex flex-row align-items-center">
-              <div class="doc-image">
+              <div class="doc-image px-3">
                 <img
                   class="border border-1 border-secondary rounded-circle p-1"
                   [ngSrc]="ipfs.getImageUrl(doc.image) || 'assets/images/doctor.png'"
@@ -20,48 +20,46 @@
                   priority
                 />
               </div>
-              <div class="doc-info d-flex flex-column">
+              <div class="doc-info d-flex flex-column text-secondary">
                 <div class="col">
                   <div class="row py-2">
                     <div class="col-md-12">
                       <b>DocID: </b>
-                      <span class="docID">
-                        <b>{{ doc.docId }}</b></span
-                      >
+                      <span class="text-success">
+                        <b>{{ doc.docId }}</b></span>
                     </div>
                   </div>
                   <div class="row-md-12 d-flex flex-row justify-content-between">
                     <div class="col-md-12 d-flex flex-column">
                       <div>
                         <b>Full Name : </b>
-                        <span class="fName"
-                        >{{ doc.fName }} {{ doc.lName }}</span
-                        >
+                        <span class="fName">{{ doc.fName }} {{ doc.lName }}</span>
                       </div>
                       <div>
                         <b>Date of Joining : </b>
                         <span class="Doj">{{ doc.doj }}</span>
                       </div>
                       <div>
-                        <b>Speciality: </b
-                        ><span class="speciality">{{ doc.speciality }}</span>
+                        <b>Speciality: </b>
+                        <span class="speciality">{{ doc.speciality }}</span>
                       </div>
                     </div>
                     <div class="col-md-12 d-flex flex-column">
                       <div>
-                        <b>Email : </b
-                        ><span class="emailID">{{ doc.emailId }}</span>
+                        <b>Email : </b>
+                        <span class="text-primary">{{ doc.emailId }}</span>
                       </div>
                       <div>
-                        <b>Phone: </b
-                        ><span class="phone">{{ doc.phone }}</span>
+                        <b>Phone: </b>
+                        <span class="phone">{{ doc.phone }}</span>
                       </div>
                       <div>
-                        <b>City </b><span class="city">{{ doc.city }}</span>
+                        <b>City: </b>
+                        <span class="city">{{ doc.city }}</span>
                       </div>
                       <div>
-                        <b>State: </b
-                        ><span class="state">{{ doc.state }}</span>
+                        <b>State: </b>
+                        <span class="state">{{ doc.state }}</span>
                       </div>
                     </div>
                   </div>

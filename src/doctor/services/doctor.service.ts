@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {IpfsService} from 'src/services/ipfs.service';
-import {DoctorType} from "../../types/doctor.type";
+import {DoctorType} from "../../shared/types/doctor.type";
 import {Contract} from "ethers";
 import {EhrContractService} from "../../services/ehr-contract.service";
 
@@ -18,7 +18,7 @@ export class DoctorService {
   }
 
   async getDoctor(): Promise<DoctorType> {
-    return (await this.ipfs.getJsonData(await this.ehrContractService.getDoctorDetailsHash(this.account)))
+    return (await this.ipfs.getJsonData(await this.ehrContractService.getDoctorDetailsHash()))
   }
 
   async checkIsPatient(id: string): Promise<boolean> {

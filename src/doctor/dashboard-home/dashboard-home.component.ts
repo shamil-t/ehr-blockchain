@@ -1,7 +1,7 @@
 import {Component, inject, OnInit, signal, WritableSignal} from '@angular/core';
 import {DoctorService} from '../services/doctor.service';
 import {NgOptimizedImage} from "@angular/common";
-import {DoctorType} from "../../types/doctor.type";
+import {DoctorType} from "../../shared/types/doctor.type";
 import {IpfsService} from "../../services/ipfs.service";
 
 @Component({
