@@ -1,73 +1,340 @@
-# EHR 2.0
+# Decentralized Electronic Health Record (EHR) System
 
+## Overview
 
-## Live
-Live site hosted in firebase
- [Click here](https://ehr-2-0.web.app/)
+This project is a decentralized Electronic Health Record (EHR) management system built using:
 
-## For Full working project 
+- Solidity Smart Contracts
+- Ethereum Blockchain
+- IPFS (InterPlanetary File System)
+- ethers.js
+- MetaMask
+- Angular
+- Local Anvil Node
 
--- Apponitments <br>
--- Pdf upload <br>
--- and much more. <br>
+The system enables secure and decentralized management of:
+- Patients
+- Doctors
+- Appointments
+- Medical Records
+- Access Permissions
 
-Demo : [Youtube](https://youtu.be/d_-pWoGgdVs)
-<br>
-Setup : [Youtube](https://youtube.com/playlist?list=PL54V-i7zW55d1VKxEkp9DCPt5k_zE6m3X)
+The architecture follows an IPFS-first design where sensitive medical data is stored off-chain while only essential references and permissions are maintained on-chain.
 
-contact : 
-[Mail](mailto:tshamil90@gmail.com?Subject=ehr-blockchain&Body=Hi,)
-`tshamil90@gmail.com`
+---
 
-🆁🅴🆀🆄🅸🆁🅴🅼🅴🅽🆃🆂
+# Objectives
 
-1.Install nodeJs
+The main goals of this project are:
 
-* [Node JS](https://nodejs.org/en/download/)
+- Eliminate centralized health record dependency
+- Ensure tamper-resistant medical history
+- Enable decentralized ownership of health records
+- Provide secure doctor-patient access control
+- Reduce data duplication and unauthorized access
+- Learn Web3-based healthcare architecture
 
-2.Install Ganache
+---
 
-* [Ganache Truffle](https://www.trufflesuite.com/ganache)
+# Technology Stack
 
-3. Download IPFS (kubo)
+| Technology | Purpose |
+|---|---|
+| Solidity | Smart Contract Development |
+| Ethereum | Blockchain Network |
+| Anvil | Local Ethereum Development Node |
+| ethers.js | Blockchain Interaction |
+| MetaMask | Wallet Authentication |
+| IPFS | Decentralized File Storage |
+| Angular | Frontend Application |
+| TypeScript | Frontend Logic |
 
-* [IPFS Kubo](https://dist.ipfs.tech/#go-ipfs)
+---
 
-  - configure ipfs refer: https://github.com/shamil-t/ehr-blockchain/issues/15#issuecomment-1333342345
+# System Architecture
 
-4.Add Metamask Extension in Browser
+## Blockchain Stores
 
-* [Metamask Chrome](https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en-US)
+The blockchain stores:
+- Wallet addresses
+- User roles
+- Appointment references
+- Medical record references
+- Access permissions
+- IPFS content identifiers (CIDs)
 
-5. open cmd in project directory
+## IPFS Stores
 
+IPFS stores:
+- Patient profile metadata
+- Doctor profile metadata
+- Appointment metadata
+- Medical record metadata
+- Uploaded medical files/documents
+
+---
+
+# User Roles
+
+## Admin
+Responsible for:
+- Registering doctors
+- Registering patients
+
+## Doctor
+Can:
+- View authorized patient records
+- Add medical records
+- Approve/reject appointments
+- View appointments
+
+## Patient
+Can:
+- Book appointments
+- Grant/revoke doctor access
+- View own medical records
+- Cancel appointments
+
+---
+
+# Smart Contract Modules
+
+## 1. User Management
+
+### Features
+- Register doctors
+- Register patients
+- Validate user roles
+
+### Data Stored
+```solidity
+struct User {
+    address id;
+    string profileCID;
+    bool exists;
+}
 ```
-npm install --force
+
+---
+
+## 2. Appointment Management
+
+### Features
+- Book appointments
+- Update appointment status
+- View appointments by user
+- Admin can view all appointments
+
+### Appointment Status
+- PENDING
+- APPROVED
+- REJECTED
+- COMPLETED
+- CANCELED
+
+### Data Structure
+```solidity
+struct Appointment {
+    uint256 id;
+    address patient;
+    address doctor;
+    string metadataCID;
+    uint256 appointmentTime;
+    AppointmentStatus status;
+    uint256 createdAt;
+}
 ```
 
-5.open cmd/terminal as Administrator and type
+---
 
-```
-npm install -g truffle
-```
+## 3. Medical Record Management
 
-6.open Ganache
- 
- *  New Workspace
- *  AddProject
- *  Select truffle-config.js in Project Directory
- *  Save Workspace
+### Features
+- Upload medical records
+- Retrieve patient records
+- Access-controlled record viewing
 
-7.Compile and migrate Contracts
- ```
- truffle migrate
- ```
-8. Run Server
-
-```
-npm start
+### Data Structure
+```solidity
+struct MedicalRecord {
+    uint256 id;
+    address patient;
+    address doctor;
+    string metadataCID;
+    string filesCID;
+    uint256 createdAt;
+}
 ```
 
-Known Issue: (https://github.com/shamil-t/ehr-blockchain/issues/15)
+---
 
+## 4. Access Control
 
+Patients can:
+- Grant doctors access to records
+- Revoke doctor access
+
+Doctors can:
+- Access records only when permission is granted
+
+### Permission Mapping
+```solidity
+mapping(address => mapping(address => bool))
+private doctorAccess;
+```
+
+---
+
+# Smart Contract Design Principles
+
+## Minimal On-Chain Storage
+
+Sensitive data is NOT stored directly on-chain.
+
+Only:
+- references
+- permissions
+- relationships
+- metadata CIDs
+
+are stored on blockchain.
+
+---
+
+## Single Source of Truth
+
+Appointments and records are stored using:
+```solidity
+mapping(uint256 => Appointment)
+mapping(uint256 => MedicalRecord)
+```
+
+with indexed relationships for scalability.
+
+---
+
+## Access-Controlled Data Retrieval
+
+Medical records are accessible only if:
+- requester is the patient
+- requester is an authorized doctor
+
+---
+
+# Workflow
+
+## Patient Registration
+1. Admin registers patient
+2. Patient profile uploaded to IPFS
+3. CID stored on blockchain
+
+---
+
+## Doctor Registration
+1. Admin registers doctor
+2. Doctor profile uploaded to IPFS
+3. CID stored on blockchain
+
+---
+
+## Appointment Booking
+1. Patient selects doctor
+2. Appointment metadata uploaded to IPFS
+3. Appointment stored on blockchain
+
+---
+
+## Medical Record Upload
+1. Doctor receives permission
+2. Medical files uploaded to IPFS
+3. CID references stored on blockchain
+
+---
+
+# Security Features
+
+- Role-based access control
+- Permission-controlled medical records
+- Immutable blockchain records
+- Decentralized storage
+- Patient-controlled authorization
+
+---
+
+# Advantages
+
+- Decentralized architecture
+- Improved transparency
+- Tamper resistance
+- Reduced centralized dependency
+- Better interoperability
+- Patient ownership of data
+
+---
+
+# Limitations
+
+- Blockchain transaction costs
+- Public blockchain metadata visibility
+- IPFS availability management
+- No encryption implemented in MVP
+- Limited scalability without indexing
+
+---
+
+# Future Improvements
+
+- Encrypted IPFS payloads
+- Hospital management module
+- Prescription management
+- Pagination support
+- Event indexing
+- Audit logs
+- Multi-admin support
+- The Graph integration
+- Role-based dashboards
+- JWT + Web3 hybrid auth
+- File encryption and key management
+
+---
+
+# Local Development Setup
+
+## Start Anvil
+```bash
+anvil
+```
+
+---
+
+## Deploy Smart Contract
+```bash
+forge script script/EHR.s.sol --broadcast
+```
+
+---
+
+## Start Local IPFS
+```bash
+ipfs daemon
+```
+
+---
+
+## Angular Frontend
+```bash
+npm install
+ng serve
+```
+
+---
+
+# Conclusion
+
+This project demonstrates a decentralized healthcare record management system using blockchain and IPFS technologies. The architecture prioritizes:
+- decentralized ownership
+- secure access control
+- scalable smart contract design
+- minimal on-chain storage
+
+The implementation serves as a strong MVP foundation for future enterprise-grade decentralized healthcare applications.
