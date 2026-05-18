@@ -43,6 +43,7 @@ The main goals of this project are:
 | Solidity | Smart Contract Development |
 | Ethereum | Blockchain Network |
 | Anvil | Local Ethereum Development Node |
+| Hardhat | Smart Contract Tooling |
 | ethers.js | Blockchain Interaction |
 | MetaMask | Wallet Authentication |
 | IPFS | Decentralized File Storage |
@@ -300,31 +301,82 @@ Medical records are accessible only if:
 
 # Local Development Setup
 
-## Start Anvil
+## Start Complete Project Environment
+
+Run:
+
 ```bash
-anvil
+./start-project.sh
+```
+
+This starts:
+- Local Anvil blockchain
+- Local IPFS node
+- Frontend application
+- Required development services
+
+---
+
+# Smart Contract Deployment
+
+## Option 1 — Deployment Script
+
+Run:
+
+```bash
+./deployer.sh
 ```
 
 ---
 
-## Deploy Smart Contract
+## Option 2 — Hardhat Ignition Deployment
+
+### Compile Contracts
+
 ```bash
-forge script script/EHR.s.sol --broadcast
+npx hardhat compile
+```
+
+### Deploy Contract
+
+```bash
+npx hardhat ignition deploy ignition/modules/EHR.ts --network localhost
 ```
 
 ---
 
-## Start Local IPFS
-```bash
-ipfs daemon
-```
+# Frontend Setup
 
----
+Install dependencies:
 
-## Angular Frontend
 ```bash
 npm install
+```
+
+Run Angular frontend:
+
+```bash
 ng serve
+```
+
+---
+
+# Project Structure
+
+```text
+contracts/
+├── EHR.sol
+
+frontend/
+├── src/
+
+ignition/
+├── modules/
+│   └── EHR.ts
+
+scripts/
+├── deployer.sh
+├── start-project.sh
 ```
 
 ---
