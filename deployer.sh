@@ -2,26 +2,36 @@
 
 set -e
 
-echo "Deploying smart contract...."
+echo "Cleaning old Ignition deployments..."
 
-npx hardhat ignition deploy ignition/modules/Contract.ts --network localhost --reset
+rm -rf ignition/deployments
 
+echo "Compiling contracts..."
+
+npx hardhat compile
+
+echo "Deploying smart contract..."
+
+npx hardhat ignition deploy ignition/modules/EHR.ts --network localhost
 
 echo "Smart contract deployment completed"
 
-SOURCE_PATH="./artifacts/contracts/Contract.sol/Contract.json"
-SOURCE_PATH_ADDR="ignition/deployments/chain-31337/deployed_addresses.json"
+SOURCE_PATH="./artifacts/contracts/EHR.sol/EHR.json"
+
+SOURCE_PATH_ADDR=$(find ignition/deployments -name deployed_addresses.json | head -n 1)
+
 DESTINATION="./src/assets/contract"
 
 mkdir -p "$DESTINATION"
 
-echo "Copying contract file"
+echo "Copying contract files..."
 
-mv "$SOURCE_PATH" "$DESTINATION"
+cp "$SOURCE_PATH" "$DESTINATION"
 
-mv "$SOURCE_PATH_ADDR" "$DESTINATION"
+cp "$SOURCE_PATH_ADDR" "$DESTINATION"
 
-echo "Deployment completed !!!"
+echo "Running seeder..."
 
 node seeder.js
 
+echo "Deployment completed !!!"

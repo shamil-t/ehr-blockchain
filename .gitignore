@@ -49,6 +49,6 @@ Thumbs.db
 /cache
 /ignition/deployments
 /artifacts
-
+ignition/deployments/*
 .accounts
 .idea
