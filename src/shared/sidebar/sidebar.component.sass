@@ -1,0 +1,143 @@
+$sidebar-width: 260px
+$sidebar-collapsed-width: 80px
+
+$sidebar-bg: #111827
+$sidebar-hover: rgba(255, 255, 255, 0.08)
+$sidebar-border: rgba(255, 255, 255, 0.08)
+
+$primary: #2563eb
+$text-light: #d1d5db
+$text-muted: #9ca3af
+$danger: #f87171
+
+$transition: all 0.3s ease
+
+/* SIDEBAR */
+
+.sidebar
+  width: $sidebar-width
+  margin-top: 25px
+  min-height: calc(100vh - 25px)
+  background: $sidebar-bg
+  position: fixed
+  top: 0
+  left: 0
+  z-index: 1000
+  overflow-x: hidden
+  transition: $transition
+
+  &.collapsed
+    width: $sidebar-collapsed-width
+
+    .nav-link
+      justify-content: center
+      padding: 0
+
+    .logout-btn
+      justify-content: center
+
+    .sidebar-header
+      justify-content: center
+
+  .sidebar-container
+    min-height: calc(100vh - 25px)
+
+/* HEADER */
+
+.sidebar-header
+  padding: 1rem 1.2rem
+  border-bottom: 1px solid $sidebar-border
+
+  h5
+    color: white
+    font-weight: 600
+
+/* TOGGLE BUTTON */
+
+.toggle-btn
+  width: 38px
+  height: 38px
+  border-radius: 10px
+  border: none
+  background: rgba(255, 255, 255, 0.08)
+  color: white
+  transition: $transition
+  display: flex
+  justify-content: center
+  align-items: center
+
+  &:hover
+    background: rgba(255, 255, 255, 0.15)
+
+/* MENU LABEL */
+
+.menu-label
+  color: $text-muted
+  font-size: 11px
+  font-weight: 700
+  letter-spacing: 1px
+
+/* NAV LINKS */
+
+.nav-link
+  height: 48px
+  border-radius: 12px
+  display: flex
+  align-items: center
+  gap: 14px
+  padding: 0 14px
+  color: $text-light
+  transition: $transition
+  font-weight: 500
+
+  i
+    width: 20px
+    text-align: center
+    font-size: 16px
+    flex-shrink: 0
+
+  span
+    white-space: nowrap
+
+  &:hover
+    background: $sidebar-hover
+    color: white
+
+  &.active
+    background: $primary
+    color: white
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35)
+
+/* LOGOUT */
+
+.logout-btn
+  color: $danger
+
+  &:hover
+    background: rgba(248, 113, 113, 0.12)
+    color: white
+
+/* CONTENT */
+
+.content-wrapper
+  width: 100%
+  transition: $transition
+
+.content-expanded
+  margin-left: $sidebar-width
+
+.content-collapsed
+  margin-left: $sidebar-collapsed-width
+
+/* MOBILE */
+
+@media (max-width: 768px)
+
+  .sidebar
+    transform: translateX(-100%)
+
+    &.mobile-open
+      transform: translateX(0)
+
+  .content-wrapper
+    margin-left: 0 !important

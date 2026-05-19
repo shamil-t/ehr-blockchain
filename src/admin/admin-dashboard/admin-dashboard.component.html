@@ -1,17 +1,9 @@
-<div class="dashboard"></div>
-
 @if (!isAdmin()) {
   <div class="overlay"></div>
 } @else {
-  <app-header (onCollapse)="isCollapse = !isCollapse"></app-header>
-  <div class="container-fluid m-0">
-    <div class="row m-0">
-      <app-sidebar [isCollapsed]="isCollapse"></app-sidebar>
-      <main class="col-md-10 ms-sm-auto col-lg-10 m-0">
-        <router-outlet></router-outlet>
-      </main>
-    </div>
-  </div>
+  <app-sidebar title="Admin Dashboard" [sidebarNavLinks]="sidebarMenus">
+    <router-outlet></router-outlet>
+  </app-sidebar>
 }
 
 <app-progress_card [success]="isAdmin() && checkProgress()" [show]="!isAdmin()" [msg_text]="progressMsg()"

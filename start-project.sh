@@ -20,7 +20,7 @@ IPFS_PID=$!
 
 echo "Starting Anvil..."
 
-anvil --balance 100 --dump-state state.json &
+anvil --balance 100 --load-state state.json --dump-state state.json &
 ANVIL_PID=$!
 
 echo "Starting Angular..."

@@ -1,17 +1,10 @@
-<div class="overlay" [hidden]="isDoctor()">
-</div>
+@if (!isDoctor()) {
+  <div class="overlay"></div>
+} @else {
+  <app-sidebar title="Doctor Dashboard" [sidebarNavLinks]="sidebarNavMenus">
+    <router-outlet></router-outlet>
+  </app-sidebar>
+}
+
 <app-progress_card retry_text="Exit" [show]="!isDoctor()" [msg_text]="progressMsg()" [warn]="progressWarn()"
                    (retry)="exitProgress()"></app-progress_card>
-
-<div class="dashboard"></div>
-
-<doctor-header (onCollapse)="isCollapse.set(!isCollapse)"></doctor-header>
-
-<div class="container-fluid m-0">
-  <div class="row m-0">
-    <doctor-sidebar [isCollapsed]="isCollapse()"></doctor-sidebar>
-    <main class="col-md-10 ms-sm-auto col-lg-10 m-0">
-      <router-outlet></router-outlet>
-    </main>
-  </div>
-</div>
