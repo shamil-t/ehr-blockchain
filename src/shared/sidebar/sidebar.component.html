@@ -1,0 +1,94 @@
+<div class="d-flex">
+
+  <!-- SIDEBAR -->
+  <nav
+    class="sidebar shadow"
+    [class.collapsed]="isCollapsed">
+
+    <div class="d-flex flex-column sidebar-container">
+
+      <!-- HEADER -->
+      <div
+        class="sidebar-header d-flex align-items-center justify-content-between">
+
+        @if (!isCollapsed) {
+          <h5 class="mb-0">
+            {{ title() }}
+          </h5>
+        }
+
+        <button
+          class="btn toggle-btn"
+          (click)="toggleSidebar()">
+          <i class="fas fa-bars"></i>
+        </button>
+
+      </div>
+
+      @for (m of sidebarNavLinks(); track m) {
+        <!-- MENU LABEL -->
+        @if (!isCollapsed) {
+          <small class="menu-label px-3 mt-4 mb-2">
+            {{ m.name }}
+          </small>
+        }
+
+        <!-- NAVIGATION -->
+        @for (n of m.menuItems; track n.routerLink) {
+          <ul class="nav flex-column px-2" [class.pt-4]="isCollapsed">
+            <li class="nav-item mb-2">
+              <a
+                class="nav-link" [class.active]="n.active"
+                [title]="n.label"
+                [routerLink]="n.routerLink">
+                <i class="fas {{n.icon}}"></i>
+                @if (!isCollapsed) {
+                  <span>{{ n.label }}</span>
+                }
+              </a>
+            </li>
+          </ul>
+        }
+
+
+      }
+
+
+
+      <!-- PUSH LOGOUT TO BOTTOM -->
+      <div class="flex-grow-1 mt-auto"></div>
+
+      <!-- LOGOUT -->
+      <div class="p-3 mt-auto">
+        <a
+          title="Sign Out"
+          class="nav-link logout-btn"
+          routerLink="/">
+
+          <i class="fas fa-sign-out-alt"></i>
+
+          @if (!isCollapsed) {
+            <span>Sign Out</span>
+          }
+        </a>
+      </div>
+
+    </div>
+
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main
+    class="content-wrapper"
+    [class.content-expanded]="!isCollapsed"
+    [class.content-collapsed]="isCollapsed">
+
+    <div class="p-4 min-vh-100 bg-light">
+
+      <ng-content></ng-content>
+
+    </div>
+
+  </main>
+
+</div>

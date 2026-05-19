@@ -1,10 +1,10 @@
 import {Component, effect, inject, OnInit, signal} from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
 import {Progress_cardComponent} from "../../shared/progress_card/progress_card.component";
-import {HeaderComponent} from "./header/header.component";
-import {SidebarComponent} from "./sidebar/sidebar.component";
+import {SidebarComponent} from "../../shared/sidebar/sidebar.component";
 import {EhrContractService} from "../../services/ehr-contract.service";
 import {WalletService} from "../../services/wallet.service";
+import {SidebarMenuItem} from "../../types/sidebar-menu.type";
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -12,7 +12,6 @@ import {WalletService} from "../../services/wallet.service";
   styleUrls: ['./admin-dashboard.component.sass'],
   imports: [
     Progress_cardComponent,
-    HeaderComponent,
     SidebarComponent,
     RouterOutlet
   ]
@@ -22,6 +21,8 @@ export class AdminDashboardComponent implements OnInit {
   walletService = inject(WalletService);
   ehrService = inject(EhrContractService)
   isCollapse: boolean = true;
+
+  sidebarMenus: SidebarMenuItem[] = []
 
   account: string = '';
   isAdmin = signal(false);
@@ -39,6 +40,16 @@ export class AdminDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkIsConnectedAsAdminAccount()
+
+    let menu: SidebarMenuItem = {
+      name: 'Management',
+      menuItems: [
+        {icon: 'fa-home', label: 'Dashboard', routerLink: '/admin/dashboard', active: true},
+        {icon: 'fa-user-doctor', label: 'Doctor', routerLink: '/admin/doctor', active: false}
+      ]
+    }
+
+    this.sidebarMenus.push(menu)
   }
 
   checkIsConnectedAsAdminAccount() {

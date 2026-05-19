@@ -1,10 +1,10 @@
 import {Component, effect, inject, OnInit, signal} from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
 import {Progress_cardComponent} from "../../shared/progress_card/progress_card.component";
-import {HeaderComponent} from "./header/header.component";
-import {SidebarComponent} from "./sidebar/sidebar.component";
 import {WalletService} from "../../services/wallet.service";
 import {EhrContractService} from "../../services/ehr-contract.service";
+import {SidebarComponent} from "../../shared/sidebar/sidebar.component";
+import {SidebarMenuItem} from "../../types/sidebar-menu.type";
 
 @Component({
   selector: 'app-doctor-dashboard',
@@ -12,9 +12,9 @@ import {EhrContractService} from "../../services/ehr-contract.service";
   styleUrls: ['./doctor-dashboard.component.sass'],
   imports: [
     Progress_cardComponent,
-    HeaderComponent,
     SidebarComponent,
-    RouterOutlet
+    RouterOutlet,
+    SidebarComponent
   ]
 })
 export class DoctorDashboardComponent implements OnInit {
@@ -30,6 +30,7 @@ export class DoctorDashboardComponent implements OnInit {
   ehrContractService = inject(EhrContractService);
   router: Router = inject(Router);
   account = ''
+  protected sidebarNavMenus: SidebarMenuItem[] = [];
 
   constructor() {
     effect(() => {
@@ -42,7 +43,19 @@ export class DoctorDashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.onCheckDoctor().then(_ =>{});
+    this.onCheckDoctor().then(_ => {
+    });
+
+    let menu: SidebarMenuItem = {
+      name: 'Management',
+      menuItems: [
+        {icon: 'fa-home', label: 'Dashboard', routerLink: '/doctor/dashboard', active: true},
+        {icon: 'fa-notes-medical', label: 'View Record', routerLink: '/doctor/view-record', active: false},
+        {icon: 'fa-user-injured', label: 'Consultation', routerLink: '/doctor/consult', active: false}
+      ]
+    }
+
+    this.sidebarNavMenus.push(menu)
   }
 
   async onCheckDoctor() {
