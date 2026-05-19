@@ -1,25 +1,479 @@
-<app-navigation></app-navigation>
-<div class="home container-fluid">
-  <div class="overlay">
-    <section
-      class="her-wrap js-fullheight"
-      data-section="home"
-      data-stellar-background-ratio="0.5"
-    >
-      <div class="container">
-        <div
-          class="row no-gutters slider-text js-fullheight align-items-center justify-content-start"
-          data-scrollax-parent="true"
-        >
-          <div class="content col-md-6">
-            <div class="subh">
-              <span class="subheading">Welcome to EHR Hospital</span>
-              <h1 class="mb-4">We are here <br />for your Care</h1>
-              <p class="mb-4"></p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top py-3">
+  <div class="container">
+
+    <a class="navbar-brand fw-bold text-primary" routerLink="/">
+      MedLedger EHR
+    </a>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+
+        <li class="nav-item mx-2">
+          <a class="nav-link active" href="#">Home</a>
+        </li>
+
+        <li class="nav-item mx-2">
+          <a class="nav-link" href="#portals">Portals</a>
+        </li>
+
+        <li class="nav-item mx-2">
+          <a class="nav-link" href="#features">Features</a>
+        </li>
+
+        <li class="nav-item mx-2">
+          <a class="nav-link" href="#security">Security</a>
+        </li>
+
+        <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
+          <a class="btn btn-primary px-4 rounded-pill" href="#portals">
+            Launch Platform
+          </a>
+        </li>
+
+      </ul>
+
+    </div>
   </div>
-</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero-section d-flex align-items-center">
+
+  <div class="container">
+
+    <div class="row align-items-center g-5">
+
+      <!-- LEFT -->
+      <div class="col-lg-6">
+
+        <span class="hero-badge mb-3 d-inline-block">
+          Blockchain Secured Healthcare
+        </span>
+
+        <h1 class="display-4 fw-bold mb-4">
+          Secure Electronic Health Records Powered by Blockchain
+        </h1>
+
+        <p class="lead text-secondary mb-4">
+          A modern healthcare platform enabling hospitals, doctors, and patients
+          to securely manage medical records with transparency, privacy, and trust.
+        </p>
+
+        <div class="d-flex flex-wrap gap-3 mb-4">
+
+          <a class="btn btn-primary btn-lg rounded-pill px-4" href="#portals">
+            Access Platform
+          </a>
+
+          <button class="btn btn-outline-primary btn-lg rounded-pill px-4">
+            Learn More
+          </button>
+
+        </div>
+
+        <div class="hero-features">
+
+          <span>
+            <i class="fa-solid fa-shield-halved"></i>
+            Blockchain Secured
+          </span>
+
+          <span>
+            <i class="fa-solid fa-lock"></i>
+            Encrypted Storage
+          </span>
+
+          <span>
+            <i class="fa-solid fa-user-shield"></i>
+            Patient Controlled Access
+          </span>
+
+        </div>
+
+      </div>
+
+      <!-- RIGHT -->
+      <div class="col-lg-6">
+
+        <div class="hero-card shadow-lg">
+
+          <div class="d-flex justify-content-between align-items-center mb-4">
+
+            <div>
+              <h5 class="fw-semibold mb-1">
+                Healthcare Dashboard
+              </h5>
+
+              <small class="text-muted">
+                Secure healthcare infrastructure
+              </small>
+            </div>
+
+            <span class="badge bg-success">
+              Active
+            </span>
+
+          </div>
+
+          <div class="dashboard-box mb-3">
+
+            <div>
+              <h6 class="mb-1">
+                Patient Records
+              </h6>
+
+              <small class="text-muted">
+                Blockchain verified medical history
+              </small>
+            </div>
+
+            <i class="fa-solid fa-circle-check text-success"></i>
+
+          </div>
+
+          <div class="dashboard-box mb-3">
+
+            <div>
+              <h6 class="mb-1">
+                Doctor Access
+              </h6>
+
+              <small class="text-muted">
+                Role-based authentication
+              </small>
+            </div>
+
+            <i class="fa-solid fa-user-doctor text-primary"></i>
+
+          </div>
+
+          <div class="dashboard-box">
+
+            <div>
+              <h6 class="mb-1">
+                Hospital Management
+              </h6>
+
+              <small class="text-muted">
+                Secure decentralized infrastructure
+              </small>
+            </div>
+
+            <i class="fa-solid fa-hospital text-warning"></i>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- PORTALS -->
+<section id="portals" class="py-5 bg-light">
+
+  <div class="container">
+
+    <div class="text-center mb-5">
+
+      <h2 class="fw-bold mb-3">
+        Choose Your Portal
+      </h2>
+
+      <p class="text-secondary">
+        Access the platform based on your role within the healthcare ecosystem.
+      </p>
+
+    </div>
+
+    <div class="row g-4">
+
+      <!-- ADMIN -->
+      <div class="col-lg-4">
+
+        <div class="card portal-card border-0 shadow-sm h-100">
+
+          <div class="card-body p-4">
+
+            <div class="portal-icon bg-primary-subtle text-primary">
+              <i class="fa-solid fa-hospital"></i>
+            </div>
+
+            <h4 class="fw-semibold mb-3">
+              Hospital Administration
+            </h4>
+
+            <p class="text-secondary mb-4">
+              Manage doctors, monitor records, and maintain institutional oversight securely.
+            </p>
+
+            <ul class="portal-list">
+              <li>Doctor Management</li>
+              <li>Record Verification</li>
+              <li>Access Control</li>
+              <li>System Monitoring</li>
+            </ul>
+
+            <button
+              routerLink="/admin"
+              class="btn btn-primary w-100 rounded-pill">
+              Go to Admin Dashboard
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- DOCTOR -->
+      <div class="col-lg-4">
+
+        <div class="card portal-card border-0 shadow-sm h-100">
+
+          <div class="card-body p-4">
+
+            <div class="portal-icon bg-success-subtle text-success">
+              <i class="fa-solid fa-user-doctor"></i>
+            </div>
+
+            <h4 class="fw-semibold mb-3">
+              Doctor Portal
+            </h4>
+
+            <p class="text-secondary mb-4">
+              Access patient records, upload reports, and manage treatments securely.
+            </p>
+
+            <ul class="portal-list">
+              <li>Patient Records</li>
+              <li>Medical Reports</li>
+              <li>Treatment History</li>
+              <li>Secure Authentication</li>
+            </ul>
+
+            <button
+              routerLink="/doctor"
+              class="btn btn-success w-100 rounded-pill">
+              Go to Doctor Dashboard
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- PATIENT -->
+      <div class="col-lg-4">
+
+        <div class="card portal-card border-0 shadow-sm h-100">
+
+          <div class="card-body p-4">
+
+            <div class="portal-icon bg-info-subtle text-info">
+              <i class="fa-solid fa-user"></i>
+            </div>
+
+            <h4 class="fw-semibold mb-3">
+              Patient Portal
+            </h4>
+
+            <p class="text-secondary mb-4">
+              View and manage your health records with complete privacy and control.
+            </p>
+
+            <ul class="portal-list">
+              <li>Personal Records</li>
+              <li>Access Permissions</li>
+              <li>Download Reports</li>
+              <li>Privacy Control</li>
+            </ul>
+
+            <button
+              routerLink="/patient/"
+              class="btn btn-info text-white w-100 rounded-pill">
+              Go to Patient Dashboard
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- FEATURES -->
+<section id="features" class="py-5">
+
+  <div class="container">
+
+    <div class="text-center mb-5">
+
+      <h2 class="fw-bold mb-3">
+        Built for Modern Healthcare Infrastructure
+      </h2>
+
+      <p class="text-secondary">
+        Designed with security, transparency, and reliability at its core.
+      </p>
+
+    </div>
+
+    <div class="row g-4">
+
+      <div class="col-md-3">
+
+        <div class="feature-box">
+
+          <i class="fa-solid fa-shield-halved"></i>
+
+          <h5>
+            Security
+          </h5>
+
+          <p>
+            Immutable blockchain-backed medical records.
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="col-md-3">
+
+        <div class="feature-box">
+
+          <i class="fa-solid fa-user-lock"></i>
+
+          <h5>
+            Privacy
+          </h5>
+
+          <p>
+            Patient-controlled access permissions.
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="col-md-3">
+
+        <div class="feature-box">
+
+          <i class="fa-solid fa-eye"></i>
+
+          <h5>
+            Transparency
+          </h5>
+
+          <p>
+            Verified audit trails for every transaction.
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="col-md-3">
+
+        <div class="feature-box">
+
+          <i class="fa-solid fa-cloud"></i>
+
+          <h5>
+            Reliability
+          </h5>
+
+          <p>
+            Decentralized secure healthcare storage.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- TRUST SECTION -->
+<section id="security" class="trust-section">
+
+  <div class="container text-center">
+
+    <h2 class="fw-bold mb-3 text-white">
+      Trusted Digital Healthcare Management
+    </h2>
+
+    <p class="trust-text text-light">
+      Designed to improve healthcare collaboration while protecting patient privacy
+      and ensuring medical data authenticity.
+    </p>
+
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer class="footer-section">
+
+  <div class="container">
+
+    <div class="row align-items-center">
+
+      <div class="col-md-6 mb-3 mb-md-0">
+
+        <h5 class="fw-bold text-primary mb-1">
+          MedLedger EHR
+        </h5>
+
+        <small class="text-secondary">
+          Secure Healthcare Infrastructure
+        </small>
+
+      </div>
+
+      <div class="col-md-6 text-md-end">
+
+        <a href="#">
+          GitHub
+        </a>
+
+        <a href="#">
+          Documentation
+        </a>
+
+        <a href="#">
+          Privacy Policy
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</footer>
