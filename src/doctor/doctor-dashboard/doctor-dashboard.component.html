@@ -1,10 +1,5 @@
-@if (!isDoctor()) {
-  <div class="overlay"></div>
-} @else {
+@if (isDoctor()) {
   <app-sidebar title="Doctor Dashboard" [sidebarNavLinks]="sidebarNavMenus">
     <router-outlet></router-outlet>
   </app-sidebar>
 }
-
-<app-progress_card retry_text="Exit" [show]="!isDoctor()" [msg_text]="progressMsg()" [warn]="progressWarn()"
-                   (retry)="exitProgress()"></app-progress_card>

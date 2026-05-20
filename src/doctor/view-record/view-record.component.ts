@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {DoctorService} from '../services/doctor.service';
 import {FormsModule} from "@angular/forms";
-import {Progress_cardComponent} from "../../shared/progress_card/progress_card.component";
 import {RecordComponent} from "./record/record.component";
 import {DatePipe} from "@angular/common";
 
@@ -11,7 +10,6 @@ import {DatePipe} from "@angular/common";
   styleUrls: ['./view-record.component.sass'],
   imports: [
     FormsModule,
-    Progress_cardComponent,
     RecordComponent,
     DatePipe
   ]
@@ -27,9 +25,10 @@ export class ViewRecordComponent implements OnInit {
   progressMsg: string = 'Loading....';
   progressWarn: boolean = false;
   progressSuccess: boolean = false;
-  viewRecord:boolean =false
+  viewRecord: boolean = false
 
-  constructor(private doctorService: DoctorService) {}
+  constructor(private doctorService: DoctorService) {
+  }
 
   ngOnInit(): void {
     //FIXME
@@ -70,13 +69,13 @@ export class ViewRecordComponent implements OnInit {
     this.progressMsg = 'Loading...!';
   }
 
-  onViewRecord(record:any){
+  onViewRecord(record: any) {
     this.PatientRecord = record
     console.log(this.PatientRecord.data);
     this.viewRecord = true
   }
 
-  onRecordClose(){
+  onRecordClose() {
     this.PatientRecord = {}
     this.viewRecord = false
   }

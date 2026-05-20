@@ -13,12 +13,6 @@ type MedicationType = [
   }
 ];
 
-type PatientMedicalrecordType = {
-  Diagnosis: '';
-  Medication: MedicationType;
-  ClinicalTest: [];
-};
-
 @Component({
   selector: 'app-patient-record',
   templateUrl: './patient-record.component.html',
@@ -71,11 +65,11 @@ export class PatientRecordComponent implements OnInit {
 
   }
 
-  onFileAdd(files:any){
-    for (let i = 0; i< files.target.files.length; i++) {
-      var reader = new FileReader();
+  onFileAdd(files: any) {
+    for (let i = 0; i < files.target.files.length; i++) {
+      const reader = new FileReader();
       reader.onload = (event: any) => {
-        this.LabFiles[i]= event.target.result;
+        this.LabFiles[i] = event.target.result;
       };
       reader.readAsDataURL(files.target.files[i]);
     }

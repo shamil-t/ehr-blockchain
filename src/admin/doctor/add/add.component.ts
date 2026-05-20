@@ -2,8 +2,8 @@ import {Component, inject, OnInit, signal} from '@angular/core';
 import {DoctorService} from 'src/admin/services/doctor.service';
 import {KuboRPCClient} from "kubo-rpc-client";
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {Progress_cardComponent} from "../../../shared/progress_card/progress_card.component";
 import {NgOptimizedImage} from "@angular/common";
+import {UiFeedbackService} from "../../../services/ui-feedback.service";
 
 
 @Component({
@@ -12,7 +12,6 @@ import {NgOptimizedImage} from "@angular/common";
   styleUrls: ['./add.component.sass'],
   imports: [
     FormsModule,
-    Progress_cardComponent,
     NgOptimizedImage,
     ReactiveFormsModule
   ]
@@ -35,18 +34,12 @@ export class AddComponent implements OnInit {
 
   image_url = signal('')
 
-  show = signal(false);
-  msg_text = signal('');
-  warn = signal(false);
-  success = signal(false)
+  uiFeedbackService = inject(UiFeedbackService);
 
   ipfs: KuboRPCClient;
-
   selectedDocImage: File | null = null;
 
-  constructor(
-    private ds: DoctorService
-  ) {
+  constructor(private ds: DoctorService) {
     this.ipfs = ds.ipfs
   }
 
@@ -55,10 +48,8 @@ export class AddComponent implements OnInit {
   }
 
   async onAddDocSubmit() {
-    this.show.set(true);
-    this.msg_text.set('Adding Doctor to the Network....');
-    this.warn.set(false);
-    this.success.set(false)
+    this.uiFeedbackService.showLoader("Adding Doctor...")
+    this.uiFeedbackService.showProgress(10, "Adding Doctor details to the IPFS...")
 
     if (this.selectedDocImage) {
       const imageHash = await this.ds.addDocImage(this.selectedDocImage);
@@ -67,17 +58,20 @@ export class AddComponent implements OnInit {
       this.doctorForm.controls.image.setValue('')
     }
 
+    this.uiFeedbackService.showProgress(50, "")
+
     this.ds.addDoctor(this.doctorForm.value).then((_r: any) => {
-      this.success.set(true)
-      this.msg_text.set('Data added to IPFS...');
-      this.msg_text.set('<br>User Added to the Blockchain');
-      console.log('User added Successfully');
+      this.uiFeedbackService.showProgress(99, "Doctor added successfully!")
+      this.uiFeedbackService.success("Doctor added successfully!")
       this.doctorForm.reset();
+      this.uiFeedbackService.hideProgress()
+      this.uiFeedbackService.hideLoader()
     }).catch((er: any) => {
-      this.warn.set(true)
-      this.msg_text.set('Adding Doctor Failed<br>1.not a valid address or <br>2.Already have a role');
-      console.log(er);
+      this.uiFeedbackService.error("Failed to add Doctor, " + er.toString());
+      this.uiFeedbackService.hideProgress()
+      this.uiFeedbackService.hideLoader()
     })
+
   }
 
 
@@ -141,11 +135,6 @@ export class AddComponent implements OnInit {
       img.onerror = reject;
       img.src = URL.createObjectURL(file);
     });
-  }
-
-  onClose() {
-    this.show.set(false);
-    this.warn.set(false);
   }
 
   protected validateDocId() {

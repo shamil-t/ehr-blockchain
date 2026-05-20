@@ -1,0 +1,93 @@
+<!-- ===================================== -->
+<!-- LOADER -->
+<!-- ===================================== -->
+
+@if (loading().active) {
+
+  <div class="loader-overlay">
+
+    <div class="loader-card shadow">
+
+      <div
+        class="spinner-border text-primary mb-3"
+        role="status">
+      </div>
+
+      <div class="loader-message">
+        {{ loading().message }}
+      </div>
+
+    </div>
+
+  </div>
+}
+
+<!-- ===================================== -->
+<!-- PROGRESS -->
+<!-- ===================================== -->
+
+@if (progress().active) {
+
+  <div class="progress-wrapper">
+
+    <div class="card shadow-sm p-3">
+
+      <div class="mb-2 fw-medium">
+        {{ progress().message }}
+      </div>
+
+      <ngb-progressbar
+        [value]="progress().value"
+        [animated]="true"
+        [striped]="true">
+      </ngb-progressbar>
+
+      <div class="text-end small mt-2">
+        {{ progress().value }}%
+      </div>
+
+    </div>
+
+  </div>
+}
+
+<!-- ===================================== -->
+<!-- TOASTS -->
+<!-- ===================================== -->
+
+<div class="toast-container">
+
+  @for (toast of toasts(); track toast.id) {
+
+    <ngb-toast
+      [autohide]="false"
+      (hidden)="removeToast(toast.id)"
+      class="mb-2">
+
+      <div
+        class="toast-header"
+        [class.bg-success]="toast.type === 'success'"
+        [class.bg-danger]="toast.type === 'error'"
+        [class.bg-warning]="toast.type === 'warning'"
+        [class.bg-info]="toast.type === 'info'">
+
+        <strong class="me-auto text-white">
+          {{ toast.title }}
+        </strong>
+
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          (click)="removeToast(toast.id)">
+        </button>
+
+      </div>
+
+      <div class="p-2 small">
+        {{ toast.message }}
+      </div>
+
+    </ngb-toast>
+  }
+
+</div>

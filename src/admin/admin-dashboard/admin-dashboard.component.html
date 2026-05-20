@@ -1,12 +1,5 @@
-@if (!isAdmin()) {
-  <div class="overlay"></div>
-} @else {
+@if (isAdmin()) {
   <app-sidebar title="Admin Dashboard" [sidebarNavLinks]="sidebarMenus">
     <router-outlet></router-outlet>
   </app-sidebar>
 }
-
-<app-progress_card [success]="isAdmin() && checkProgress()" [show]="!isAdmin()" [msg_text]="progressMsg()"
-                   [warn]="progressWarn()"
-                   retry_text="Exit"
-                   (retry)="exitProgress()"></app-progress_card>

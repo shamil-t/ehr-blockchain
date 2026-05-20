@@ -1,35 +1,31 @@
 import {Component, effect, inject, OnInit, signal} from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
-import {Progress_cardComponent} from "../../shared/progress_card/progress_card.component";
 import {SidebarComponent} from "../../shared/sidebar/sidebar.component";
 import {EhrContractService} from "../../services/ehr-contract.service";
 import {WalletService} from "../../services/wallet.service";
 import {SidebarMenuItem} from "../../types/sidebar-menu.type";
+import {UiFeedbackService} from "../../services/ui-feedback.service";
 
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
   styleUrls: ['./admin-dashboard.component.sass'],
   imports: [
-    Progress_cardComponent,
     SidebarComponent,
     RouterOutlet
   ]
 })
 export class AdminDashboardComponent implements OnInit {
   router = inject(Router);
+  uiFeedbackService = inject(UiFeedbackService);
+
   walletService = inject(WalletService);
   ehrService = inject(EhrContractService)
-  isCollapse: boolean = true;
 
   sidebarMenus: SidebarMenuItem[] = []
 
   account: string = '';
   isAdmin = signal(false);
-
-  checkProgress = signal(true);
-  progressWarn = signal(false);
-  progressMsg = signal('Checking Admin....');
 
   constructor() {
     effect(() => {
@@ -39,7 +35,7 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.checkIsConnectedAsAdminAccount()
+    // this.checkIsConnectedAsAdminAccount()
 
     let menu: SidebarMenuItem = {
       name: 'Management',
@@ -48,31 +44,32 @@ export class AdminDashboardComponent implements OnInit {
         {icon: 'fa-user-doctor', label: 'Doctor', routerLink: '/admin/doctor', active: false}
       ]
     }
-
     this.sidebarMenus.push(menu)
   }
 
   checkIsConnectedAsAdminAccount() {
-    this.progressMsg.set('Checking Admin Access...')
-    this.progressWarn.set(false)
+    // this.uiFeedbackService.showProgress(0, "Checking Admin Access...")
+    this.uiFeedbackService.showLoader("Checking Admin Access...")
+    // this.progressMsg.set('')
+    // this.progressWarn.set(false)
     this.ehrService.isAdmin().then(r => {
       this.isAdmin.set(r)
       // console.log(this.isAdmin())
       if (!this.isAdmin()) {
-        this.showProgress()
+        // this.showProgress()
+        // this.uiFeedbackService.hideProgress()
+        this.uiFeedbackService.error("Not connected as Admin, Connect MetaMask to admin account");
+        this.router.navigate(['']).then(() => {
+        });
       } else {
+        this.uiFeedbackService.success("Admin validated successfully.");
         this.router.navigate(['admin/dashboard']).then(_ => {
         });
       }
     })
+    this.uiFeedbackService.hideLoader()
   }
 
-  showProgress() {
-    this.checkProgress.set(false)
-    this.progressWarn.set(true)
-    this.progressMsg.set('<span class="text-danger">Only admin have Access to this Page.... </span><br> ' +
-      'Connect MetaMask to your Admin account')
-  }
 
   protected exitProgress() {
     this.router.navigate(['']).then(r => {
