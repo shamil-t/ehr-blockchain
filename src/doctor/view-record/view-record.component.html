@@ -7,9 +7,6 @@
       <button type="submit" class="btn btn-primary">Consult</button>
     </form>
 
-    <app-progress_card [show]="showProgress" [msg_text]="progressMsg" [success]="progressSuccess" [warn]="progressWarn"
-    (close)="onProgressClose()"></app-progress_card>
-
     @if (PatientRecords.length >=1) {
       <div class="records my-3">
         <table class="table table-hover">
