@@ -1,9 +1,9 @@
 import {Component, effect, inject, OnInit, signal} from '@angular/core';
 import {RouterOutlet} from "@angular/router";
-import {EhrContractService} from "../services/ehr-contract.service";
-import {WalletService} from "../services/wallet.service";
-import {UiFeedbackComponent} from "../shared/ui-feedback/ui-feedback.component";
-import {UiFeedbackService} from "../services/ui-feedback.service";
+import {EhrContractService} from "./services/ehr-contract.service";
+import {WalletService} from "./services/wallet.service";
+import {UiFeedbackComponent} from "./shared/ui-feedback/ui-feedback.component";
+import {UiFeedbackService} from "./services/ui-feedback.service";
 
 
 @Component({
@@ -41,7 +41,7 @@ export class AppComponent implements OnInit {
   }
 
   connectWithContract() {
-    this.ehrContractService.validateContract().then(x => {
+    this.ehrContractService.validateContract().then(_x => {
       // this.isConnected.set(x);
       this.uiFeedbackService.hideLoader()
     }).catch(err => {
