@@ -5,11 +5,11 @@ export const DoctorRoutes: Routes = [
   {
     path: '',
     canActivateChild: [doctorGuard],
-    loadComponent: () => import('./doctor-dashboard/doctor-dashboard.component').then(m => m.DoctorDashboardComponent),
+    loadComponent: () => import('./dashboard/dashboard.component').then(m => m.DashboardComponent),
     children: [
       {
         path: 'dashboard',
-        loadComponent: () => import('./dashboard-home/dashboard-home.component').then(m => m.DashboardHomeComponent),
+        loadComponent: () => import('./home/home.component').then(m => m.HomeComponent),
       },
       {
         path: 'consult',

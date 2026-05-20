@@ -5,15 +5,15 @@ import {WalletService} from "../../services/wallet.service";
 
 
 @Component({
-  selector: 'app-dashboard-home',
-  templateUrl: './dashboard-home.component.html',
+  selector: 'app-home',
+  templateUrl: './home.component.html',
   imports: [
     CardComponent,
     CurrencyPipe
   ],
-  styleUrls: ['./dashboard-home.component.sass']
+  styleUrls: ['./home.component.sass']
 })
-export class DashboardHomeComponent implements OnInit {
+export class HomeComponent implements OnInit {
 
   Titles: any = ['Total Patients', 'In Patients', 'Active Doctors', 'Active Nurses']
   Images: any = ['user-injured', 'procedures', 'user-md', 'user-nurse']

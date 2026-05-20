@@ -1,6 +1,6 @@
 import {Component, inject, OnInit, signal, WritableSignal} from '@angular/core';
-import {DoctorService} from 'src/admin/services/doctor.service';
-import {DoctorType} from "../../../types/doctor.type";
+import {DoctorService} from 'src/app/admin/services/doctor.service';
+import {DoctorType} from "../../../../types/doctor.type";
 import {IpfsService} from "../../../services/ipfs.service";
 import {DoctorProfileCardComponent} from "../../../shared/doctor-profile-card/doctor-profile-card.component";
 

@@ -7,11 +7,11 @@ export const routes: Routes = [
     },
     {
       path: 'admin',
-      loadChildren: () => import('../admin/admin.routes').then((m) => m.AdminRoutes)
+      loadChildren: () => import('./admin/admin.routes').then((m) => m.AdminRoutes)
     },
     {
       path: 'doctor',
-      loadChildren: () => import('../doctor/doctor.routes').then((m) => m.DoctorRoutes),
+      loadChildren: () => import('./doctor/doctor.routes').then((m) => m.DoctorRoutes),
     },
     {
       path: '**',

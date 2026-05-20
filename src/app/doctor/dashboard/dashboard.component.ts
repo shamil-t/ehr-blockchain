@@ -3,20 +3,20 @@ import {Router, RouterOutlet} from '@angular/router';
 import {WalletService} from "../../services/wallet.service";
 import {EhrContractService} from "../../services/ehr-contract.service";
 import {SidebarComponent} from "../../shared/sidebar/sidebar.component";
-import {SidebarMenuItem} from "../../types/sidebar-menu.type";
+import {SidebarMenuItem} from "../../../types/sidebar-menu.type";
 import {UiFeedbackService} from "../../services/ui-feedback.service";
 
 @Component({
-  selector: 'app-doctor-dashboard',
-  templateUrl: './doctor-dashboard.component.html',
-  styleUrls: ['./doctor-dashboard.component.sass'],
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.sass'],
   imports: [
     SidebarComponent,
     RouterOutlet,
     SidebarComponent
   ]
 })
-export class DoctorDashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit {
   isDoctor = signal(false);
 
   checkProgress = signal(true);

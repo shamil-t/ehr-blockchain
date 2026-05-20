@@ -5,11 +5,11 @@ export const AdminRoutes: Routes = [
   {
     path: '',
     canActivateChild: [adminGuard],
-    loadComponent: () => import('./admin-dashboard/admin-dashboard.component').then(m => m.AdminDashboardComponent),
+    loadComponent: () => import('./dashboard/dashboard.component').then(m => m.DashboardComponent),
     children: [
       {
         path: 'dashboard',
-        loadComponent: () => import('./dashboard-home/dashboard-home.component').then(m => m.DashboardHomeComponent)
+        loadComponent: () => import('./home/home.component').then(m => m.HomeComponent)
       },
       {
         path: 'doctor',

@@ -3,19 +3,19 @@ import {Router, RouterOutlet} from '@angular/router';
 import {SidebarComponent} from "../../shared/sidebar/sidebar.component";
 import {EhrContractService} from "../../services/ehr-contract.service";
 import {WalletService} from "../../services/wallet.service";
-import {SidebarMenuItem} from "../../types/sidebar-menu.type";
+import {SidebarMenuItem} from "../../../types/sidebar-menu.type";
 import {UiFeedbackService} from "../../services/ui-feedback.service";
 
 @Component({
-  selector: 'app-admin-dashboard',
-  templateUrl: './admin-dashboard.component.html',
-  styleUrls: ['./admin-dashboard.component.sass'],
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.sass'],
   imports: [
     SidebarComponent,
     RouterOutlet
   ]
 })
-export class AdminDashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit {
   router = inject(Router);
   uiFeedbackService = inject(UiFeedbackService);
 

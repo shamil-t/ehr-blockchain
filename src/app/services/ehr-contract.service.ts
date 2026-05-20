@@ -1,10 +1,10 @@
 import {effect, inject, Injectable} from '@angular/core';
-import EHR_Contract from '../assets/contract/EHR.json'
-import DeployedAddress from '../assets/contract/deployed_addresses.json'
+import EHR_Contract from '../../assets/contract/EHR.json'
+import DeployedAddress from '../../assets/contract/deployed_addresses.json'
 import {Contract} from "ethers";
 import {WalletService} from "./wallet.service";
-import {User} from "../enums/user.enum";
-import {UserType} from "../types/user.type";
+import {User} from "../../enums/user.enum";
+import {UserType} from "../../types/user.type";
 
 @Injectable({
   providedIn: 'root',

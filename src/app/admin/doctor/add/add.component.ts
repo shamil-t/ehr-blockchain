@@ -1,5 +1,5 @@
 import {Component, inject, OnInit, signal} from '@angular/core';
-import {DoctorService} from 'src/admin/services/doctor.service';
+import {DoctorService} from 'src/app/admin/services/doctor.service';
 import {KuboRPCClient} from "kubo-rpc-client";
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgOptimizedImage} from "@angular/common";
