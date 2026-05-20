@@ -21,15 +21,15 @@ export class DoctorService {
     return (await this.ipfs.getJsonData(await this.ehrContractService.getDoctorDetailsHash()))
   }
 
-  async checkIsPatient(id: string): Promise<boolean> {
+  async checkIsPatient(_id: string): Promise<boolean> {
     throw new Error("Functionality not implemented.");
   }
 
-  async getPatientDetails(id: string): Promise<any> {
+  async getPatientDetails(_id: string): Promise<any> {
     throw new Error("Functionality not implemented.");
   }
 
-  async savePatientMedRecord(data: any): Promise<any> {
+  async savePatientMedRecord(_data: any): Promise<any> {
     // console.log(this.patientId, data);
     // let PatientData = {
     //   doctor: this.account,
@@ -78,7 +78,7 @@ export class DoctorService {
     throw new Error("Functionality not implemented.");
   }
 
-  async getPatientRecords(id: any): Promise<any> {
+  async getPatientRecords(_id: any): Promise<any> {
     // return new Promise((resolve, reject) => {
     //   this.contract["viewMedRec"](id)
     //     .then((result: any) => {

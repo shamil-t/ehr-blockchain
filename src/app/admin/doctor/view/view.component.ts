@@ -28,7 +28,7 @@ export class ViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadAllDoctors().then(r => {
+    this.loadAllDoctors().then(_r => {
     }).catch(err => {
       console.log(err)
     })

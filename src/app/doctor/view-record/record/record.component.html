@@ -68,7 +68,7 @@
                     <div class="col-md-12 files">
                       <div class="h6 my-2">Lab Records</div>
                       <hr>
-                        @for (file of Medical.files; track file; let i = $index) {
+                        @for (file of Medical.files; track file;) {
                           <div class="lab-files position-relative">
                             <img [ngSrc]="file" alt="" width="150" height="150" priority>
                             <a download="labfile.jpg" [href]="file"><i class="fas fa-download"></i></a>

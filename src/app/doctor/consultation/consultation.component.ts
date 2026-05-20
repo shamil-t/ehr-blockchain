@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {DoctorService} from '../services/doctor.service';
 import {FormsModule} from "@angular/forms";
 import {PatientRecordComponent} from "./patient-record/patient-record.component";
 
@@ -21,7 +20,7 @@ export class ConsultationComponent implements OnInit {
 
   PatientDetails: any = {};
 
-  constructor(private doctorService: DoctorService) {
+  constructor() {
   }
 
   ngOnInit(): void {
@@ -31,7 +30,7 @@ export class ConsultationComponent implements OnInit {
 
   }
 
-  onMedRecordSave(data: any) {
+  onMedRecordSave() {
 
   }
 

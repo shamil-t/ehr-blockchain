@@ -7,7 +7,7 @@
         <div class="patient-details w-100 mx-2 my-2 d-flex flex-row align-items-center">
           <div class="doc-image">
             <img class="border border-1 border-secondary rounded-circle p-1"
-                 ngSrc='PatientDetails.imageHash || "../../../assets/images/patient.png"' alt="Doctor Image"
+                 [ngSrc]='PatientDetails.imageHash || "../../../assets/images/patient.png"' alt="Doctor Image"
                  width="150px"
                  height="150px">
           </div>

@@ -2,17 +2,6 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {NgOptimizedImage} from "@angular/common";
 
-
-type MedicationType = [
-  {
-    name: '';
-    dose: '';
-    frequency: '';
-    nofDays: '';
-    remarks: '';
-  }
-];
-
 @Component({
   selector: 'app-patient-record',
   templateUrl: './patient-record.component.html',

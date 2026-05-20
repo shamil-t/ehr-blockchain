@@ -72,7 +72,7 @@ export class DashboardComponent implements OnInit {
 
 
   protected exitProgress() {
-    this.router.navigate(['']).then(r => {
+    this.router.navigate(['']).then(_r => {
     })
   }
 }

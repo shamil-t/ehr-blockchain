@@ -41,7 +41,7 @@ export class AppComponent implements OnInit {
   }
 
   connectWithContract() {
-    this.ehrContractService.validateContract().then(x => {
+    this.ehrContractService.validateContract().then(_x => {
       // this.isConnected.set(x);
       this.uiFeedbackService.hideLoader()
     }).catch(err => {

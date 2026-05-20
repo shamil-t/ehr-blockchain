@@ -21,7 +21,6 @@ export class SidebarComponent implements OnInit {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         const currentUrl = event.url
-        let navs = this.sidebarNavLinks() as SidebarMenuItem[];
 
         this.sidebarNavLinks.update((items: SidebarMenuItem[] | undefined) =>
           items?.map(item => ({
