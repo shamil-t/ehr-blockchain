@@ -36,23 +36,13 @@ export class AppComponent implements OnInit {
     this.connectWithContract();
   }
 
-  reload() {
-    this.connectWithContract();
-  }
-
   connectWithContract() {
     this.ehrContractService.validateContract().then(_x => {
-      // this.isConnected.set(x);
       this.uiFeedbackService.hideLoader()
+      this.uiFeedbackService.success("Contract validated successfully.", "Connected to Wallet");
     }).catch(err => {
-      console.log(err)
-      // this.isConnected.set(false);
+      console.error(err)
       this.uiFeedbackService.error("Failed to connect to BlockChain.... \n" + err.toString());
-      // this.load_text.set(
-      //   'Unable to connect to BlockChain \n ' +
-      //   err.toString()
-      // )
-      // this.retry_visibility.set(true);
     })
   }
 }

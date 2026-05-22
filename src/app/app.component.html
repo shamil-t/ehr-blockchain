@@ -1,36 +1,10 @@
 <div class="header">
-  <div class="logo px-2">
+  <div class="text-secondary fw-bold px-2">
     MedLedger EHR
   </div>
-  <div class="account px-2">
+  <div class="account px-2 fs-12 text-warning">
     {{ account() }}
   </div>
 </div>
-
-<!--@if (!isConnected()) {-->
-<!--  <div class="pre-loader position-absolute">-->
-<!--    <div class="card p-3">-->
-<!--      @if (retry_visibility()) {-->
-<!--        <i class="fa-solid fa-triangle-exclamation fs-1 text-warning"></i>-->
-<!--      } @else {-->
-<!--        <div class="spinner-border text-danger mb-3 mt-2" role="status">-->
-<!--        </div>-->
-<!--      }-->
-<!--      <div class="load-text my-3 text-center" style="white-space: pre-line">-->
-<!--        {{ load_text() }}-->
-<!--      </div>-->
-<!--      @if (retry_visibility()) {-->
-<!--        <div class="retry">-->
-<!--          <button class="btn btn-primary btn-sm" (click)="reload()">-->
-<!--            <i class="fa-solid fa-arrow-rotate-right pe-2"></i>-->
-<!--            Retry-->
-<!--          </button>-->
-<!--        </div>-->
-<!--      }-->
-<!--    </div>-->
-<!--  </div>-->
-<!--}-->
 <app-ui-feedback/>
-
-
 <router-outlet></router-outlet>
