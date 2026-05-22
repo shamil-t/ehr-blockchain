@@ -50,19 +50,15 @@ export interface MedicalAttachment {
   uploadedBy: string;
 }
 
-export interface MedicalRecord {
-  // Primary IDs
+export interface MedicalRecordMetadataType {
   id: string;
   patientId: string;
-  // Blockchain
   transactionHash?: string;
   blockNumber?: number;
-  // Record Details
   category: RecordCategory;
   status: RecordStatus;
   title: string;
   description?: string;
-  // Clinical Data
   symptoms?: string[];
   diagnosis?: string[];
   treatmentPlan?: string;
@@ -71,17 +67,22 @@ export interface MedicalRecord {
   vitalSigns?: VitalSigns;
   allergies?: string[];
   notes?: string;
-  // Healthcare Provider
   doctorId: string;
   doctorName: string;
   doctorWalletAddress?: string;
-  // Dates
   visitDate: Date;
   followUpDate?: Date;
-  // Files & Reports
   attachments?: MedicalAttachment[];
-  // Audit
   createdAt: Date;
   updatedAt?: Date;
   createdBy: string;
+}
+
+export type MedicalRecordType = {
+  id: string;
+  patient: string;
+  doctor: string;
+  metadataCID: string;
+  filesCID: string;
+  createdAt: number;
 }
