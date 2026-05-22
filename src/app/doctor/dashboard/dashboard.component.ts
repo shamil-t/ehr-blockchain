@@ -19,10 +19,6 @@ import {UiFeedbackService} from "../../services/ui-feedback.service";
 export class DashboardComponent implements OnInit {
   isDoctor = signal(false);
 
-  checkProgress = signal(true);
-  progressWarn = signal(false);
-  progressMsg = signal('Checking Doctor....');
-
   walletService = inject(WalletService);
   ehrContractService = inject(EhrContractService);
   uiFeedbackService = inject(UiFeedbackService);
