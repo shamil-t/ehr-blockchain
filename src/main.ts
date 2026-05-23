@@ -1,7 +1,7 @@
 /// <reference types="@angular/localize" />
 
 import {bootstrapApplication} from "@angular/platform-browser";
-import {routes} from "./app/app.routes";
+import {routes} from "./app/app.route";
 import {provideHttpClient} from "@angular/common/http";
 import {AppComponent} from "./app/app.component";
 import {provideRouter} from "@angular/router";

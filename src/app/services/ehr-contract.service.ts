@@ -36,6 +36,10 @@ export class EhrContractService {
     return (await this.isUser()) == User.PATIENT;
   }
 
+  async getUserType(): Promise<User> {
+    return +(await this.isUser())
+  }
+
   async addDoctor(drId: string, ipfsHash: string): Promise<void> {
     return await this.addUser(drId, ipfsHash, User.DOCTOR)
   }

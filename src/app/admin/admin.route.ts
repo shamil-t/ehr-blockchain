@@ -1,7 +1,7 @@
 import {Routes} from '@angular/router';
 import {adminGuard} from "../guards/admin.guard";
 
-export const AdminRoutes: Routes = [
+export const AdminRoute: Routes = [
   {
     path: '',
     canActivateChild: [adminGuard],

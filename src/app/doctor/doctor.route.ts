@@ -1,7 +1,7 @@
 import {Routes} from '@angular/router';
 import {doctorGuard} from "../guards/doctor.guard";
 
-export const DoctorRoutes: Routes = [
+export const DoctorRoute: Routes = [
   {
     path: '',
     canActivateChild: [doctorGuard],

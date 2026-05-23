@@ -38,9 +38,6 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.onCheckDoctor().then(_ => {
-    // });
-
     let menu: SidebarMenuItem = {
       name: 'Management',
       menuItems: [

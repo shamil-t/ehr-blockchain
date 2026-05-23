@@ -17,9 +17,6 @@ export class AppComponent implements OnInit {
   walletService: WalletService = inject(WalletService);
   ehrContractService = inject(EhrContractService);
   account = signal('')
-  // isConnected = signal(false);
-  // load_text = signal('Connecting to BlockChain....');
-  // retry_visibility = signal(false);
 
   constructor() {
     effect(() => {
