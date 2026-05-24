@@ -51,6 +51,10 @@ export class EhrContractService {
     return await this.ehrContract["getAllDoctors"]()
   }
 
+  async addPatient(patId: string, ipfsHash: string): Promise<void> {
+    return await this.addUser(patId, ipfsHash, User.PATIENT)
+  }
+
   async getDoctorDetailsHash(): Promise<string> {
     if (!this.ehrContract) {
       this.ehrContract = await this.getContract()

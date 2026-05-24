@@ -18,10 +18,6 @@ export const routes: Routes = [
       loadChildren: () => import('./patient/patient.route').then((m) => m.PatientRoute),
     },
     {
-      path: 'register',
-      loadComponent: () => import('./register/register.component').then(m => m.RegisterComponent),
-    },
-    {
       path: '**',
       redirectTo: '',
       pathMatch: "full"

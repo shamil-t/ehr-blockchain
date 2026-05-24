@@ -20,7 +20,9 @@ export class DashboardComponent implements OnInit {
 
   router = inject(Router)
   navs: SidebarMenuItem[] = [];
+
   isPatient = signal(false)
+
   ehrContractService = inject(EhrContractService)
   walletService = inject(WalletService);
   uiFeedbackService = inject(UiFeedbackService);
@@ -38,19 +40,18 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.setNavigation()
   }
 
   checkIsConnectedAsPatient() {
-
     this.ehrContractService.isPatient().then(r => {
       this.isPatient.set(r)
       if (!this.isPatient()) {
         this.ehrContractService.getUserType().then(userType => {
-          console.log(userType)
+          // console.log(userType)
           if (userType == User.NONE) {
             this.uiFeedbackService.warning("Patient not registered, please register and try again")
-            this.router.navigate(['register']).then(() => {
+            this.router.navigate(['patient/register']).then(() => {
             })
           } else {
             this.uiFeedbackService.error("User already has a role, please login to respective dashboard")
@@ -58,8 +59,6 @@ export class DashboardComponent implements OnInit {
             })
           }
         })
-      } else {
-        this.setNavigation()
       }
     })
   }

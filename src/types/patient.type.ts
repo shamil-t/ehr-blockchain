@@ -5,7 +5,7 @@ export type PatientType = {
   // Personal Info
   firstName: string;
   lastName: string;
-  gender: 'male' | 'female' | 'other';
+  gender: GenderType;
   dateOfBirth: Date;
   bloodGroup?: string;
   // Contact
@@ -25,7 +25,9 @@ export type PatientType = {
 }
 
 export interface EmergencyContact {
-  name: string;
-  relation: string;
-  phone: string;
+  name?: string;
+  relation?: string;
+  phone?: string;
 }
+
+export type GenderType = 'male' | 'female' | 'other'
