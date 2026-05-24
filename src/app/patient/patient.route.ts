@@ -6,10 +6,6 @@ export const PatientRoute: Routes = [
     loadComponent: () => import('./dashboard/dashboard.component').then(m => m.DashboardComponent),
     children: [
       {
-        path: 'register',
-        loadComponent: () => import('./register/register.component').then(m => m.RegisterComponent),
-      },
-      {
         path: 'view-record',
         loadComponent: () => import('./view-record/view-record.component').then(m => m.ViewRecordComponent)
       },
@@ -18,5 +14,9 @@ export const PatientRoute: Routes = [
         loadComponent: () => import('./appointment/appointment.component').then(m => m.AppointmentComponent),
       }
     ]
+  },
+  {
+    path: 'register',
+    loadComponent: () => import('../register/register.component').then(m => m.RegisterComponent),
   },
 ]

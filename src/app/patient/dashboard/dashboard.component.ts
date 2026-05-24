@@ -48,7 +48,7 @@ export class DashboardComponent implements OnInit {
           console.log(userType)
           if (userType == User.NONE) {
             // TODO // provide feedback to register
-            this.router.navigate(['patient/register']).then(() => {
+            this.router.navigate(['register']).then(() => {
             })
           } else {
             // TODO: provide feedback

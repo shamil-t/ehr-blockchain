@@ -1,0 +1,422 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+
+      <div class="card shadow-lg border-0 rounded-4">
+
+        <!-- Header -->
+        <div class="card-header bg-primary text-white p-4 rounded-top-4">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <h2 class="mb-1 fw-bold">
+                Patient Registration
+              </h2>
+              <p class="mb-0 opacity-75">
+                Blockchain Enabled Electronic Health Record
+              </p>
+            </div>
+
+            <div class="text-end">
+              <span class="badge bg-light text-primary px-3 py-2">
+                EHR System
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Body -->
+        <div class="card-body p-5 small">
+
+          <form [formGroup]="patientForm">
+
+            <!-- ========================= -->
+            <!-- Blockchain Information -->
+            <!-- ========================= -->
+
+            <div class="mb-2">
+
+              <h5 class="fw-bold text-primary mb-4 border-bottom pb-2">
+                Blockchain Identity
+              </h5>
+
+              <div class="row">
+                <div class="col-md-12 mb-4">
+
+                  <div class="form-floating">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="walletAddress"
+                      placeholder="Wallet Address"
+                      formControlName="walletAddress">
+
+                    <label for="walletAddress">
+                      Wallet Address *
+                    </label>
+                  </div>
+                </div>
+
+<!--                <div class="col-md-4 mb-4">-->
+
+<!--                  <button-->
+<!--                    type="button"-->
+<!--                    class="btn btn-outline-primary w-100 h-100 fw-semibold">-->
+
+<!--                    <i class="bi bi-wallet2 me-2"></i>-->
+<!--                    Connect MetaMask-->
+
+<!--                  </button>-->
+
+<!--                </div>-->
+
+              </div>
+
+            </div>
+
+            <!-- ========================= -->
+            <!-- Personal Information -->
+            <!-- ========================= -->
+
+            <div class="mb-2">
+
+              <h5 class="fw-bold text-primary mb-4 border-bottom pb-2">
+                Personal Information
+              </h5>
+
+              <div class="row">
+
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-floating">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="firstName"
+                      placeholder="First Name"
+                      formControlName="firstName">
+
+                    <label for="firstName">
+                      First Name *
+                    </label>
+                  </div>
+
+                </div>
+
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-floating">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="lastName"
+                      placeholder="Last Name"
+                      formControlName="lastName">
+
+                    <label for="lastName">
+                      Last Name *
+                    </label>
+                  </div>
+
+                </div>
+
+                <div class="col-md-4 mb-4">
+
+                  <div class="form-floating">
+                    <select
+                      class="form-select"
+                      id="gender"
+                      formControlName="gender">
+
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                      <option value="other">Other</option>
+
+                    </select>
+
+                    <label for="gender">
+                      Gender *
+                    </label>
+                  </div>
+
+                </div>
+
+                <div class="col-md-4 mb-4">
+
+                  <div class="form-floating">
+                    <input
+                      type="date"
+                      class="form-control"
+                      id="dateOfBirth"
+                      formControlName="dateOfBirth">
+
+                    <label for="dateOfBirth">
+                      Date of Birth *
+                    </label>
+                  </div>
+
+                </div>
+
+                <div class="col-md-4 mb-4">
+
+                  <div class="form-floating">
+                    <select
+                      class="form-select"
+                      id="bloodGroup"
+                      formControlName="bloodGroup">
+
+                      <option value="">Select</option>
+                      <option value="A+">A+</option>
+                      <option value="A-">A-</option>
+                      <option value="B+">B+</option>
+                      <option value="B-">B-</option>
+                      <option value="AB+">AB+</option>
+                      <option value="AB-">AB-</option>
+                      <option value="O+">O+</option>
+                      <option value="O-">O-</option>
+
+                    </select>
+
+                    <label for="bloodGroup">
+                      Blood Group
+                    </label>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+            <!-- ========================= -->
+            <!-- Contact Information -->
+            <!-- ========================= -->
+
+            <div class="mb-2">
+
+              <h5 class="fw-bold text-primary mb-4 border-bottom pb-2">
+                Contact Information
+              </h5>
+
+              <div class="row">
+
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-floating">
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="email"
+                      placeholder="Email"
+                      formControlName="email">
+
+                    <label for="email">
+                      Email Address *
+                    </label>
+                  </div>
+
+                </div>
+
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-floating">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="phone"
+                      placeholder="Phone"
+                      formControlName="phone">
+
+                    <label for="phone">
+                      Phone Number *
+                    </label>
+                  </div>
+
+                </div>
+
+                <div class="col-12 mb-4">
+
+                  <div class="form-floating">
+                    <textarea
+                      class="form-control"
+                      placeholder="Address"
+                      id="address"
+                      style="height: 120px"
+                      formControlName="address"></textarea>
+
+                    <label for="address">
+                      Address
+                    </label>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+            <!-- ========================= -->
+            <!-- Emergency Contact -->
+            <!-- ========================= -->
+
+            <div
+              class="mb-2"
+              formGroupName="emergencyContact">
+
+              <h5 class="fw-bold text-primary mb-4 border-bottom pb-2">
+                Emergency Contact
+              </h5>
+
+              <div class="row">
+
+                <div class="col-md-4 mb-4">
+
+                  <div class="form-floating">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="emergencyName"
+                      placeholder="Emergency Name"
+                      formControlName="name">
+
+                    <label for="emergencyName">
+                      Contact Name
+                    </label>
+                  </div>
+
+                </div>
+
+                <div class="col-md-4 mb-4">
+
+                  <div class="form-floating">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="relation"
+                      placeholder="Relation"
+                      formControlName="relation">
+
+                    <label for="relation">
+                      Relation
+                    </label>
+                  </div>
+
+                </div>
+
+                <div class="col-md-4 mb-4">
+
+                  <div class="form-floating">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="emergencyPhone"
+                      placeholder="Emergency Phone"
+                      formControlName="phone">
+
+                    <label for="emergencyPhone">
+                      Emergency Phone
+                    </label>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+            <!-- ========================= -->
+            <!-- Medical Information -->
+            <!-- ========================= -->
+
+            <div class="mb-2">
+
+              <h5 class="fw-bold text-primary mb-4 border-bottom pb-2">
+                Medical Information
+              </h5>
+
+              <div class="row">
+
+                <div class="col-md-4 mb-4">
+
+                  <div class="form-floating">
+                    <textarea
+                      class="form-control"
+                      placeholder="Allergies"
+                      id="allergies"
+                      style="height: 120px"></textarea>
+
+                    <label for="allergies">
+                      Allergies
+                    </label>
+                  </div>
+
+                </div>
+
+                <div class="col-md-4 mb-4">
+
+                  <div class="form-floating">
+                    <textarea
+                      class="form-control"
+                      placeholder="Chronic Diseases"
+                      id="chronicDiseases"
+                      style="height: 120px"></textarea>
+
+                    <label for="chronicDiseases">
+                      Chronic Diseases
+                    </label>
+                  </div>
+
+                </div>
+
+                <div class="col-md-4 mb-4">
+
+                  <div class="form-floating">
+                    <textarea
+                      class="form-control"
+                      placeholder="Medications"
+                      id="medications"
+                      style="height: 120px"></textarea>
+
+                    <label for="medications">
+                      Medications
+                    </label>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+            <!-- ========================= -->
+            <!-- Footer Buttons -->
+            <!-- ========================= -->
+
+            <div class="d-flex justify-content-end gap-3 pt-3 border-top">
+
+              <button
+                type="button"
+                class="btn btn-light px-4 py-2 fw-semibold">
+
+                Cancel
+
+              </button>
+
+              <button
+                type="submit"
+                class="btn btn-primary px-5 py-2 fw-semibold shadow">
+
+                <i class="bi bi-person-plus-fill me-2"></i>
+                Register Patient
+
+              </button>
+
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
