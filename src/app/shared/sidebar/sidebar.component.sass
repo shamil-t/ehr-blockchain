@@ -1,18 +1,23 @@
+
+
 $sidebar-width: 260px
-$sidebar-collapsed-width: 80px
+$sidebar-collapsed-width: 82px
 
-$sidebar-bg: #111827
-$sidebar-hover: rgba(255, 255, 255, 0.08)
-$sidebar-border: rgba(255, 255, 255, 0.08)
+$sidebar-bg: #ffffff
+$sidebar-hover: rgba(13, 110, 253, 0.08)
+$sidebar-border: #edf2f7
 
-$primary: #2563eb
-$text-light: #d1d5db
+$primary: #0d6efd
+$text-dark: #1f2937
+$text-light: #6b7280
 $text-muted: #9ca3af
-$danger: #f87171
+$danger: #dc3545
 
-$transition: all 0.3s ease
+$transition: all .25s ease
 
+/* ============================= */
 /* SIDEBAR */
+/* ============================= */
 
 .sidebar
   width: $sidebar-width
@@ -25,6 +30,8 @@ $transition: all 0.3s ease
   z-index: 1000
   overflow-x: hidden
   transition: $transition
+  border-right: 1px solid $sidebar-border
+  box-shadow: 0 8px 30px rgba(0,0,0,.04)
 
   &.collapsed
     width: $sidebar-collapsed-width
@@ -33,67 +40,94 @@ $transition: all 0.3s ease
       justify-content: center
       padding: 0
 
+      span
+        display: none
+
     .logout-btn
       justify-content: center
 
     .sidebar-header
       justify-content: center
 
+      h5
+        display: none
+
   .sidebar-container
     min-height: calc(100vh - 25px)
+    display: flex
+    flex-direction: column
 
+/* ============================= */
 /* HEADER */
+/* ============================= */
 
 .sidebar-header
   padding: 1rem 1.2rem
   border-bottom: 1px solid $sidebar-border
+  display: flex
+  align-items: center
+  justify-content: space-between
 
   h5
-    color: white
-    font-weight: 600
+    color: $text-dark
+    font-weight: 700
+    font-size: 15px
+    margin: 0
 
+/* ============================= */
 /* TOGGLE BUTTON */
+/* ============================= */
 
 .toggle-btn
   width: 38px
   height: 38px
   border-radius: 10px
   border: none
-  background: rgba(255, 255, 255, 0.08)
-  color: white
+  background: #f3f6fb
+  color: $primary
   transition: $transition
   display: flex
   justify-content: center
   align-items: center
 
   &:hover
-    background: rgba(255, 255, 255, 0.15)
+    background: rgba(13, 110, 253, 0.1)
 
+/* ============================= */
 /* MENU LABEL */
+/* ============================= */
 
 .menu-label
   color: $text-muted
-  font-size: 11px
+  font-size: 10px
   font-weight: 700
   letter-spacing: 1px
+  padding-left: 6px
 
-/* NAV LINKS */
+/* ============================= */
+/* NAVIGATION */
+/* ============================= */
+
+.nav
+  padding: 10px
 
 .nav-link
-  height: 48px
-  border-radius: 12px
+  height: 46px
+  border-radius: 14px
   display: flex
   align-items: center
   gap: 14px
   padding: 0 14px
   color: $text-light
   transition: $transition
+  font-size: 13px
   font-weight: 500
+  margin-bottom: 6px
 
   i
     width: 20px
     text-align: center
-    font-size: 16px
+    font-size: 15px
     flex-shrink: 0
 
   span
@@ -101,26 +135,35 @@ $transition: all 0.3s ease
 
   &:hover
     background: $sidebar-hover
-    color: white
+    color: $primary
 
   &.active
-    background: $primary
+    background: linear-gradient(135deg, #0d6efd, #3b82f6)
     color: white
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35)
+    box-shadow: 0 8px 20px rgba(13,110,253,.18)
 
+    i
+      color: white
+
+/* ============================= */
 /* LOGOUT */
+/* ============================= */
 
 .logout-btn
   color: $danger
 
   &:hover
-    background: rgba(248, 113, 113, 0.12)
-    color: white
+    background: rgba(220, 53, 69, .08)
+    color: $danger
 
+/* ============================= */
 /* CONTENT */
+/* ============================= */
 
 .content-wrapper
   width: 100%
+  min-height: 100vh
+  background: #f8fafc
   transition: $transition
 
 .content-expanded
@@ -129,12 +172,27 @@ $transition: all 0.3s ease
 .content-collapsed
   margin-left: $sidebar-collapsed-width
 
+/* ============================= */
+/* SCROLLBAR */
+/* ============================= */
+
+.sidebar::-webkit-scrollbar
+  width: 6px
+
+.sidebar::-webkit-scrollbar-thumb
+  background: rgba(0,0,0,.08)
+  border-radius: 20px
+
+/* ============================= */
 /* MOBILE */
+/* ============================= */
 
 @media (max-width: 768px)
 
   .sidebar
     transform: translateX(-100%)
+    margin-top: 0
+    min-height: 100vh
 
     &.mobile-open
       transform: translateX(0)
