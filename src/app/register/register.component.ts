@@ -1,5 +1,6 @@
-import {Component, inject} from '@angular/core';
+import {Component, effect, inject} from '@angular/core';
 import {FormBuilder, ReactiveFormsModule, Validators} from "@angular/forms";
+import {WalletService} from "../services/wallet.service";
 
 @Component({
   selector: 'app-register',
@@ -11,9 +12,10 @@ import {FormBuilder, ReactiveFormsModule, Validators} from "@angular/forms";
 })
 export class RegisterComponent {
   fb = inject(FormBuilder);
+  walletService = inject(WalletService);
 
   patientForm = this.fb.group({
-    walletAddress: ['', Validators.required],
+    walletAddress: [{value: '', disabled: true}, Validators.required],
 
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
@@ -45,4 +47,12 @@ export class RegisterComponent {
 
     medications: this.fb.control<string[]>([])
   })
+
+  constructor() {
+    effect(() => {
+      this.patientForm.patchValue({
+        walletAddress: this.walletService.connectedAccount()
+      })
+    });
+  }
 }

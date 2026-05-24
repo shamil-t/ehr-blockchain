@@ -14,9 +14,5 @@ export const PatientRoute: Routes = [
         loadComponent: () => import('./appointment/appointment.component').then(m => m.AppointmentComponent),
       }
     ]
-  },
-  {
-    path: 'register',
-    loadComponent: () => import('../register/register.component').then(m => m.RegisterComponent),
-  },
+  }
 ]

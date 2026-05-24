@@ -1,0 +1,90 @@
+/* ============================= */
+/* Floating Inputs */
+/* ============================= */
+
+.form-floating
+
+  > .form-control,
+  > .form-select
+    height: 42px
+    min-height: 42px
+    padding: 1rem 0.75rem 0.25rem 0.75rem
+    font-size: 12px
+    border-radius: 10px
+
+  > textarea.form-control
+    min-height: 90px !important
+    padding-top: 1.5rem !important
+    font-size: 12px
+    border-radius: 10px
+    line-height: 1.4
+
+  > label
+    font-size: 12px
+    padding: 0.65rem 0.75rem
+    color: #6c757d
+
+  > .form-control:focus ~ label,
+  > .form-control:not(:placeholder-shown) ~ label,
+  > .form-select ~ label,
+  > textarea.form-control:focus ~ label,
+  > textarea.form-control:not(:placeholder-shown) ~ label
+    transform: scale(.85) translateY(-0.65rem) translateX(0.15rem)
+
+  > .form-control::placeholder,
+  > textarea.form-control::placeholder
+    color: transparent
+
+/* ============================= */
+/* Focus */
+/* ============================= */
+
+.form-control:focus,
+.form-select:focus
+  border-color: #0d6efd
+  box-shadow: 0 0 0 0.12rem rgba(13, 110, 253, 0.15)
+
+/* ============================= */
+/* Buttons */
+/* ============================= */
+
+.btn
+  font-size: 12px
+  border-radius: 10px
+  height: 40px
+
+/* ============================= */
+/* Typography */
+/* ============================= */
+
+h5
+  font-size: 14px
+
+p,
+span,
+button,
+label
+  font-size: 12px
+
+/* ============================= */
+/* Textarea */
+/* ============================= */
+
+textarea.form-control
+  resize: none
+
+/* ============================= */
+/* Mobile Responsive */
+/* ============================= */
+
+@media (max-width: 768px)
+
+  .card-body
+    padding: 1.25rem !important
+
+  .form-floating
+
+    > .form-control,
+    > .form-select
+      height: 40px
+      min-height: 40px

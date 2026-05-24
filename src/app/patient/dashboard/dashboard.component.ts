@@ -5,6 +5,7 @@ import {SidebarMenuItem} from "../../../types/sidebar-menu.type";
 import {WalletService} from "../../services/wallet.service";
 import {EhrContractService} from "../../services/ehr-contract.service";
 import {User} from "../../../enums/user.enum";
+import {UiFeedbackService} from "../../services/ui-feedback.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -22,6 +23,7 @@ export class DashboardComponent implements OnInit {
   isPatient = signal(false)
   ehrContractService = inject(EhrContractService)
   walletService = inject(WalletService);
+  uiFeedbackService = inject(UiFeedbackService);
   private account: string = '';
 
   constructor() {
@@ -47,14 +49,12 @@ export class DashboardComponent implements OnInit {
         this.ehrContractService.getUserType().then(userType => {
           console.log(userType)
           if (userType == User.NONE) {
-            // TODO // provide feedback to register
+            this.uiFeedbackService.warning("Patient not registered, please register and try again")
             this.router.navigate(['register']).then(() => {
             })
           } else {
-            // TODO: provide feedback
-            // User already have a role
+            this.uiFeedbackService.error("User already has a role, please login to respective dashboard")
             this.router.navigate(['']).then(() => {
-
             })
           }
         })

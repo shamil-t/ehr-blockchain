@@ -31,10 +31,6 @@ export class ViewRecordComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //FIXME
-    // let data = localStorage.getItem("PatRecord")
-    // this.PatientRecords = JSON.parse(data!) || {}
-    // console.log(this.PatientRecords);
     this.PatientRecords = {}
   }
 
