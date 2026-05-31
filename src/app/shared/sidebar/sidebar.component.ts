@@ -33,6 +33,8 @@ export class SidebarComponent implements OnInit {
         )
       }
     })
+
+  //   TODO -- auto collapse sidebar on width below 720
   }
 
   protected toggleSidebar() {
