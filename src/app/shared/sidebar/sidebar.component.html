@@ -36,7 +36,7 @@
         <!-- NAVIGATION -->
         @for (n of m.menuItems; track n.routerLink) {
           <ul class="nav flex-column px-2" [class.pt-4]="isCollapsed">
-            <li class="nav-item mb-2">
+            <li class="nav-item">
               <a
                 class="nav-link" [class.active]="n.active"
                 [title]="n.label"
