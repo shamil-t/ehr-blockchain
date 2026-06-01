@@ -3,7 +3,9 @@ import {FormBuilder, ReactiveFormsModule, Validators} from "@angular/forms";
 import {WalletService} from "../../services/wallet.service";
 import {PatientService} from "../services/patient.service";
 import {EmergencyContact, GenderType, PatientType} from "../../../types/patient.type";
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
+import {CallExceptionError} from "ethers";
+import {UiFeedbackService} from "../../services/ui-feedback.service";
 
 @Component({
   selector: 'app-register',
@@ -18,6 +20,8 @@ export class RegisterComponent {
   fb = inject(FormBuilder);
   walletService = inject(WalletService);
   patientService = inject(PatientService);
+  uiFeedbackService = inject(UiFeedbackService);
+  router = inject(Router);
 
   patientForm = this.fb.group({
     walletAddress: [{value: '', disabled: true}, Validators.required],
@@ -48,6 +52,29 @@ export class RegisterComponent {
         walletAddress: this.walletService.connectedAccount()
       })
     });
+  }
+
+  setDummyValue() {
+    this.patientForm.patchValue({
+      walletAddress: '0x1234567890abcdef1234567890abcdef12345678',
+      firstName: 'John',
+      lastName: 'Doe',
+      gender: 'male',
+      dateOfBirth: '1995-05-15',
+      bloodGroup: 'O+',
+      email: 'john.doe@example.com',
+      phone: '9876543210',
+      address: '123 Main Street, New York',
+      emergencyContact: {
+        name: 'Jane Doe',
+        relation: 'Spouse',
+        phone: '9876543211'
+      },
+      allergies: ['Peanuts', 'Dust'],
+      chronicDiseases: ['Diabetes'],
+      medications: ['Metformin']
+    });
+
   }
 
   async onRegister() {
@@ -88,8 +115,10 @@ export class RegisterComponent {
     try {
       await this.patientService.registerPatient(patient)
       this.patientForm.reset()
+
+      await this.router.navigate(['/patient/'])
     } catch (error) {
-      console.log(error)
+      this.uiFeedbackService.error("Contract failed with error: " + (error as CallExceptionError).reason || "Error occurred during patient registration");
     }
 
   }

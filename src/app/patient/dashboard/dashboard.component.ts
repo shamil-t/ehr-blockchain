@@ -59,6 +59,8 @@ export class DashboardComponent implements OnInit {
             })
           }
         })
+      } else {
+        this.router.navigate(['patient/dashboard']).then(r => {})
       }
     })
   }

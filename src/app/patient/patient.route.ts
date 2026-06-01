@@ -8,6 +8,10 @@ export const PatientRoute: Routes = [
     canActivateChild: [patientGuard],
     children: [
       {
+        path: 'dashboard',
+        loadComponent: () => import('./home/home.component').then(m => m.HomeComponent),
+      },
+      {
         path: 'view-record',
         loadComponent: () => import('./view-record/view-record.component').then(m => m.ViewRecordComponent)
       },

@@ -62,6 +62,13 @@ export class EhrContractService {
     return await this.ehrContract["getDoctorProfile"]()
   }
 
+  async getPatientProfileHash(id: string): Promise<string> {
+    if (!this.ehrContract) {
+      this.ehrContract = await this.getContract()
+    }
+    return await this.ehrContract["getPatientProfile"](id)
+  }
+
   async validateContract() {
     if (!this.ehrContract) {
       this.ehrContract = await this.getContract()

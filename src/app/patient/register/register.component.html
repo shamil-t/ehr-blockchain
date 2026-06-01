@@ -27,7 +27,7 @@
         <!-- Body -->
         <div class="card-body p-5 small">
 
-          <form [formGroup]="patientForm">
+          <form [formGroup]="patientForm" (ngSubmit)="onRegister()">
 
             <!-- ========================= -->
             <!-- Blockchain Information -->
@@ -49,7 +49,7 @@
                       id="walletAddress"
                       placeholder="Wallet Address"
                       formControlName="walletAddress"
-                      >
+                    >
                     <label for="walletAddress">
                       Wallet Address *
                     </label>
@@ -329,6 +329,7 @@
                       class="form-control"
                       placeholder="Allergies"
                       id="allergies"
+                      formControlName="allergies"
                       style="height: 120px"></textarea>
 
                     <label for="allergies">
@@ -345,6 +346,7 @@
                       class="form-control"
                       placeholder="Chronic Diseases"
                       id="chronicDiseases"
+                      formControlName="chronicDiseases"
                       style="height: 120px"></textarea>
 
                     <label for="chronicDiseases">
@@ -361,6 +363,7 @@
                       class="form-control"
                       placeholder="Medications"
                       id="medications"
+                      formControlName="medications"
                       style="height: 120px"></textarea>
 
                     <label for="medications">
