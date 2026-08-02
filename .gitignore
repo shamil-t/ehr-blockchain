@@ -47,10 +47,10 @@ Thumbs.db
 
 /cache/*
 /cache
-/ignition/deployments
 /artifacts
-ignition/deployments/*
 .accounts
 .idea
 state.json
 src/assets/contract
+
+/ignition
