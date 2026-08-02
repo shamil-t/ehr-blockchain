@@ -12,7 +12,6 @@ npx hardhat compile
 
 echo "Deploying smart contract..."
 
-npx hardhat ignition deploy ignition/modules/EHR.ts --network localhost
 
 echo "Smart contract deployment completed"
 
@@ -32,6 +31,6 @@ cp "$SOURCE_PATH_ADDR" "$DESTINATION"
 
 echo "Running seeder..."
 
-node seeder.js
+node ../seeder.js
 
 echo "Deployment completed !!!"

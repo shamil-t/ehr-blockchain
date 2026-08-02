@@ -1,4 +1,4 @@
-/// <reference types="@angular/localize" />
+// / <reference types="@angular/localize" />
 
 import {bootstrapApplication} from "@angular/platform-browser";
 import {routes} from "./app/app.route";

@@ -1,8 +1,8 @@
 // const EHR_Contract = require('./src/assets/contract/EHR.sol.json')
 // const DeployedAddress = require('./src/assets/contract/deployed_addresses.json')
 
-import EHR_Contract from './src/assets/contract/EHR.json' with {type: 'json'}
-import DeployedAddress from './src/assets/contract/deployed_addresses.json' with {type: 'json'}
+import EHR_Contract from '../src/assets/contract/EHR.json' with {type: 'json'}
+import DeployedAddress from '../src/assets/contract/deployed_addresses.json' with {type: 'json'}
 
 import {create} from "kubo-rpc-client";
 import {Contract, JsonRpcProvider, Wallet} from "ethers";
