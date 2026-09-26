@@ -1,4 +1,4 @@
-import {Component, inject, input, model, ModelSignal, OnInit} from '@angular/core';
+import {Component, inject, input, model, ModelSignal, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {NavigationEnd, Router, RouterLink} from "@angular/router";
 import {SidebarMenuItem} from "../../../types/sidebar-menu.type";
 
@@ -9,6 +9,7 @@ import {SidebarMenuItem} from "../../../types/sidebar-menu.type";
     RouterLink
   ],
   templateUrl: './sidebar.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './sidebar.component.sass',
 })
 export class SidebarComponent implements OnInit {

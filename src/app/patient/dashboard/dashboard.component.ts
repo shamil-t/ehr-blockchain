@@ -1,4 +1,4 @@
-import {Component, effect, inject, OnInit, signal} from '@angular/core';
+import {Component, effect, inject, OnInit, signal, ChangeDetectionStrategy} from '@angular/core';
 import {SidebarComponent} from "../../shared/sidebar/sidebar.component";
 import {Router, RouterOutlet} from "@angular/router";
 import {SidebarMenuItem} from "../../../types/sidebar-menu.type";
@@ -14,6 +14,7 @@ import {UiFeedbackService} from "../../services/ui-feedback.service";
     RouterOutlet
   ],
   templateUrl: './dashboard.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './dashboard.component.sass',
 })
 export class DashboardComponent implements OnInit {

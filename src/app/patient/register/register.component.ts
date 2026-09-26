@@ -1,4 +1,4 @@
-import {Component, effect, inject} from '@angular/core';
+import {Component, effect, inject, ChangeDetectionStrategy} from '@angular/core';
 import {FormBuilder, ReactiveFormsModule, Validators} from "@angular/forms";
 import {WalletService} from "../../services/wallet.service";
 import {PatientService} from "../services/patient.service";
@@ -14,6 +14,7 @@ import {UiFeedbackService} from "../../services/ui-feedback.service";
     RouterLink
   ],
   templateUrl: './register.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './register.component.sass',
 })
 export class RegisterComponent {

@@ -1,4 +1,4 @@
-import {Component, inject, input, InputSignal} from '@angular/core';
+import {Component, inject, input, InputSignal, ChangeDetectionStrategy} from '@angular/core';
 import {NgOptimizedImage} from "@angular/common";
 import {DoctorType} from "../../../types/doctor.type";
 import {IpfsService} from "../../services/ipfs.service";
@@ -9,6 +9,7 @@ import {IpfsService} from "../../services/ipfs.service";
     NgOptimizedImage
   ],
   templateUrl: './doctor-profile-card.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './doctor-profile-card.component.sass',
 })
 export class DoctorProfileCardComponent {

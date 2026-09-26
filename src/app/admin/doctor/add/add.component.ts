@@ -1,4 +1,4 @@
-import {Component, inject, OnInit, signal} from '@angular/core';
+import {Component, inject, OnInit, signal, ChangeDetectionStrategy} from '@angular/core';
 import {DoctorService} from 'src/app/admin/services/doctor.service';
 import {KuboRPCClient} from "kubo-rpc-client";
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
@@ -10,6 +10,7 @@ import {UiFeedbackService} from "../../../services/ui-feedback.service";
   selector: 'doctor-add',
   templateUrl: './add.component.html',
   styleUrls: ['./add.component.sass'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     FormsModule,
     NgOptimizedImage,

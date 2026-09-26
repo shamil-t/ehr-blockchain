@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, ChangeDetectionStrategy} from '@angular/core';
 import {UiFeedbackService} from "../../services/ui-feedback.service";
 import {NgbProgressbar, NgbToast} from "@ng-bootstrap/ng-bootstrap";
 
@@ -9,6 +9,7 @@ import {NgbProgressbar, NgbToast} from "@ng-bootstrap/ng-bootstrap";
     NgbProgressbar
   ],
   templateUrl: './ui-feedback.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './ui-feedback.component.sass',
 })
 export class UiFeedbackComponent {

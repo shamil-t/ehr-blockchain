@@ -1,4 +1,4 @@
-import {Component, effect, inject, OnInit, signal} from '@angular/core';
+import {Component, effect, inject, OnInit, signal, ChangeDetectionStrategy} from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
 import {WalletService} from "../../services/wallet.service";
 import {EhrContractService} from "../../services/ehr-contract.service";
@@ -10,6 +10,7 @@ import {UiFeedbackService} from "../../services/ui-feedback.service";
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.sass'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     SidebarComponent,
     RouterOutlet,

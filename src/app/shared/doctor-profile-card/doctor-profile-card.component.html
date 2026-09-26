@@ -4,7 +4,7 @@
       <div class="doc-image px-3">
         <img
           class="border border-1 border-secondary rounded-circle p-1"
-          [ngSrc]="ipfs.getImageUrl(doctor()?.image) || 'assets/images/doctor.png'"
+          [ngSrc]="ipfs.getImageUrl($safeNavigationMigration(doctor()?.image)) || 'assets/images/doctor.png'"
           alt="Doctor Image"
           width="150"
           height="150"

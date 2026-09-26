@@ -1,4 +1,4 @@
-import {Component, effect, inject, OnInit, signal} from '@angular/core';
+import {Component, effect, inject, OnInit, signal, ChangeDetectionStrategy} from '@angular/core';
 import {RouterOutlet} from "@angular/router";
 import {EhrContractService} from "./services/ehr-contract.service";
 import {WalletService} from "./services/wallet.service";
@@ -10,6 +10,7 @@ import {UiFeedbackService} from "./services/ui-feedback.service";
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.sass'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [RouterOutlet, UiFeedbackComponent]
 })
 export class AppComponent implements OnInit {
