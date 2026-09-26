@@ -1,5 +1,5 @@
 import {inject, Injectable} from '@angular/core';
-import {IpfsService} from 'src/app/services/ipfs.service';
+import {IpfsService} from '../../services/ipfs.service';
 import {KuboRPCClient} from "kubo-rpc-client";
 import {DoctorType} from "../../../types/doctor.type";
 import {EhrContractService} from "../../services/ehr-contract.service";

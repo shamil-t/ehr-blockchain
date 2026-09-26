@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {create, KuboRPCClient} from 'kubo-rpc-client';
-import {IPFS} from 'src/environments/environment';
+import {IPFS} from "../../environments/environment";
+// import {IPFS} from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
