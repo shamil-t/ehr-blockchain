@@ -27,14 +27,15 @@
     "zone.js": "^0.15.1"
   },
   "devDependencies": {
-    "@angular/build": "^21.2.24",
-    "@angular/cli": "^21.2.24",
+    "@angular/build": "^22.2.0",
+    "@angular/cli": "^22.2.0",
     "@angular/compiler-cli": "^22.2.0",
     "@nomicfoundation/hardhat-ignition": "^3.1.8",
     "@nomicfoundation/hardhat-ignition-viem": "^3.1.6",
     "@types/jasmine": "^4.6.6",
     "@types/node": "^22.20.4",
     "hardhat": "^3.18.0",
+    "istanbul-lib-instrument": "^6.0.3",
     "typescript": "~6.0.3"
   },
   "type": "module"
