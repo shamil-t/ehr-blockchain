@@ -9,14 +9,14 @@ This document contains Mermaid diagrams and brief explanations covering the EHR 
 ```mermaid
 flowchart TB
   subgraph UI [Angular UI]
-    A[Angular Components\n(Transaction modal, Wallet UI)]
+    A["Angular Components\n(Transaction modal, Wallet UI)"]
   end
 
   subgraph AppService [Application Services]
-    B[EHRWalletService\n(create/import/unlock/lock/sign)]
-    C[KeyManager\n(encrypted storage, in-memory signer lifecycle)]
-    D[ProviderService\n(JsonRpcProvider read-only/write)]
-    E[ContractService\n(ABI, contract ops)]
+    B["EHRWalletService\n(create/import/unlock/lock/sign)"]
+    C["KeyManager\n(encrypted storage, in-memory signer lifecycle)"]
+    D["ProviderService\n(JsonRpcProvider read-only/write)"]
+    E["ContractService\n(ABI, contract ops)"]
   end
 
   subgraph Ethers [ethers.js]
@@ -52,22 +52,22 @@ flowchart LR
   subgraph Wallet\nResponsibilities
     W1[Create / Import wallet]
     W2[Lock / Unlock]
-    W3[Sign message / tx (with confirm UI)]
+    W3["Sign message / tx (with confirm UI)"]
     W4[Address retrieval]
     W5[Encrypt / Decrypt keys]
   end
 
   subgraph Provider\nResponsibilities
-    P1[JsonRpcProvider (read-only)]
+    P1["JsonRpcProvider (read-only)"]
     P2[Broadcast txs]
     P3[Chain ID & block queries]
   end
 
   subgraph Contract\nResponsibilities
     C1[ABI & addresses]
-    C2[Read-only methods (use provider)]
-    C3[Write methods (require signer)]
-    C4[Map EHR business ops to tx/data]
+    C2["Read-only methods (use provider)"]
+    C3["Write methods (require signer)"]
+    C4["Map EHR business ops to tx/data"]
   end
 
   Wallet --> Provider
@@ -81,14 +81,14 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-  subgraph Trusted[Trusted (Private key boundary)]
+  subgraph Trusted["Trusted (Private key boundary)"]
     T1[EHRWalletService]
-    T2[KeyManager (encrypted storage + in-memory signer)]
+    T2["KeyManager (encrypted storage + in-memory signer)"]
     T3[In-memory Signer]
   end
 
   subgraph Untrusted[Untrusted / External]
-    U1[Angular UI (no keys)]
+    U1["Angular UI (no keys)"]
     U2[Backend servers]
     U3[Telemetry / Logs]
     U4[Provider / RPC nodes]
@@ -233,7 +233,7 @@ stateDiagram-v2
 flowchart TD
   A[User has MetaMask] --> B{Migration path}
   B --> C[Export seed phrase / private key from MetaMask]
-  C --> D[Import into EHR Wallet (mnemonic/private key)]
+  C --> D["Import into EHR Wallet (mnemonic/private key)"]
 
   B --> E[Link-only: connect MetaMask to app]
   E --> F[Sign auth message to link addresses]
