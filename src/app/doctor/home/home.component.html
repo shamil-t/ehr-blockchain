@@ -1,0 +1,11 @@
+@if (DoctorDetails()) {
+  <div class="container-fluid">
+    <div class="container py-4">
+      <div class="h5 fw-bold">Doctor Dashboard</div>
+      <hr>
+      <div class="content">
+        <app-doctor-profile-card [doctor]="DoctorDetails()"></app-doctor-profile-card>
+      </div>
+    </div>
+  </div>
+}

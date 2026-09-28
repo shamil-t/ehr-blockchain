@@ -44,3 +44,13 @@ backup.zip
 # System files
 .DS_Store
 Thumbs.db
+
+/cache/*
+/cache
+/ignition/deployments
+/artifacts
+ignition/deployments/*
+.accounts
+.idea
+state.json
+src/assets/contract

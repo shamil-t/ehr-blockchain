@@ -1,0 +1,42 @@
+:host
+  pointer-events: none
+
+.loader-overlay
+  position: fixed
+  inset: 0
+  z-index: 2000
+  display: flex
+  align-items: center
+  justify-content: center
+  background: rgba(0, 0, 0, 0.35)
+  backdrop-filter: blur(2px)
+  pointer-events: all
+
+.loader-card
+  background: #fff
+  padding: 2rem
+  border-radius: 1rem
+  min-width: 280px
+  text-align: center
+
+.loader-message
+  font-size: 1rem
+  font-weight: 500
+
+
+.progress-wrapper
+  position: fixed
+  top: 1rem
+  left: 50%
+  transform: translateX(-50%)
+  width: min(420px, 92vw)
+  z-index: 2100
+  pointer-events: all
+
+.toast-container
+  position: fixed
+  top: 1rem
+  right: 1rem
+  z-index: 2200
+  width: min(360px, 92vw)
+  pointer-events: all
