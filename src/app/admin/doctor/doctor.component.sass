@@ -1,17 +1,116 @@
-.nav
+:host
+  display: block
+  width: 100%
+
+.doctor-page
+  width: min(100%, 1440px)
+  margin: 0 auto
+  padding: clamp(1rem, 3vw, 2.5rem)
+
+.page-heading
+  display: flex
+  align-items: center
+  gap: 1rem
+  margin-bottom: 1.75rem
+
+.heading-icon
+  display: grid
+  width: 3.5rem
+  height: 3.5rem
+  flex: 0 0 auto
+  place-items: center
+  border-radius: 1.1rem
+  color: var(--ehr-primary)
+  background: var(--ehr-primary-subtle)
+  font-size: 1.35rem
+
+.eyebrow
+  margin: 0 0 .25rem
+  color: var(--ehr-primary)
+  font-size: .7rem
+  font-weight: 700
+  letter-spacing: .12em
+
+h1
+  margin: 0
+  color: var(--ehr-dark)
+  font-size: clamp(1.5rem, 3vw, 2rem)
+  font-weight: 700
+  letter-spacing: -.035em
+
+.heading-copy
+  margin: .3rem 0 0
+  color: var(--ehr-muted)
+  font-size: .92rem
+
+.doctor-workspace
+  overflow: hidden
+  border: 1px solid var(--ehr-border)
+  border-radius: 1.25rem
+  background: var(--ehr-surface)
+  box-shadow: 0 12px 32px rgba(25, 54, 65, .055)
+
+.doctor-tabs
+  display: flex
+  gap: .4rem
+  padding: .65rem .85rem 0
+  border-bottom: 1px solid var(--ehr-border)
+  background: #fbfdfc
+  list-style: none
+
   .nav-link
-    margin-left: 3px
-    border-bottom: 2px solid #ffffff
-    border-radius: 10px 10px 0 0
+    display: inline-flex
+    align-items: center
+    gap: .55rem
+    padding: .8rem 1rem
+    border: 0
+    border-bottom: 2px solid transparent
+    border-radius: .65rem .65rem 0 0
+    color: var(--ehr-muted)
+    background: transparent
+    font-size: .9rem
+    font-weight: 600
+    transition: color .18s ease, background .18s ease, border-color .18s ease
 
     &:hover
-      border-bottom: 2px solid #0e6dfb
+      color: var(--ehr-primary)
+      background: var(--ehr-primary-subtle)
 
-.tab-content
-    width: 100%
-    height: calc(100vh - 150px)
-    overflow-y: scroll
-    overflow-x: hidden
-    scroll-behavior: smooth
+    &:focus-visible
+      outline: 3px solid rgba(25, 123, 117, .24)
+      outline-offset: 2px
 
+  .nav-link.active
+    border-bottom-color: var(--ehr-primary)
+    color: var(--ehr-primary-dark)
+    background: var(--ehr-primary-subtle)
 
+.workspace-content
+  display: block
+
+@media (max-width: 575.98px)
+  .doctor-page
+    padding: 1rem .75rem
+
+  .page-heading
+    align-items: flex-start
+    margin-bottom: 1.1rem
+
+  .heading-icon
+    width: 2.9rem
+    height: 2.9rem
+    border-radius: .9rem
+    font-size: 1.1rem
+
+  .heading-copy
+    max-width: 28rem
+    font-size: .84rem
+
+  .doctor-tabs
+    gap: .15rem
+    padding: .5rem .4rem 0
+
+    .nav-link
+      gap: .4rem
+      padding: .7rem .65rem
+      font-size: .8rem

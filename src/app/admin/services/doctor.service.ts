@@ -1,6 +1,5 @@
 import {inject, Injectable} from '@angular/core';
 import {IpfsService} from '../../services/ipfs.service';
-import {KuboRPCClient} from "kubo-rpc-client";
 import {DoctorType} from "../../../types/doctor.type";
 import {EhrContractService} from "../../services/ehr-contract.service";
 import {UiFeedbackService} from "../../services/ui-feedback.service";
@@ -12,11 +11,6 @@ export class DoctorService {
   ehrContractService = inject(EhrContractService);
   ipfsService = inject(IpfsService);
   uiFeedbackService = inject(UiFeedbackService);
-  ipfs: KuboRPCClient;
-
-  constructor() {
-    this.ipfs = this.ipfsService.getIPFS();
-  }
 
   async getAllDoctors(): Promise<DoctorType[]> {
     let doctors = await this.ehrContractService.getAllDoctors();
@@ -27,11 +21,17 @@ export class DoctorService {
     return data
   }
 
-  async addDoctor(data: any): Promise<any> {
-    const docId = data.docId;
-
+  async prepareDoctor(data: Record<string, unknown>): Promise<string> {
     const ipfsHash = await this.ipfsService.addRecord(data)
     this.uiFeedbackService.showProgress(70, "Data added to IPFS...")
+    return ipfsHash;
+  }
+
+  estimateAddDoctorTransaction(docId: string, ipfsHash: string) {
+    return this.ehrContractService.estimateAddDoctorTransaction(docId, ipfsHash);
+  }
+
+  async addDoctor(docId: string, ipfsHash: string): Promise<void> {
     this.uiFeedbackService.showLoader("Please confirm MetaMask Transaction")
     return await this.ehrContractService.addDoctor(docId, ipfsHash)
   }

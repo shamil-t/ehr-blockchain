@@ -1,31 +1,36 @@
-<div class="d-flex flex-column p-3">
-  <ul ngbNav #nav="ngbNav" [(activeId)]="activeNav" orientation="horizontal" class="nav nav-pills small">
-    <li ngbNavItem="1">
-      <button ngbNavLink>View Doctor</button>
-      <ng-template ngbNavContent>
-        <div class="tab-content">
+<main class="doctor-page">
+  <header class="page-heading">
+    <div class="heading-icon" aria-hidden="true">
+      <i class="fa-solid fa-user-doctor"></i>
+    </div>
+    <div>
+      <p class="eyebrow">ADMINISTRATION</p>
+      <h1>Doctor management</h1>
+      <p class="heading-copy">Manage your care team and keep doctor profiles up to date.</p>
+    </div>
+  </header>
+
+  <section class="doctor-workspace" aria-label="Doctor management">
+    <ul ngbNav #nav="ngbNav" [(activeId)]="activeNav" class="doctor-tabs" aria-label="Doctor management sections">
+      <li ngbNavItem="1">
+        <button ngbNavLink>
+          <i class="fa-solid fa-users" aria-hidden="true"></i>
+          <span>Doctor directory</span>
+        </button>
+        <ng-template ngbNavContent>
           <doctor-view/>
-        </div>
-      </ng-template>
-    </li>
-    <li ngbNavItem="2">
-      <button ngbNavLink>Add Doctor</button>
-      <ng-template ngbNavContent>
-        <div class="tab-content">
+        </ng-template>
+      </li>
+      <li ngbNavItem="2">
+        <button ngbNavLink>
+          <i class="fa-solid fa-user-plus" aria-hidden="true"></i>
+          <span>Add a doctor</span>
+        </button>
+        <ng-template ngbNavContent>
           <doctor-add/>
-        </div>
-      </ng-template>
-    </li>
-    <li ngbNavItem="3">
-      <button ngbNavLink>Edit Doctor</button>
-      <ng-template ngbNavContent>
-        <div class="tab-content">
-          <p class="p-5">
-            Implementation in progress
-          </p>
-        </div>
-      </ng-template>
-    </li>
-  </ul>
-  <div [ngbNavOutlet]="nav"></div>
-</div>
+        </ng-template>
+      </li>
+    </ul>
+    <div [ngbNavOutlet]="nav" class="workspace-content"></div>
+  </section>
+</main>

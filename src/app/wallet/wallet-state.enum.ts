@@ -1,0 +1,7 @@
+export enum WalletState {
+  NO_WALLET = 'NO_WALLET',
+  LOCKED = 'LOCKED',
+  UNLOCKED = 'UNLOCKED',
+  INITIALIZING = 'INITIALIZING',
+  ERROR = 'ERROR',
+}

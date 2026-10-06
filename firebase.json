@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/ehr2.0",
+    "public": "dist/ehr2.0/browser",
     "ignore": [
       "firebase.json",
       "**/.*",

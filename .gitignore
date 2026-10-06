@@ -55,3 +55,169 @@ src/assets/contract
 
 /ignition
 
+.angular
+
+EHRManagerStudio
+EHRBlockchain.Desktop.deps.json
+EHRBlockchain.Desktop.dll
+EHRBlockchain.Desktop.pdb
+EHRBlockchain.Desktop.runtimeconfig.json
+Microsoft.Extensions.FileProviders.Embedded.dll
+Photino.NET.dll
+Photino.NET.Server.dll
+
+# =========================
+# .NET / Visual Studio
+# =========================
+
+# Build output
+[Bb]in/
+[Oo]bj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio Code
+.vscode/
+
+# Rider / ReSharper
+.idea/
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# =========================
+# NuGet
+# =========================
+
+*.nupkg
+*.snupkg
+packages/
+.nuget/
+project.lock.json
+project.fragment.lock.json
+
+# NuGet generated files
+**/obj/
+**/bin/
+
+# =========================
+# Test Results / Coverage
+# =========================
+
+TestResults/
+*.trx
+coverage/
+coverage.opencover.xml
+*.coverage
+*.coveragexml
+
+# =========================
+# Logs
+# =========================
+
+*.log
+logs/
+Log/
+
+# =========================
+# ASP.NET Core
+# =========================
+
+# User secrets
+secrets.json
+appsettings.*.local.json
+
+# Local development configuration
+appsettings.Local.json
+
+# =========================
+# Environment Variables
+# =========================
+
+.env
+.env.*
+!.env.example
+
+# =========================
+# OS Files
+# =========================
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+
+# Linux
+*~
+
+# =========================
+# Database / Local Data
+# =========================
+
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+
+# =========================
+# Publish / Deployment
+# =========================
+
+publish/
+Publish/
+*.publishsettings
+
+# =========================
+# Azure / Deployment
+# =========================
+
+*.azurePubxml
+*.publish.xml
+
+# =========================
+# Generated Files
+# =========================
+
+Generated/
+generated/
+*.generated.cs
+
+# =========================
+# Temporary Files
+# =========================
+
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+
+# =========================
+# Certificates / Keys
+# =========================
+
+*.pfx
+*.p12
+*.key
+*.pem
+
+# =========================
+# Docker
+# =========================
+
+docker-compose.override.yml
+
+# =========================
+# Local Tools / Scripts
+# =========================
+
+tools/

@@ -18,6 +18,10 @@ export const routes: Routes = [
       loadChildren: () => import('./patient/patient.route').then((m) => m.PatientRoute),
     },
     {
+      path: 'wallet',
+      loadComponent: () => import('./wallet/wallet-page/wallet-page.component').then((m) => m.WalletPageComponent),
+    },
+    {
       path: '**',
       redirectTo: '',
       pathMatch: "full"

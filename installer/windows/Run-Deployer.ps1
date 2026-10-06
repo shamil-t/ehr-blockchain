@@ -8,12 +8,14 @@ Write-Output "Project root: $PROJECT_ROOT"
 # Push to project root directory for all operations
 Push-Location $PROJECT_ROOT
 
-try {
+try
+{
   Write-Output "Cleaning up old ignition deployments"
 
   $IGNITION_DEPLOYMENT_PATH = "ignition/deployments"
 
-  if(Test-Path $IGNITION_DEPLOYMENT_PATH){
+  if (Test-Path $IGNITION_DEPLOYMENT_PATH)
+  {
     Remove-Item -Recurse -Force $IGNITION_DEPLOYMENT_PATH
   }
 
@@ -37,19 +39,28 @@ try {
 
   Write-Output "Copying contract files to $DESTINATION"
 
-  if(-not (Test-Path $DESTINATION)){
+  if (-not (Test-Path $DESTINATION))
+  {
     New-Item -ItemType Directory -Path $DESTINATION -Force | Out-Null
   }
 
-  if(Test-Path $SOURCE_PATH){
+  if (Test-Path $SOURCE_PATH)
+  {
     Copy-Item "$SOURCE_PATH" "$DESTINATION" -Force
-  } else {
+    Write-Host "Copied $SOURCE_PATH to $DESTINATION"
+  }
+  else
+  {
     Write-Output "Warning: $SOURCE_PATH not found"
   }
 
-  if($SOURCE_PATH_ADDR -and (Test-Path $SOURCE_PATH_ADDR)){
+  if ($SOURCE_PATH_ADDR -and (Test-Path $SOURCE_PATH_ADDR))
+  {
     Copy-Item "$SOURCE_PATH_ADDR" "$DESTINATION" -Force
-  } else {
+    Write-Host "Copied $SOURCE_PATH_ADDR to $DESTINATION"
+  }
+  else
+  {
     Write-Output "Warning: deployed_addresses.json not found at $SOURCE_PATH_ADDR"
   }
 
@@ -59,7 +70,9 @@ try {
 
   Write-Output "Deployment completed !!!"
 
-} finally {
+}
+finally
+{
   Pop-Location
 }
 

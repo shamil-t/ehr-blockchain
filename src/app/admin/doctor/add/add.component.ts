@@ -1,9 +1,10 @@
-import {Component, inject, OnInit, signal, ChangeDetectionStrategy} from '@angular/core';
+import {Component, inject, OnDestroy, signal, ChangeDetectionStrategy} from '@angular/core';
 import {DoctorService} from '../../services/doctor.service';
-import {KuboRPCClient} from "kubo-rpc-client";
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgOptimizedImage} from "@angular/common";
 import {UiFeedbackService} from "../../../services/ui-feedback.service";
+import {ProviderService} from "../../../wallet/provider.service";
+import {TransactionConfirmationService} from "../../../wallet/transaction-confirmation.service";
 
 
 @Component({
@@ -17,7 +18,7 @@ import {UiFeedbackService} from "../../../services/ui-feedback.service";
     ReactiveFormsModule
   ]
 })
-export class AddComponent implements OnInit {
+export class AddComponent implements OnDestroy {
 
   fb = inject(FormBuilder)
   doctorForm = this.fb.group({
@@ -26,7 +27,7 @@ export class AddComponent implements OnInit {
     doj: ['', Validators.required],
     emailId: ['', [Validators.required, Validators.email]],
     phone: ['', Validators.required],
-    docId: ['', Validators.required],
+    docId: ['', [Validators.required, Validators.pattern(/^0x[a-fA-F0-9]{40}$/)]],
     city: ['', Validators.required],
     state: [''],
     speciality: ['', Validators.required],
@@ -36,73 +37,113 @@ export class AddComponent implements OnInit {
   image_url = signal('')
 
   uiFeedbackService = inject(UiFeedbackService);
+  private readonly providerService = inject(ProviderService);
+  private readonly transactionConfirmationService = inject(TransactionConfirmationService);
 
-  ipfs: KuboRPCClient;
   selectedDocImage: File | null = null;
+  isSubmitting = signal(false);
+  private previewUrl = '';
 
-  constructor(private ds: DoctorService) {
-    this.ipfs = ds.ipfs
-  }
+  constructor(private ds: DoctorService) {}
 
-  ngOnInit(): void {
-    this.ipfs = this.ds.ipfs
-  }
+  async onAddDocSubmit(imageInput: HTMLInputElement) {
+    if (this.doctorForm.invalid || this.isSubmitting()) {
+      this.doctorForm.markAllAsTouched();
+      return;
+    }
 
-  async onAddDocSubmit() {
+    this.isSubmitting.set(true);
     this.uiFeedbackService.showLoader("Adding Doctor...")
     this.uiFeedbackService.showProgress(10, "Adding Doctor details to the IPFS...")
 
-    if (this.selectedDocImage) {
-      const imageHash = await this.ds.addDocImage(this.selectedDocImage);
-      this.doctorForm.controls.image.setValue(imageHash.path)
-    } else {
-      this.doctorForm.controls.image.setValue('')
-    }
+    try {
+      if (this.selectedDocImage) {
+        const imageHash = await this.ds.addDocImage(this.selectedDocImage);
+        this.doctorForm.controls.image.setValue(imageHash.path);
+      } else {
+        this.doctorForm.controls.image.setValue('');
+      }
 
-    this.uiFeedbackService.showProgress(50, "")
+      this.uiFeedbackService.showProgress(50, "");
+      const docId = this.doctorForm.controls.docId.value;
+      if (!docId) throw new Error('Doctor wallet address is required.');
+      const profileHash = await this.ds.prepareDoctor(this.doctorForm.value);
+      const estimate = await this.ds.estimateAddDoctorTransaction(docId, profileHash);
+      this.uiFeedbackService.hideProgress();
+      this.uiFeedbackService.hideLoader();
+      const confirmed = await this.transactionConfirmationService.requestConfirmation({
+        operation: 'Add doctor',
+        from: estimate.from,
+        to: estimate.to,
+        chainId: this.providerService.chainId() ?? this.providerService.expectedChainId,
+        network: this.providerService.networkName,
+        value: 0n,
+        gasLimit: estimate.gasLimit,
+        estimatedFee: estimate.estimatedFee,
+      });
+      if (!confirmed) return;
 
-    this.ds.addDoctor(this.doctorForm.value).then((_r: any) => {
+      await this.ds.addDoctor(docId, profileHash);
       this.uiFeedbackService.showProgress(99, "Doctor added successfully!")
       this.uiFeedbackService.success("Doctor added successfully!")
       this.doctorForm.reset();
-      this.uiFeedbackService.hideProgress()
-      this.uiFeedbackService.hideLoader()
-    }).catch((er: any) => {
-      this.uiFeedbackService.error("Failed to add Doctor, " + er.toString());
-      this.uiFeedbackService.hideProgress()
-      this.uiFeedbackService.hideLoader()
-    })
-
+      this.clearImage(imageInput);
+    } catch (error) {
+      this.uiFeedbackService.error("Failed to add Doctor, " + String(error));
+    } finally {
+      this.isSubmitting.set(false);
+      this.uiFeedbackService.hideProgress();
+      this.uiFeedbackService.hideLoader();
+    }
   }
 
 
-  async PreviewImage(event: any) {
-    if (event.target.files && event.target.files[0]) {
-      const resizedBlob = await this.resizeProfileImage(event.target.files[0]);
-      this.selectedDocImage = new File([resizedBlob], "DoctorProfileImage.png", {
+  async PreviewImage(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith('image/')) {
+      this.uiFeedbackService.error("Please select an image file.");
+      input.value = '';
+      return;
+    }
+
+    try {
+      const resizedBlob = await this.resizeProfileImage(file);
+      this.selectedDocImage = new File([resizedBlob], "doctor-profile.jpg", {
         type: resizedBlob.type,
         lastModified: Date.now()
       });
-      this.image_url.set(URL.createObjectURL(resizedBlob));
+      this.releasePreviewUrl();
+      this.previewUrl = URL.createObjectURL(resizedBlob);
+      this.image_url.set(this.previewUrl);
+    } catch (error) {
+      this.uiFeedbackService.error("Unable to preview this image, " + String(error));
+      input.value = '';
     }
   }
 
   async resizeProfileImage(file: File): Promise<Blob> {
     return new Promise((resolve, reject) => {
       const img = new Image();
+      const sourceUrl = URL.createObjectURL(file);
 
       img.onload = () => {
+        URL.revokeObjectURL(sourceUrl);
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
 
-        if (!ctx) return
+        if (!ctx) {
+          reject(new Error('Unable to process this image.'));
+          return;
+        }
 
         const TARGET_SIZE = 150;
 
         canvas.width = TARGET_SIZE;
         canvas.height = TARGET_SIZE;
 
-        // Maintain aspect ratio WITHOUT cropping
         const scale = Math.max(
           TARGET_SIZE / img.width,
           TARGET_SIZE / img.height
@@ -116,29 +157,45 @@ export class AddComponent implements OnInit {
 
         ctx.imageSmoothingEnabled = true;
         ctx.imageSmoothingQuality = 'high';
-
         ctx.drawImage(img, x, y, newWidth, newHeight);
 
         canvas.toBlob(
           (blob) => {
             if (!blob) {
-              reject('Failed to resize image');
+              reject(new Error('Failed to resize image.'));
               return;
             }
 
             resolve(blob);
           },
           'image/jpeg',
-          0.95
+          0.82
         );
       };
 
-      img.onerror = reject;
-      img.src = URL.createObjectURL(file);
+      img.onerror = () => {
+        URL.revokeObjectURL(sourceUrl);
+        reject(new Error('The selected file could not be read as an image.'));
+      };
+      img.src = sourceUrl;
     });
   }
 
-  protected validateDocId() {
-    return this.doctorForm.controls.docId.value?.length != 42;
+  clearImage(imageInput: HTMLInputElement) {
+    this.selectedDocImage = null;
+    this.image_url.set('');
+    imageInput.value = '';
+    this.releasePreviewUrl();
+  }
+
+  ngOnDestroy() {
+    this.releasePreviewUrl();
+  }
+
+  private releasePreviewUrl() {
+    if (this.previewUrl) {
+      URL.revokeObjectURL(this.previewUrl);
+      this.previewUrl = '';
+    }
   }
 }

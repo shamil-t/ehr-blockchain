@@ -1,0 +1,61 @@
+<div class="confirmation-backdrop">
+  <section class="confirmation-dialog" role="dialog" aria-modal="true"
+           aria-labelledby="transaction-confirmation-title">
+    <div class="dialog-heading">
+      <span class="dialog-icon" aria-hidden="true">
+        <i class="fas fa-file-signature"></i>
+      </span>
+      <div>
+        <p class="eyebrow">REVIEW BEFORE SIGNING</p>
+        <h2 id="transaction-confirmation-title">Confirm transaction</h2>
+      </div>
+    </div>
+
+    <p class="dialog-description">
+      Review the transaction details carefully. Confirming will continue the wallet authorization flow.
+    </p>
+
+    <dl class="transaction-details">
+      <div class="detail-row">
+        <dt>Operation</dt>
+        <dd>{{ transaction.operation }}</dd>
+      </div>
+      <div class="detail-row">
+        <dt>From</dt>
+        <dd class="address">{{ transaction.from }}</dd>
+      </div>
+      @if (transaction.to) {
+        <div class="detail-row">
+          <dt>To</dt>
+          <dd class="address">{{ transaction.to }}</dd>
+        </div>
+      }
+      <div class="detail-row">
+        <dt>Network</dt>
+        <dd>{{ transaction.network }} <span class="chain-id">Chain {{ transaction.chainId }}</span></dd>
+      </div>
+      <div class="detail-row">
+        <dt>Value</dt>
+        <dd>{{ formatAmount(transaction.value) }}</dd>
+      </div>
+      <div class="detail-row">
+        <dt>Estimated gas</dt>
+        <dd>{{ transaction.gasLimit === undefined ? 'Not provided' : formatInteger(transaction.gasLimit) }}</dd>
+      </div>
+      <div class="detail-row">
+        <dt>Estimated transaction fee</dt>
+        <dd>{{ formatAmount(transaction.estimatedFee) }}</dd>
+      </div>
+    </dl>
+
+    <p class="security-note">
+      <i class="fas fa-triangle-exclamation" aria-hidden="true"></i>
+      Blockchain transactions may be irreversible.
+    </p>
+
+    <div class="dialog-actions">
+      <button class="button button-secondary" type="button" (click)="cancelled.emit()">Cancel</button>
+      <button class="button button-primary" type="button" (click)="confirmed.emit()">Confirm &amp; Sign</button>
+    </div>
+  </section>
+</div>

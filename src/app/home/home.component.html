@@ -1,5 +1,5 @@
 <!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3 sticky-top">
+<nav class="home-navbar navbar navbar-expand-lg navbar-light shadow-sm sticky-top" aria-label="Main navigation">
   <div class="container">
 
     <a class="navbar-brand fw-bold text-primary" routerLink="/">
@@ -10,7 +10,10 @@
       class="navbar-toggler"
       type="button"
       data-bs-toggle="collapse"
-      data-bs-target="#navbarNav">
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -19,7 +22,7 @@
       <ul class="navbar-nav ms-auto align-items-lg-center">
 
         <li class="nav-item mx-2">
-          <a class="nav-link active" href="#">Home</a>
+          <a class="nav-link active" href="#" aria-current="page">Home</a>
         </li>
 
         <li class="nav-item mx-2">
@@ -35,8 +38,13 @@
         </li>
 
         <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
-          <a class="btn btn-primary px-4 rounded-pill" href="#portals">
+          <a class="btn btn-primary home-nav-button px-4 rounded-pill" href="#portals">
             Launch Platform
+          </a>
+        </li>
+        <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
+          <a class="btn btn-outline-primary home-nav-button px-4 rounded-pill" routerLink="/wallet">
+            <i class="fa-solid fa-wallet me-2" aria-hidden="true"></i>Wallet
           </a>
         </li>
 
@@ -71,13 +79,13 @@
 
         <div class="d-flex flex-wrap gap-3 mb-4">
 
-          <a class="btn btn-primary btn-lg rounded-pill px-4" href="#portals">
+          <a class="btn btn-primary btn-lg rounded-pill px-4 home-action" href="#portals">
             Access Platform
           </a>
 
-          <button class="btn btn-outline-primary btn-lg rounded-pill px-4">
+          <a class="btn btn-outline-primary btn-lg rounded-pill px-4 home-action" href="#features">
             Learn More
-          </button>
+          </a>
 
         </div>
 
@@ -230,7 +238,7 @@
 
             <button
               routerLink="/admin"
-              class="btn btn-primary w-100 rounded-pill">
+              class="btn btn-primary w-100 rounded-pill portal-action">
               Go to Admin Dashboard
             </button>
 
@@ -247,7 +255,7 @@
 
           <div class="card-body p-4">
 
-            <div class="portal-icon bg-success-subtle text-success">
+            <div class="portal-icon bg-primary-subtle text-primary">
               <i class="fa-solid fa-user-doctor"></i>
             </div>
 
@@ -268,7 +276,7 @@
 
             <button
               routerLink="/doctor"
-              class="btn btn-success w-100 rounded-pill">
+              class="btn btn-primary w-100 rounded-pill portal-action">
               Go to Doctor Dashboard
             </button>
 
@@ -285,7 +293,7 @@
 
           <div class="card-body p-4">
 
-            <div class="portal-icon bg-info-subtle text-info">
+            <div class="portal-icon bg-primary-subtle text-primary">
               <i class="fa-solid fa-user"></i>
             </div>
 
@@ -306,7 +314,7 @@
 
             <button
               routerLink="/patient/"
-              class="btn btn-info text-white w-100 rounded-pill">
+              class="btn btn-primary w-100 rounded-pill portal-action">
               Go to Patient Dashboard
             </button>
 

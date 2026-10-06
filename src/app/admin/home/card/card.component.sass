@@ -4,19 +4,19 @@
   border: none
   border-radius: 18px
   padding: 18px
-  background: linear-gradient(135deg, #0d6efd, #3b82f6)
+  background: linear-gradient(135deg, var(--ehr-primary), var(--ehr-primary-dark))
   color: #ffffff
   min-width: 180px
   min-height: 110px
   display: flex
   flex-direction: column
   justify-content: space-between
-  box-shadow: 0 8px 24px rgba(13, 110, 253, 0.15)
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--ehr-primary) 15%, transparent)
   transition: all .25s ease
 
   &:hover
     transform: translateY(-3px)
-    box-shadow: 0 12px 30px rgba(13, 110, 253, 0.22)
+    box-shadow: 0 12px 30px color-mix(in srgb, var(--ehr-primary) 22%, transparent)
 
   &::before
     content: ''
@@ -62,7 +62,7 @@
 /* ============================= */
 
 .blue
-  background: linear-gradient(135deg, #0d6efd, #3b82f6)
+  background: linear-gradient(135deg, var(--ehr-primary), var(--ehr-primary-dark))
 
 .green
   background: linear-gradient(135deg, #198754, #20c997)
@@ -80,10 +80,10 @@
   box-shadow: 0 6px 18px rgba(0,0,0,.06)
 
   .image
-    background: rgba(13, 110, 253, .08)
+    background: var(--ehr-primary-subtle)
 
     span
-      color: #0d6efd
+      color: var(--ehr-primary)
 
   .title
     color: #6c757d

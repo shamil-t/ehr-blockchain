@@ -1,0 +1,166 @@
+:host
+  display: block
+  min-width: 0
+
+.doctor-card
+  min-width: 0
+  height: 100%
+  padding: 1.1rem
+  border: 1px solid var(--ehr-border)
+  border-radius: 1rem
+  background: var(--ehr-surface)
+  box-shadow: 0 5px 16px rgba(25, 54, 65, .035)
+  transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease
+
+  &:hover
+    transform: translateY(-2px)
+    border-color: #c6ddda
+    box-shadow: 0 10px 24px rgba(25, 54, 65, .08)
+
+.card-topline
+  display: flex
+  justify-content: space-between
+  align-items: flex-start
+  gap: .75rem
+  padding-bottom: 1rem
+  border-bottom: 1px solid var(--ehr-border)
+
+.doctor-identity
+  display: flex
+  min-width: 0
+  align-items: center
+  gap: .8rem
+
+.doctor-avatar
+  width: 3.8rem
+  height: 3.8rem
+  flex: 0 0 auto
+  border: 2px solid #fff
+  border-radius: 50%
+  background: var(--ehr-primary-subtle)
+  box-shadow: 0 0 0 1px var(--ehr-border)
+  object-fit: cover
+
+.identity-copy
+  min-width: 0
+
+.doctor-label
+  display: block
+  margin-bottom: .16rem
+  color: var(--ehr-primary)
+  font-size: .62rem
+  font-weight: 700
+  letter-spacing: .1em
+
+h3
+  overflow-wrap: anywhere
+  margin: 0
+  color: var(--ehr-dark)
+  font-size: 1rem
+  font-weight: 700
+  line-height: 1.35
+
+.speciality
+  overflow-wrap: anywhere
+  margin: .2rem 0 0
+  color: var(--ehr-muted)
+  font-size: .8rem
+
+.profile-status
+  display: inline-flex
+  flex: 0 0 auto
+  align-items: center
+  gap: .35rem
+  padding: .32rem .5rem
+  border-radius: 999px
+  color: var(--ehr-success)
+  background: #eaf5f0
+  font-size: .67rem
+  font-weight: 600
+
+  span
+    width: .38rem
+    height: .38rem
+    border-radius: 50%
+    background: var(--ehr-success)
+
+.doctor-details
+  display: grid
+  grid-template-columns: repeat(2, minmax(0, 1fr))
+  gap: .9rem 1rem
+  padding: 1rem 0
+
+.detail-item
+  display: flex
+  min-width: 0
+  align-items: center
+  gap: .55rem
+
+.detail-icon
+  display: grid
+  width: 2rem
+  height: 2rem
+  flex: 0 0 auto
+  place-items: center
+  border-radius: .65rem
+  color: var(--ehr-primary)
+  background: var(--ehr-primary-subtle)
+  font-size: .78rem
+
+.detail-copy
+  display: flex
+  min-width: 0
+  flex-direction: column
+  gap: .1rem
+
+  > span:last-child,
+  a
+    overflow: hidden
+    color: var(--ehr-text)
+    font-size: .78rem
+    text-overflow: ellipsis
+    white-space: nowrap
+
+  a
+    text-decoration: none
+
+    &:hover
+      color: var(--ehr-primary-dark)
+      text-decoration: underline
+
+.detail-label
+  color: var(--ehr-muted)
+  font-size: .68rem
+
+.wallet-address
+  display: flex
+  min-width: 0
+  flex-direction: column
+  gap: .35rem
+  padding: .7rem .75rem
+  border-radius: .7rem
+  background: #f6f9f8
+
+  > span
+    color: var(--ehr-muted)
+    font-size: .62rem
+    font-weight: 700
+    letter-spacing: .08em
+
+  code
+    overflow-wrap: anywhere
+    color: var(--ehr-secondary)
+    font-size: .72rem
+    line-height: 1.5
+
+@media (max-width: 575.98px)
+  .doctor-card
+    padding: .95rem
+
+  .doctor-details
+    gap: .8rem .6rem
+
+  .profile-status
+    gap: .3rem
+    padding: .28rem .42rem
+    font-size: .62rem

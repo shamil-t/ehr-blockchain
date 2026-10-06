@@ -3,15 +3,15 @@
 $sidebar-width: 260px
 $sidebar-collapsed-width: 82px
 
-$sidebar-bg: #ffffff
-$sidebar-hover: rgba(13, 110, 253, 0.08)
-$sidebar-border: #edf2f7
+$sidebar-bg: var(--ehr-surface)
+$sidebar-hover: var(--ehr-primary-subtle)
+$sidebar-border: var(--ehr-border)
 
-$primary: #0d6efd
-$text-dark: #1f2937
-$text-light: #6b7280
-$text-muted: #9ca3af
-$danger: #dc3545
+$primary: var(--ehr-primary)
+$text-dark: var(--ehr-text)
+$text-light: var(--ehr-secondary)
+$text-muted: var(--ehr-muted)
+$danger: var(--ehr-danger)
 
 $transition: all .25s ease
 
@@ -21,14 +21,16 @@ $transition: all .25s ease
 
 .sidebar
   width: $sidebar-width
-  margin-top: 25px
-  min-height: calc(100vh - 25px)
+  height: calc(100vh - var(--ehr-header-height))
+  height: calc(100dvh - var(--ehr-header-height))
+  min-height: 0
   background: $sidebar-bg
   position: fixed
-  top: 0
+  top: var(--ehr-header-height)
   left: 0
   z-index: 1000
   overflow-x: hidden
+  overflow-y: auto
   transition: $transition
   border-right: 1px solid $sidebar-border
   box-shadow: 0 8px 30px rgba(0,0,0,.04)
@@ -53,7 +55,7 @@ $transition: all .25s ease
         display: none
 
   .sidebar-container
-    min-height: calc(100vh - 25px)
+    min-height: 100%
     display: flex
     flex-direction: column
 
@@ -83,7 +85,7 @@ $transition: all .25s ease
   height: 38px
   border-radius: 10px
   border: none
-  background: #f3f6fb
+  background: var(--ehr-background)
   color: $primary
   transition: $transition
   display: flex
@@ -91,7 +93,7 @@ $transition: all .25s ease
   align-items: center
 
   &:hover
-    background: rgba(13, 110, 253, 0.1)
+    background: var(--ehr-primary-subtle)
 
 /* ============================= */
 /* MENU LABEL */
@@ -138,9 +140,9 @@ $transition: all .25s ease
     color: $primary
 
   &.active
-    background: linear-gradient(135deg, #0d6efd, #3b82f6)
+    background: linear-gradient(135deg, var(--ehr-primary), var(--ehr-primary-dark))
     color: white
-    box-shadow: 0 8px 20px rgba(13,110,253,.18)
+    box-shadow: 0 8px 20px color-mix(in srgb, var(--ehr-primary) 18%, transparent)
 
     i
       color: white
@@ -153,7 +155,7 @@ $transition: all .25s ease
   color: $danger
 
   &:hover
-    background: rgba(220, 53, 69, .08)
+    background: color-mix(in srgb, var(--ehr-danger) 8%, transparent)
     color: $danger
 
 /* ============================= */
@@ -161,10 +163,20 @@ $transition: all .25s ease
 /* ============================= */
 
 .content-wrapper
+  flex: 1 1 auto
   width: 100%
-  min-height: 100vh
-  background: #f8fafc
+  min-width: 0
+  height: calc(100vh - var(--ehr-header-height))
+  height: calc(100dvh - var(--ehr-header-height))
+  min-height: 0
+  overflow-x: hidden
+  overflow-y: auto
+  background: var(--ehr-background)
   transition: $transition
+
+.content-inner
+  min-height: 100%
+  box-sizing: border-box
 
 .content-expanded
   margin-left: $sidebar-width
@@ -191,11 +203,14 @@ $transition: all .25s ease
 
   .sidebar
     transform: translateX(-100%)
-    margin-top: 0
-    min-height: 100vh
+    top: 0
+    height: 100vh
+    height: 100dvh
 
     &.mobile-open
       transform: translateX(0)
 
   .content-wrapper
     margin-left: 0 !important
+    height: calc(100vh - var(--ehr-header-height))
+    height: calc(100dvh - var(--ehr-header-height))
