@@ -1,61 +1,54 @@
-@if (doctor()) {
-  <div class="card mb-1 shadow small border">
-    <div class="doctor w-100 p-2 d-flex flex-row align-items-center">
-      <div class="doc-image px-3">
-        <img
-          class="border border-1 border-secondary rounded-circle p-1"
-          [ngSrc]="ipfs.getImageUrl(doctor()?.image) || 'assets/images/doctor.png'"
-          alt="Doctor Image"
-          width="150"
-          height="150"
-          priority
-        />
+@if (doctor(); as profile) {
+  <article class="doctor-card">
+    <div class="card-topline">
+      <div class="doctor-identity">
+        <img class="doctor-avatar" [ngSrc]="ipfs.getImageUrl(profile.image) || 'assets/images/doctor.png'"
+             [alt]="'Dr. ' + profile.fName + ' ' + profile.lName"
+             width="100" height="100"
+             (error)="onImageError($event)">
+        <div class="identity-copy">
+          <span class="doctor-label">DOCTOR</span>
+          <h3>{{ profile.fName }} {{ profile.lName }}</h3>
+          <p class="speciality">{{ profile.speciality }}</p>
+        </div>
       </div>
-      <div class="doc-info d-flex flex-column text-secondary">
-        <div class="col">
-          <div class="row py-2">
-            <div class="col-md-12">
-              <b>DocID: </b>
-              <span class="text-success">
-                        <b>{{ doctor()?.docId }}</b></span>
-            </div>
-          </div>
-          <div class="row-md-12 d-flex flex-row justify-content-between">
-            <div class="col-md-12 d-flex flex-column">
-              <div>
-                <b>Full Name : </b>
-                <span class="fName">{{ doctor()?.fName }} {{ doctor()?.lName }}</span>
-              </div>
-              <div>
-                <b>Date of Joining : </b>
-                <span class="Doj">{{ doctor()?.doj }}</span>
-              </div>
-              <div>
-                <b>Speciality: </b>
-                <span class="speciality">{{ doctor()?.speciality }}</span>
-              </div>
-            </div>
-            <div class="col-md-12 d-flex flex-column">
-              <div>
-                <b>Email : </b>
-                <span class="text-primary">{{ doctor()?.emailId }}</span>
-              </div>
-              <div>
-                <b>Phone: </b>
-                <span class="phone">{{ doctor()?.phone }}</span>
-              </div>
-              <div>
-                <b>City: </b>
-                <span class="city">{{ doctor()?.city }}</span>
-              </div>
-              <div>
-                <b>State: </b>
-                <span class="state">{{ doctor()?.state }}</span>
-              </div>
-            </div>
-          </div>
+      <span class="profile-status"><span aria-hidden="true"></span> Registered</span>
+    </div>
+
+    <div class="doctor-details">
+      <div class="detail-item">
+        <span class="detail-icon" aria-hidden="true"><i class="fa-solid fa-envelope"></i></span>
+        <div class="detail-copy">
+          <span class="detail-label">Email</span>
+          <a [href]="'mailto:' + profile.emailId">{{ profile.emailId }}</a>
+        </div>
+      </div>
+      <div class="detail-item">
+        <span class="detail-icon" aria-hidden="true"><i class="fa-solid fa-phone"></i></span>
+        <div class="detail-copy">
+          <span class="detail-label">Phone</span>
+          <a [href]="'tel:' + profile.phone">{{ profile.phone }}</a>
+        </div>
+      </div>
+      <div class="detail-item">
+        <span class="detail-icon" aria-hidden="true"><i class="fa-solid fa-location-dot"></i></span>
+        <div class="detail-copy">
+          <span class="detail-label">Location</span>
+          <span>{{ profile.city }}{{ profile.state ? ', ' + profile.state : '' }}</span>
+        </div>
+      </div>
+      <div class="detail-item">
+        <span class="detail-icon" aria-hidden="true"><i class="fa-solid fa-calendar-days"></i></span>
+        <div class="detail-copy">
+          <span class="detail-label">Joined</span>
+          <span>{{ profile.doj }}</span>
         </div>
       </div>
     </div>
-  </div>
+
+    <div class="wallet-address">
+      <span>WALLET ADDRESS</span>
+      <code>{{ profile.docId }}</code>
+    </div>
+  </article>
 }

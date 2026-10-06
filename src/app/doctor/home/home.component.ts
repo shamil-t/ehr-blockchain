@@ -1,4 +1,4 @@
-import {Component, inject, OnInit, signal, WritableSignal} from '@angular/core';
+import {Component, inject, OnInit, signal, WritableSignal, ChangeDetectionStrategy} from '@angular/core';
 import {DoctorService} from '../services/doctor.service';
 import {DoctorType} from "../../../types/doctor.type";
 import {IpfsService} from "../../services/ipfs.service";
@@ -8,6 +8,7 @@ import {DoctorProfileCardComponent} from "../../shared/doctor-profile-card/docto
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.sass'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     DoctorProfileCardComponent
   ]

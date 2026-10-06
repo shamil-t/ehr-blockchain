@@ -3,13 +3,15 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  blockchain: {rpc_url: "http://localhost:8545", chainId: 31337, networkName: 'Anvil Local'}
 };
 
 export const IPFS = {
   localIPFS: 'http://127.0.0.1:5001/api/v0',
-  localIPFSGet: 'http://localhost:8080/ipfs/'
+  localIPFSGet: 'http://127.0.0.1:8080/ipfs/'
 }
+
 
 /*
  * For easier debugging in development mode, you can import the following file

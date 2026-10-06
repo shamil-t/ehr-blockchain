@@ -4,13 +4,13 @@
 
 @if (loading().active) {
 
-  <div class="loader-overlay">
+  <div class="loader-overlay" role="status" aria-live="polite" aria-label="Loading">
 
-    <div class="loader-card shadow">
+    <div class="loader-card">
 
       <div
-        class="spinner-border text-primary mb-3"
-        role="status">
+        class="feedback-spinner mb-3"
+        aria-hidden="true">
       </div>
 
       <div class="loader-message">
@@ -30,7 +30,7 @@
 
   <div class="progress-wrapper">
 
-    <div class="card shadow-sm p-3">
+    <div class="progress-card">
 
       <div class="mb-2 fw-medium">
         {{ progress().message }}
@@ -55,35 +55,41 @@
 <!-- TOASTS -->
 <!-- ===================================== -->
 
-<div class="toast-container">
+<div class="toast-container" aria-live="polite" aria-atomic="false">
 
   @for (toast of toasts(); track toast.id) {
 
     <ngb-toast
       [autohide]="false"
       (hidden)="removeToast(toast.id)"
-      class="mb-2">
+      class="feedback-toast"
+      [class.toast-success]="toast.type === 'success'"
+      [class.toast-error]="toast.type === 'error'"
+      [class.toast-warning]="toast.type === 'warning'"
+      [class.toast-info]="toast.type === 'info'">
 
-      <div
-        class="toast-header"
-        [class.bg-success]="toast.type === 'success'"
-        [class.bg-danger]="toast.type === 'error'"
-        [class.bg-warning]="toast.type === 'warning'"
-        [class.bg-info]="toast.type === 'info'">
-
-        <strong class="me-auto text-white">
-          {{ toast.title }}
-        </strong>
+      <div class="toast-content">
+        <div class="toast-heading">
+          <span class="toast-icon" aria-hidden="true">
+            @switch (toast.type) {
+              @case ('success') { <i class="fa-solid fa-circle-check"></i> }
+              @case ('error') { <i class="fa-solid fa-circle-xmark"></i> }
+              @case ('warning') { <i class="fa-solid fa-triangle-exclamation"></i> }
+              @case ('info') { <i class="fa-solid fa-circle-info"></i> }
+            }
+          </span>
+          <strong>{{ toast.title }}</strong>
+        </div>
 
         <button
           type="button"
-          class="btn-close btn-close-white"
+          class="btn-close"
+          [attr.aria-label]="'Dismiss ' + toast.title"
           (click)="removeToast(toast.id)">
         </button>
-
       </div>
 
-      <div class="p-2 small text-bg-light text-secondary-emphasis">
+      <div class="toast-message">
         {{ toast.message }}
       </div>
 

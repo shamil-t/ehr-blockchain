@@ -1,4 +1,4 @@
-import {Component, effect, inject, OnInit, signal} from '@angular/core';
+import {Component, effect, inject, OnInit, signal, ChangeDetectionStrategy} from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
 import {WalletService} from "../../services/wallet.service";
 import {EhrContractService} from "../../services/ehr-contract.service";
@@ -10,6 +10,7 @@ import {UiFeedbackService} from "../../services/ui-feedback.service";
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.sass'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     SidebarComponent,
     RouterOutlet,
@@ -18,10 +19,6 @@ import {UiFeedbackService} from "../../services/ui-feedback.service";
 })
 export class DashboardComponent implements OnInit {
   isDoctor = signal(false);
-
-  checkProgress = signal(true);
-  progressWarn = signal(false);
-  progressMsg = signal('Checking Doctor....');
 
   walletService = inject(WalletService);
   ehrContractService = inject(EhrContractService);
@@ -42,9 +39,6 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.onCheckDoctor().then(_ => {
-    // });
-
     let menu: SidebarMenuItem = {
       name: 'Management',
       menuItems: [

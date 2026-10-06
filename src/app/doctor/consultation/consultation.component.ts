@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {PatientRecordComponent} from "./patient-record/patient-record.component";
 
@@ -6,6 +6,7 @@ import {PatientRecordComponent} from "./patient-record/patient-record.component"
   selector: 'app-consultation',
   templateUrl: './consultation.component.html',
   styleUrls: ['./consultation.component.sass'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     FormsModule,
     PatientRecordComponent

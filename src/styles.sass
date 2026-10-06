@@ -1,8 +1,44 @@
-@use "bootstrap/scss/bootstrap"
+@use "theme" as theme
+@use "bootstrap/scss/bootstrap" with (
+  $primary: theme.$primary,
+  $secondary: theme.$secondary,
+  $success: theme.$success,
+  $info: theme.$info,
+  $warning: theme.$warning,
+  $danger: theme.$danger,
+  $light: theme.$light,
+  $dark: theme.$dark,
+  $body-color: theme.$body-color,
+  $body-bg: theme.$body-bg,
+  $border-color: theme.$border-color
+)
 @use "@fortawesome/fontawesome-free/scss/fontawesome"
 @use "@fortawesome/fontawesome-free/scss/solid"
 //@use "@fortawesome/fontawesome-free/scss/regular"
 //@use "@fortawesome/fontawesome-free/scss/brands"
+
+:root
+  --ehr-header-height: 40px
+  --ehr-primary: #{theme.$primary}
+  --ehr-primary-dark: #{theme.$primary-dark}
+  --ehr-primary-subtle: #{theme.$primary-subtle}
+  --ehr-secondary: #{theme.$secondary}
+  --ehr-success: #{theme.$success}
+  --ehr-info: #{theme.$info}
+  --ehr-warning: #{theme.$warning}
+  --ehr-danger: #{theme.$danger}
+  --ehr-dark: #{theme.$dark}
+  --ehr-text: #{theme.$body-color}
+  --ehr-muted: #{theme.$muted}
+  --ehr-background: #{theme.$body-bg}
+  --ehr-surface: #{theme.$surface}
+  --ehr-border: #{theme.$border-color}
+  --bs-secondary-color: var(--ehr-muted)
+
+body
+  color: var(--ehr-text)
+  background-color: var(--ehr-background)
+
 *
   margin: 0
   padding: 0
@@ -21,7 +57,7 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb
-  background: #5ba2ff
+  background: var(--ehr-primary)
   border-radius: 10px
 
 .fs-8

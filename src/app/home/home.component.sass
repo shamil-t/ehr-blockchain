@@ -1,24 +1,67 @@
 .navbar
-  margin-top: 25px
-  top: 25px
+  top: 40px
+
+.home-navbar
+  min-height: 72px
+  background: var(--ehr-surface)
+  border-bottom: 1px solid var(--ehr-border)
+
+  .navbar-brand
+    display: inline-flex
+    align-items: center
+    color: var(--ehr-dark)
+
+    &:hover
+      color: var(--ehr-primary)
+
+  .nav-link
+    color: var(--ehr-secondary)
+    font-weight: 500
+    transition: color .2s ease
+
+    &:hover,
+    &.active
+      color: var(--ehr-primary)
+
+.home-nav-button
+  min-width: 112px
+  font-weight: 600
+
+.home-action,
+.portal-action
+  font-weight: 600
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease
+
+  &:hover
+    transform: translateY(-2px)
+    box-shadow: 0 .5rem 1rem color-mix(in srgb, var(--ehr-primary) 18%, transparent)
+
+.home-navbar .btn-outline-primary
+  --bs-btn-color: var(--ehr-primary)
+  --bs-btn-border-color: var(--ehr-primary)
+  --bs-btn-hover-color: #fff
+  --bs-btn-hover-bg: var(--ehr-primary)
+  --bs-btn-hover-border-color: var(--ehr-primary)
+  --bs-btn-active-bg: var(--ehr-primary-dark)
+  --bs-btn-active-border-color: var(--ehr-primary-dark)
 
 .hero-section
   min-height: 92vh
-  background: linear-gradient(135deg, #f8fbff 0%, #eef5ff 100%)
+  background: linear-gradient(135deg, var(--ehr-background) 0%, var(--ehr-primary-subtle) 100%)
 
 .hero-badge
-  background: rgba(37, 99, 235, 0.1)
-  color: #2563eb
+  background: var(--ehr-primary-subtle)
+  color: var(--ehr-primary)
   padding: .7rem 1.2rem
   border-radius: 999px
   font-size: .9rem
   font-weight: 600
 
 .hero-card
-  background: white
+  background: var(--ehr-surface)
   border-radius: 1.5rem
   padding: 2rem
-  border: 1px solid #e9ecef
+  border: 1px solid var(--ehr-border)
 
 .dashboard-box
   display: flex
@@ -26,14 +69,14 @@
   align-items: center
   padding: 1rem
   border-radius: 1rem
-  background: #f8fafc
-  border: 1px solid #edf2f7
+  background: var(--ehr-background)
+  border: 1px solid var(--ehr-border)
 
 .hero-features
   display: flex
   flex-wrap: wrap
   gap: 1rem
-  color: #64748b
+  color: var(--ehr-muted)
   font-size: .95rem
 
   span
@@ -65,20 +108,20 @@
 
   li
     margin-bottom: .8rem
-    color: #64748b
+    color: var(--ehr-muted)
 
     &::before
       content: "✓"
-      color: #10b981
+      color: var(--ehr-success)
       margin-right: .7rem
       font-weight: 700
 
 .feature-box
-  background: white
+  background: var(--ehr-surface)
   border-radius: 1.5rem
   padding: 2rem
   text-align: center
-  border: 1px solid #edf2f7
+  border: 1px solid var(--ehr-border)
   height: 100%
   transition: .3s ease
 
@@ -88,18 +131,18 @@
   i
     font-size: 2rem
     margin-bottom: 1rem
-    color: #2563eb
+    color: var(--ehr-primary)
 
   h5
     margin-bottom: 1rem
     font-weight: 600
 
   p
-    color: #64748b
+    color: var(--ehr-muted)
     margin-bottom: 0
 
 .trust-section
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%)
+  background: linear-gradient(135deg, var(--ehr-primary-dark) 0%, var(--ehr-dark) 100%)
   padding: 6rem 0
 
 .trust-text
@@ -110,16 +153,16 @@
 
 .footer-section
   padding: 2rem 0
-  border-top: 1px solid #e5e7eb
+  border-top: 1px solid var(--ehr-border)
 
   a
     text-decoration: none
-    color: #64748b
+    color: var(--ehr-muted)
     margin-left: 1.5rem
     transition: .3s ease
 
     &:hover
-      color: #2563eb
+      color: var(--ehr-primary)
 
 .navbar-brand
   letter-spacing: .5px

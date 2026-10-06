@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy} from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {NgOptimizedImage} from "@angular/common";
 
@@ -6,6 +6,7 @@ import {NgOptimizedImage} from "@angular/common";
   selector: 'app-patient-record',
   templateUrl: './patient-record.component.html',
   styleUrls: ['./patient-record.component.sass'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     FormsModule,
     NgOptimizedImage

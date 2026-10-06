@@ -8,35 +8,163 @@
   display: flex
   align-items: center
   justify-content: center
-  background: rgba(0, 0, 0, 0.35)
-  backdrop-filter: blur(2px)
+  background: color-mix(in srgb, var(--ehr-dark) 42%, transparent)
+  backdrop-filter: blur(4px)
   pointer-events: all
 
 .loader-card
-  background: #fff
-  padding: 2rem
-  border-radius: 1rem
+  display: flex
+  flex-direction: column
+  align-items: center
+  background: var(--ehr-surface)
+  padding: 2rem 2.5rem
+  border: 1px solid var(--ehr-border)
+  border-radius: 1.25rem
   min-width: 280px
   text-align: center
+  box-shadow: 0 1.25rem 3rem color-mix(in srgb, var(--ehr-dark) 20%, transparent)
+
+.feedback-spinner
+  width: 2.25rem
+  height: 2.25rem
+  border: 3px solid var(--ehr-primary-subtle)
+  border-top-color: var(--ehr-primary)
+  border-radius: 50%
+  animation: feedback-spin .8s linear infinite
+
+@keyframes feedback-spin
+  to
+    transform: rotate(360deg)
 
 .loader-message
-  font-size: 1rem
-  font-weight: 500
+  color: var(--ehr-text)
+  font-size: .95rem
+  font-weight: 600
 
 
 .progress-wrapper
   position: fixed
-  top: 1rem
+  top: calc(var(--ehr-header-height) + .75rem)
   left: 50%
   transform: translateX(-50%)
   width: min(420px, 92vw)
   z-index: 2100
   pointer-events: all
 
+.progress-card
+  padding: 1rem 1.25rem
+  border: 1px solid var(--ehr-border)
+  border-radius: .9rem
+  background: var(--ehr-surface)
+  color: var(--ehr-text)
+  box-shadow: 0 .75rem 2rem color-mix(in srgb, var(--ehr-dark) 12%, transparent)
+
+.progress-card ngb-progressbar
+  --bs-progress-bg: var(--ehr-primary-subtle)
+  --bs-progress-bar-bg: var(--ehr-primary)
+  border-radius: 999px
+
+.progress-card .text-end
+  color: var(--ehr-muted)
+
 .toast-container
   position: fixed
-  top: 1rem
-  right: 1rem
+  bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px))
+  right: 1.25rem
   z-index: 2200
   width: min(360px, 92vw)
+  max-height: calc(100vh - var(--ehr-header-height) - 2rem)
+  display: flex
+  flex-direction: column
+  gap: .75rem
+  overflow-y: auto
   pointer-events: all
+
+.toast-container .feedback-toast
+  display: block
+  width: 100%
+  overflow: hidden
+  border: 1px solid var(--ehr-border)
+  border-inline-start: 4px solid var(--toast-accent)
+  border-radius: 1rem
+  background: var(--ehr-surface)
+  color: var(--ehr-text)
+  box-shadow: 0 1rem 2.5rem color-mix(in srgb, var(--ehr-dark) 16%, transparent)
+  animation: toast-enter .24s ease-out both
+
+.toast-success
+  --toast-accent: var(--ehr-success)
+  --toast-tint: color-mix(in srgb, var(--ehr-success) 11%, var(--ehr-surface))
+
+.toast-error
+  --toast-accent: var(--ehr-danger)
+  --toast-tint: color-mix(in srgb, var(--ehr-danger) 11%, var(--ehr-surface))
+
+.toast-warning
+  --toast-accent: var(--ehr-warning)
+  --toast-tint: color-mix(in srgb, var(--ehr-warning) 13%, var(--ehr-surface))
+
+.toast-info
+  --toast-accent: var(--ehr-primary)
+  --toast-tint: var(--ehr-primary-subtle)
+
+.toast-content
+  display: flex
+  align-items: center
+  justify-content: space-between
+  gap: .75rem
+  padding: .85rem .9rem .25rem
+
+.toast-heading
+  display: flex
+  min-width: 0
+  align-items: center
+  gap: .65rem
+  color: var(--ehr-dark)
+  font-size: .9rem
+
+.toast-heading strong
+  overflow: hidden
+  text-overflow: ellipsis
+  white-space: nowrap
+
+.toast-icon
+  display: grid
+  width: 2rem
+  height: 2rem
+  flex: 0 0 2rem
+  place-items: center
+  border-radius: .7rem
+  background: var(--toast-tint)
+  color: var(--toast-accent)
+
+.toast-content .btn-close
+  flex: 0 0 auto
+  padding: .4rem
+  opacity: .55
+
+.toast-content .btn-close:hover
+  opacity: 1
+
+.toast-message
+  padding: .25rem .9rem .9rem 3.55rem
+  color: var(--ehr-muted)
+  font-size: .85rem
+  line-height: 1.45
+
+@keyframes toast-enter
+  from
+    opacity: 0
+    transform: translateX(1rem)
+  to
+    opacity: 1
+    transform: translateX(0)
+
+@media (max-width: 576px)
+  .toast-container
+    right: .75rem
+    width: calc(100vw - 1.5rem)
+
+@media (prefers-reduced-motion: reduce)
+  .toast-container .feedback-toast
+    animation: none

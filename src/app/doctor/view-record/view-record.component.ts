@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {DoctorService} from '../services/doctor.service';
 import {FormsModule} from "@angular/forms";
 import {RecordComponent} from "./record/record.component";
@@ -8,6 +8,7 @@ import {DatePipe} from "@angular/common";
   selector: 'app-view-record',
   templateUrl: './view-record.component.html',
   styleUrls: ['./view-record.component.sass'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     FormsModule,
     RecordComponent,
@@ -31,10 +32,6 @@ export class ViewRecordComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //FIXME
-    // let data = localStorage.getItem("PatRecord")
-    // this.PatientRecords = JSON.parse(data!) || {}
-    // console.log(this.PatientRecords);
     this.PatientRecords = {}
   }
 

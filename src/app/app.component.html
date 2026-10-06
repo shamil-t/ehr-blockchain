@@ -1,10 +1,55 @@
-<div class="header">
-  <div class="text-secondary fw-bold px-2">
-    MedLedger EHR
+<header class="app-header">
+  <a class="app-brand" routerLink="/" aria-label="MedLedger EHR home">
+    <span class="app-brand-mark" aria-hidden="true">
+      <i class="fa-solid fa-heart-pulse"></i>
+    </span>
+    <span>MedLedger <span class="app-brand-accent">EHR</span></span>
+  </a>
+  <div class="account-controls">
+    @if (walletService.state() === WalletState.LOCKED) {
+      <a
+        class="wallet-unlock-button"
+        routerLink="/wallet"
+        [queryParams]="{ unlock: 'true' }"
+        aria-label="Unlock wallet">
+        <i class="fa-solid fa-lock-open" aria-hidden="true"></i>
+        <span>Unlock</span>
+      </a>
+    }
+    <div
+      class="account-status"
+      [class.account-connected]="walletService.state() === WalletState.UNLOCKED || walletService.state() === WalletState.LOCKED"
+      [class.account-warning]="walletService.state() === WalletState.LOCKED"
+      [class.account-offline]="walletService.state() === WalletState.NO_WALLET || walletService.state() === WalletState.ERROR"
+    >
+      <span class="account-indicator" aria-hidden="true"></span>
+      @switch (walletService.state()) {
+        @case (WalletState.UNLOCKED) {
+          <span class="account-label">Wallet unlocked</span>
+        }
+        @case (WalletState.LOCKED) {
+          <span class="account-label">Wallet locked</span>
+        }
+        @case (WalletState.INITIALIZING) {
+          <span class="account-label">Checking wallet...</span>
+        }
+        @case (WalletState.ERROR) {
+          <span class="account-label">Wallet unavailable</span>
+        }
+        @default {
+          <span class="account-label">Wallet not connected</span>
+        }
+      }
+    </div>
   </div>
-  <div class="account px-2 fs-12 text-warning">
-    {{ account() }}
-  </div>
-</div>
+</header>
 <app-ui-feedback/>
-<router-outlet></router-outlet>
+<main class="app-content">
+  <router-outlet></router-outlet>
+</main>
+@if (transactionConfirmationService.transaction(); as transaction) {
+  <app-transaction-confirmation
+    [transaction]="transaction"
+    (confirmed)="transactionConfirmationService.confirm()"
+    (cancelled)="transactionConfirmationService.cancel()"/>
+}

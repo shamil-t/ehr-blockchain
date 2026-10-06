@@ -1,5 +1,5 @@
 import {inject, Injectable} from '@angular/core';
-import {IpfsService} from 'src/app/services/ipfs.service';
+import {IpfsService} from '../../services/ipfs.service';
 import {DoctorType} from "../../../types/doctor.type";
 import {Contract} from "ethers";
 import {EhrContractService} from "../../services/ehr-contract.service";

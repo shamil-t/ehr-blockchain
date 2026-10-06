@@ -1,0 +1,556 @@
+<main class="wallet-page">
+  <header class="page-header">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true"><i class="fas fa-shield-heart"></i></span>
+      <div>
+        <p class="eyebrow">EHR · IDENTITY</p>
+        <h1>EHR Wallet</h1>
+      </div>
+    </div>
+    <div class="network-pill" [class.is-connected]="providerService.status() === 'CONNECTED'"
+         [class.is-warning]="providerService.status() === 'WRONG_NETWORK'"
+         [class.is-offline]="providerService.status() === 'DISCONNECTED'"
+         role="status" aria-live="polite">
+      <span class="status-dot" aria-hidden="true"></span>
+      @switch (providerService.status()) {
+        @case ('CHECKING') {
+          <span>Checking network</span>
+        }
+        @case ('CONNECTED') {
+          <span>{{ providerService.networkName }} · Connected</span>
+        }
+        @case ('WRONG_NETWORK') {
+          <span>Unexpected network</span>
+        }
+        @case ('DISCONNECTED') {
+          <span>RPC unavailable</span>
+        }
+      }
+      <button class="icon-button refresh-button" type="button" (click)="refreshNetwork()"
+              aria-label="Refresh network status" title="Refresh network status">
+        <i class="fas fa-rotate" aria-hidden="true"></i>
+      </button>
+    </div>
+  </header>
+
+  <section class="intro">
+    <div>
+      <p class="eyebrow">YOUR SECURE EHR IDENTITY</p>
+      <h2>Wallet</h2>
+      <p class="intro-copy">Manage your blockchain identity and authorize EHR actions securely.</p>
+    </div>
+    @if (walletService.state() === WalletState.UNLOCKED) {
+      <span class="wallet-state unlocked"><i class="fas fa-lock-open" aria-hidden="true"></i> Unlocked</span>
+    } @else if (walletService.state() === WalletState.LOCKED) {
+      <span class="wallet-state locked"><i class="fas fa-lock" aria-hidden="true"></i> Locked</span>
+    } @else if (walletService.state() === WalletState.INITIALIZING) {
+      <span class="wallet-state pending"><i class="fas fa-circle-notch fa-spin"
+                                            aria-hidden="true"></i> Loading wallet</span>
+    }
+  </section>
+
+  @if (providerService.status() === 'WRONG_NETWORK') {
+    <aside class="network-alert" role="alert">
+      <span class="alert-icon" aria-hidden="true"><i class="fas fa-triangle-exclamation"></i></span>
+      <div>
+        <strong>Unexpected network</strong>
+        <p>Expected chain {{ providerService.expectedChainId }}; detected chain {{ providerService.chainId() }}.
+          Blockchain writes are disabled.</p>
+      </div>
+    </aside>
+  } @else if (providerService.status() === 'DISCONNECTED') {
+    <aside class="network-alert offline" role="alert">
+      <span class="alert-icon" aria-hidden="true"><i class="fas fa-plug-circle-xmark"></i></span>
+      <div>
+        <strong>Blockchain network unavailable</strong>
+        <p>Unable to connect to the configured blockchain network. Read and write details will return when it is
+          available.</p>
+      </div>
+    </aside>
+  }
+
+  @if (walletService.state() === WalletState.INITIALIZING && !walletAddress) {
+    <section class="loading-card" role="status" aria-live="polite">
+      <span class="loader" aria-hidden="true"></span>
+      <span>Checking this device for a wallet…</span>
+    </section>
+  } @else if (walletService.state() === WalletState.NO_WALLET) {
+    <section class="onboarding-card">
+      <div class="onboarding-content">
+        <div class="onboarding-icon" aria-hidden="true"><i class="fas fa-fingerprint"></i></div>
+        <p class="eyebrow">GET STARTED</p>
+        <h3>Your identity, secured.</h3>
+        <p class="body-copy">Create a wallet to securely authorize EHR actions on the blockchain. Your encrypted wallet
+          stays on this device.</p>
+        <div class="onboarding-actions">
+          <button class="button button-primary" type="button" (click)="openDialog('create')">
+            <i class="fas fa-plus" aria-hidden="true"></i> Create new wallet
+          </button>
+          <button class="button button-secondary" type="button" (click)="openDialog('import')">
+            <i class="fas fa-right-to-bracket" aria-hidden="true"></i> Import existing wallet
+          </button>
+        </div>
+        <div class="onboarding-network">
+          <span class="mini-dot" [class.active]="providerService.status() === 'CONNECTED'"></span>
+          <div>
+            <strong>{{ providerService.networkName }}</strong>
+            <span>Chain ID {{ providerService.expectedChainId }} ·
+              {{ providerService.status() === 'CONNECTED' ? 'Connected' : 'Configured network' }}
+            </span>
+          </div>
+        </div>
+        <p class="security-note"><i class="fas fa-shield-halved" aria-hidden="true"></i> Your password is never shared
+          with the application.</p>
+      </div>
+      <div class="onboarding-side">
+        <div class="side-art" aria-hidden="true">
+          <span class="art-ring ring-one"></span>
+          <span class="art-ring ring-two"></span>
+          <span class="art-core"><i class="fas fa-heart-pulse"></i></span>
+        </div>
+        <span class="side-caption">TRUSTED · PRIVATE · YOURS</span>
+      </div>
+    </section>
+  } @else if (walletService.state() === WalletState.ERROR) {
+    <section class="empty-card" role="alert">
+      <span class="empty-icon error-icon"><i class="fas fa-circle-exclamation" aria-hidden="true"></i></span>
+      <h3>Wallet unavailable</h3>
+      <p>Wallet information could not be opened. Your encrypted wallet data has not been changed.</p>
+      <button class="button button-secondary" type="button" (click)="ngOnInit()">Try again</button>
+    </section>
+  } @else if (walletAddress) {
+    <section class="wallet-overview" aria-label="Wallet overview">
+      <div class="overview-top">
+        <div class="wallet-identity">
+          <span class="identity-icon" aria-hidden="true"><i class="fas fa-fingerprint"></i></span>
+          <div>
+            <p class="label">Wallet address</p>
+            <div class="address-line">
+              <span class="address" [title]="walletAddress">{{ shortenAddress(walletAddress) }}</span>
+              <button class="copy-button" type="button" (click)="copyText(walletAddress)"
+                      aria-label="Copy wallet address">
+                <i class="fas" [class.fa-copy]="!copied()" [class.fa-check]="copied()" aria-hidden="true"></i>
+                {{ copied() ? 'Copied' : 'Copy' }}
+              </button>
+            </div>
+          </div>
+        </div>
+        <span class="self-custody"><i class="fas fa-shield-check" aria-hidden="true"></i> Stored on this device</span>
+      </div>
+      <div class="overview-divider"></div>
+      <div class="overview-details">
+        <div class="balance-block">
+          <p class="label">Available balance</p>
+          @if (providerService.status() === 'CONNECTED') {
+            @if (balance(); as currentBalance) {
+              <p class="balance">{{ currentBalance | number:'1.0-4' }} <span>ETH</span></p>
+            } @else {
+              <p class="balance balance-muted">— <span>ETH</span></p>
+              @if (balanceError()) {
+                <p class="detail-caption balance-error">Balance could not be loaded</p>
+              }
+            }
+          } @else {
+            <p class="balance balance-muted">Unavailable</p>
+            <p class="detail-caption">Connect to the network to read balance</p>
+          }
+        </div>
+        <div class="detail-divider"></div>
+        <div class="network-detail">
+          <p class="label">Network</p>
+          <p class="detail-value"><span class="mini-dot"
+                                        [class.active]="providerService.status() === 'CONNECTED'"></span>{{ providerService.networkName }}
+          </p>
+          <p class="detail-caption">Chain ID {{ providerService.chainId() ?? '—' }}</p>
+        </div>
+        <div class="detail-divider"></div>
+        <div class="security-detail">
+          <p class="label">Wallet security</p>
+          <p class="detail-value">
+            <i class="fas" [class.fa-lock-open]="walletService.state() === WalletState.UNLOCKED"
+               [class.fa-lock]="walletService.state() === WalletState.LOCKED" aria-hidden="true"></i>
+            {{ walletService.state() === WalletState.UNLOCKED ? 'Ready to authorize' : 'Protected while locked' }}
+          </p>
+          <p class="detail-caption">Signing requires your approval</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="wallet-management">
+      <span>Finished using this wallet on this device?</span>
+      <button class="button button-sign-out" type="button" (click)="openDialog('sign-out')">
+        <i class="fas fa-right-from-bracket" aria-hidden="true"></i> Sign out
+      </button>
+    </div>
+
+    @if (walletService.state() === WalletState.LOCKED) {
+      <section class="locked-message">
+        <span class="lock-indicator"><i class="fas fa-lock" aria-hidden="true"></i></span>
+        <div>
+          <strong>Your wallet is locked</strong>
+          <p>Unlock to sign messages or authorize blockchain transactions. Your address and network information remain
+            available.</p>
+        </div>
+        <button class="button button-primary unlock-button" type="button" (click)="openDialog('unlock')">Unlock wallet
+        </button>
+      </section>
+    }
+
+    @if (walletService.state() === WalletState.UNLOCKED) {
+      <section class="actions-section" aria-labelledby="actions-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">AUTHORIZED ACTIONS</p>
+            <h3 id="actions-title">Wallet actions</h3>
+          </div>
+          <p>Each action requires your confirmation.</p>
+        </div>
+        <div class="action-grid">
+          <button class="action-card" type="button" [disabled]="!canWrite" (click)="openDialog('sign')">
+            <span class="action-icon signing"><i class="fas fa-pen-nib" aria-hidden="true"></i></span>
+            <span
+              class="action-copy"><strong>Sign a message</strong><small>Prove control of your EHR identity</small></span>
+            <i class="fas fa-arrow-right action-arrow" aria-hidden="true"></i>
+          </button>
+          <button class="action-card" type="button" [disabled]="!canWrite" (click)="openDialog('send')">
+            <span class="action-icon transaction"><i class="fas fa-file-signature" aria-hidden="true"></i></span>
+            <span class="action-copy"><strong>Send transaction</strong><small>Review details before authorizing</small></span>
+            <i class="fas fa-arrow-right action-arrow" aria-hidden="true"></i>
+          </button>
+        </div>
+        @if (providerService.status() !== 'CONNECTED') {
+          <p class="write-disabled"><i class="fas fa-circle-info" aria-hidden="true"></i> Wallet actions are unavailable
+            until the expected network is connected.</p>
+        }
+        <div class="lock-row">
+          <span><i class="fas fa-shield-halved"
+                   aria-hidden="true"></i> Lock when you’re finished using this device.</span>
+          <button class="button button-lock" type="button" (click)="lockWallet()"><i class="fas fa-lock"
+                                                                                     aria-hidden="true"></i> Lock wallet
+          </button>
+        </div>
+      </section>
+    }
+
+    <section class="activity-section" aria-labelledby="activity-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">WALLET DETAILS</p>
+          <h3 id="activity-title">Security & activity</h3>
+        </div>
+      </div>
+      <div class="activity-row">
+        <span class="activity-icon"><i class="fas fa-shield-halved" aria-hidden="true"></i></span>
+        <div><strong>Local encrypted storage</strong>
+          <p>Your wallet is encrypted and stored on this device.</p></div>
+        <span class="activity-status">Protected</span>
+      </div>
+      <div class="activity-row">
+        <span class="activity-icon"><i class="fas fa-network-wired" aria-hidden="true"></i></span>
+        <div><strong>Network connection</strong>
+          <p>Blockchain reads do not require wallet unlock.</p></div>
+        <span class="activity-status" [class.status-offline]="providerService.status() !== 'CONNECTED'">
+          {{ providerService.status() === 'CONNECTED' ? 'Available' : 'Unavailable' }}
+        </span>
+      </div>
+    </section>
+  }
+
+  <footer class="page-footer">
+    <i class="fas fa-shield-halved" aria-hidden="true"></i>
+    <span>Keep your wallet password private. The application cannot recover it.</span>
+    <span class="footer-separator">·</span>
+    <span>Network writes are only enabled on the configured chain.</span>
+  </footer>
+
+  @if (errorMessage()) {
+    <p class="toast-message" role="alert">{{ errorMessage() }}</p>
+  }
+
+  @if (dialog()) {
+    <div class="dialog-backdrop">
+      <section #walletDialog class="wallet-dialog" role="dialog" aria-modal="true"
+               [attr.aria-labelledby]="'dialog-title'">
+        <button class="dialog-close" type="button" aria-label="Close dialog" (click)="closeDialog()"
+                [disabled]="!!busyAction()">
+          <i class="fas fa-xmark" aria-hidden="true"></i>
+        </button>
+
+        @if (dialog() === 'create') {
+          <span class="dialog-icon"><i class="fas fa-shield-heart" aria-hidden="true"></i></span>
+          <p class="eyebrow">NEW EHR IDENTITY</p>
+          <h2 id="dialog-title">Create wallet</h2>
+          <p class="dialog-description">Protect your wallet with a strong password. It cannot be recovered by the
+            application.</p>
+          <form (ngSubmit)="createWallet()" #createForm="ngForm">
+            <label for="create-password">Password</label>
+            <div class="input-with-action">
+              <input id="create-password" name="password" [(ngModel)]="password"
+                     [type]="showPassword ? 'text' : 'password'"
+                     autocomplete="new-password" minlength="12" required>
+              <button type="button" class="visibility-button" (click)="showPassword = !showPassword"
+                      [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'">
+                <i class="fas" [class.fa-eye]="!showPassword" [class.fa-eye-slash]="showPassword"
+                   aria-hidden="true"></i>
+              </button>
+            </div>
+            <div class="strength-row" aria-live="polite">
+              <span class="strength-track"><span [style.width.%]="passwordStrength() * 25"
+                                                 [class]="'strength-fill strength-' + passwordStrength()"></span></span>
+              <span>{{ strengthLabel() }}</span>
+            </div>
+            @if (password && !passwordMeetsRequirements) {
+              <small class="field-error">Use at least 12 characters.</small>
+            }
+            <label for="create-confirm">Confirm password</label>
+            <div class="input-with-action">
+              <input id="create-confirm" name="confirmPassword" [(ngModel)]="confirmPassword"
+                     [type]="showConfirmPassword ? 'text' : 'password'"
+                     autocomplete="new-password" required>
+              <button type="button" class="visibility-button" (click)="showConfirmPassword = !showConfirmPassword"
+                      [attr.aria-label]="showConfirmPassword ? 'Hide password confirmation' : 'Show password confirmation'">
+                <i class="fas" [class.fa-eye]="!showConfirmPassword" [class.fa-eye-slash]="showConfirmPassword"
+                   aria-hidden="true"></i>
+              </button>
+            </div>
+            @if (confirmPassword && !passwordsMatch) {
+              <small class="field-error">Passwords do not match.</small>
+            }
+            <p class="form-note"><i class="fas fa-circle-info" aria-hidden="true"></i> Your password is required to
+              unlock this wallet and cannot be recovered.</p>
+            <div class="dialog-actions">
+              <button class="button button-secondary" type="button" (click)="closeDialog()">Cancel</button>
+              <button class="button button-primary" type="submit"
+                      [disabled]="!createForm.valid || !passwordMeetsRequirements || !passwordsMatch || !!busyAction()">
+                {{ busyAction() === 'create' ? 'Creating…' : 'Create wallet' }}
+              </button>
+            </div>
+          </form>
+        }
+
+        @if (dialog() === 'import') {
+          <span class="dialog-icon"><i class="fas fa-arrow-down-to-bracket" aria-hidden="true"></i></span>
+          <p class="eyebrow">USE AN EXISTING IDENTITY</p>
+          <h2 id="dialog-title">Import wallet</h2>
+          <p class="dialog-description">Your private key is used only to encrypt this wallet on your device.</p>
+          <form (ngSubmit)="prepareImport()" #importForm="ngForm">
+            <label for="private-key">Private key</label>
+            <div class="input-with-action">
+              <input id="private-key" name="privateKey" [(ngModel)]="privateKey"
+                     [type]="showPrivateKey ? 'text' : 'password'"
+                     autocomplete="off" spellcheck="false" required>
+              <button type="button" class="visibility-button" (click)="showPrivateKey = !showPrivateKey"
+                      [attr.aria-label]="showPrivateKey ? 'Hide private key' : 'Show private key'">
+                <i class="fas" [class.fa-eye]="!showPrivateKey" [class.fa-eye-slash]="showPrivateKey"
+                   aria-hidden="true"></i>
+              </button>
+            </div>
+            <label for="import-password">New wallet password</label>
+            <input id="import-password" name="password" [(ngModel)]="password" type="password"
+                   autocomplete="new-password" minlength="12" required>
+            <div class="strength-row"><span class="strength-track"><span [style.width.%]="passwordStrength() * 25"
+                                                                         [class]="'strength-fill strength-' + passwordStrength()"></span></span><span>{{ strengthLabel() }}</span>
+            </div>
+            <label for="import-confirm">Confirm password</label>
+            <input id="import-confirm" name="confirmPassword" [(ngModel)]="confirmPassword" type="password"
+                   autocomplete="new-password" required>
+            @if (password && !passwordMeetsRequirements) {
+              <small class="field-error">Use at least 12 characters.</small>
+            }
+            @if (confirmPassword && !passwordsMatch) {
+              <small class="field-error">Passwords do not match.</small>
+            }
+            <p class="form-note"><i class="fas fa-lock" aria-hidden="true"></i> Never share your private key. It will
+              not be displayed or sent to a server.</p>
+            <div class="dialog-actions">
+              <button class="button button-secondary" type="button" (click)="closeDialog()">Cancel</button>
+              <button class="button button-primary" type="submit"
+                      [disabled]="!importForm.valid || !passwordMeetsRequirements || !passwordsMatch">Continue
+              </button>
+            </div>
+          </form>
+        }
+
+        @if (dialog() === 'import-confirm') {
+          <span class="dialog-icon"><i class="fas fa-fingerprint" aria-hidden="true"></i></span>
+          <p class="eyebrow">CONFIRM IDENTITY</p>
+          <h2 id="dialog-title">Confirm wallet</h2>
+          <p class="dialog-description">Wallet address detected:</p>
+          <div class="confirmation-address">{{ detectedImportAddress }}</div>
+          <p class="form-note"><i class="fas fa-lock" aria-hidden="true"></i> This wallet will be encrypted with your
+            password and stored on this device. Your private key is no longer shown.</p>
+          <div class="dialog-actions">
+            <button class="button button-secondary" type="button" (click)="openDialog('import')">Back</button>
+            <button class="button button-primary" type="button" (click)="confirmImport()" [disabled]="!!busyAction()">
+              {{ busyAction() === 'import' ? 'Importing…' : 'Confirm import' }}
+            </button>
+          </div>
+        }
+
+        @if (dialog() === 'unlock') {
+          <span class="dialog-icon"><i class="fas fa-lock-open" aria-hidden="true"></i></span>
+          <p class="eyebrow">WALLET ACCESS</p>
+          <h2 id="dialog-title">Unlock wallet</h2>
+          <p class="dialog-description">Enter your wallet password to authorize EHR blockchain actions.</p>
+          @if (walletAddress) {
+            <p class="dialog-address">{{ shortenAddress(walletAddress) }}</p>
+          }
+          <form (ngSubmit)="unlockWallet()" #unlockForm="ngForm">
+            <label for="unlock-password">Password</label>
+            <div class="input-with-action">
+              <input id="unlock-password" name="unlockPassword" [(ngModel)]="unlockPassword"
+                     [type]="showPassword ? 'text' : 'password'"
+                     autocomplete="current-password" required>
+              <button type="button" class="visibility-button" (click)="showPassword = !showPassword"
+                      [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'">
+                <i class="fas" [class.fa-eye]="!showPassword" [class.fa-eye-slash]="showPassword"
+                   aria-hidden="true"></i>
+              </button>
+            </div>
+            <div class="dialog-actions">
+              <button class="button button-secondary" type="button" (click)="closeDialog()">Cancel</button>
+              <button class="button button-primary" type="submit" [disabled]="!unlockForm.valid || !!busyAction()">
+                {{ busyAction() === 'unlock' ? 'Unlocking…' : 'Unlock wallet' }}
+              </button>
+            </div>
+          </form>
+        }
+
+        @if (dialog() === 'sign-out') {
+          <span class="dialog-icon danger"><i class="fas fa-right-from-bracket" aria-hidden="true"></i></span>
+          <p class="eyebrow">REMOVE WALLET FROM THIS DEVICE</p>
+          <h2 id="dialog-title">Sign out of wallet</h2>
+          <p class="dialog-description">This removes the encrypted wallet data from this device so another user can
+            create or import a wallet. Make sure you have your private key or recovery backup; you will need it to use
+            this wallet again.</p>
+          <p class="form-note"><i class="fas fa-triangle-exclamation" aria-hidden="true"></i> This cannot be undone.
+            Your wallet and funds on the blockchain are not deleted.</p>
+          <div class="dialog-actions">
+            <button class="button button-secondary" type="button" (click)="closeDialog()">Cancel</button>
+            <button class="button button-primary" type="button" (click)="signOutWallet()" [disabled]="!!busyAction()">
+              {{ busyAction() === 'sign-out' ? 'Signing out…' : 'Sign out' }}
+            </button>
+          </div>
+        }
+
+        @if (dialog() === 'created') {
+          <span class="dialog-icon success"><i class="fas fa-circle-check" aria-hidden="true"></i></span>
+          <p class="eyebrow">IDENTITY READY</p>
+          <h2 id="dialog-title">{{ walletResult() === 'created' ? 'Wallet created' : 'Wallet imported' }}</h2>
+          <p class="dialog-description">Your EHR wallet has been securely stored on this device.</p>
+          <label>Wallet address</label>
+          <div class="confirmation-address address-copy">
+            <span>{{ walletAddress }}</span>
+            <button class="copy-button" type="button" (click)="walletAddress && copyText(walletAddress)"
+                    aria-label="Copy wallet address">
+              <i class="fas fa-copy" aria-hidden="true"></i> Copy
+            </button>
+          </div>
+          <div class="result-network"><i class="fas fa-circle-check"
+                                         aria-hidden="true"></i>{{ providerService.networkName }} ·
+            Chain {{ providerService.expectedChainId }}
+          </div>
+          <div class="dialog-actions">
+            <button class="button button-primary" type="button" (click)="closeDialog()">Continue</button>
+          </div>
+        }
+
+        @if (dialog() === 'sign') {
+          <span class="dialog-icon"><i class="fas fa-pen-nib" aria-hidden="true"></i></span>
+          <p class="eyebrow">WALLET AUTHORIZATION</p>
+          <h2 id="dialog-title">Sign message</h2>
+          <p class="dialog-description">The application is requesting your wallet signature. Signing proves control of
+            this wallet.</p>
+          <label for="sign-message">Message</label>
+          <textarea id="sign-message" name="message" [(ngModel)]="message" rows="4" maxlength="1000"></textarea>
+          <p class="form-note"><i class="fas fa-circle-info" aria-hidden="true"></i> This signs a message only; it does
+            not submit a blockchain transaction.</p>
+          <div class="dialog-actions">
+            <button class="button button-secondary" type="button" (click)="closeDialog()">Cancel</button>
+            <button class="button button-primary" type="button" (click)="signMessage()"
+                    [disabled]="!message.trim() || !canWrite || !!busyAction()">
+              {{ busyAction() === 'sign' ? 'Signing…' : 'Sign message' }}
+            </button>
+          </div>
+        }
+
+        @if (dialog() === 'signed') {
+          <span class="dialog-icon success"><i class="fas fa-circle-check" aria-hidden="true"></i></span>
+          <p class="eyebrow">SIGNATURE COMPLETE</p>
+          <h2 id="dialog-title">Message signed</h2>
+          <p class="dialog-description">The message was signed successfully. Share this signature only with the
+            application that requested it.</p>
+          <label for="signature-result">Signature</label>
+          <textarea id="signature-result" [value]="signature" readonly rows="4"></textarea>
+          <div class="dialog-actions">
+            <button class="button button-secondary" type="button" (click)="copyText(signature)">Copy signature</button>
+            <button class="button button-primary" type="button" (click)="closeDialog()">Done</button>
+          </div>
+        }
+
+        @if (dialog() === 'send') {
+          <span class="dialog-icon"><i class="fas fa-file-signature" aria-hidden="true"></i></span>
+          <p class="eyebrow">REVIEW BEFORE AUTHORITATION</p>
+          <h2 id="dialog-title">Send transaction</h2>
+          <p class="dialog-description">Review the recipient and amount. Nothing will be signed until you confirm the
+            next screen.</p>
+          <form (ngSubmit)="prepareTransaction()" #transactionForm="ngForm">
+            <label for="destination">Recipient address</label>
+            <input id="destination" name="toAddress" [(ngModel)]="toAddress" autocomplete="off" spellcheck="false"
+                   required>
+            <label for="amount">Amount (ETH)</label>
+            <input id="amount" name="valueEth" [(ngModel)]="valueEth" type="number" min="0" step="any"
+                   inputmode="decimal" required>
+            <p class="form-note"><i class="fas fa-triangle-exclamation" aria-hidden="true"></i> Blockchain transactions
+              cannot be reversed.</p>
+            <div class="dialog-actions">
+              <button class="button button-secondary" type="button" (click)="closeDialog()">Cancel</button>
+              <button class="button button-primary" type="submit" [disabled]="!transactionForm.valid || !canWrite">
+                Review transaction
+              </button>
+            </div>
+          </form>
+        }
+
+        @if (dialog() === 'transaction') {
+          @if (transactionState() === 'SUCCESS') {
+            <span class="dialog-icon success"><i class="fas fa-circle-check" aria-hidden="true"></i></span>
+            <p class="eyebrow">TRANSACTION SUBMITTED</p>
+            <h2 id="dialog-title">Transaction submitted</h2>
+            <p class="dialog-description">Your transaction was submitted to the configured network.</p>
+            <label for="transaction-hash">Transaction reference</label>
+            <div class="confirmation-address">{{ transactionHash }}</div>
+            <div class="dialog-actions">
+              <button class="button button-primary" type="button" (click)="closeDialog()">Done</button>
+            </div>
+          } @else if (transactionState() === 'ERROR') {
+            <span class="dialog-icon danger"><i class="fas fa-circle-exclamation" aria-hidden="true"></i></span>
+            <p class="eyebrow">TRANSACTION FAILED</p>
+            <h2 id="dialog-title">Could not submit</h2>
+            <p class="dialog-description">The transaction could not be submitted. Review the details and try again.</p>
+            <div class="dialog-actions">
+              <button class="button button-secondary" type="button" (click)="closeDialog()">Close</button>
+              <button class="button button-primary" type="button"
+                      (click)="retryTransaction()">Review again
+              </button>
+            </div>
+          } @else {
+            @if (transactionState() === 'SIGNING' || transactionState() === 'SUBMITTING') {
+              <div class="transaction-progress" role="status" aria-live="polite">
+                <span class="loader" aria-hidden="true"></span>
+                {{ transactionState() === 'SIGNING' ? 'Signing transaction…' : 'Submitting transaction…' }}
+              </div>
+            } @else if (transactionState() === 'CONFIRMING') {
+              <p class="dialog-description" role="status">Waiting for transaction confirmation…</p>
+            }
+          }
+        }
+
+        @if (errorMessage() && !dialog()) {
+          <p class="dialog-error" role="alert"><i class="fas fa-circle-exclamation"
+                                                  aria-hidden="true"></i>{{ errorMessage() }}</p>
+        }
+      </section>
+    </div>
+  }
+</main>

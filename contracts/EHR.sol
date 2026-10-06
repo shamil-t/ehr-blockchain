@@ -79,9 +79,18 @@ contract EHR {
     }
   }
 
-  function addUser(address id, string  memory dataHash, UserType userType) public onlyAdmin {
+  function addUser(address id, string  memory dataHash, UserType userType) public {
     require(id != address(0), "Invalid address");
     require(!doctors[id].exists && !patients[id].exists, "User already registered");
+
+    if (userType == UserType.DOCTOR) {
+      require(msg.sender == admin, "Only admin can add doctor");
+    }
+
+    if (userType == UserType.PATIENT) {
+      require(msg.sender != admin && !doctors[msg.sender].exists, "Only patients can add themself");
+    }
+
     if (userType == UserType.DOCTOR) {
       doctors[id] = User({id: id, profileCID: dataHash, exists: true});
       doctorIds.push(id);

@@ -1,4 +1,4 @@
-import {Component, inject, OnInit, signal} from '@angular/core';
+import {Component, inject, OnInit, signal, ChangeDetectionStrategy} from '@angular/core';
 import {CardComponent} from "./card/card.component";
 import {CurrencyPipe} from "@angular/common";
 import {WalletService} from "../../services/wallet.service";
@@ -11,6 +11,7 @@ import {WalletService} from "../../services/wallet.service";
     CardComponent,
     CurrencyPipe
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./home.component.sass']
 })
 export class HomeComponent implements OnInit {
