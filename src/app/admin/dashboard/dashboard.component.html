@@ -1,0 +1,5 @@
+@if (isAdmin()) {
+  <app-sidebar title="Admin Dashboard" [sidebarNavLinks]="sidebarMenus">
+    <router-outlet></router-outlet>
+  </app-sidebar>
+}

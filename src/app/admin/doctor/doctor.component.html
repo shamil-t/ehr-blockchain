@@ -1,0 +1,31 @@
+<div class="d-flex flex-column p-3">
+  <ul ngbNav #nav="ngbNav" [(activeId)]="activeNav" orientation="horizontal" class="nav nav-pills small">
+    <li ngbNavItem="1">
+      <button ngbNavLink>View Doctor</button>
+      <ng-template ngbNavContent>
+        <div class="tab-content">
+          <doctor-view/>
+        </div>
+      </ng-template>
+    </li>
+    <li ngbNavItem="2">
+      <button ngbNavLink>Add Doctor</button>
+      <ng-template ngbNavContent>
+        <div class="tab-content">
+          <doctor-add/>
+        </div>
+      </ng-template>
+    </li>
+    <li ngbNavItem="3">
+      <button ngbNavLink>Edit Doctor</button>
+      <ng-template ngbNavContent>
+        <div class="tab-content">
+          <p class="p-5">
+            Implementation in progress
+          </p>
+        </div>
+      </ng-template>
+    </li>
+  </ul>
+  <div [ngbNavOutlet]="nav"></div>
+</div>

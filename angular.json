@@ -6,7 +6,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ehr2.0": {
+    "ehr": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -21,12 +21,16 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular/build:application",
           "options": {
-            "outputPath": "dist/ehr2.0",
+            "outputPath": {
+              "base": "dist/ehr2.0"
+            },
             "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": [
+              "zone.js",
+              "@angular/localize/init"
+            ],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "sass",
             "assets": [
@@ -45,7 +49,8 @@
               "ipfs-utils/src/http.js",
               "stream-to-it/source.js",
               "debug"
-            ]
+            ],
+            "browser": "src/main.ts"
           },
           "configurations": {
             "production": {
@@ -70,9 +75,7 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true,
@@ -82,35 +85,39 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular/build:dev-server",
           "options": {
-            "browserTarget": "ehr2.0:build",
             "watch": true,
-            "hmr": true
+            "hmr": true,
+            "buildTarget": "ehr:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ehr2.0:build:production"
+              "buildTarget": "ehr:build:production"
             },
             "development": {
-              "browserTarget": "ehr2.0:build:development"
+              "buildTarget": "ehr:build:development"
             }
           },
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "builder": "@angular/build:extract-i18n",
           "options": {
-            "browserTarget": "ehr2.0:build"
+            "buildTarget": "ehr:build"
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:karma",
           "options": {
             "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing",
+              "@angular/localize/init"
+            ],
             "inlineStyleLanguage": "sass",
             "assets": [
               "src/favicon.ico",
@@ -125,5 +132,36 @@
       }
     }
   },
-  "defaultProject": "ehr2.0"
+  "schematics": {
+    "@schematics/angular:component": {
+      "skipTests": true,
+      "type": "component"
+    },
+    "@schematics/angular:directive": {
+      "skipTests": true,
+      "type": "directive"
+    },
+    "@schematics/angular:service": {
+      "skipTests": true,
+      "type": "service"
+    },
+    "@schematics/angular:guard": {
+      "skipTests": true,
+      "typeSeparator": "."
+    },
+    "@schematics/angular:interceptor": {
+      "skipTests": true,
+      "typeSeparator": "."
+    },
+    "@schematics/angular:module": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:pipe": {
+      "skipTests": true,
+      "typeSeparator": "."
+    },
+    "@schematics/angular:resolver": {
+      "typeSeparator": "."
+    }
+  }
 }
