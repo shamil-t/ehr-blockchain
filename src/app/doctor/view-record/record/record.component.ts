@@ -1,10 +1,11 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy} from '@angular/core';
 import {NgOptimizedImage} from "@angular/common";
 
 @Component({
   selector: 'app-record',
   templateUrl: './record.component.html',
   styleUrls: ['./record.component.sass'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     NgOptimizedImage
   ]

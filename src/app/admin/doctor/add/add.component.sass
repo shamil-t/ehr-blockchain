@@ -1,29 +1,258 @@
-.container
-  width: 100%
-  max-width: 600px
-  //.usr-image
-  //  object-fit: contain
-  //  object-position: center
-  //  image-rendering: optimizeSpeed
-  //  .image
-  //    padding: 3px
-  //    border: 2px solid #bdbdbd
-  //    box-shadow: 0px 0px 1px 0px #333
-  //    max-width: 150px
-  //    max-height: 150px
-  //  .img-c
-  //    font-size: 12px
-  //    color: #8f8f8f
-  //    .img-chooser
-  //      padding: 3px
-  //      padding-left: 3px
-  //      font-size: 13px
-  //
-  //.form-group
-  //  margin-bottom: 10px
-  //  label
-  //    margin-bottom: 5px
-  //    font-family: 'Poppins', sans-serif
-  //    font-weight: 400
-  //  input
-  //    color: #313131
+:host
+  display: block
+
+.add-doctor
+  width: min(100%, 980px)
+  margin: 0 auto
+  padding: clamp(1rem, 3vw, 2rem)
+
+.form-intro
+  display: flex
+  justify-content: space-between
+  align-items: flex-start
+  gap: 1rem
+  margin-bottom: 1.5rem
+
+  h2
+    margin: 0
+    color: var(--ehr-dark)
+    font-size: 1.25rem
+    font-weight: 700
+    letter-spacing: -.02em
+
+  p
+    margin: .35rem 0 0
+    color: var(--ehr-muted)
+    font-size: .9rem
+
+.required-note
+  padding: .4rem .7rem
+  border-radius: 999px
+  color: var(--ehr-muted)
+  background: var(--ehr-background)
+  font-size: .76rem
+  white-space: nowrap
+
+  span
+    color: var(--ehr-danger)
+    font-weight: 700
+
+.form-section
+  padding: 1.35rem 0
+  border-top: 1px solid var(--ehr-border)
+
+.section-heading
+  display: flex
+  align-items: center
+  gap: .75rem
+  margin-bottom: 1.25rem
+
+  h3
+    margin: 0
+    color: var(--ehr-dark)
+    font-size: .98rem
+    font-weight: 700
+
+  p
+    margin: .2rem 0 0
+    color: var(--ehr-muted)
+    font-size: .81rem
+
+.section-icon
+  display: grid
+  width: 2.45rem
+  height: 2.45rem
+  flex: 0 0 auto
+  place-items: center
+  border-radius: .8rem
+  color: var(--ehr-primary)
+  background: var(--ehr-primary-subtle)
+
+.profile-upload
+  display: flex
+  align-items: center
+  gap: 1.1rem
+  padding: 1rem
+  border: 1px solid var(--ehr-border)
+  border-radius: 1rem
+  background: #fbfdfc
+
+.profile-preview
+  width: 6rem
+  height: 6rem
+  flex: 0 0 auto
+  border: 3px solid #fff
+  border-radius: 50%
+  background: #e7f3f1
+  box-shadow: 0 0 0 1px var(--ehr-border)
+  object-fit: cover
+
+.upload-copy
+  min-width: 0
+  flex: 1
+
+  .form-label
+    margin-bottom: .15rem
+    color: var(--ehr-dark)
+    font-size: .88rem
+    font-weight: 600
+
+  p
+    margin: 0 0 .55rem
+    color: var(--ehr-muted)
+    font-size: .78rem
+
+.optional-label
+  margin-left: .25rem
+  color: var(--ehr-muted)
+  font-size: .72rem
+  font-weight: 400
+
+.image-input
+  max-width: 28rem
+  padding: .45rem
+  font-size: .82rem
+
+.selected-image
+  display: flex
+  align-items: center
+  justify-content: space-between
+  gap: .5rem
+  max-width: 28rem
+  margin-top: .5rem
+  color: var(--ehr-secondary)
+  font-size: .78rem
+
+  span
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
+
+.remove-image
+  display: grid
+  width: 1.8rem
+  height: 1.8rem
+  flex: 0 0 auto
+  place-items: center
+  border: 0
+  border-radius: 50%
+  color: var(--ehr-muted)
+  background: transparent
+
+  &:hover
+    color: var(--ehr-danger)
+    background: #fff1f1
+
+.form-grid
+  display: grid
+  grid-template-columns: repeat(2, minmax(0, 1fr))
+  gap: 1rem 1.15rem
+
+.field
+  min-width: 0
+
+  .form-label
+    margin-bottom: .4rem
+    color: var(--ehr-dark)
+    font-size: .83rem
+    font-weight: 600
+
+  .form-control
+    min-height: 2.85rem
+    border-color: var(--ehr-border)
+    border-radius: .7rem
+    color: var(--ehr-text)
+    font-size: .88rem
+    box-shadow: none
+    transition: border-color .18s ease, box-shadow .18s ease
+
+    &::placeholder
+      color: #9aabb0
+
+    &:focus
+      border-color: var(--ehr-primary)
+      box-shadow: 0 0 0 .2rem rgba(25, 123, 117, .12)
+
+.required-mark
+  color: var(--ehr-danger)
+
+.wallet-input
+  font-family: ui-monospace, "Cascadia Code", "Segoe UI Mono", monospace
+  font-size: .82rem !important
+
+.field-wide
+  grid-column: 1 / -1
+
+.field-hint
+  display: block
+  margin-top: .4rem
+  color: var(--ehr-muted)
+  font-size: .75rem
+
+.field-error
+  display: block
+  margin-top: .35rem
+  color: var(--ehr-danger)
+  font-size: .77rem
+
+.form-actions
+  display: flex
+  justify-content: space-between
+  align-items: center
+  gap: 1rem
+  padding-top: 1.25rem
+  border-top: 1px solid var(--ehr-border)
+
+  p
+    margin: 0
+    color: var(--ehr-muted)
+    font-size: .78rem
+
+.submit-button
+  display: inline-flex
+  min-height: 2.85rem
+  align-items: center
+  justify-content: center
+  gap: .55rem
+  padding-inline: 1.15rem
+  border-radius: .75rem
+  font-size: .87rem
+  font-weight: 600
+  white-space: nowrap
+
+@media (max-width: 575.98px)
+  .add-doctor
+    padding: 1.1rem .85rem
+
+  .form-intro
+    flex-direction: column
+    margin-bottom: 1.2rem
+
+  .form-section
+    padding: 1.1rem 0
+
+  .profile-upload
+    align-items: flex-start
+    gap: .8rem
+    padding: .8rem
+
+  .profile-preview
+    width: 4.5rem
+    height: 4.5rem
+
+  .image-input
+    width: 100%
+
+  .form-grid
+    grid-template-columns: minmax(0, 1fr)
+    gap: .85rem
+
+  .field-wide
+    grid-column: auto
+
+  .form-actions
+    align-items: stretch
+    flex-direction: column
+
+  .submit-button
+    width: 100%

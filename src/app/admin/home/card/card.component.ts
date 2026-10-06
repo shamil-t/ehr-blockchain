@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ChangeDetectionStrategy} from '@angular/core';
 
 @Component({
   selector: 'app-card',
@@ -11,6 +11,7 @@ import {Component, Input, OnInit} from '@angular/core';
       <span class="count" [innerHTML]="count"></span>
     </div>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./card.component.sass'],
 })
 export class CardComponent implements OnInit {

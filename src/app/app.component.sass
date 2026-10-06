@@ -1,11 +1,119 @@
-.header
+.app-header
   width: 100%
-  height: 25px
-  background-color: #111827
+  height: var(--ehr-header-height)
+  box-sizing: border-box
+  padding: 0 1.25rem
+  background-color: var(--ehr-surface)
+  border-bottom: 1px solid var(--ehr-border)
   display: flex
   justify-content: space-between
-  margin: 0
   align-items: center
   position: fixed
   top: 0
   z-index: 2000
+
+.app-content
+  padding-top: var(--ehr-header-height)
+
+.app-brand
+  display: inline-flex
+  align-items: center
+  gap: .55rem
+  color: var(--ehr-dark)
+  font-size: .85rem
+  font-weight: 700
+  text-decoration: none
+  letter-spacing: .01em
+
+  &:hover
+    color: var(--ehr-primary)
+
+.app-brand-mark
+  width: 26px
+  height: 26px
+  display: grid
+  place-items: center
+  border-radius: 8px
+  background: var(--ehr-primary-subtle)
+  color: var(--ehr-primary)
+
+.app-brand-accent
+  color: var(--ehr-primary)
+
+.account-status
+  min-width: 0
+  display: flex
+  align-items: center
+  gap: .45rem
+  color: var(--ehr-muted)
+  font-size: .7rem
+
+.account-controls
+  display: flex
+  align-items: center
+  gap: .85rem
+
+.wallet-unlock-button
+  display: inline-flex
+  min-height: 28px
+  align-items: center
+  justify-content: center
+  gap: .4rem
+  padding: 0 .7rem
+  border: 1px solid color-mix(in srgb, var(--ehr-primary) 22%, var(--ehr-border))
+  border-radius: .55rem
+  background: var(--ehr-primary-subtle)
+  color: var(--ehr-primary-dark)
+  font-size: .72rem
+  font-weight: 650
+  text-decoration: none
+  transition: background-color .15s ease, border-color .15s ease, color .15s ease
+
+  &:hover
+    border-color: var(--ehr-primary)
+    background: var(--ehr-primary)
+    color: var(--ehr-surface)
+
+  &:focus-visible
+    outline: 2px solid var(--ehr-primary)
+    outline-offset: 2px
+
+.account-connected
+  color: var(--ehr-text)
+
+.account-warning
+  color: var(--ehr-warning)
+
+.account-offline
+  color: var(--ehr-muted)
+
+.account-indicator
+  width: 7px
+  height: 7px
+  flex: 0 0 7px
+  border-radius: 50%
+  background: var(--ehr-muted)
+
+.account-connected .account-indicator
+  background: var(--ehr-success)
+
+.account-warning .account-indicator
+  background: var(--ehr-warning)
+
+.account-offline .account-indicator
+  background: var(--ehr-muted)
+
+.account-address
+  max-width: min(34vw, 280px)
+  overflow: hidden
+  color: var(--ehr-primary)
+  font-family: monospace
+  text-overflow: ellipsis
+  white-space: nowrap
+
+@media (max-width: 576px)
+  .app-header
+    padding: 0 .75rem
+
+  .account-label
+    display: none

@@ -1,0 +1,123 @@
+@if (patient()) {
+  <div class="py-3"></div>
+  <div class="card mb-1 shadow fs-12 border rounded-4">
+    <div class="patient w-100 p-2 d-flex flex-row align-items-center">
+
+      <div class="patient-image px-3">
+        <img
+          class="border border-1 border-secondary rounded-circle p-1"
+          ngSrc="assets/images/patient.png"
+          alt="Patient Image"
+          width="150"
+          height="150"
+        />
+      </div>
+
+      <div class="patient-info d-flex flex-column text-secondary flex-grow-1">
+        <div class="col">
+
+          <div class="row py-2">
+            <div class="col-md-12">
+              <b>Wallet Address :</b>
+              <span class="text-success ms-1">
+                <b>{{ patient()?.walletAddress }}</b>
+              </span>
+            </div>
+          </div>
+
+          <div class="row-md-12 d-flex flex-row justify-content-between">
+
+            <!-- Left Column -->
+            <div class="col-md-6 d-flex flex-column gap-1">
+
+              <div>
+                <b>Full Name :</b>
+                <span>
+                  {{ patient()?.firstName }}
+                  {{ patient()?.lastName }}
+                </span>
+              </div>
+
+              <div>
+                <b>Gender :</b>
+                <span>{{ patient()?.gender }}</span>
+              </div>
+
+              <div>
+                <b>Date of Birth :</b>
+                <span>{{ patient()?.dateOfBirth }}</span>
+              </div>
+
+              <div>
+                <b>Blood Group :</b>
+                <span>{{ patient()?.bloodGroup || 'N/A' }}</span>
+              </div>
+
+              <div>
+                <b>Phone :</b>
+                <span>{{ patient()?.phone }}</span>
+              </div>
+
+              <div>
+                <b>Email :</b>
+                <span class="text-primary">
+                  {{ patient()?.email }}
+                </span>
+              </div>
+
+            </div>
+
+            <!-- Right Column -->
+            <div class="col-md-6 d-flex flex-column gap-1">
+
+              <div>
+                <b>Address :</b>
+                <span>{{ patient()?.address || 'N/A' }}</span>
+              </div>
+
+              <div>
+                <b>Emergency Contact :</b>
+                <span>{{ patient()?.emergencyContact?.name }}</span>
+              </div>
+
+              <div>
+                <b>Relation :</b>
+                <span>{{ patient()?.emergencyContact?.relation }}</span>
+              </div>
+
+              <div>
+                <b>Emergency Phone :</b>
+                <span>{{ patient()?.emergencyContact?.phone }}</span>
+              </div>
+
+              <div>
+                <b>Allergies :</b>
+                <span>
+                  {{ patient()?.allergies?.join(', ') || 'None' }}
+                </span>
+              </div>
+
+              <div>
+                <b>Chronic Diseases :</b>
+                <span>
+                  {{ patient()?.chronicDiseases?.join(', ') || 'None' }}
+                </span>
+              </div>
+
+              <div>
+                <b>Medications :</b>
+                <span>
+                  {{ patient()?.medications?.join(', ') || 'None' }}
+                </span>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+}

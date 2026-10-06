@@ -1,0 +1,1153 @@
+$ink: var(--ehr-dark)
+$muted: var(--ehr-muted)
+$line: var(--ehr-border)
+$teal: var(--ehr-primary)
+$teal-dark: var(--ehr-primary-dark)
+$canvas: var(--ehr-background)
+
+:host
+  display: block
+  min-height: calc(100vh - var(--ehr-header-height))
+  background: $canvas
+
+.wallet-page
+  max-width: 1120px
+  margin: 0 auto
+  padding: 32px 34px 26px
+  color: $ink
+
+.page-header, .brand, .network-pill, .intro, .wallet-identity, .address-line, .overview-top, .overview-details, .detail-value, .section-heading, .action-card, .lock-row, .activity-row, .page-footer
+  display: flex
+  align-items: center
+
+.page-header, .intro, .overview-top, .section-heading, .lock-row
+  justify-content: space-between
+
+.page-header
+  padding-bottom: 25px
+  border-bottom: 1px solid $line
+
+.brand
+  gap: 12px
+
+.brand-mark, .identity-icon
+  display: grid
+  place-items: center
+  color: $teal
+  background: var(--ehr-primary-subtle)
+
+.brand-mark
+  width: 44px
+  height: 44px
+  border-radius: 14px
+  font-size: 19px
+
+.eyebrow
+  margin: 0 0 6px
+  color: $muted
+  font-size: 10px
+  font-weight: 700
+  letter-spacing: 1.35px
+
+h1, h2, h3, p
+  margin-top: 0
+
+h1
+  margin-bottom: 0
+  font-size: 19px
+  font-weight: 700
+
+.network-pill
+  gap: 9px
+  min-height: 38px
+  padding: 0 10px 0 13px
+  border: 1px solid $line
+  border-radius: 22px
+  background: #fff
+  color: #4d666e
+  font-size: 12px
+  font-weight: 600
+
+.status-dot, .mini-dot
+  width: 8px
+  height: 8px
+  flex: 0 0 8px
+  border-radius: 50%
+  background: #a4b3b7
+
+.is-connected .status-dot, .mini-dot.active
+  background: #278774
+
+.is-warning .status-dot
+  background: #c2852c
+
+.is-offline .status-dot
+  background: #bd6464
+
+.icon-button, .dialog-close, .visibility-button
+  border: 0
+  background: transparent
+  color: $muted
+  cursor: pointer
+
+.refresh-button
+  width: 28px
+  height: 28px
+  border-radius: 50%
+
+.refresh-button:hover
+  background: #eff5f4
+  color: $teal
+
+.intro
+  margin: 34px 0 22px
+  align-items: flex-end
+
+.intro .eyebrow
+  margin-bottom: 7px
+  color: $teal
+
+.intro h2
+  margin-bottom: 5px
+  font-size: 28px
+  letter-spacing: -.7px
+
+.intro-copy
+  margin-bottom: 0
+  color: $muted
+  font-size: 13px
+
+.wallet-state
+  display: inline-flex
+  align-items: center
+  gap: 7px
+  padding: 8px 12px
+  border-radius: 20px
+  font-size: 11px
+  font-weight: 700
+
+.wallet-state.unlocked
+  color: #176b61
+  background: #e6f4ef
+
+.wallet-state.locked
+  color: #697b80
+  background: #edf1f2
+
+.wallet-state.pending
+  color: #426c7c
+  background: #eaf3f6
+
+.network-alert
+  display: flex
+  align-items: flex-start
+  gap: 12px
+  margin-bottom: 18px
+  padding: 14px 16px
+  border: 1px solid #f1dfb9
+  border-radius: 12px
+  background: #fffaf0
+  color: #76581f
+
+.network-alert.offline
+  border-color: #ecd3d3
+  background: #fff7f7
+  color: #834b4b
+
+.alert-icon
+  padding-top: 2px
+
+.network-alert strong, .activity-row strong, .locked-message strong
+  font-size: 13px
+
+.network-alert p, .locked-message p
+  margin: 4px 0 0
+  color: #807c6f
+  font-size: 12px
+  line-height: 1.55
+
+.wallet-overview, .onboarding-card, .empty-card, .loading-card, .locked-message, .actions-section, .activity-section
+  border: 1px solid $line
+  border-radius: 16px
+  background: #fff
+  box-shadow: 0 6px 22px rgba(32, 65, 69, .035)
+
+.wallet-overview
+  padding: 25px 28px 22px
+
+.wallet-management
+  display: flex
+  align-items: center
+  justify-content: space-between
+  gap: 12px
+  margin-top: 12px
+  padding: 0 4px
+  color: $muted
+  font-size: 11px
+
+.button-sign-out
+  min-height: 34px
+  border-color: $line
+  background: #fff
+  color: #8c514d
+
+.button-sign-out:hover
+  border-color: #e2c2bf
+  background: #fff8f7
+
+.overview-top
+  gap: 16px
+
+.wallet-identity
+  min-width: 0
+  gap: 14px
+
+.identity-icon
+  width: 42px
+  height: 42px
+  flex: 0 0 42px
+  border-radius: 12px
+  font-size: 18px
+
+.label
+  margin: 0 0 6px
+  color: $muted
+  font-size: 11px
+  font-weight: 600
+
+.address-line
+  gap: 12px
+
+.address
+  overflow: hidden
+  color: $ink
+  font-family: Consolas, 'Courier New', monospace
+  font-size: 15px
+  font-weight: 700
+  text-overflow: ellipsis
+  white-space: nowrap
+
+.copy-button
+  display: inline-flex
+  align-items: center
+  gap: 6px
+  flex: 0 0 auto
+  padding: 6px 9px
+  border: 1px solid $line
+  border-radius: 7px
+  background: #fff
+  color: #49656d
+  cursor: pointer
+  font-size: 11px
+  font-weight: 600
+
+.copy-button:hover
+  border-color: #abd1cc
+  color: $teal-dark
+
+.self-custody
+  display: inline-flex
+  align-items: center
+  gap: 7px
+  color: #648078
+  font-size: 11px
+
+.self-custody i
+  color: $teal
+
+.overview-divider, .detail-divider
+  background: $line
+
+.overview-divider
+  height: 1px
+  margin: 21px 0
+
+.overview-details
+  justify-content: space-between
+  gap: 22px
+
+.balance-block, .network-detail, .security-detail
+  flex: 1
+
+.balance
+  margin: 0
+  color: $ink
+  font-size: 27px
+  font-weight: 700
+  letter-spacing: -.8px
+
+.balance span
+  color: #6a7d82
+  font-size: 13px
+  font-weight: 600
+  letter-spacing: 0
+
+.balance-muted
+  font-size: 18px
+
+.detail-divider
+  width: 1px
+  align-self: stretch
+
+.detail-value
+  gap: 8px
+  margin: 0 0 5px
+  color: #29464e
+  font-size: 13px
+  font-weight: 650
+
+.detail-value i
+  color: $teal
+
+.detail-caption
+  margin: 0
+  color: #87979b
+  font-size: 11px
+
+.locked-message
+  display: flex
+  align-items: center
+  gap: 13px
+  margin-top: 17px
+  padding: 16px 19px
+  background: #fbfcfc
+
+.lock-indicator, .activity-icon
+  display: grid
+  place-items: center
+  width: 35px
+  height: 35px
+  flex: 0 0 35px
+  border-radius: 10px
+  background: #eef2f3
+  color: #61777e
+
+.locked-message > div
+  flex: 1
+
+.locked-message p
+  color: $muted
+
+.button
+  display: inline-flex
+  align-items: center
+  justify-content: center
+  gap: 8px
+  min-height: 39px
+  padding: 0 15px
+  border: 1px solid transparent
+  border-radius: 8px
+  cursor: pointer
+  font: inherit
+  font-size: 12px
+  font-weight: 650
+  transition: background-color .15s ease, border-color .15s ease
+
+.button:focus-visible, .action-card:focus-visible, .copy-button:focus-visible, .icon-button:focus-visible, .visibility-button:focus-visible, .dialog-close:focus-visible
+  outline: 3px solid rgba(25, 123, 117, .28)
+  outline-offset: 2px
+
+.button:disabled, .action-card:disabled
+  cursor: not-allowed
+  opacity: .55
+
+.button-primary
+  background: $teal
+  color: #fff
+
+.button-primary:hover:not(:disabled)
+  background: $teal-dark
+
+.button-secondary
+  border-color: $line
+  background: #fff
+  color: #4c656b
+
+.button-secondary:hover
+  border-color: #b7cfce
+  background: #f8fbfa
+
+.actions-section, .activity-section
+  margin-top: 22px
+  padding: 23px 25px
+
+.section-heading
+  margin-bottom: 17px
+
+.section-heading .eyebrow
+  margin-bottom: 4px
+  color: $teal
+
+.section-heading h3
+  margin-bottom: 0
+  font-size: 16px
+
+.section-heading > p
+  margin: 0
+  color: $muted
+  font-size: 11px
+
+.action-grid
+  display: grid
+  grid-template-columns: repeat(2, minmax(0, 1fr))
+  gap: 13px
+
+.action-card
+  width: 100%
+  gap: 12px
+  min-height: 78px
+  padding: 13px
+  border: 1px solid $line
+  border-radius: 11px
+  background: #fff
+  color: $ink
+  cursor: pointer
+  text-align: left
+
+.action-card:hover:not(:disabled)
+  border-color: #b4d4d0
+  background: #fbfdfc
+
+.action-icon
+  display: grid
+  place-items: center
+  width: 38px
+  height: 38px
+  flex: 0 0 38px
+  border-radius: 10px
+  color: $teal
+  background: #eaf4f2
+
+.action-icon.transaction
+  color: #5c6d92
+  background: #eef0f7
+
+.action-copy
+  display: grid
+  gap: 4px
+  min-width: 0
+
+.action-copy strong
+  font-size: 12px
+
+.action-copy small
+  overflow: hidden
+  color: $muted
+  font-size: 10px
+  text-overflow: ellipsis
+  white-space: nowrap
+
+.action-arrow
+  margin-left: auto
+  color: #91a2a5
+  font-size: 11px
+
+.write-disabled
+  margin: 12px 0 0
+  color: #89692e
+  font-size: 11px
+
+.lock-row
+  gap: 12px
+  margin-top: 18px
+  padding-top: 16px
+  border-top: 1px solid $line
+
+.lock-row > span
+  color: $muted
+  font-size: 11px
+
+.lock-row > span i
+  margin-right: 5px
+  color: $teal
+
+.button-lock
+  min-height: 34px
+  border-color: $line
+  background: #fff
+  color: #526a70
+
+.button-lock:hover
+  border-color: #bdcccc
+  background: #f8fbfa
+
+.activity-section
+  padding-bottom: 8px
+
+.activity-row
+  gap: 12px
+  min-height: 61px
+  border-top: 1px solid #edf1f1
+
+.activity-icon
+  width: 31px
+  height: 31px
+  flex-basis: 31px
+  color: $teal
+  background: #eff6f5
+  font-size: 12px
+
+.activity-row > div
+  flex: 1
+
+.activity-row strong
+  color: #38545b
+  font-size: 11px
+
+.activity-row p
+  margin: 3px 0 0
+  color: $muted
+  font-size: 10px
+
+.activity-status
+  padding: 5px 8px
+  border-radius: 20px
+  background: #eaf4f1
+  color: #267267
+  font-size: 10px
+  font-weight: 650
+
+.activity-status.status-offline
+  background: #f2f1ee
+  color: #777770
+
+.onboarding-card
+  display: grid
+  grid-template-columns: minmax(0, 1.15fr) minmax(240px, .85fr)
+  overflow: hidden
+  min-height: 350px
+
+.onboarding-content
+  align-self: center
+  padding: 42px 44px
+
+.onboarding-icon
+  display: grid
+  place-items: center
+  width: 42px
+  height: 42px
+  margin-bottom: 21px
+  border-radius: 13px
+  background: #e9f4f1
+  color: $teal
+  font-size: 18px
+
+.onboarding-content .eyebrow
+  color: $teal
+
+.onboarding-content h3
+  margin-bottom: 8px
+  font-size: 25px
+  letter-spacing: -.6px
+
+.body-copy
+  max-width: 450px
+  margin-bottom: 23px
+  color: $muted
+  font-size: 13px
+  line-height: 1.7
+
+.onboarding-actions
+  display: flex
+  flex-wrap: wrap
+  gap: 9px
+
+.onboarding-network
+  display: flex
+  align-items: center
+  gap: 10px
+  max-width: 300px
+  margin-top: 19px
+  padding: 11px 12px
+  border: 1px solid $line
+  border-radius: 9px
+  background: #fbfdfc
+
+.onboarding-network > div
+  display: grid
+  gap: 3px
+
+.onboarding-network strong
+  color: #38545b
+  font-size: 11px
+
+.onboarding-network span:not(.mini-dot)
+  color: $muted
+  font-size: 10px
+
+.balance-error
+  margin-top: 4px
+  color: #a85a52
+
+.security-note
+  margin: 21px 0 0
+  color: #71877e
+  font-size: 10px
+
+.security-note i
+  margin-right: 5px
+  color: $teal
+
+.onboarding-side
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  gap: 13px
+  background: radial-gradient(circle at 50% 45%, #eef8f5 0, #e8f3f1 43%, #e4efed 100%)
+
+.side-art
+  position: relative
+  display: grid
+  place-items: center
+  width: 205px
+  height: 205px
+
+.art-ring, .art-core
+  position: absolute
+  display: grid
+  place-items: center
+  border: 1px solid rgba(47, 133, 122, .18)
+  border-radius: 50%
+
+.ring-one
+  width: 196px
+  height: 196px
+
+.ring-two
+  width: 150px
+  height: 150px
+
+.art-core
+  width: 100px
+  height: 100px
+  border: 0
+  background: #fff
+  box-shadow: 0 9px 26px rgba(30, 94, 86, .13)
+  color: $teal
+  font-size: 36px
+
+.side-caption
+  color: #6d918b
+  font-size: 9px
+  font-weight: 700
+  letter-spacing: 1.8px
+
+.empty-card, .loading-card
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  min-height: 270px
+  padding: 28px
+  text-align: center
+
+.empty-icon
+  display: grid
+  place-items: center
+  width: 44px
+  height: 44px
+  margin-bottom: 13px
+  border-radius: 14px
+  background: #eef5f4
+  color: $teal
+
+.error-icon
+  color: #ad5c53
+  background: #fbefed
+
+.empty-card h3
+  margin-bottom: 6px
+  font-size: 18px
+
+.empty-card p
+  max-width: 420px
+  margin-bottom: 18px
+  color: $muted
+  font-size: 12px
+  line-height: 1.6
+
+.loading-card
+  flex-direction: row
+  gap: 11px
+  min-height: 140px
+  color: $muted
+  font-size: 13px
+
+.loader
+  display: inline-block
+  width: 17px
+  height: 17px
+  border: 2px solid #dce9e7
+  border-top-color: $teal
+  border-radius: 50%
+  animation: spin .8s linear infinite
+
+@keyframes spin
+  to
+    transform: rotate(360deg)
+
+.page-footer
+  justify-content: center
+  flex-wrap: wrap
+  gap: 6px
+  padding: 23px 0 0
+  color: #87979a
+  font-size: 10px
+
+.page-footer i
+  color: #6f9a92
+
+.footer-separator
+  padding: 0 4px
+
+.dialog-backdrop
+  position: fixed
+  z-index: 1050
+  inset: 0
+  display: grid
+  place-items: center
+  overflow-y: auto
+  padding: 22px
+  background: rgba(18, 39, 44, .43)
+  backdrop-filter: blur(3px)
+
+.wallet-dialog
+  position: relative
+  width: min(100%, 470px)
+  max-height: calc(100vh - 44px)
+  overflow-y: auto
+  padding: 30px
+  border: 1px solid rgba(255, 255, 255, .7)
+  border-radius: 16px
+  background: #fff
+  box-shadow: 0 22px 70px rgba(23, 48, 53, .2)
+
+.dialog-close
+  position: absolute
+  top: 14px
+  right: 14px
+  display: grid
+  place-items: center
+  width: 32px
+  height: 32px
+  border-radius: 50%
+  font-size: 16px
+
+.dialog-close:hover
+  background: #f2f6f5
+  color: $ink
+
+.dialog-close:disabled
+  cursor: not-allowed
+  opacity: .5
+
+.dialog-icon
+  display: grid
+  place-items: center
+  width: 43px
+  height: 43px
+  margin-bottom: 17px
+  border-radius: 13px
+  background: #eaf4f2
+  color: $teal
+  font-size: 17px
+
+.dialog-icon.success
+  background: #e8f5ef
+  color: #278069
+
+.dialog-icon.danger
+  background: #fbefed
+  color: #b25850
+
+.wallet-dialog h2
+  margin-bottom: 8px
+  font-size: 22px
+  letter-spacing: -.4px
+
+.dialog-description
+  margin-bottom: 19px
+  color: $muted
+  font-size: 12px
+  line-height: 1.6
+
+.wallet-dialog form, .wallet-dialog form label
+  display: block
+
+.wallet-dialog label
+  margin: 14px 0 7px
+  color: #3b555d
+  font-size: 11px
+  font-weight: 650
+
+.wallet-dialog input, .wallet-dialog textarea
+  display: block
+  width: 100%
+  min-height: 41px
+  padding: 10px 12px
+  border: 1px solid #dce6e5
+  border-radius: 8px
+  outline: 0
+  background: #fff
+  color: $ink
+  font: inherit
+  font-size: 12px
+
+.wallet-dialog textarea
+  min-height: auto
+  resize: vertical
+  font-family: inherit
+  line-height: 1.55
+
+.wallet-dialog input:focus, .wallet-dialog textarea:focus
+  border-color: #6fb0a8
+  box-shadow: 0 0 0 3px rgba(36, 133, 123, .1)
+
+.wallet-dialog input[type=number]
+  appearance: textfield
+
+.input-with-action
+  position: relative
+
+.input-with-action input
+  padding-right: 43px
+
+.visibility-button
+  position: absolute
+  top: 0
+  right: 3px
+  width: 38px
+  height: 100%
+
+.strength-row
+  display: flex
+  align-items: center
+  gap: 9px
+  margin: 8px 0 2px
+  color: #819296
+  font-size: 10px
+
+.strength-track
+  display: block
+  overflow: hidden
+  width: 100%
+  height: 4px
+  border-radius: 4px
+  background: #e8eeee
+
+.strength-fill
+  display: block
+  height: 100%
+  border-radius: 4px
+  transition: width .15s ease
+
+.strength-1
+  background: #cf8875
+
+.strength-2
+  background: #d5b55f
+
+.strength-3
+  background: #82aa73
+
+.strength-4
+  background: #268574
+
+.field-error
+  display: block
+  margin-top: 5px
+  color: #ac5750
+  font-size: 10px
+
+.form-note
+  margin: 15px 0 0
+  padding: 10px 11px
+  border-radius: 8px
+  background: #f4f8f7
+  color: #667c7c
+  font-size: 10px
+  line-height: 1.55
+
+.form-note i
+  margin-right: 5px
+  color: $teal
+
+.dialog-actions
+  display: flex
+  justify-content: flex-end
+  gap: 9px
+  margin-top: 21px
+
+.dialog-actions .button
+  min-width: 105px
+
+.confirmation-address
+  overflow-wrap: anywhere
+  padding: 12px
+  border: 1px solid $line
+  border-radius: 8px
+  background: #f8fbfa
+  color: #385158
+  font-family: Consolas, 'Courier New', monospace
+  font-size: 11px
+  line-height: 1.6
+
+.dialog-address
+  margin: -8px 0 13px
+  color: #708388
+  font-family: Consolas, 'Courier New', monospace
+  font-size: 11px
+
+.address-copy
+  display: flex
+  align-items: center
+  justify-content: space-between
+  gap: 9px
+
+.address-copy > span
+  overflow-wrap: anywhere
+
+.result-network
+  display: flex
+  gap: 8px
+  align-items: center
+  margin-top: 14px
+  color: #607b76
+  font-size: 11px
+
+.result-network i
+  color: $teal
+
+.transaction-details
+  margin: 0
+  border-top: 1px solid $line
+
+.transaction-details > div
+  display: flex
+  justify-content: space-between
+  gap: 15px
+  padding: 10px 0
+  border-bottom: 1px solid #edf1f1
+
+.transaction-details dt
+  flex: 0 0 110px
+  color: $muted
+  font-size: 11px
+
+.transaction-details dd
+  overflow-wrap: anywhere
+  margin: 0
+  color: #385158
+  font-family: Consolas, 'Courier New', monospace
+  font-size: 11px
+  text-align: right
+
+.transaction-details > div:first-child dd
+  font-family: inherit
+
+.transaction-progress
+  display: flex
+  align-items: center
+  justify-content: center
+  gap: 10px
+  margin-top: 20px
+  color: #52736f
+  font-size: 12px
+
+.dialog-error
+  margin: 14px 0 0
+  padding: 10px
+  border-radius: 8px
+  background: #fcf0ef
+  color: #9a4f49
+  font-size: 11px
+  line-height: 1.5
+
+.dialog-error i
+  margin-right: 7px
+
+.toast-message
+  position: fixed
+  z-index: 1060
+  right: 25px
+  bottom: 22px
+  max-width: min(360px, calc(100vw - 40px))
+  margin: 0
+  padding: 12px 15px
+  border: 1px solid #e8cccc
+  border-radius: 9px
+  background: #fff
+  box-shadow: 0 8px 28px rgba(33, 55, 60, .12)
+  color: #8c4e4c
+  font-size: 12px
+
+@media (max-width: 700px)
+  .wallet-page
+    padding: 22px 17px
+
+  .page-header
+    align-items: flex-start
+    gap: 12px
+
+  .network-pill
+    gap: 6px
+    max-width: 185px
+    min-height: 34px
+    padding-left: 9px
+    font-size: 10px
+
+  .network-pill > span:nth-child(2)
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
+
+  .intro
+    align-items: flex-start
+    gap: 10px
+    margin-top: 26px
+
+  .intro h2
+    font-size: 25px
+
+  .intro-copy
+    max-width: 280px
+    line-height: 1.5
+
+  .wallet-state
+    flex: 0 0 auto
+    padding: 7px 9px
+    font-size: 10px
+
+  .onboarding-card
+    grid-template-columns: 1fr
+
+  .onboarding-content
+    padding: 30px 24px
+
+  .onboarding-side
+    min-height: 180px
+
+  .side-art
+    width: 125px
+    height: 125px
+
+  .ring-one
+    width: 122px
+    height: 122px
+
+  .ring-two
+    width: 94px
+    height: 94px
+
+  .art-core
+    width: 62px
+    height: 62px
+    font-size: 24px
+
+  .onboarding-actions, .onboarding-actions .button
+    width: 100%
+
+  .onboarding-network
+    max-width: none
+
+  .wallet-overview
+    padding: 19px
+
+  .overview-top
+    align-items: flex-start
+
+  .self-custody
+    max-width: 104px
+    text-align: right
+    font-size: 9px
+
+  .overview-details
+    display: grid
+    grid-template-columns: 1fr 1fr
+    gap: 17px 10px
+
+  .detail-divider
+    display: none
+
+  .balance
+    font-size: 24px
+
+  .locked-message
+    flex-wrap: wrap
+    align-items: flex-start
+  .locked-message > div
+    flex-basis: calc(100% - 55px)
+  .unlock-button
+    width: 100%
+
+  .actions-section, .activity-section
+    padding: 19px 16px
+
+  .section-heading
+    align-items: flex-start
+    gap: 12px
+
+  .section-heading > p
+    max-width: 115px
+    text-align: right
+    line-height: 1.5
+
+  .action-grid
+    grid-template-columns: 1fr
+
+  .action-card
+    min-height: 70px
+
+  .lock-row
+    align-items: flex-start
+  .lock-row > span
+    max-width: 190px
+    line-height: 1.5
+
+  .page-footer
+    justify-content: flex-start
+    line-height: 1.5
+
+  .footer-separator
+    display: none
+
+@media (max-width: 420px)
+  .wallet-page
+    padding-right: 12px
+    padding-left: 12px
+
+  .brand
+    gap: 8px
+  .brand-mark
+    width: 37px
+    height: 37px
+    border-radius: 11px
+  .page-header .eyebrow
+    font-size: 8px
+  .network-pill
+    max-width: 145px
+
+  .address
+    max-width: 185px
+    font-size: 12px
+  .overview-top
+    gap: 6px
+  .identity-icon
+    width: 35px
+    height: 35px
+    flex-basis: 35px
+  .wallet-identity
+    gap: 9px
+
+  .wallet-dialog
+    padding: 24px 19px
+  .dialog-backdrop
+    padding: 12px
+
+@media (prefers-reduced-motion: reduce)
+  *, *::before, *::after
+    animation-duration: .01ms !important
+    animation-iteration-count: 1 !important
+    scroll-behavior: auto !important
+    transition-duration: .01ms !important

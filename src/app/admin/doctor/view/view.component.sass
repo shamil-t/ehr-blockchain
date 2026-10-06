@@ -1,5 +1,177 @@
-.refresh-btn
-  margin-top: -40px
-  position: absolute
-  right: 50px
-  z-index: 1999
+:host
+  display: block
+
+.directory
+  padding: clamp(1rem, 3vw, 2rem)
+
+.directory-heading
+  display: flex
+  justify-content: space-between
+  align-items: flex-start
+  gap: 1rem
+  margin-bottom: 1.25rem
+
+  h2
+    margin: 0
+    color: var(--ehr-dark)
+    font-size: 1.2rem
+    font-weight: 700
+
+  p
+    margin: .3rem 0 0
+    color: var(--ehr-muted)
+    font-size: .86rem
+
+.refresh-button
+  display: inline-flex
+  min-height: 2.55rem
+  align-items: center
+  gap: .5rem
+  padding-inline: .9rem
+  border-radius: .7rem
+  font-size: .82rem
+  font-weight: 600
+  white-space: nowrap
+
+.directory-toolbar
+  display: flex
+  justify-content: space-between
+  align-items: center
+  gap: 1rem
+  margin-bottom: 1rem
+
+.doctor-count
+  display: inline-flex
+  align-items: center
+  gap: .5rem
+  color: var(--ehr-muted)
+  font-size: .82rem
+
+  strong
+    color: var(--ehr-dark)
+    font-weight: 700
+
+.count-dot
+  width: .5rem
+  height: .5rem
+  border-radius: 50%
+  background: var(--ehr-success)
+  box-shadow: 0 0 0 3px rgba(39, 128, 105, .12)
+
+.search-box
+  display: flex
+  width: min(100%, 21rem)
+  min-height: 2.6rem
+  align-items: center
+  gap: .6rem
+  padding: 0 .8rem
+  border: 1px solid var(--ehr-border)
+  border-radius: .7rem
+  color: var(--ehr-muted)
+  background: var(--ehr-surface)
+  transition: border-color .18s ease, box-shadow .18s ease
+
+  &:focus-within
+    border-color: var(--ehr-primary)
+    box-shadow: 0 0 0 .2rem rgba(25, 123, 117, .12)
+
+  input
+    width: 100%
+    min-width: 0
+    border: 0
+    outline: 0
+    color: var(--ehr-text)
+    background: transparent
+    font-size: .82rem
+
+    &::placeholder
+      color: #95a6aa
+
+.doctor-grid
+  display: grid
+  grid-template-columns: repeat(2, minmax(0, 1fr))
+  gap: 1rem
+
+.directory-state
+  display: flex
+  min-height: 18rem
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  padding: 2rem 1rem
+  text-align: center
+
+  h3
+    margin: .9rem 0 .35rem
+    color: var(--ehr-dark)
+    font-size: 1rem
+    font-weight: 700
+
+  p
+    max-width: 27rem
+    margin: 0
+    color: var(--ehr-muted)
+    font-size: .85rem
+    line-height: 1.6
+
+  .btn
+    margin-top: 1rem
+
+.state-icon
+  display: grid
+  width: 3.25rem
+  height: 3.25rem
+  place-items: center
+  border-radius: 1.1rem
+  color: var(--ehr-primary)
+  background: var(--ehr-primary-subtle)
+  font-size: 1.3rem
+
+.loading-icon
+  color: var(--ehr-primary)
+  background: transparent
+
+  .spinner-border
+    width: 2rem
+    height: 2rem
+
+.error-state .state-icon
+  color: var(--ehr-danger)
+  background: #fbefef
+
+.no-results
+  display: flex
+  min-height: 9rem
+  align-items: center
+  justify-content: center
+  gap: .6rem
+  padding: 1rem
+  color: var(--ehr-muted)
+  font-size: .86rem
+  text-align: center
+
+  i
+    color: var(--ehr-primary)
+
+@media (max-width: 900px)
+  .doctor-grid
+    grid-template-columns: minmax(0, 1fr)
+
+@media (max-width: 575.98px)
+  .directory
+    padding: 1.1rem .85rem
+
+  .directory-heading
+    align-items: stretch
+    flex-direction: column
+
+  .refresh-button
+    align-self: flex-start
+
+  .directory-toolbar
+    align-items: stretch
+    flex-direction: column
+    gap: .75rem
+
+  .search-box
+    width: 100%

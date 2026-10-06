@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {RouterLink} from "@angular/router";
 
 @Component({
@@ -7,6 +7,7 @@ import {RouterLink} from "@angular/router";
   imports: [
     RouterLink
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./home.component.sass']
 })
 export class HomeComponent implements OnInit {

@@ -1,4 +1,4 @@
-import {Component, effect, inject, OnInit, signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, effect, inject, OnInit, signal} from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
 import {SidebarComponent} from "../../shared/sidebar/sidebar.component";
 import {EhrContractService} from "../../services/ehr-contract.service";
@@ -10,6 +10,7 @@ import {UiFeedbackService} from "../../services/ui-feedback.service";
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.sass'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     SidebarComponent,
     RouterOutlet
@@ -30,12 +31,12 @@ export class DashboardComponent implements OnInit {
   constructor() {
     effect(() => {
       this.walletService.connectedAccount()
-      this.checkIsConnectedAsAdminAccount()
+      // this.checkIsConnectedAsAdminAccount()
     });
   }
 
   ngOnInit(): void {
-    // this.checkIsConnectedAsAdminAccount()
+    this.checkIsConnectedAsAdminAccount()
 
     let menu: SidebarMenuItem = {
       name: 'Management',
@@ -48,7 +49,7 @@ export class DashboardComponent implements OnInit {
   }
 
   checkIsConnectedAsAdminAccount() {
-    // this.uiFeedbackService.showProgress(0, "Checking Admin Access...")
+    this.uiFeedbackService.showProgress(0, "Checking Admin Access...")
     this.uiFeedbackService.showLoader("Checking Admin Access...")
     // this.progressMsg.set('')
     // this.progressWarn.set(false)
@@ -56,8 +57,6 @@ export class DashboardComponent implements OnInit {
       this.isAdmin.set(r)
       // console.log(this.isAdmin())
       if (!this.isAdmin()) {
-        // this.showProgress()
-        // this.uiFeedbackService.hideProgress()
         this.uiFeedbackService.error("Not connected as Admin, Connect MetaMask to admin account");
         this.router.navigate(['']).then(() => {
         });
@@ -66,7 +65,8 @@ export class DashboardComponent implements OnInit {
         this.router.navigate(['admin/dashboard']).then(_ => {
         });
       }
-    })
+      this.uiFeedbackService.hideProgress()
+    }).catch(err => console.error(err));
     this.uiFeedbackService.hideLoader()
   }
 

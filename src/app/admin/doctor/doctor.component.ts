@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {ViewComponent} from "./view/view.component";
 import {AddComponent} from "./add/add.component";
 import {
@@ -23,6 +23,7 @@ import {
     NgbNavContent,
     NgbNavOutlet,
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./doctor.component.sass']
 })
 export class DoctorComponent implements OnInit {
