@@ -2,6 +2,9 @@
 
 set -e
 
+PROJECT_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../.." && pwd)"
+cd "$PROJECT_ROOT"
+
 echo "Cleaning old Ignition deployments..."
 
 rm -rf ignition/deployments
@@ -12,6 +15,7 @@ npx hardhat compile
 
 echo "Deploying smart contract..."
 
+npx hardhat ignition deploy ignition/modules/EHR.ts --network localhost
 
 echo "Smart contract deployment completed"
 
@@ -31,6 +35,6 @@ cp "$SOURCE_PATH_ADDR" "$DESTINATION"
 
 echo "Running seeder..."
 
-node ../seeder.js
+node installer/seeder.js
 
 echo "Deployment completed !!!"
