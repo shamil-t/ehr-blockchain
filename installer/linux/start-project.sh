@@ -2,6 +2,9 @@
 
 set -e
 
+PROJECT_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../.." && pwd)"
+cd "$PROJECT_ROOT"
+
 cleanup() {
   echo ""
   echo "Stopping services..."
@@ -12,6 +15,11 @@ cleanup() {
 }
 
 trap cleanup EXIT INT TERM
+
+if [ ! -d "$HOME/.ipfs" ]; then
+  echo "Initializing IPFS..."
+  ipfs init
+fi
 
 echo "Starting IPFS..."
 
@@ -25,7 +33,7 @@ ANVIL_PID=$!
 
 echo "Starting Angular..."
 
-ng serve -o &
+npm run start -- --open &
 ANGULAR_PID=$!
 
 echo "Waiting for Anvil RPC..."

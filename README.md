@@ -299,64 +299,113 @@ Medical records are accessible only if:
 
 ---
 
-# Local Development Setup
+# Installation and Local Run
 
-## Start Complete Project Environment
+The local development environment uses Anvil for the blockchain, Kubo (IPFS) for
+file storage, and the Angular CLI for the web application. The installer scripts
+start the blockchain, IPFS, and frontend; contract deployment is a separate step.
 
-Run:
+## Prerequisites
 
-```bash
-./start-project.sh
+Install the following and make sure each command is available in your terminal:
+
+- Git
+- Node.js 22 LTS and npm
+- pnpm (for example, `npm install --global pnpm`)
+- Foundry, including Anvil
+- Kubo IPFS (`ipfs`)
+- `nc`/netcat on Linux and macOS (used by the startup script to wait for services)
+
+Use the official installation instructions for
+[Node.js](https://nodejs.org/), [pnpm](https://pnpm.io/installation),
+[Foundry](https://book.getfoundry.sh/getting-started/installation), and
+[Kubo](https://docs.ipfs.tech/install/command-line/).
+
+From the repository root, install the project dependencies:
+
+```sh
+pnpm install --frozen-lockfile
 ```
 
-This starts:
-- Local Anvil blockchain
-- Local IPFS node
-- Frontend application
-- Required development services
+## Windows
 
----
+Open PowerShell in the repository root and start the services:
 
-# Smart Contract Deployment
-
-## Option 1 — Deployment Script
-
-Run:
-
-```bash
-./deployer.sh
+```powershell
+.\installer\windows\Run-StartProject.ps1
 ```
 
----
+If PowerShell blocks the script, allow scripts for this terminal session only,
+then run it again:
 
-## Option 2 — Hardhat Ignition Deployment
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.\installer\windows\Run-StartProject.ps1
+```
 
-### Compile Contracts
+In a second PowerShell window at the repository root, deploy the contract and
+seed the local IPFS/blockchain environment:
 
-```bash
+```powershell
+.\installer\windows\Run-Deployer.ps1
+```
+
+## Linux
+
+From the repository root, make the scripts executable once, then start the
+services:
+
+```sh
+chmod +x installer/linux/start-project.sh installer/linux/deployer.sh
+./installer/linux/start-project.sh
+```
+
+In a second terminal at the repository root, deploy the contract and seed the
+local environment:
+
+```sh
+./installer/linux/deployer.sh
+```
+
+## macOS
+
+There is no separate macOS installer script. The Bash scripts under
+`installer/linux` are also used for macOS. Install the prerequisites above,
+including Anvil, Kubo, and netcat, then run from the repository root:
+
+```sh
+chmod +x installer/linux/start-project.sh installer/linux/deployer.sh
+./installer/linux/start-project.sh
+```
+
+In a second Terminal window at the repository root, deploy and seed:
+
+```sh
+./installer/linux/deployer.sh
+```
+
+## Open and Stop the App
+
+The startup script opens the Angular app at `http://localhost:4200`. Keep the
+startup terminal running while using the app; press **Ctrl+C** there to stop
+the services. The scripts use the local Anvil RPC at port `8545` and the IPFS
+API/gateway at ports `5001` and `8080`. On first startup, IPFS is initialized
+automatically if it has not already been initialized.
+
+## Run Components Manually
+
+To run only the frontend after installing dependencies:
+
+```sh
+pnpm start
+```
+
+To compile and deploy the smart contract manually, first start Anvil in one
+terminal, then run these commands from the repository root:
+
+```sh
 npx hardhat compile
-```
-
-### Deploy Contract
-
-```bash
 npx hardhat ignition deploy ignition/modules/EHR.ts --network localhost
-```
-
----
-
-# Frontend Setup
-
-Install dependencies:
-
-```bash
-npm install
-```
-
-Run Angular frontend:
-
-```bash
-ng serve
 ```
 
 ---
@@ -367,16 +416,20 @@ ng serve
 contracts/
 ├── EHR.sol
 
-frontend/
-├── src/
-
 ignition/
 ├── modules/
 │   └── EHR.ts
 
-scripts/
-├── deployer.sh
-├── start-project.sh
+installer/
+├── linux/
+├── windows/
+└── seeder.js
+
+src/
+└── app/
+
+package.json
+hardhat.config.ts
 ```
 
 ---

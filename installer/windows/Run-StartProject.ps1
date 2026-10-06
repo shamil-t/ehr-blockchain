@@ -85,8 +85,8 @@ try
 
   Write-Host "Starting Angular..."
 
-  $ANGULAR_PROCESS = Start-Process ng.cmd `
-    -ArgumentList "serve -o" `
+  $ANGULAR_PROCESS = Start-Process npm.cmd `
+    -ArgumentList "run start -- --open" `
     -PassThru -NoNewWindow
 
   Write-Host "Waiting for Anvil RPC..."
