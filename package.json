@@ -16,7 +16,7 @@
     "@angular/forms": "^22.2.0",
     "@angular/localize": "^22.2.0",
     "@angular/platform-browser": "^22.2.0",
-    "@angular/router": "^22.2.0",
+    "@angular/router": "^22.2.1",
     "@fortawesome/fontawesome-free": "^7.3.1",
     "@ng-bootstrap/ng-bootstrap": "^21.0.0",
     "@popperjs/core": "^2.11.8",
